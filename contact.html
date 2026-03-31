@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — Adriano Lezama</title>
+  <link href="https://fonts.googleapis.com/css2?family=GFS+Didot&family=Jost:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    :root {
+      --bg: #0e0e0e;
+      --bg2: #141414;
+      --border: rgba(255,255,255,0.07);
+      --text: #e2e2e2;
+      --muted: #888;
+      --accent: #c8a96e;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: Futura, 'Jost', 'Century Gothic', 'Trebuchet MS', sans-serif;
+      font-weight: 300;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+
+    ::-webkit-scrollbar { width: 2px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--accent); }
+
+    a { text-decoration: none; color: inherit; }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5vw;
+      height: 150px;
+      background: transparent;
+      border-bottom: none;
+      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .nav-left { display: flex; align-items: center; gap: 2.5rem; flex: 1; }
+    .nav-left a {
+      font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: #fff; transition: color 0.2s;
+    }
+    .nav-left a:hover { color: var(--accent); }
+    .nav-center { display: flex; align-items: center; justify-content: center; flex: 1; }
+    .nav-logo { display: flex; align-items: center; }
+    .nav-logo img { height: 130px; width: auto; opacity: 0.92; transition: opacity 0.2s; }
+    .nav-logo:hover img { opacity: 1; }
+    .nav-right { display: flex; align-items: center; gap: 1.4rem; flex: 1; justify-content: flex-end; }
+    .nav-icon { display: flex; align-items: center; color: #fff; transition: color 0.2s; }
+    .nav-icon:hover { color: var(--accent); }
+
+    /* ─── PAGE LAYOUT ─── */
+    .page-wrap {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 180px 5vw 80px;
+    }
+
+    .contact-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    .contact-header .eyebrow {
+      font-size: 0.62rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 18px;
+    }
+    .contact-header h1 {
+      font-family: 'GFS Didot', Didot, 'Bodoni MT', serif;
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      color: #fff;
+      line-height: 1.05;
+      margin-bottom: 20px;
+    }
+    .contact-header p {
+      font-size: 0.82rem;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      max-width: 400px;
+      margin: 0 auto;
+      line-height: 1.8;
+    }
+
+    /* ─── FORM CARD ─── */
+    .form-card {
+      width: 100%;
+      max-width: 560px;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 52px 48px;
+    }
+
+    .form-row { margin-bottom: 24px; }
+    .form-row label {
+      display: block;
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+    .form-row input,
+    .form-row textarea {
+      width: 100%;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text);
+      font-family: inherit;
+      font-weight: 300;
+      font-size: 0.88rem;
+      padding: 14px 18px;
+      outline: none;
+      transition: border-color 0.2s, background 0.2s;
+      resize: none;
+    }
+    .form-row input::placeholder,
+    .form-row textarea::placeholder { color: #444; }
+    .form-row input:focus,
+    .form-row textarea:focus {
+      border-color: rgba(200,169,110,0.5);
+      background: rgba(200,169,110,0.04);
+    }
+    .form-row textarea { height: 140px; }
+
+    .form-submit {
+      width: 100%;
+      padding: 16px 32px;
+      background: var(--accent);
+      border: none;
+      border-radius: 10px;
+      color: #0e0e0e;
+      font-family: inherit;
+      font-weight: 500;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.15s;
+      margin-top: 8px;
+    }
+    .form-submit:hover { opacity: 0.88; transform: translateY(-1px); }
+    .form-submit:active { transform: translateY(0); opacity: 1; }
+
+    /* ─── SUCCESS STATE ─── */
+    .success-msg {
+      display: none;
+      text-align: center;
+      padding: 48px 0 24px;
+    }
+    .success-msg .check {
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      background: rgba(200,169,110,0.12);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 24px;
+    }
+    .success-msg h3 {
+      font-family: 'GFS Didot', Didot, serif;
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+    .success-msg p {
+      font-size: 0.8rem;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+    }
+
+    /* ─── SOCIAL STRIP ─── */
+    .social-strip {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      margin-top: 48px;
+    }
+    .social-link {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--muted); transition: color 0.2s;
+    }
+    .social-link:hover { color: var(--accent); }
+    .social-divider { width: 1px; height: 20px; background: var(--border); }
+
+    @media (max-width: 640px) {
+      .form-card { padding: 36px 24px; }
+      .nav-left, .nav-right { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════ NAV ══════════ -->
+<nav id="navbar">
+  <div class="nav-left">
+    <a href="index.html">Work</a>
+    <a href="index.html#contact">About</a>
+    <a href="contact.html">Contact</a>
+  </div>
+  <div class="nav-center">
+    <a href="index.html" class="nav-logo" aria-label="Home">
+      <img src="logo-al.svg" alt="AL logo">
+    </a>
+  </div>
+  <div class="nav-right">
+    <a href="https://www.instagram.com/byadriano_/" target="_blank" rel="noopener" class="nav-icon" aria-label="Instagram">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+    </a>
+    <a href="mailto:adrlezama@gmail.com" class="nav-icon" aria-label="Email">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
+    </a>
+  </div>
+</nav>
+
+<!-- ══════════ CONTACT ══════════ -->
+<div class="page-wrap">
+
+  <div class="contact-header">
+    <p class="eyebrow">Get in touch</p>
+    <h1>Let's work<br>together.</h1>
+    <p>Available for editorial shoots, sports events,<br>and commercial projects.</p>
+  </div>
+
+  <div class="form-card">
+
+    <!-- SUCCESS MESSAGE (shown after submit) -->
+    <div class="success-msg" id="success-msg">
+      <div class="check">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c8a96e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <h3>Message sent.</h3>
+      <p>Thank you — I'll get back to you shortly.</p>
+    </div>
+
+    <!-- FORM -->
+    <form id="contact-form">
+
+      <div class="form-row">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" placeholder="Your name" required>
+      </div>
+
+      <div class="form-row">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="your@email.com" required>
+      </div>
+
+      <div class="form-row">
+        <label for="subject">Subject</label>
+        <input type="text" id="subject" name="subject" placeholder="Project type / inquiry">
+      </div>
+
+      <div class="form-row">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" placeholder="Tell me about your project…" required></textarea>
+      </div>
+
+      <button type="submit" class="form-submit">Send Message</button>
+
+    </form>
+  </div>
+
+  <!-- SOCIAL LINKS -->
+  <div class="social-strip">
+    <a href="https://www.instagram.com/byadriano_/" target="_blank" rel="noopener" class="social-link">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+      @byadriano_
+    </a>
+    <div class="social-divider"></div>
+    <a href="mailto:adrlezama@gmail.com" class="social-link">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
+      adrlezama@gmail.com
+    </a>
+  </div>
+
+</div>
+
+<script>
+  // Hide/show nav on scroll
+  const navbar = document.getElementById('navbar');
+  let lastScrollY = window.scrollY;
+  window.addEventListener('scroll', () => {
+    const current = window.scrollY;
+    if (current > lastScrollY && current > 80) {
+      navbar.style.transform = 'translateY(-100%)';
+    } else {
+      navbar.style.transform = 'translateY(0)';
+    }
+    lastScrollY = current;
+  }, { passive: true });
+
+  const form = document.getElementById('contact-form');
+  const successMsg = document.getElementById('success-msg');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = form.querySelector('.form-submit');
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+
+    const data = {
+      name: form.name.value,
+      email: form.email.value,
+      subject: form.subject.value,
+      message: form.message.value,
+    };
+
+    try {
+      const res = await fetch('/api/send', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      if (res.ok) {
+        form.style.display = 'none';
+        successMsg.style.display = 'block';
+      } else {
+        btn.textContent = 'Send Message';
+        btn.disabled = false;
+        alert('Something went wrong. Please email me directly at adrlezama@gmail.com');
+      }
+    } catch {
+      btn.textContent = 'Send Message';
+      btn.disabled = false;
+      alert('Something went wrong. Please email me directly at adrlezama@gmail.com');
+    }
+  });
+</script>
+
+</body>
+</html>

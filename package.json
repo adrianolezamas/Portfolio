@@ -1,0 +1,14 @@
+{
+  "name": "adriano-lezama-portfolio",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "serve": "node serve.mjs"
+  },
+  "dependencies": {
+    "resend": "^3.2.0"
+  },
+  "devDependencies": {
+    "puppeteer": "^22.0.0"
+  }
+}
