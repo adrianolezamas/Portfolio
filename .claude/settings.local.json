@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(env)",
+      "WebFetch(domain:flophotografoot.myportfolio.com)",
+      "Bash(npm install:*)",
+      "Bash(export PATH=\"$PATH:/usr/local/bin:/opt/homebrew/bin:/usr/bin\")"
+    ]
+  }
+}
