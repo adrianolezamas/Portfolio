@@ -46,10 +46,13 @@
     .nav-left { display: flex; align-items: center; gap: 2.2rem; flex: 1; }
     .nav-left a { font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: #fff; transition: color 0.2s; }
     .nav-left a:hover, .nav-left a.active { color: var(--accent); }
-    .nav-center { display: flex; align-items: center; justify-content: center; }
+    .nav-center { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; }
     .nav-logo { display: flex; align-items: center; }
-    .nav-logo img { height: 110px; width: auto; opacity: 0.92; transition: opacity 0.2s; }
+    .nav-logo img { height: 80px; width: auto; opacity: 0.92; transition: opacity 0.2s; }
     .nav-logo:hover img { opacity: 1; }
+    .nav-links { display: flex; align-items: center; gap: 2rem; }
+    .nav-links a { font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: #fff; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--accent); }
     .nav-right { display: flex; align-items: center; gap: 1.4rem; justify-content: flex-end; flex: 1; }
     .nav-icon { display: flex; align-items: center; color: #fff; transition: color 0.2s; }
     .nav-icon:hover { color: var(--accent); }
@@ -57,8 +60,9 @@
     @media (max-width: 640px) {
       .nav-left { display: none; }
       .nav-right { display: none; }
-      .nav-logo img { height: 70px; }
-      nav { height: 90px; }
+      .nav-links { display: none; }
+      .nav-logo img { height: 55px; }
+      nav { height: 80px; }
       .nav-hamburger { display: flex; }
     }
     #mobile-menu {
@@ -263,6 +267,12 @@
     <a href="index.html" class="nav-logo" aria-label="Home">
       <img src="logo-al.svg" alt="AL logo">
     </a>
+    <div class="nav-links">
+      <a href="work.html" data-en="Gallery" data-fr="Galerie">Gallery</a>
+      <a href="about.html" data-en="About" data-fr="À propos">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="book.html" data-en="Book" data-fr="Réserver">Book</a>
+    </div>
   </div>
   <div class="nav-right">
     <a href="cart.html" class="nav-icon nav-cart active" aria-label="Cart">
