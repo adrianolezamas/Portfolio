@@ -299,13 +299,6 @@
       </a>`).join('');
   }
 
-  // ── Navbar (static, no scroll-hide on full-screen layout) ──
-  const navbar = document.getElementById('navbar');
-  window.addEventListener('scroll', () => {
-    navbar.classList.toggle('bg', window.scrollY > 20);
-  }, { passive: true });
-
-
   // ── Init ──
   renderSplit();
 

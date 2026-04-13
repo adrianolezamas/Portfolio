@@ -869,24 +869,6 @@
     if (e.key === 'ArrowRight') stepLb(1);
   });
 
-  // Navbar
-  const navbar = document.getElementById('navbar');
-  let lastScrollY = window.scrollY;
-  window.addEventListener('scroll', () => {
-    const current = window.scrollY;
-    navbar.style.transform = current > lastScrollY && current > 80 ? 'translateY(-100%)' : 'translateY(0)';
-    navbar.classList.toggle('bg', current > 20);
-    lastScrollY = current;
-  }, { passive: true });
-
-  // Nav download button — opens modal if photos selected, else shows toast hint
-  document.getElementById('nav-dl-btn').addEventListener('click', () => {
-    if (selected.size > 0) { openDlModal(); }
-    else { showToast(t('Select photos first — click or hold to select', 'Sélectionnez des photos — cliquez ou maintenez pour sélectionner')); }
-  });
-
-  // Mobile menu
-
   renderGrid();
 
   // ── Card scroll slide-in ──
