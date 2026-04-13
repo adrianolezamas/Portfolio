@@ -173,14 +173,17 @@
       color: var(--accent);
     }
 
-    /* Mobile: stack vertically */
+    /* Mobile: stack vertically + always show content */
     @media (max-width: 640px) {
       .split-container { flex-direction: column; height: auto; }
-      .split-panel { flex: none; height: 70vw; min-height: 260px; }
+      .split-panel { flex: none; height: 72vw; min-height: 280px; }
       .split-panel:hover { flex: none; }
       .split-divider { display: none; }
       .split-content { padding: 28px 24px; }
-      .split-title { font-size: clamp(1.3rem, 5vw, 1.8rem); }
+      .split-title { font-size: clamp(1.3rem, 5vw, 1.8rem); transform: none; }
+      .split-league { opacity: 1; transform: none; }
+      .split-arrow { opacity: 1; transform: none; border-color: rgba(255,255,255,0.3); }
+      .split-overlay { background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.08) 55%, rgba(0,0,0,0.04) 100%); }
     }
 
     /* ─── BOOK CTA ─── */
@@ -231,7 +234,36 @@
     .site-nav-left a, .site-nav-right a { font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.55); transition: color 0.2s; text-decoration: none; }
     .site-nav-left a:hover, .site-nav-right a:hover { color: #fff; }
     .site-nav-right .book-link { color: #c8a96e; }
-    @media (max-width: 640px) { .site-nav { height: 70px; } .site-nav-center img { height: 55px; } .site-nav-left, .site-nav-right { display: none; } }
+    .site-nav-hamburger { display: none; background: none; border: none; cursor: pointer; color: rgba(255,255,255,0.65); padding: 8px; position: absolute; right: 5vw; top: 50%; transform: translateY(-50%); z-index: 201; transition: color 0.2s; }
+    .site-nav-hamburger:hover { color: #fff; }
+    @media (max-width: 640px) {
+      .site-nav { height: 70px; background: linear-gradient(to bottom, rgba(14,14,14,0.7) 0%, transparent 100%); }
+      .site-nav-center img { height: 55px; }
+      .site-nav-left, .site-nav-right { display: none; }
+      .site-nav-hamburger { display: flex; align-items: center; justify-content: center; }
+    }
+    #site-mobile-menu {
+      display: none; position: fixed; inset: 0; z-index: 300;
+      background: rgba(14,14,14,0.98);
+      flex-direction: column; align-items: center; justify-content: center; gap: 2.6rem;
+    }
+    #site-mobile-menu.open { display: flex; }
+    #site-mobile-menu a {
+      font-family: 'GFS Didot', Didot, 'Bodoni MT', Georgia, serif;
+      font-size: clamp(2rem, 8vw, 3.2rem);
+      color: rgba(255,255,255,0.82);
+      letter-spacing: 0.04em;
+      transition: color 0.2s;
+      text-decoration: none;
+    }
+    #site-mobile-menu a:hover { color: #c8a96e; }
+    #site-mobile-menu .book-link { color: #c8a96e; }
+    #site-menu-close {
+      position: absolute; top: 22px; right: 22px;
+      background: none; border: none; cursor: pointer;
+      color: rgba(255,255,255,0.4); transition: color 0.2s; padding: 8px;
+    }
+    #site-menu-close:hover { color: #fff; }
   </style>
 </head>
 <body>
@@ -245,7 +277,28 @@
     <a href="contact.html">Contact</a>
     <a href="book.html" class="book-link">Book</a>
   </div>
+  <button class="site-nav-hamburger" id="site-menu-open" aria-label="Open menu">
+    <svg width="22" height="16" viewBox="0 0 22 16" fill="none"><line x1="0" y1="1" x2="22" y2="1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="0" y1="8" x2="22" y2="8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="0" y1="15" x2="22" y2="15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+  </button>
 </nav>
+<div id="site-mobile-menu">
+  <button id="site-menu-close" aria-label="Close menu">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><line x1="2" y1="2" x2="18" y2="18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="18" y1="2" x2="2" y2="18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+  </button>
+  <a href="work.html">Gallery</a>
+  <a href="about.html">About</a>
+  <a href="contact.html">Contact</a>
+  <a href="book.html" class="book-link">Book</a>
+</div>
+<script>
+(function(){
+  var open = document.getElementById('site-menu-open');
+  var close = document.getElementById('site-menu-close');
+  var menu = document.getElementById('site-mobile-menu');
+  if(open) open.addEventListener('click', function(){ menu.classList.add('open'); document.body.style.overflow='hidden'; });
+  if(close) close.addEventListener('click', function(){ menu.classList.remove('open'); document.body.style.overflow=''; });
+})();
+</script>
 
 
 <!-- ══════════ SPLIT GALLERY ══════════ -->
