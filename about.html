@@ -369,9 +369,6 @@
     lastScrollY = current;
   }, { passive: true });
 
-  const mobileMenu = document.getElementById('mobile-menu');
-  document.getElementById('mobile-menu-btn').addEventListener('click', () => { mobileMenu.style.display = 'flex'; });
-  document.getElementById('mobile-close').addEventListener('click', () => { mobileMenu.style.display = 'none'; });
 
   const observer = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });

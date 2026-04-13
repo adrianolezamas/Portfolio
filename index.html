@@ -677,11 +677,6 @@
     lastScrollY = current;
   }, { passive: true });
 
-  // ── Mobile menu ──
-  const mobileMenu = document.getElementById('mobile-menu');
-  document.getElementById('mobile-menu-btn').addEventListener('click', () => { mobileMenu.style.display = 'flex'; });
-  document.getElementById('mobile-close').addEventListener('click', () => { mobileMenu.style.display = 'none'; });
-  document.querySelectorAll('.mobile-link').forEach(l => l.addEventListener('click', () => { mobileMenu.style.display = 'none'; }));
 
   // ── Reveal on scroll ──
   const observer = new IntersectionObserver(entries => {

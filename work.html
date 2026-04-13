@@ -317,11 +317,6 @@
     navbar.classList.toggle('bg', window.scrollY > 20);
   }, { passive: true });
 
-  // ── Mobile menu ──
-  const mobileMenu = document.getElementById('mobile-menu');
-  document.getElementById('mobile-menu-btn').addEventListener('click', () => { mobileMenu.style.display = 'flex'; });
-  document.getElementById('mobile-close').addEventListener('click', () => { mobileMenu.style.display = 'none'; });
-  document.querySelectorAll('#mobile-menu a').forEach(l => l.addEventListener('click', () => { mobileMenu.style.display = 'none'; }));
 
   // ── Init ──
   renderSplit();
