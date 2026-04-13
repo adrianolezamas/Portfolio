@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — Adriano Lezama</title>
+  <link href="https://fonts.googleapis.com/css2?family=GFS+Didot&family=Jost:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    :root {
+      --bg: #0e0e0e;
+      --bg2: #141414;
+      --border: rgba(255,255,255,0.07);
+      --text: #e2e2e2;
+      --muted: #888;
+      --accent: #c8a96e;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: Futura, 'Jost', 'Century Gothic', 'Trebuchet MS', sans-serif;
+      font-weight: 300;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+
+    ::-webkit-scrollbar { width: 2px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--accent); }
+
+    a { text-decoration: none; color: inherit; }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5vw;
+      height: 130px;
+      background: transparent;
+      border-bottom: none;
+      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .nav-left { display: flex; align-items: center; gap: 2.2rem; flex: 1; }
+    .nav-left a {
+      font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: #fff; transition: color 0.2s;
+    }
+    .nav-left a:hover { color: var(--accent); }
+    .nav-center { display: flex; align-items: center; justify-content: center; }
+    .nav-logo { display: flex; align-items: center; }
+    .nav-logo img { height: 110px; width: auto; opacity: 0.92; transition: opacity 0.2s; }
+    .nav-logo:hover img { opacity: 1; }
+    .nav-right { display: flex; align-items: center; gap: 1.4rem; justify-content: flex-end; flex: 1; }
+    .nav-icon { display: flex; align-items: center; color: #fff; transition: color 0.2s; }
+    .nav-icon:hover { color: var(--accent); }
+    .nav-hamburger { display: none; background: none; border: none; cursor: pointer; color: var(--muted); padding: 4px; }
+    @media (max-width: 640px) {
+      .nav-left { display: none; }
+      .nav-right { display: none; }
+      .nav-logo img { height: 70px; }
+      nav { height: 90px; }
+      .nav-hamburger { display: flex; position: absolute; right: 5vw; }
+    }
+    #mobile-menu {
+      display: none; position: fixed; inset: 0;
+      background: rgba(14,14,14,0.98); z-index: 200;
+      flex-direction: column; align-items: center; justify-content: center; gap: 2.8rem;
+    }
+    #mobile-menu a {
+      font-family: 'GFS Didot', Didot, 'Bodoni MT', serif;
+      font-size: clamp(2.5rem, 10vw, 4rem); color: var(--text);
+      letter-spacing: 0.04em; transition: color 0.2s;
+    }
+    #mobile-menu a:hover { color: var(--accent); }
+    #mobile-close { position: absolute; top: 20px; right: 24px; background: none; border: none; cursor: pointer; color: var(--muted); transition: color 0.2s; }
+    #mobile-close:hover { color: var(--text); }
+
+    /* ─── PAGE ─── */
+    .page-wrap {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 160px 5vw 100px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    @media (max-width: 720px) {
+      .page-wrap { grid-template-columns: 1fr; gap: 60px; padding-top: 160px; }
+    }
+
+    /* ─── LEFT: BIO ─── */
+    .eyebrow {
+      font-size: 0.62rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 22px;
+      display: block;
+    }
+    .about-name {
+      font-family: 'GFS Didot', Didot, 'Bodoni MT', serif;
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      color: #fff;
+      line-height: 1.05;
+      margin-bottom: 32px;
+    }
+    .about-name em { font-style: italic; }
+    .about-bio {
+      font-size: 0.88rem;
+      line-height: 1.95;
+      color: var(--muted);
+      margin-bottom: 48px;
+    }
+    .about-bio p + p { margin-top: 1.2em; }
+
+    .about-photo-wrap {
+      position: relative;
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin-bottom: 36px;
+      border: 1px solid var(--border);
+    }
+    .about-photo-wrap img {
+      width: 100%; height: 100%; object-fit: cover; object-position: center top;
+    }
+    .about-photo-wrap::after {
+      content: '';
+      position: absolute; inset: 0;
+      border-radius: 50%;
+      background: linear-gradient(to bottom, transparent 40%, rgba(14,14,14,0.25));
+    }
+
+    .divider {
+      width: 32px;
+      height: 1px;
+      background: var(--accent);
+      opacity: 0.5;
+      margin-bottom: 48px;
+    }
+
+    /* ─── RIGHT: SOCIALS ─── */
+    .socials-label {
+      font-size: 0.62rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 32px;
+      display: block;
+    }
+    .social-list { display: flex; flex-direction: column; gap: 4px; }
+    .social-item {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 20px 24px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: var(--bg2);
+      color: var(--text);
+      transition: border-color 0.25s, background 0.25s, transform 0.2s;
+      cursor: pointer;
+    }
+    .social-item:hover {
+      border-color: rgba(200,169,110,0.35);
+      background: rgba(200,169,110,0.05);
+      transform: translateX(4px);
+    }
+    .social-item:active { transform: translateX(2px); }
+    .social-icon {
+      width: 38px; height: 38px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.05);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      color: var(--accent);
+    }
+    .social-info { flex: 1; }
+    .social-name {
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text);
+      margin-bottom: 3px;
+    }
+    .social-handle {
+      font-size: 0.78rem;
+      color: var(--muted);
+      letter-spacing: 0.02em;
+    }
+    .social-arrow {
+      color: var(--muted);
+      transition: color 0.2s, transform 0.2s;
+    }
+    .social-item:hover .social-arrow {
+      color: var(--accent);
+      transform: translateX(3px);
+    }
+
+    /* ─── REVEAL ─── */
+    .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1); }
+    .reveal.d1 { transition-delay: 0.1s; }
+    .reveal.d2 { transition-delay: 0.2s; }
+    .reveal.d3 { transition-delay: 0.3s; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ─── FOOTER ─── */
+    footer { padding: 28px 5vw; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
+    .footer-brand { display: flex; flex-direction: column; gap: 5px; }
+    .footer-name { font-family: 'GFS Didot', Didot, 'Bodoni MT', serif; font-size: 0.9rem; letter-spacing: 0.05em; color: var(--muted); }
+    .footer-tagline { font-size: 0.52rem; letter-spacing: 0.18em; text-transform: uppercase; color: #555; }
+    .footer-links { display: flex; align-items: center; gap: 1.8rem; flex-wrap: wrap; justify-content: center; }
+    .footer-links a { font-size: 0.56rem; letter-spacing: 0.18em; text-transform: uppercase; color: #555; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--text); }
+    .footer-right { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
+    .footer-ig { font-size: 0.56rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); transition: color 0.2s; }
+    .footer-ig:hover { color: var(--text); }
+    .footer-copy { font-size: 0.52rem; letter-spacing: 0.16em; text-transform: uppercase; color: #555; }
+    @media (max-width: 640px) { footer { flex-direction: column; align-items: center; text-align: center; gap: 24px; } .footer-right { align-items: center; } }
+  </style>
+</head>
+<body>
+
+<!-- ══════════ NAV ══════════ -->
+<nav id="navbar">
+  <div class="nav-left">
+    <a href="work.html" data-en="Gallery" data-fr="Galerie">Gallery</a>
+    <a href="about.html" data-en="About" data-fr="À propos">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="book.html" data-en="Book" data-fr="Réserver" style="color:var(--accent);border:1px solid rgba(200,169,110,0.45);padding:6px 16px;border-radius:999px;transition:background 0.2s,color 0.2s;" onmouseover="this.style.background='rgba(200,169,110,0.12)'" onmouseout="this.style.background=''">Book</a>
+  </div>
+  <div class="nav-center">
+    <a href="index.html" class="nav-logo" aria-label="Home">
+      <img src="logo-al.svg" alt="AL logo">
+    </a>
+  </div>
+  <div class="nav-right">
+    <a href="https://www.instagram.com/byadriano_/" target="_blank" rel="noopener" class="nav-icon" aria-label="Instagram">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+    </a>
+    <a href="https://www.youtube.com/@ADRIANO_LEZAMA" target="_blank" rel="noopener" class="nav-icon" aria-label="YouTube">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+    </a>
+    <a href="https://www.tiktok.com/@adrianolezamas" target="_blank" rel="noopener" class="nav-icon" aria-label="TikTok">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/></svg>
+    </a>
+    <button class="lang-btn" onclick="toggleLang()" style="background:none;border:1px solid rgba(255,255,255,0.2);color:#fff;font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;padding:5px 10px;border-radius:999px;cursor:pointer;transition:border-color 0.2s,color 0.2s;" onmouseover="this.style.borderColor='rgba(200,169,110,0.6)';this.style.color='var(--accent)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.2)';this.style.color='#fff'">FR</button>
+  </div>
+  <button class="nav-hamburger" id="mobile-menu-btn" aria-label="Menu">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div id="mobile-menu">
+  <button id="mobile-close" aria-label="Close">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </button>
+  <a href="index.html" data-en="Gallery" data-fr="Galerie">Gallery</a>
+  <a href="about.html" data-en="About" data-fr="À propos">About</a>
+  <a href="contact.html">Contact</a>
+  <a href="book.html" data-en="Book" data-fr="Réserver" style="color:var(--accent)">Book</a>
+  <button onclick="toggleLang()" class="lang-btn" style="background:none;border:1px solid rgba(255,255,255,0.2);color:var(--muted);font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;padding:8px 20px;border-radius:999px;cursor:pointer;margin-top:1rem;">FR</button>
+</div>
+
+<!-- ══════════ CONTENT ══════════ -->
+<div class="page-wrap">
+
+  <!-- BIO -->
+  <div>
+    <div class="about-photo-wrap reveal">
+      <img src="photos/IMG_0571.JPG" alt="Adriano Lezama">
+    </div>
+    <span class="eyebrow reveal" data-en="About me" data-fr="À propos de moi">About me</span>
+    <h1 class="about-name reveal d1">Adriano<br><em>Lezama</em></h1>
+    <div class="divider reveal d2"></div>
+    <div class="about-bio reveal d2">
+      <p data-en="I'm a sports photographer based in Portugal, passionate about capturing the raw intensity and emotion of sport — from the explosive energy of futsal to the beauty of the game in motion." data-fr="Je suis photographe sportif basé au Portugal, passionné par la capture de l'intensité brute et de l'émotion du sport — de l'énergie explosive du futsal à la beauté du jeu en mouvement.">I'm a sports photographer based in Portugal, passionate about capturing the raw intensity and emotion of sport — from the explosive energy of futsal to the beauty of the game in motion.</p>
+      <p data-en="Every frame is a story. My work focuses on the split-second moments that define matches, the joy of victory, and the grit behind every athlete's performance." data-fr="Chaque image raconte une histoire. Mon travail se concentre sur les moments décisifs qui définissent les matchs, la joie de la victoire et la détermination de chaque athlète.">Every frame is a story. My work focuses on the split-second moments that define matches, the joy of victory, and the grit behind every athlete's performance.</p>
+      <p data-en="Available for match coverage, editorial shoots, club partnerships, and image licensing." data-fr="Disponible pour la couverture de matchs, les shootings éditoriaux, les partenariats avec des clubs et la licence d'images.">Available for match coverage, editorial shoots, club partnerships, and image licensing.</p>
+    </div>
+  </div>
+
+  <!-- SOCIALS -->
+  <div>
+    <span class="socials-label reveal" data-en="Follow along" data-fr="Suivez-moi">Follow along</span>
+    <div class="social-list">
+
+      <a href="https://www.instagram.com/byadriano_/" target="_blank" rel="noopener" class="social-item reveal d1">
+        <div class="social-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </div>
+        <div class="social-info">
+          <div class="social-name">Instagram</div>
+          <div class="social-handle">@byadriano_</div>
+        </div>
+        <svg class="social-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+
+      <a href="https://www.youtube.com/@ADRIANO_LEZAMA" target="_blank" rel="noopener" class="social-item reveal d2">
+        <div class="social-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+        </div>
+        <div class="social-info">
+          <div class="social-name">YouTube</div>
+          <div class="social-handle">@ADRIANO_LEZAMA</div>
+        </div>
+        <svg class="social-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+
+      <a href="https://www.tiktok.com/@adrianolezamas" target="_blank" rel="noopener" class="social-item reveal d3">
+        <div class="social-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/></svg>
+        </div>
+        <div class="social-info">
+          <div class="social-name">TikTok</div>
+          <div class="social-handle">@adrianolezamas</div>
+        </div>
+        <svg class="social-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+
+    </div>
+
+    <div style="margin-top: 32px;" class="reveal d3">
+      <span class="socials-label" style="margin-bottom: 16px;">Media Kit</span>
+      <a href="mediakit.html" class="social-item" style="border-color: rgba(200,169,110,0.2); background: rgba(200,169,110,0.04);">
+        <div class="social-icon" style="background: rgba(200,169,110,0.1);">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        </div>
+        <div class="social-info">
+          <div class="social-name" data-en="View Media Kit" data-fr="Voir le dossier de presse">View Media Kit</div>
+          <div class="social-handle" data-en="Stats, audience &amp; partnerships" data-fr="Stats, audience &amp; partenariats">Stats, audience &amp; partnerships</div>
+        </div>
+        <svg class="social-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="mediakit.pdf" download="Adriano_Lezama_Media_Kit.pdf" class="social-item" style="border-color: rgba(255,255,255,0.06); background: rgba(255,255,255,0.02);">
+        <div class="social-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        </div>
+        <div class="social-info">
+          <div class="social-name" data-en="Download PDF" data-fr="Télécharger le PDF">Download PDF</div>
+          <div class="social-handle" data-en="Press kit for brands &amp; sponsors" data-fr="Dossier de presse pour marques">Press kit for brands &amp; sponsors</div>
+        </div>
+        <svg class="social-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer>
+  <div class="footer-brand">
+    <span class="footer-name">Adriano Lezama</span>
+    <span class="footer-tagline" data-en="Sport Photographer · Montréal" data-fr="Photographe sportif · Montréal">Sport Photographer · Montréal</span>
+  </div>
+  <nav class="footer-links">
+    <a href="work.html" data-en="Gallery" data-fr="Galerie">Gallery</a>
+    <a href="about.html" data-en="About" data-fr="À propos">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="book.html" data-en="Book" data-fr="Réserver" style="color:var(--accent)">Book</a>
+    <a href="mediakit.html" data-en="Media Kit" data-fr="Dossier de presse">Media Kit</a>
+  </nav>
+  <div class="footer-right">
+    <a href="https://www.instagram.com/byadriano_/" target="_blank" rel="noopener" class="footer-ig">@byadriano_</a>
+    <span class="footer-copy">© 2026 · All rights reserved</span>
+  </div>
+</footer>
+
+<script>
+  const navbar = document.getElementById('navbar');
+  let lastScrollY = window.scrollY;
+  window.addEventListener('scroll', () => {
+    const current = window.scrollY;
+    if (current > lastScrollY && current > 80) {
+      navbar.style.transform = 'translateY(-100%)';
+    } else {
+      navbar.style.transform = 'translateY(0)';
+    }
+    lastScrollY = current;
+  }, { passive: true });
+
+  const mobileMenu = document.getElementById('mobile-menu');
+  document.getElementById('mobile-menu-btn').addEventListener('click', () => { mobileMenu.style.display = 'flex'; });
+  document.getElementById('mobile-close').addEventListener('click', () => { mobileMenu.style.display = 'none'; });
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // ── Cart badge ──
+  (function(){
+    const n = JSON.parse(localStorage.getItem('al_cart')||'[]').reduce((s,i)=>s+i.qty,0);
+    const b = document.getElementById('cart-badge');
+    if(b&&n>0){b.textContent=n;b.classList.add('has-items');}
+  })();
+</script>
+<script src="lang.js"></script>
+</body>
+</html>

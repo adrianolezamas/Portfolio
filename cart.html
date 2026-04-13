@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cart — Adriano Lezama</title>
+  <link href="https://fonts.googleapis.com/css2?family=GFS+Didot&family=Jost:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    :root {
+      --bg: #0e0e0e;
+      --bg2: #141414;
+      --border: rgba(255,255,255,0.07);
+      --text: #e2e2e2;
+      --muted: #888;
+      --accent: #c8a96e;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: Futura, 'Jost', 'Century Gothic', 'Trebuchet MS', sans-serif;
+      font-weight: 300;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+
+    ::-webkit-scrollbar { width: 2px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--accent); }
+
+    a { text-decoration: none; color: inherit; }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5vw; height: 130px;
+      background: transparent; border-bottom: none;
+      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), background 0.3s ease;
+    }
+    nav.bg { background: rgba(14,14,14,0.92); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+    .nav-left { display: flex; align-items: center; gap: 2.2rem; flex: 1; }
+    .nav-left a { font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: #fff; transition: color 0.2s; }
+    .nav-left a:hover, .nav-left a.active { color: var(--accent); }
+    .nav-center { display: flex; align-items: center; justify-content: center; }
+    .nav-logo { display: flex; align-items: center; }
+    .nav-logo img { height: 110px; width: auto; opacity: 0.92; transition: opacity 0.2s; }
+    .nav-logo:hover img { opacity: 1; }
+    .nav-right { display: flex; align-items: center; gap: 1.4rem; justify-content: flex-end; flex: 1; }
+    .nav-icon { display: flex; align-items: center; color: #fff; transition: color 0.2s; }
+    .nav-icon:hover { color: var(--accent); }
+    .nav-hamburger { display: none; background: none; border: none; cursor: pointer; color: var(--muted); padding: 4px; }
+    @media (max-width: 640px) {
+      .nav-left { display: none; }
+      .nav-right { display: none; }
+      .nav-logo img { height: 70px; }
+      nav { height: 90px; }
+      .nav-hamburger { display: flex; }
+    }
+    #mobile-menu {
+      display: none; position: fixed; inset: 0;
+      background: rgba(14,14,14,0.98); z-index: 200;
+      flex-direction: column; align-items: center; justify-content: center; gap: 2.8rem;
+    }
+    #mobile-menu a {
+      font-family: 'GFS Didot', Didot, 'Bodoni MT', serif;
+      font-size: clamp(2.5rem, 10vw, 4rem); color: var(--text);
+      letter-spacing: 0.04em; transition: color 0.2s;
+    }
+    #mobile-menu a:hover { color: var(--accent); }
+    #mobile-close { position: absolute; top: 20px; right: 24px; background: none; border: none; cursor: pointer; color: var(--muted); transition: color 0.2s; }
+    #mobile-close:hover { color: var(--text); }
+
+    /* ─── PAGE ─── */
+    .page-wrap {
+      padding: 160px 5vw 100px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .page-eyebrow {
+      font-size: 0.58rem; letter-spacing: 0.28em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 14px; display: block;
+    }
+    .page-title {
+      font-family: 'GFS Didot', Didot, 'Bodoni MT', serif;
+      font-size: clamp(2rem, 4vw, 3rem); font-weight: 400;
+      letter-spacing: -0.02em; color: #fff; line-height: 1.05;
+    }
+    .page-rule { height: 1px; background: var(--border); margin: 36px 0; }
+
+    /* ─── EMPTY STATE ─── */
+    .cart-empty {
+      text-align: center; padding: 80px 0;
+    }
+    .cart-empty-icon { color: var(--muted); margin-bottom: 20px; opacity: 0.4; }
+    .cart-empty-title {
+      font-family: 'GFS Didot', Didot, 'Bodoni MT', serif;
+      font-size: 1.4rem; color: var(--muted); margin-bottom: 10px;
+    }
+    .cart-empty-sub {
+      font-size: 0.68rem; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 32px;
+    }
+    .btn-browse {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 28px; border-radius: 10px;
+      background: var(--accent); color: #0e0e0e;
+      font-family: Futura, 'Jost', 'Century Gothic', sans-serif;
+      font-size: 0.63rem; letter-spacing: 0.18em; text-transform: uppercase;
+      transition: background 0.2s;
+    }
+    .btn-browse:hover { background: #d9bc82; }
+
+    /* ─── CART LAYOUT ─── */
+    .cart-layout {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 40px;
+      align-items: start;
+    }
+    @media (max-width: 860px) { .cart-layout { grid-template-columns: 1fr; } }
+
+    /* ─── ITEMS LIST ─── */
+    .cart-items { display: flex; flex-direction: column; gap: 0; }
+
+    .cart-item {
+      display: grid;
+      grid-template-columns: 80px 1fr auto;
+      gap: 16px; align-items: center;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .cart-item:first-child { border-top: 1px solid var(--border); }
+
+    .cart-thumb {
+      width: 80px; height: 80px; border-radius: 8px;
+      object-fit: cover; display: block; flex-shrink: 0;
+      background: var(--bg2);
+    }
+
+    .cart-item-info { min-width: 0; }
+    .cart-item-title {
+      font-family: 'GFS Didot', Didot, 'Bodoni MT', serif;
+      font-size: 0.95rem; color: #fff; white-space: nowrap;
+      overflow: hidden; text-overflow: ellipsis;
+    }
+    .cart-item-meta {
+      font-size: 0.56rem; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--muted); margin-top: 3px;
+    }
+    .cart-item-product {
+      font-size: 0.62rem; letter-spacing: 0.06em;
+      color: var(--accent); margin-top: 6px;
+    }
+
+    .cart-item-right {
+      display: flex; flex-direction: column; align-items: flex-end; gap: 10px; flex-shrink: 0;
+    }
+    .cart-item-price {
+      font-size: 0.82rem; color: var(--text); letter-spacing: 0.04em;
+    }
+
+    .qty-control {
+      display: flex; align-items: center; gap: 0;
+      border: 1px solid var(--border); border-radius: 8px; overflow: hidden;
+    }
+    .qty-btn {
+      background: none; border: none; cursor: pointer;
+      color: var(--muted); width: 28px; height: 28px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.9rem; transition: color 0.2s, background 0.2s; line-height: 1;
+    }
+    .qty-btn:hover { color: #fff; background: rgba(255,255,255,0.06); }
+    .qty-val {
+      min-width: 26px; text-align: center;
+      font-size: 0.68rem; letter-spacing: 0.06em; color: var(--text);
+      border-left: 1px solid var(--border); border-right: 1px solid var(--border);
+      height: 28px; display: flex; align-items: center; justify-content: center;
+    }
+
+    .cart-remove {
+      background: none; border: none; cursor: pointer;
+      font-size: 0.56rem; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--muted); transition: color 0.2s; padding: 0;
+    }
+    .cart-remove:hover { color: #e57373; }
+
+    /* ─── ORDER SUMMARY ─── */
+    .order-summary {
+      background: #111; border: 1px solid var(--border);
+      border-radius: 16px; padding: 28px;
+      position: sticky; top: 170px;
+    }
+    .summary-title {
+      font-size: 0.58rem; letter-spacing: 0.26em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 20px;
+    }
+    .summary-line {
+      display: flex; justify-content: space-between; align-items: baseline;
+      font-size: 0.68rem; letter-spacing: 0.04em; color: var(--muted);
+      padding: 8px 0; border-bottom: 1px solid var(--border);
+    }
+    .summary-line:last-of-type { border-bottom: none; }
+    .summary-total {
+      display: flex; justify-content: space-between; align-items: baseline;
+      padding: 16px 0 20px;
+    }
+    .summary-total-label {
+      font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text);
+    }
+    .summary-total-amount {
+      font-family: 'GFS Didot', Didot, 'Bodoni MT', serif;
+      font-size: 1.4rem; color: #fff;
+    }
+
+    .btn-checkout {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      width: 100%; padding: 15px 20px; border-radius: 12px;
+      background: var(--accent); color: #0e0e0e;
+      border: none;
+      font-family: Futura, 'Jost', 'Century Gothic', sans-serif;
+      font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-checkout:hover { background: #d9bc82; }
+    .btn-checkout:active { transform: scale(0.98); }
+
+    .checkout-note {
+      font-size: 0.54rem; letter-spacing: 0.08em;
+      color: var(--muted); text-align: center; margin-top: 12px;
+      line-height: 1.6;
+    }
+
+    .btn-continue {
+      display: block; text-align: center; margin-top: 14px;
+      font-size: 0.56rem; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--muted); transition: color 0.2s;
+    }
+    .btn-continue:hover { color: var(--accent); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      padding: 24px 5vw; border-top: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+    }
+    .footer-name { font-family: 'GFS Didot', Didot, 'Bodoni MT', serif; font-size: 0.9rem; letter-spacing: 0.05em; color: var(--muted); }
+    .footer-copy { font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
+    .footer-ig { font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); transition: color 0.2s; }
+    .footer-ig:hover { color: var(--text); }
+  </style>
+</head>
+<body>
+
+<!-- ══════════ NAV ══════════ -->
+<nav id="navbar">
+  <div class="nav-left">
+    <a href="work.html" data-en="Gallery" data-fr="Galerie">Gallery</a>
+    <a href="about.html" data-en="About" data-fr="À propos">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="book.html" data-en="Book" data-fr="Réserver" style="color:var(--accent);border:1px solid rgba(200,169,110,0.45);padding:6px 16px;border-radius:999px;transition:background 0.2s,color 0.2s;" onmouseover="this.style.background='rgba(200,169,110,0.12)'" onmouseout="this.style.background=''">Book</a>
+  </div>
+  <div class="nav-center">
+    <a href="index.html" class="nav-logo" aria-label="Home">
+      <img src="logo-al.svg" alt="AL logo">
+    </a>
+  </div>
+  <div class="nav-right">
+    <a href="https://www.instagram.com/byadriano_/" target="_blank" rel="noopener" class="nav-icon" aria-label="Instagram">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+    </a>
+    <a href="https://www.youtube.com/@ADRIANO_LEZAMA" target="_blank" rel="noopener" class="nav-icon" aria-label="YouTube">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+    </a>
+    <a href="https://www.tiktok.com/@adrianolezamas" target="_blank" rel="noopener" class="nav-icon" aria-label="TikTok">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/></svg>
+    </a>
+    <a href="cart.html" class="nav-icon nav-cart active" aria-label="Cart">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+      <span class="cart-badge" id="cart-badge"></span>
+    </a>
+  </div>
+  <button class="nav-hamburger" id="mobile-menu-btn" aria-label="Menu">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div id="mobile-menu">
+  <button id="mobile-close" aria-label="Close">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </button>
+  <a href="work.html" data-en="Gallery" data-fr="Galerie">Gallery</a>
+  <a href="about.html" data-en="About" data-fr="À propos">About</a>
+  <a href="contact.html">Contact</a>
+  <a href="book.html" data-en="Book" data-fr="Réserver" style="color:var(--accent)">Book</a>
+</div>
+
+<!-- ══════════ PAGE ══════════ -->
+<div class="page-wrap">
+  <span class="page-eyebrow">Review Order</span>
+  <h1 class="page-title">Your Cart</h1>
+  <div class="page-rule"></div>
+
+  <!-- Empty state (shown when cart is empty) -->
+  <div class="cart-empty" id="cart-empty" style="display:none;">
+    <div class="cart-empty-icon">
+      <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+    </div>
+    <p class="cart-empty-title">Your cart is empty</p>
+    <p class="cart-empty-sub">Browse the gallery and click any photo to add it to your order.</p>
+    <a href="work.html" class="btn-browse">Browse Gallery</a>
+  </div>
+
+  <!-- Cart content (shown when items exist) -->
+  <div class="cart-layout" id="cart-content" style="display:none;">
+    <div class="cart-items" id="cart-items"></div>
+
+    <div class="order-summary">
+      <p class="summary-title">Order Summary</p>
+      <div id="summary-lines"></div>
+      <div class="summary-total">
+        <span class="summary-total-label">Total</span>
+        <span class="summary-total-amount" id="summary-total">$0.00</span>
+      </div>
+      <button class="btn-checkout" id="btn-checkout">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12V22H4V12"/><path d="M22 7H2v5h20V7z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+        Proceed to Checkout
+      </button>
+      <p class="checkout-note">Payment setup coming soon. Your cart is saved and will be ready when checkout is live.</p>
+      <a href="work.html" class="btn-continue">← Continue Shopping</a>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer>
+  <span class="footer-name">Adriano Lezama</span>
+  <span class="footer-copy">© 2025 · All rights reserved</span>
+  <a href="https://www.instagram.com/byadriano_/" target="_blank" rel="noopener" class="footer-ig">@byadriano_</a>
+</footer>
+
+<!-- ══════════ ORDER CONFIRMATION MODAL ══════════ -->
+<div id="order-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.85); z-index:9000; align-items:center; justify-content:center;">
+  <div style="background:#141414; border:1px solid rgba(200,169,110,0.2); border-radius:20px; padding:48px 40px; max-width:440px; width:90%; text-align:center;">
+    <div style="color:var(--accent); margin-bottom:20px;">
+      <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+    </div>
+    <p style="font-family:'GFS Didot',serif; font-size:1.3rem; color:#fff; margin-bottom:10px;">Order Received</p>
+    <p style="font-size:0.65rem; letter-spacing:0.06em; color:var(--muted); line-height:1.8; margin-bottom:28px;">Your order has been recorded. Once the payment system is set up, you'll receive a confirmation email at checkout. We'll be in touch!</p>
+    <button onclick="closeOrderModal()" style="padding:12px 32px; background:var(--accent); color:#0e0e0e; border:none; border-radius:10px; font-family:Futura,'Jost',sans-serif; font-size:0.63rem; letter-spacing:0.18em; text-transform:uppercase; cursor:pointer;">Close</button>
+  </div>
+</div>
+
+<script>
+  function getCart() { return JSON.parse(localStorage.getItem('al_cart') || '[]'); }
+  function saveCart(c) { localStorage.setItem('al_cart', JSON.stringify(c)); render(); }
+
+  function fmtPrice(cents) { return '$' + (cents / 100).toFixed(2); }
+
+  function updateCartBadge() {
+    const n = getCart().reduce((s, i) => s + i.qty, 0);
+    const b = document.getElementById('cart-badge');
+    if (!b) return;
+    b.textContent = n || '';
+    b.classList.toggle('has-items', n > 0);
+  }
+
+  function render() {
+    const cart = getCart();
+    updateCartBadge();
+
+    if (!cart.length) {
+      document.getElementById('cart-empty').style.display = 'block';
+      document.getElementById('cart-content').style.display = 'none';
+      return;
+    }
+    document.getElementById('cart-empty').style.display = 'none';
+    document.getElementById('cart-content').style.display = 'grid';
+
+    // Items
+    const itemsEl = document.getElementById('cart-items');
+    itemsEl.innerHTML = cart.map((item, idx) => {
+      const locked = item.type === 'full-gallery' || item.type === 'pack5';
+      const qtyHtml = locked
+        ? `<div class="qty-control"><span class="qty-val" style="padding:0 12px;border:none;color:var(--muted);">1×</span></div>`
+        : `<div class="qty-control">
+             <button class="qty-btn" data-action="dec" data-idx="${idx}" aria-label="Decrease">−</button>
+             <span class="qty-val">${item.qty}</span>
+             <button class="qty-btn" data-action="inc" data-idx="${idx}" aria-label="Increase">+</button>
+           </div>`;
+      const photoCount = item.selectedPhotos ? item.selectedPhotos.length : null;
+      const productDisplay = item.productName + (photoCount ? ' · ' + photoCount + ' photos' : '');
+      return `
+      <div class="cart-item" data-idx="${idx}">
+        <img class="cart-thumb" src="${item.photoSrc || ''}" alt="${item.photoTitle}" onerror="this.style.background='#1a1a1a';this.removeAttribute('src')">
+        <div class="cart-item-info">
+          <p class="cart-item-title">${item.photoTitle}</p>
+          <p class="cart-item-meta">${item.teamLabel} · ${item.year}</p>
+          <p class="cart-item-product">${productDisplay}</p>
+        </div>
+        <div class="cart-item-right">
+          <span class="cart-item-price">${fmtPrice(item.price * item.qty)}</span>
+          ${qtyHtml}
+          <button class="cart-remove" data-idx="${idx}">Remove</button>
+        </div>
+      </div>`;
+    }).join('');
+
+    // Qty / remove handlers
+    itemsEl.querySelectorAll('.qty-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const cart2 = getCart();
+        const i = +btn.dataset.idx;
+        if (btn.dataset.action === 'inc') {
+          cart2[i].qty += 1;
+        } else {
+          cart2[i].qty -= 1;
+          if (cart2[i].qty <= 0) cart2.splice(i, 1);
+        }
+        saveCart(cart2);
+      });
+    });
+    itemsEl.querySelectorAll('.cart-remove').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const cart2 = getCart();
+        cart2.splice(+btn.dataset.idx, 1);
+        saveCart(cart2);
+      });
+    });
+
+    // Summary
+    const summaryLines = document.getElementById('summary-lines');
+    summaryLines.innerHTML = cart.map(item => {
+      const label = item.type === 'pack5'
+        ? `5-Photo Pack${item.qty > 1 ? ' ×' + item.qty : ''} — ${item.teamLabel}`
+        : item.type === 'full-gallery'
+        ? `Full Gallery — ${item.teamLabel}`
+        : `${item.photoTitle}${item.qty > 1 ? ' ×' + item.qty : ''}`;
+      return `<div class="summary-line"><span>${label}</span><span>${fmtPrice(item.price * item.qty)}</span></div>`;
+    }).join('');
+
+    const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
+    document.getElementById('summary-total').textContent = fmtPrice(total);
+  }
+
+  // Checkout button
+  document.getElementById('btn-checkout').addEventListener('click', () => {
+    const modal = document.getElementById('order-modal');
+    modal.style.display = 'flex';
+  });
+  function closeOrderModal() {
+    document.getElementById('order-modal').style.display = 'none';
+  }
+  document.getElementById('order-modal').addEventListener('click', e => {
+    if (e.target === e.currentTarget) closeOrderModal();
+  });
+
+  // Navbar
+  const navbar = document.getElementById('navbar');
+  let lastScrollY = window.scrollY;
+  window.addEventListener('scroll', () => {
+    const current = window.scrollY;
+    navbar.style.transform = current > lastScrollY && current > 80 ? 'translateY(-100%)' : 'translateY(0)';
+    navbar.classList.toggle('bg', current > 20);
+    lastScrollY = current;
+  }, { passive: true });
+
+  // Mobile menu
+  const mobileMenu = document.getElementById('mobile-menu');
+  document.getElementById('mobile-menu-btn').addEventListener('click', () => { mobileMenu.style.display = 'flex'; });
+  document.getElementById('mobile-close').addEventListener('click', () => { mobileMenu.style.display = 'none'; });
+  document.querySelectorAll('#mobile-menu a').forEach(l => l.addEventListener('click', () => { mobileMenu.style.display = 'none'; }));
+
+  render();
+</script>
+</body>
+</html>

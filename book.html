@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book — Adriano Lezama</title>
+  <link href="https://fonts.googleapis.com/css2?family=GFS+Didot&family=Jost:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Cormorant+Garamond:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    :root {
+      --bg: #0e0e0e; --bg2: #141414; --bg3: #181818;
+      --border: rgba(255,255,255,0.07); --border2: rgba(255,255,255,0.11);
+      --text: #e2e2e2; --muted: #777; --accent: #c8a96e; --nav-h: 130px;
+    }
+    body { background: var(--bg); color: var(--text); font-family: Futura, 'Jost', 'Century Gothic', sans-serif; font-weight: 300; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    ::-webkit-scrollbar { width: 2px; } ::-webkit-scrollbar-track { background: var(--bg); } ::-webkit-scrollbar-thumb { background: var(--accent); }
+    a { text-decoration: none; color: inherit; }
+
+    /* ── NAV ── */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 5vw; height: var(--nav-h); background: rgba(14,14,14,0.96); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+    .nav-left { display: flex; align-items: center; gap: 2.2rem; flex: 1; }
+    .nav-left a { font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: #aaa; transition: color 0.2s; }
+    .nav-left a:hover { color: #fff; }
+    .nav-book-pill { color: var(--accent) !important; border: 1px solid rgba(200,169,110,0.5) !important; padding: 5px 14px; border-radius: 999px; }
+    .nav-book-pill.active, .nav-book-pill:hover { background: rgba(200,169,110,0.12) !important; }
+    .nav-center { display: flex; align-items: center; justify-content: center; }
+    .nav-logo { display: flex; align-items: center; }
+    .nav-logo img { height: 110px; width: auto; opacity: 0.92; transition: opacity 0.2s; }
+    .nav-logo:hover img { opacity: 1; }
+    .nav-right { display: flex; align-items: center; gap: 1.4rem; justify-content: flex-end; flex: 1; }
+    .nav-icon { display: flex; align-items: center; color: #666; transition: color 0.2s; }
+    .nav-icon:hover { color: #fff; }
+    .nav-hamburger { display: none; background: none; border: none; cursor: pointer; color: var(--muted); padding: 4px; }
+    @media (max-width: 640px) { .nav-left { display: none; } .nav-right { display: none; } .nav-logo img { height: 70px; } nav { height: 90px; } .nav-hamburger { display: flex; position: absolute; right: 5vw; } }
+    #mobile-menu { display: none; position: fixed; inset: 0; background: rgba(14,14,14,0.98); z-index: 200; flex-direction: column; align-items: center; justify-content: center; gap: 2.8rem; }
+    #mobile-menu a { font-family: 'GFS Didot', serif; font-size: clamp(2.2rem, 9vw, 3.6rem); color: var(--text); letter-spacing: 0.04em; transition: color 0.2s; }
+    #mobile-menu a:hover { color: var(--accent); }
+    #mobile-close { position: absolute; top: 20px; right: 24px; background: none; border: none; cursor: pointer; color: var(--muted); }
+    #mobile-close:hover { color: var(--text); }
+
+    /* ── PAGE HEADING STRIP ── */
+    .page-strip {
+      margin-top: var(--nav-h);
+      padding: 28px 5vw 24px;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: baseline; gap: 20px;
+    }
+    .page-strip-label { font-size: 0.58rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--accent); }
+    .page-strip-title { font-family: 'GFS Didot', Didot, serif; font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 400; color: #fff; letter-spacing: -0.01em; }
+    .page-strip-sub { font-size: 0.72rem; color: var(--muted); letter-spacing: 0.04em; margin-left: auto; }
+
+    /* ── TWO-COLUMN CONFIGURATOR ── */
+    .config-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+      align-items: start;
+    }
+    @media (max-width: 900px) { .config-layout { grid-template-columns: 1fr; } }
+
+    /* LEFT: sticky gallery */
+    .config-gallery {
+      position: sticky;
+      top: var(--nav-h);
+      height: calc(100vh - var(--nav-h));
+      display: flex;
+      flex-direction: column;
+      border-right: 1px solid var(--border);
+      overflow: hidden;
+      background: #080808;
+    }
+    @media (max-width: 900px) { .config-gallery { position: relative; height: 60vw; max-height: 460px; top: 0; border-right: none; border-bottom: 1px solid var(--border); } }
+    .gallery-main {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+    }
+    .gallery-img {
+      position: absolute; inset: 0;
+      background-size: cover; background-position: center;
+      opacity: 0; transition: opacity 0.5s ease;
+    }
+    .gallery-img.active { opacity: 1; }
+    .gallery-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(8,8,8,0.7) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .gallery-thumbs {
+      display: flex; gap: 6px; padding: 10px 12px;
+      background: #0a0a0a; border-top: 1px solid var(--border);
+    }
+    .gallery-thumb {
+      width: 52px; height: 52px; flex-shrink: 0;
+      background-size: cover; background-position: center;
+      border: 1px solid transparent; border-radius: 4px;
+      cursor: pointer; transition: border-color 0.2s, opacity 0.2s;
+      opacity: 0.5;
+    }
+    .gallery-thumb.active { border-color: var(--accent); opacity: 1; }
+    .gallery-thumb:hover { opacity: 0.85; }
+    .gallery-badge {
+      position: absolute; bottom: 66px; left: 16px;
+      font-size: 0.52rem; letter-spacing: 0.22em; text-transform: uppercase;
+      color: rgba(200,169,110,0.85); background: rgba(14,14,14,0.7);
+      padding: 5px 10px; border-radius: 3px; backdrop-filter: blur(4px);
+      pointer-events: none;
+    }
+
+    /* RIGHT: config column */
+    .config-right { min-height: calc(100vh - var(--nav-h)); }
+
+    /* Sticky price bar */
+    .price-bar {
+      position: sticky;
+      top: var(--nav-h);
+      z-index: 50;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border2);
+      padding: 14px 36px;
+      display: flex; align-items: center; justify-content: space-between; gap: 20px;
+    }
+    .pb-left { display: flex; flex-direction: column; gap: 4px; flex: 1; }
+    .pb-label { font-size: 0.52rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); }
+    .pb-breakdown { font-size: 0.72rem; color: var(--muted); line-height: 1.6; }
+    .pb-breakdown span { color: var(--text); }
+    .pb-right { text-align: right; flex-shrink: 0; }
+    .pb-total-label { font-size: 0.5rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 2px; }
+    .pb-total { font-family: 'GFS Didot', Didot, serif; font-size: 1.6rem; color: var(--accent); letter-spacing: -0.01em; }
+    .pb-total.custom { font-size: 0.9rem; color: var(--muted); letter-spacing: 0.04em; font-family: inherit; margin-top: 4px; }
+    @media (max-width: 640px) { .price-bar { padding: 12px 20px; } .pb-total { font-size: 1.2rem; } }
+
+    /* Config steps */
+    .config-step {
+      padding: 32px 36px;
+      border-bottom: 1px solid var(--border);
+    }
+    @media (max-width: 640px) { .config-step { padding: 24px 20px; } }
+    .step-hd {
+      display: flex; align-items: center; gap: 14px;
+      margin-bottom: 22px;
+    }
+    .step-n {
+      font-size: 0.5rem; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--accent); border: 1px solid rgba(200,169,110,0.3);
+      padding: 4px 9px; border-radius: 3px; flex-shrink: 0;
+    }
+    .step-title {
+      font-family: 'GFS Didot', Didot, serif;
+      font-size: 0.95rem; color: #fff; letter-spacing: 0.01em;
+    }
+    .step-hint { font-size: 0.68rem; color: var(--muted); margin-left: auto; text-align: right; }
+
+    /* Package cards */
+    .pkg-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+    }
+    .pkg-card--full { grid-column: 1 / -1; }
+    @media (max-width: 520px) { .pkg-grid { grid-template-columns: 1fr; } .pkg-card--full { grid-column: auto; } }
+    .pkg-includes {
+      list-style: none; margin: 0 0 14px; padding: 0;
+      display: flex; flex-direction: column; gap: 5px;
+    }
+    .pkg-includes li {
+      font-size: 0.62rem; color: var(--muted); line-height: 1.5; padding-left: 14px; position: relative;
+    }
+    .pkg-includes li::before {
+      content: '—'; position: absolute; left: 0; color: rgba(200,169,110,0.45);
+    }
+    .pkg-badge {
+      font-size: 0.48rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: #0e0e0e; background: var(--accent); padding: 3px 9px; border-radius: 999px;
+      white-space: nowrap; flex-shrink: 0;
+    }
+    .pkg-card {
+      display: block; cursor: pointer;
+      border: 1px solid var(--border2);
+      border-radius: 10px; padding: 18px 20px;
+      background: var(--bg2);
+      transition: border-color 0.2s, background 0.2s;
+      position: relative; overflow: hidden;
+    }
+    .pkg-card:hover { border-color: rgba(200,169,110,0.28); background: var(--bg3); }
+    .pkg-card input[type=radio] { position: absolute; opacity: 0; pointer-events: none; }
+    .pkg-card.selected { border-color: var(--accent); background: rgba(200,169,110,0.06); }
+    .pkg-card.selected::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: var(--accent);
+    }
+    .pkg-check {
+      width: 18px; height: 18px; border-radius: 50%;
+      border: 1px solid var(--border2); background: var(--bg);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 12px; transition: border-color 0.2s, background 0.2s;
+    }
+    .pkg-card.selected .pkg-check { border-color: var(--accent); background: var(--accent); }
+    .pkg-check svg { opacity: 0; transition: opacity 0.2s; }
+    .pkg-card.selected .pkg-check svg { opacity: 1; }
+    .pkg-name { font-size: 0.78rem; color: #fff; margin-bottom: 5px; letter-spacing: 0.02em; }
+    .pkg-desc { font-size: 0.65rem; color: var(--muted); line-height: 1.65; margin-bottom: 12px; }
+    .pkg-price {
+      font-family: 'GFS Didot', Didot, serif;
+      font-size: 1.05rem; color: var(--accent);
+    }
+    .pkg-price.custom { font-family: inherit; font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+    .pkg-detail { font-size: 0.58rem; color: var(--muted); margin-top: 2px; letter-spacing: 0.04em; }
+
+    /* Add-ons */
+    .addon-list { display: flex; flex-direction: column; gap: 2px; }
+    .addon-item {
+      display: flex; align-items: flex-start; gap: 14px;
+      padding: 13px 14px; border-radius: 8px; cursor: pointer;
+      border: 1px solid transparent;
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .addon-item:hover { background: var(--bg2); }
+    .addon-item.selected { background: rgba(74,130,217,0.07); border-color: rgba(74,130,217,0.35); }
+    .addon-item input[type=checkbox] { display: none; }
+    .addon-box {
+      flex-shrink: 0; width: 18px; height: 18px; border-radius: 4px;
+      border: 1px solid var(--border2); background: var(--bg2);
+      display: flex; align-items: center; justify-content: center;
+      margin-top: 2px; transition: border-color 0.2s, background 0.2s;
+    }
+    .addon-item.selected .addon-box { border-color: #4a82d9; background: #4a82d9; }
+    .addon-box svg { opacity: 0; transition: opacity 0.15s; }
+    .addon-item.selected .addon-box svg { opacity: 1; }
+    .addon-body { flex: 1; }
+    .addon-name { font-size: 0.77rem; color: var(--text); margin-bottom: 2px; }
+    .addon-desc { font-size: 0.62rem; color: var(--muted); line-height: 1.6; }
+    .addon-price { flex-shrink: 0; font-size: 0.72rem; color: var(--accent); white-space: nowrap; padding-top: 2px; }
+
+    /* Form rows */
+    .bf-row { margin-bottom: 18px; }
+    .bf-row:last-child { margin-bottom: 0; }
+    .bf-row label { display: block; font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 9px; }
+    .bf-row input, .bf-row select, .bf-row textarea {
+      width: 100%; background: var(--bg2); border: 1px solid var(--border2);
+      border-radius: 8px; color: var(--text); font-family: inherit;
+      font-weight: 300; font-size: 0.84rem; padding: 12px 16px; outline: none;
+      transition: border-color 0.2s, background 0.2s; resize: none; appearance: none;
+    }
+    .bf-row select {
+      background-image: url("data:image/svg+xml,%3Csvg width='10' height='7' viewBox='0 0 10 7' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 6L9 1' stroke='%23666' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; cursor: pointer;
+    }
+    .bf-row select option { background: #1a1a1a; }
+    .bf-row input::placeholder, .bf-row textarea::placeholder { color: #3a3a3a; }
+    .bf-row input:focus, .bf-row select:focus, .bf-row textarea:focus { border-color: rgba(200,169,110,0.45); background: rgba(200,169,110,0.03); }
+    input[type="date"]::-webkit-calendar-picker-indicator,
+    input[type="time"]::-webkit-calendar-picker-indicator {
+      filter: invert(1); opacity: 0.75; cursor: pointer;
+    }
+    input[type="date"]::-webkit-calendar-picker-indicator:hover,
+    input[type="time"]::-webkit-calendar-picker-indicator:hover { opacity: 1; }
+    .bf-row textarea { height: 100px; }
+    .bf-grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    @media (max-width: 480px) { .bf-grid2 { grid-template-columns: 1fr; } }
+    .bf-grid2 .bf-row { margin-bottom: 0; }
+    .bf-travel-result { font-size: 0.68rem; min-height: 22px; padding: 0 2px; line-height: 1.6; transition: color 0.2s; }
+    .bf-travel-result.loading { color: var(--muted); display: flex; align-items: center; gap: 7px; }
+    .bf-travel-result.loading::before { content: ''; display: inline-block; width: 10px; height: 10px; border: 1.5px solid rgba(255,255,255,0.15); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.7s linear infinite; flex-shrink: 0; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .bf-travel-result.ok { color: #7ab87a; }
+    .bf-travel-result.ok strong { color: #9dd49d; }
+    .bf-travel-result.error { color: #e07a7a; }
+    .book-btn:disabled { opacity: 0.35; cursor: not-allowed; transform: none !important; }
+
+    /* Terms */
+    .term-item {
+      display: flex; align-items: flex-start; gap: 13px;
+      padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.04); cursor: pointer;
+    }
+    .term-item:last-child { border-bottom: none; }
+    .term-item input[type=checkbox] { display: none; }
+    .term-box {
+      flex-shrink: 0; width: 17px; height: 17px; border-radius: 3px;
+      border: 1px solid var(--border2); background: var(--bg2);
+      display: flex; align-items: center; justify-content: center; margin-top: 2px;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .term-item.checked .term-box { border-color: var(--accent); background: var(--accent); }
+    .term-box svg { opacity: 0; transition: opacity 0.15s; }
+    .term-item.checked .term-box svg { opacity: 1; }
+    .term-text { font-size: 0.72rem; color: var(--muted); line-height: 1.75; }
+    .term-text strong { color: var(--text); font-weight: 400; }
+    .terms-warning { display: none; font-size: 0.62rem; color: #e05b5b; margin-top: 12px; letter-spacing: 0.06em; }
+    .terms-warning.show { display: block; }
+
+    /* Submit area */
+    .submit-section {
+      padding: 28px 36px 40px;
+    }
+    @media (max-width: 640px) { .submit-section { padding: 24px 20px 36px; } }
+    .order-summary-table { margin-bottom: 24px; }
+    .os-row { display: flex; justify-content: space-between; align-items: center; padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.04); font-size: 0.78rem; }
+    .os-row:last-child { border-bottom: none; }
+    .os-row .osl { color: var(--muted); }
+    .os-row .osv { color: var(--text); }
+    .os-tax-row .osl, .os-tax-row .osv { font-size: 0.72rem; opacity: 0.65; }
+    .os-row.total { padding-top: 16px; }
+    .os-row.total .osl { font-family: 'GFS Didot', serif; font-size: 0.88rem; color: #fff; }
+    .os-row.total .osv { font-family: 'GFS Didot', serif; font-size: 1.25rem; color: var(--accent); letter-spacing: -0.01em; }
+    .os-note { font-size: 0.62rem; color: var(--muted); line-height: 1.7; margin-bottom: 20px; }
+    .os-note a { color: var(--accent); }
+    .book-btn {
+      width: 100%; padding: 17px 32px;
+      background: var(--accent); border: none; border-radius: 8px;
+      color: #0e0e0e; font-family: inherit; font-weight: 500;
+      font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase;
+      cursor: pointer; transition: opacity 0.2s, transform 0.15s;
+    }
+    .book-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+    .book-btn:active { transform: translateY(0); }
+    .book-btn:disabled { opacity: 0.35; cursor: not-allowed; transform: none !important; }
+
+    /* Success */
+    .book-success {
+      display: none; text-align: center; padding: 60px 36px;
+    }
+    .bs-check { width: 60px; height: 60px; border-radius: 50%; background: rgba(200,169,110,0.1); display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; }
+    .book-success h3 { font-family: 'GFS Didot', serif; font-size: 1.6rem; color: #fff; font-weight: 400; margin-bottom: 12px; }
+    .book-success p { font-size: 0.78rem; color: var(--muted); line-height: 1.8; }
+
+    /* Footer */
+    footer { padding: 28px 5vw; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
+    .footer-brand { display: flex; flex-direction: column; gap: 5px; }
+    .footer-name { font-family: 'GFS Didot', Didot, 'Bodoni MT', serif; font-size: 0.9rem; letter-spacing: 0.05em; color: var(--muted); }
+    .footer-tagline { font-size: 0.52rem; letter-spacing: 0.18em; text-transform: uppercase; color: #555; }
+    .footer-links { display: flex; align-items: center; gap: 1.8rem; flex-wrap: wrap; justify-content: center; }
+    .footer-links a { font-size: 0.56rem; letter-spacing: 0.18em; text-transform: uppercase; color: #555; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--text); }
+    .footer-right { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
+    .footer-ig { font-size: 0.56rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); transition: color 0.2s; }
+    .footer-ig:hover { color: var(--text); }
+    .footer-copy { font-size: 0.52rem; letter-spacing: 0.16em; text-transform: uppercase; color: #555; }
+    @media (max-width: 640px) { footer { flex-direction: column; align-items: center; text-align: center; gap: 24px; } .footer-right { align-items: center; } }
+  </style>
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<nav id="navbar">
+  <div class="nav-left">
+    <a href="work.html" data-en="Gallery" data-fr="Galerie">Gallery</a>
+    <a href="about.html" data-en="About" data-fr="À propos">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="book.html" data-en="Book" data-fr="Réserver" class="nav-book-pill active">Book</a>
+  </div>
+  <div class="nav-center">
+    <a href="index.html" class="nav-logo" aria-label="Home">
+      <img src="logo-al.svg" alt="AL logo">
+    </a>
+  </div>
+  <div class="nav-right">
+    <a href="https://www.instagram.com/byadriano_/" target="_blank" rel="noopener" class="nav-icon" aria-label="Instagram">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+    </a>
+    <a href="https://www.youtube.com/@ADRIANO_LEZAMA" target="_blank" rel="noopener" class="nav-icon" aria-label="YouTube">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+    </a>
+    <a href="https://www.tiktok.com/@adrianolezamas" target="_blank" rel="noopener" class="nav-icon" aria-label="TikTok">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/></svg>
+    </a>
+    <button class="lang-btn" onclick="toggleLang()" style="background:none;border:1px solid rgba(255,255,255,0.2);color:#fff;font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;padding:5px 10px;border-radius:999px;cursor:pointer;transition:border-color 0.2s,color 0.2s;" onmouseover="this.style.borderColor='rgba(200,169,110,0.6)';this.style.color='var(--accent)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.2)';this.style.color='#fff'">FR</button>
+  </div>
+  <button class="nav-hamburger" id="mobile-menu-btn" aria-label="Menu">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+  </button>
+</nav>
+
+<div id="mobile-menu">
+  <button id="mobile-close" aria-label="Close"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+  <a href="work.html" data-en="Gallery" data-fr="Galerie">Gallery</a>
+  <a href="about.html" data-en="About" data-fr="À propos">About</a>
+  <a href="contact.html">Contact</a>
+  <a href="book.html" data-en="Book" data-fr="Réserver" style="color:var(--accent)">Book</a>
+  <button onclick="toggleLang()" class="lang-btn" style="background:none;border:1px solid rgba(255,255,255,0.2);color:var(--muted);font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;padding:8px 20px;border-radius:999px;cursor:pointer;margin-top:1rem;">FR</button>
+</div>
+
+<!-- ══ PAGE HEADING ══ -->
+<div class="page-strip">
+  <span class="page-strip-label" data-en="Sports Photography" data-fr="Photographie sportive">Sports Photography</span>
+  <h1 class="page-strip-title" data-en="Build your booking" data-fr="Créez votre réservation">Build your booking</h1>
+  <span class="page-strip-sub" data-en="Configure below · Price updates live" data-fr="Configurez ci-dessous · Prix mis à jour en temps réel">Configure below · Price updates live</span>
+</div>
+
+<!-- ══ TWO-COLUMN CONFIGURATOR ══ -->
+<div class="config-layout">
+
+  <!-- ══ LEFT: GALLERY ══ -->
+  <div class="config-gallery">
+    <div class="gallery-main">
+      <div class="gallery-img active" style="background-image:url('photos/DSC09028.jpg')" data-idx="0"></div>
+      <div class="gallery-img" style="background-image:url('photos/DSC09364.jpg')" data-idx="1"></div>
+      <div class="gallery-img" style="background-image:url('photos/DSC09177.jpg')" data-idx="2"></div>
+      <div class="gallery-img" style="background-image:url('photos/DSC09510.jpg')" data-idx="3"></div>
+      <div class="gallery-img" style="background-image:url('photos/DSC08942-copy.jpg')" data-idx="4"></div>
+      <div class="gallery-overlay"></div>
+      <span class="gallery-badge">@byadriano_</span>
+    </div>
+    <div class="gallery-thumbs" id="gallery-thumbs">
+      <div class="gallery-thumb active" style="background-image:url('photos/DSC09028.jpg')" data-idx="0"></div>
+      <div class="gallery-thumb" style="background-image:url('photos/DSC09364.jpg')" data-idx="1"></div>
+      <div class="gallery-thumb" style="background-image:url('photos/DSC09177.jpg')" data-idx="2"></div>
+      <div class="gallery-thumb" style="background-image:url('photos/DSC09510.jpg')" data-idx="3"></div>
+      <div class="gallery-thumb" style="background-image:url('photos/DSC08942-copy.jpg')" data-idx="4"></div>
+    </div>
+  </div>
+
+  <!-- ══ RIGHT: CONFIGURATOR ══ -->
+  <div class="config-right" id="config-right">
+
+    <!-- Sticky price bar -->
+    <div class="price-bar">
+      <div class="pb-left">
+        <span class="pb-label" data-en="Your Booking" data-fr="Votre réservation">Your Booking</span>
+        <div class="pb-breakdown" id="pb-breakdown">— Select a package to begin</div>
+      </div>
+      <div class="pb-right">
+        <span class="pb-total-label">Total</span>
+        <div class="pb-total" id="pb-total">—</div>
+      </div>
+    </div>
+
+    <!-- ══ STEP 1: PACKAGE ══ -->
+    <div class="config-step">
+      <div class="step-hd">
+        <span class="step-n">01</span>
+        <span class="step-title" data-en="Choose your package" data-fr="Choisissez votre forfait">Choose your package</span>
+        <span class="step-hint" data-en="Min. 7 days notice" data-fr="Min. 7 jours à l'avance">Min. 7 days notice</span>
+      </div>
+      <div class="pkg-grid" id="pkg-grid">
+
+        <label class="pkg-card" data-price="250" data-name="Single Player Action & Portraits" data-slug="single-player">
+          <input type="radio" name="package" value="250">
+          <div class="pkg-check">
+            <svg width="10" height="8" viewBox="0 0 10 8" fill="none" stroke="#0e0e0e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 3.5 6.5 9 1"/></svg>
+          </div>
+          <div class="pkg-name">Single Player Action &amp; Portraits</div>
+          <div class="pkg-desc" data-en="Dedicated focus on one athlete for the entire duration of the game. Max 15 edited images delivered." data-fr="Focus dédié sur un athlète pour toute la durée du match. Max 15 images éditées livrées.">Dedicated focus on one athlete for the entire duration of the game. Max 15 edited images delivered.</div>
+          <ul class="pkg-includes">
+            <li data-en='Pre-game cinematic "Hero" portraits' data-fr="Portraits cinématiques avant-match">Pre-game cinematic "Hero" portraits</li>
+            <li data-en="100% dedicated tracking during play" data-fr="Suivi 100% dédié pendant le jeu">100% dedicated tracking during play</li>
+            <li data-en="All high-res images via private link" data-fr="Toutes les images HD via lien privé">All high-res images via private link</li>
+            <li data-en="24h Turnaround Guarantee" data-fr="Livraison garantie en 24h">24h Turnaround Guarantee</li>
+          </ul>
+          <div class="pkg-price">$250</div>
+          <div class="pkg-detail" data-en="Full game · 24h delivery" data-fr="Match complet · Livraison 24h">Full game · 24h delivery</div>
+        </label>
+
+        <label class="pkg-card" data-price="315" data-name="Full Team Coverage" data-slug="full-team">
+          <input type="radio" name="package" value="315">
+          <div class="pkg-check">
+            <svg width="10" height="8" viewBox="0 0 10 8" fill="none" stroke="#0e0e0e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 3.5 6.5 9 1"/></svg>
+          </div>
+          <div class="pkg-name">Full Team Coverage</div>
+          <div class="pkg-desc" data-en="Action shots and candid moments for the entire roster. Up to 30 edited images delivered." data-fr="Photos d'action et moments spontanés pour toute l'équipe. Jusqu'à 30 images éditées livrées.">Action shots and candid moments for the entire roster. Up to 30 edited images delivered.</div>
+          <ul class="pkg-includes">
+            <li data-en="Coverage of all players on field &amp; bench" data-fr="Couverture de tous les joueurs sur le terrain et le banc">Coverage of all players on field &amp; bench</li>
+            <li data-en="Team celebrations &amp; key match moments" data-fr="Célébrations d'équipe et moments clés du match">Team celebrations &amp; key match moments</li>
+            <li data-en="One master link for the whole team" data-fr="Un lien principal pour toute l'équipe">One master link for the whole team</li>
+            <li data-en="24h Turnaround Guarantee" data-fr="Livraison garantie en 24h">24h Turnaround Guarantee</li>
+          </ul>
+          <div class="pkg-price">$315</div>
+          <div class="pkg-detail" data-en="Full game · 24h delivery" data-fr="Match complet · Livraison 24h">Full game · 24h delivery</div>
+        </label>
+
+        <label class="pkg-card pkg-card--full" data-price="850" data-name="Season Media Partner" data-slug="season">
+          <input type="radio" name="package" value="850">
+          <div class="pkg-check">
+            <svg width="10" height="8" viewBox="0 0 10 8" fill="none" stroke="#0e0e0e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 3.5 6.5 9 1"/></svg>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+            <div class="pkg-name" style="margin-bottom:0;">Season Media Partner</div>
+            <span class="pkg-badge">Best Value</span>
+          </div>
+          <div class="pkg-desc" data-en="The premium offer for consistent team or academy branding — 3 full games of coverage. Up to 30 edited images per match." data-fr="L'offre premium pour une image d'équipe cohérente — 3 matchs complets couverts. Jusqu'à 30 images éditées par match.">The premium offer for consistent team or academy branding — 3 full games of coverage. Up to 30 edited images per match.</div>
+          <ul class="pkg-includes">
+            <li data-en="3 full games of coverage throughout the season" data-fr="3 matchs complets couverts tout au long de la saison">3 full games of coverage throughout the season</li>
+            <li data-en="Portraits + action for every game" data-fr="Portraits + action pour chaque match">Portraits + action for every game</li>
+            <li data-en="Priority scheduling (1-week notice required)" data-fr="Planification prioritaire (1 semaine de préavis requis)">Priority scheduling (1-week notice required)</li>
+            <li data-en="Save ~$90 vs. booking 3 team games individually" data-fr="Économisez ~90$ par rapport à 3 réservations individuelles">Save ~$90 vs. booking 3 team games individually</li>
+          </ul>
+          <div class="pkg-price">$850</div>
+          <div class="pkg-detail" data-en="3 games · Priority booking · 24h delivery each" data-fr="3 matchs · Réservation prioritaire · Livraison 24h chacun">3 games · Priority booking · 24h delivery each</div>
+        </label>
+
+      </div>
+    </div>
+
+    <!-- ══ STEP 2: ADD-ONS ══ -->
+    <div class="config-step">
+      <div class="step-hd">
+        <span class="step-n">02</span>
+        <span class="step-title" data-en="Add-ons" data-fr="Suppléments">Add-ons</span>
+        <span class="step-hint" data-en="Optional extras" data-fr="Options facultatives">Optional extras</span>
+      </div>
+      <div class="addon-list">
+
+        <label class="addon-item" data-price="60" data-name="Extra Hour of Coverage">
+          <input type="checkbox" name="addon" value="60">
+          <div class="addon-box">
+            <svg width="10" height="8" viewBox="0 0 10 8" fill="none" stroke="#0e0e0e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 3.5 6.5 9 1"/></svg>
+          </div>
+          <div class="addon-body">
+            <div class="addon-name" data-en="Extra Hour of Coverage" data-fr="Heure de couverture supplémentaire">Extra Hour of Coverage</div>
+            <div class="addon-desc" data-en="Extend your session by one additional hour of shooting time — includes +5 edited photos." data-fr="Prolongez votre session d'une heure de prise de vue — inclut +5 photos éditées.">Extend your session by one additional hour of shooting time — includes +5 edited photos.</div>
+          </div>
+          <div class="addon-price">+$60</div>
+        </label>
+
+        <label class="addon-item" data-price="100" data-name="Rush Delivery">
+          <input type="checkbox" name="addon" value="100">
+          <div class="addon-box">
+            <svg width="10" height="8" viewBox="0 0 10 8" fill="none" stroke="#0e0e0e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 3.5 6.5 9 1"/></svg>
+          </div>
+          <div class="addon-body">
+            <div class="addon-name" data-en="Rush Delivery (4h turnaround)" data-fr="Livraison express (4h)">Rush Delivery (4h turnaround)</div>
+            <div class="addon-desc" data-en="Edited gallery link delivered within 4 hours of the final whistle — perfect for same-day posting." data-fr="Galerie éditée livrée dans les 4 heures après le match — idéal pour publier le jour même.">Edited gallery link delivered within 4 hours of the final whistle — perfect for same-day posting.</div>
+          </div>
+          <div class="addon-price">+$100</div>
+        </label>
+
+        <label class="addon-item" data-price="50" data-name="In-Game Delivery">
+          <input type="checkbox" name="addon" value="50">
+          <div class="addon-box">
+            <svg width="10" height="8" viewBox="0 0 10 8" fill="none" stroke="#0e0e0e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 3.5 6.5 9 1"/></svg>
+          </div>
+          <div class="addon-body">
+            <div class="addon-name" data-en="In-Game Delivery (3 shots)" data-fr="Livraison en direct (3 photos)">In-Game Delivery (3 shots)</div>
+            <div class="addon-desc" data-en="3 selected images edited and sent within 1 hour of the game — great for instant stories." data-fr="3 images sélectionnées éditées et envoyées dans l'heure suivant le match — idéal pour les stories instantanées.">3 selected images edited and sent within 1 hour of the game — great for instant stories.</div>
+          </div>
+          <div class="addon-price">+$50</div>
+        </label>
+
+        <label class="addon-item" data-price="50" data-name="Team Picture & Player Headshots">
+          <input type="checkbox" name="addon" value="50">
+          <div class="addon-box">
+            <svg width="10" height="8" viewBox="0 0 10 8" fill="none" stroke="#0e0e0e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 3.5 6.5 9 1"/></svg>
+          </div>
+          <div class="addon-body">
+            <div class="addon-name" data-en="Team Picture &amp; Player Headshots" data-fr="Photo d'équipe &amp; portraits individuels">Team Picture &amp; Player Headshots</div>
+            <div class="addon-desc" data-en="Full team group photo plus individual headshots for each player — ideal for club profiles and socials." data-fr="Photo de groupe complète et portraits individuels pour chaque joueur — idéal pour les profils de club et les réseaux sociaux.">Full team group photo plus individual headshots for each player — ideal for club profiles and socials.</div>
+          </div>
+          <div class="addon-price">+$50</div>
+        </label>
+
+      </div>
+    </div>
+
+    <!-- ══ STEP 3: EVENT DETAILS ══ -->
+    <div class="config-step">
+      <div class="step-hd">
+        <span class="step-n">03</span>
+        <span class="step-title" data-en="Event details" data-fr="Détails de l'événement">Event details</span>
+      </div>
+      <div class="bf-grid2" style="margin-bottom:18px;">
+        <div class="bf-row">
+          <label for="bf-sport" data-en="Sport / Event type" data-fr="Sport / Type d'événement">Sport / Event type</label>
+          <select id="bf-sport" name="sport">
+            <option value="" disabled selected>Select…</option>
+            <option>Soccer — outdoor</option>
+            <option>Futsal — indoor</option>
+            <option>Basketball</option>
+            <option>Volleyball</option>
+            <option>Hockey</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="bf-row">
+          <label for="bf-date"><span data-en="Event date" data-fr="Date de l'événement">Event date</span> <span style="font-size:0.5rem;color:#444;">(7+ <span data-en="days" data-fr="jours">days</span>)</span></label>
+          <input type="date" id="bf-date" name="date">
+        </div>
+      </div>
+      <div class="bf-grid2" style="margin-bottom:18px;">
+        <div class="bf-row">
+          <label for="bf-time" data-en="Kickoff time" data-fr="Heure de début">Kickoff time</label>
+          <input type="time" id="bf-time" name="time">
+        </div>
+        <div class="bf-row">
+          <label for="bf-km" data-en="Distance from Brossard, QC (km)" data-fr="Distance depuis Brossard, QC (km)">Distance from Brossard, QC (km)</label>
+          <input type="number" id="bf-km" name="km" placeholder="e.g. 15" min="0" max="500">
+        </div>
+      </div>
+      <div class="bf-row" style="margin-bottom:0;">
+        <label for="bf-address" data-en="Venue / Full address" data-fr="Lieu / Adresse complète">Venue / Full address</label>
+        <input type="text" id="bf-address" name="address" placeholder="Arena name, street, city, province…" data-ph-en="Arena name, street, city, province…" data-ph-fr="Nom de l'aréna, rue, ville, province…" autocomplete="off">
+      </div>
+    </div>
+
+    <!-- ══ STEP 4: CONTACT ══ -->
+    <div class="config-step">
+      <div class="step-hd">
+        <span class="step-n">04</span>
+        <span class="step-title" data-en="Your info" data-fr="Vos coordonnées">Your info</span>
+      </div>
+      <div class="bf-grid2" style="margin-bottom:18px;">
+        <div class="bf-row">
+          <label for="bf-fname" data-en="First name" data-fr="Prénom">First name</label>
+          <input type="text" id="bf-fname" name="firstname" placeholder="First name" data-ph-en="First name" data-ph-fr="Prénom">
+        </div>
+        <div class="bf-row">
+          <label for="bf-lname" data-en="Last name" data-fr="Nom">Last name</label>
+          <input type="text" id="bf-lname" name="lastname" placeholder="Last name" data-ph-en="Last name" data-ph-fr="Nom">
+        </div>
+      </div>
+      <div class="bf-grid2" style="margin-bottom:18px;">
+        <div class="bf-row">
+          <label for="bf-email">Email</label>
+          <input type="email" id="bf-email" name="email" placeholder="your@email.com">
+        </div>
+        <div class="bf-row">
+          <label for="bf-phone">Phone</label>
+          <input type="tel" id="bf-phone" name="phone" placeholder="+1 (514) 000-0000">
+        </div>
+      </div>
+      <div class="bf-row" style="margin-bottom:0;">
+        <label for="bf-notes" data-en="Notes" data-fr="Notes">Notes</label>
+        <textarea id="bf-notes" name="notes" placeholder="Team name, specific shots you need, anything else…" data-ph-en="Team name, specific shots you need, anything else…" data-ph-fr="Nom de l'équipe, photos spécifiques, toute autre information…"></textarea>
+      </div>
+    </div>
+
+    <!-- ══ STEP 5: TERMS ══ -->
+    <div class="config-step">
+      <div class="step-hd">
+        <span class="step-n">05</span>
+        <span class="step-title" data-en="Terms &amp; policies" data-fr="Conditions &amp; politiques">Terms &amp; policies</span>
+        <span class="step-hint" data-en="All required" data-fr="Toutes obligatoires">All required</span>
+      </div>
+      <div id="terms-list">
+        <label class="term-item" id="t1">
+          <input type="checkbox" id="tc1">
+          <div class="term-box"><svg width="10" height="8" viewBox="0 0 10 8" fill="none" stroke="#0e0e0e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 3.5 6.5 9 1"/></svg></div>
+          <span class="term-text" data-en="<strong>Turnaround Time:</strong> I understand I will receive a private link to all edited images within 24 hours of the shoot." data-fr="<strong>Délai de livraison :</strong> Je comprends que je recevrai un lien privé vers toutes les images éditées dans les 24 heures suivant la séance."><strong>Turnaround Time:</strong> I understand I will receive a private link to all edited images within 24 hours of the shoot.</span>
+        </label>
+        <label class="term-item" id="t2">
+          <input type="checkbox" id="tc2">
+          <div class="term-box"><svg width="10" height="8" viewBox="0 0 10 8" fill="none" stroke="#0e0e0e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 3.5 6.5 9 1"/></svg></div>
+          <span class="term-text" data-en="<strong>Usage Rights:</strong> I agree images are for Personal Use Only. Commercial reselling or redistribution is prohibited." data-fr="<strong>Droits d'utilisation :</strong> Je conviens que les images sont à usage personnel uniquement. La revente ou redistribution commerciale est interdite."><strong>Usage Rights:</strong> I agree images are for Personal Use Only. Commercial reselling or redistribution is prohibited.</span>
+        </label>
+        <label class="term-item" id="t3">
+          <input type="checkbox" id="tc3">
+          <div class="term-box"><svg width="10" height="8" viewBox="0 0 10 8" fill="none" stroke="#0e0e0e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 3.5 6.5 9 1"/></svg></div>
+          <span class="term-text" data-en="<strong>Creator Rights:</strong> I grant the photographer permission to use captured media for business promotion and portfolio." data-fr="<strong>Droits du créateur :</strong> J'autorise le photographe à utiliser les médias capturés pour la promotion de son activité et son portfolio."><strong>Creator Rights:</strong> I grant the photographer permission to use captured media for business promotion and portfolio.</span>
+        </label>
+        <label class="term-item" id="t4">
+          <input type="checkbox" id="tc4">
+          <div class="term-box"><svg width="10" height="8" viewBox="0 0 10 8" fill="none" stroke="#0e0e0e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 3.5 6.5 9 1"/></svg></div>
+          <span class="term-text" data-en="<strong>Cancellation Policy:</strong> I understand that cancellations result in a fee of 25% of the total payment." data-fr="<strong>Politique d'annulation :</strong> Je comprends que les annulations entraînent des frais de 25% du paiement total."><strong>Cancellation Policy:</strong> I understand that cancellations result in a fee of 25% of the total payment.</span>
+        </label>
+      </div>
+      <div class="terms-warning" id="terms-warning">Please accept all 4 terms to continue.</div>
+    </div>
+
+    <!-- ══ SUBMIT ══ -->
+    <div class="submit-section" id="submit-section">
+
+      <div class="book-success" id="book-success">
+        <div class="bs-check">
+          <svg width="26" height="22" viewBox="0 0 26 22" fill="none" stroke="#c8a96e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 11 9 18 24 2"/></svg>
+        </div>
+        <h3 data-en="Booking request sent." data-fr="Demande de réservation envoyée.">Booking request sent.</h3>
+        <p data-en="I'll confirm within 24 hours with availability and next steps.<br>Check your inbox — a summary is on its way." data-fr="Je confirmerai dans les 24 heures avec les disponibilités et les prochaines étapes.<br>Vérifiez votre boîte mail — un résumé est en route.">I'll confirm within 24 hours with availability and next steps.<br>Check your inbox — a summary is on its way.</p>
+      </div>
+
+      <div id="order-summary-wrap">
+        <div class="order-summary-table" id="order-summary">
+          <div class="os-row">
+            <span class="osl">Package</span>
+            <span class="osv" id="os-pkg">—</span>
+          </div>
+          <div id="os-addon-rows"></div>
+          <div class="os-row">
+            <span class="osl" id="os-travel-label">Travel (0 km × $0.75)</span>
+            <span class="osv" id="os-travel">$0.00</span>
+          </div>
+          <div class="os-row os-tax-row">
+            <span class="osl">Subtotal</span>
+            <span class="osv" id="os-subtotal">—</span>
+          </div>
+          <div class="os-row os-tax-row">
+            <span class="osl">GST (5%)</span>
+            <span class="osv" id="os-gst">—</span>
+          </div>
+          <div class="os-row os-tax-row" style="border-bottom: 1px solid rgba(255,255,255,0.08);">
+            <span class="osl">QST (9.975%)</span>
+            <span class="osv" id="os-qst">—</span>
+          </div>
+          <div class="os-row total">
+            <span class="osl">Total (taxes incl.)</span>
+            <span class="osv" id="os-total">—</span>
+          </div>
+        </div>
+        <p class="os-note">100% payment required upfront to confirm your date. I'll send a payment link once I confirm availability.<br>Prefer to talk directly? <a href="mailto:adrlezama@gmail.com">adrlezama@gmail.com</a></p>
+        <button class="book-btn" id="book-btn" data-en="Request Booking" data-fr="Envoyer la demande">Request Booking</button>
+      </div>
+
+    </div>
+
+  </div><!-- /config-right -->
+</div><!-- /config-layout -->
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="footer-brand">
+    <span class="footer-name">Adriano Lezama</span>
+    <span class="footer-tagline" data-en="Sport Photographer · Montréal" data-fr="Photographe sportif · Montréal">Sport Photographer · Montréal</span>
+  </div>
+  <nav class="footer-links">
+    <a href="work.html" data-en="Gallery" data-fr="Galerie">Gallery</a>
+    <a href="about.html" data-en="About" data-fr="À propos">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="book.html" data-en="Book" data-fr="Réserver" style="color:var(--accent)">Book</a>
+    <a href="mediakit.html" data-en="Media Kit" data-fr="Dossier de presse">Media Kit</a>
+  </nav>
+  <div class="footer-right">
+    <a href="https://www.instagram.com/byadriano_/" target="_blank" rel="noopener" class="footer-ig">@byadriano_</a>
+    <span class="footer-copy">© 2026 · All rights reserved</span>
+  </div>
+</footer>
+
+<script>
+  // Mobile menu
+  const mobileMenu = document.getElementById('mobile-menu');
+  document.getElementById('mobile-menu-btn').addEventListener('click', () => { mobileMenu.style.display = 'flex'; });
+  document.getElementById('mobile-close').addEventListener('click', () => { mobileMenu.style.display = 'none'; });
+  document.querySelectorAll('#mobile-menu a').forEach(l => l.addEventListener('click', () => { mobileMenu.style.display = 'none'; }));
+
+  // Gallery switcher
+  document.querySelectorAll('.gallery-thumb').forEach(thumb => {
+    thumb.addEventListener('click', () => {
+      const idx = thumb.dataset.idx;
+      document.querySelectorAll('.gallery-img').forEach(img => img.classList.remove('active'));
+      document.querySelectorAll('.gallery-thumb').forEach(t => t.classList.remove('active'));
+      document.querySelector(`.gallery-img[data-idx="${idx}"]`).classList.add('active');
+      thumb.classList.add('active');
+    });
+  });
+
+  // Click anywhere on date/time inputs to open picker
+  document.getElementById('bf-date').addEventListener('click', function() { this.showPicker(); });
+  document.getElementById('bf-time').addEventListener('click', function() { this.showPicker(); });
+
+  // Set min date (7 days)
+  const dateInput = document.getElementById('bf-date');
+  const minDate = new Date();
+  minDate.setDate(minDate.getDate() + 7);
+  dateInput.min = minDate.toISOString().split('T')[0];
+
+  // ── Live price state ──
+  const GST_RATE = 0.05;
+  const QST_RATE = 0.09975;
+  const TRAVEL_RATE = 0.75; // $ per km
+
+  let selectedPkg  = null;
+  let addonTotal   = 0;
+  let addonItems   = [];
+
+
+  function getTravel() {
+    const km = parseFloat(document.getElementById('bf-km').value) || 0;
+    return { km, cost: km * TRAVEL_RATE };
+  }
+
+  document.getElementById('bf-km').addEventListener('input', refreshPrice);
+
+  function refreshPrice() {
+    const { km, cost: travel } = getTravel();
+    const breakdown    = document.getElementById('pb-breakdown');
+    const totalEl      = document.getElementById('pb-total');
+    const pbTotalLabel = document.querySelector('.pb-total-label');
+    const osAddonRows  = document.getElementById('os-addon-rows');
+    const osPkg        = document.getElementById('os-pkg');
+    const osTravelLabel = document.getElementById('os-travel-label');
+    const osTravel     = document.getElementById('os-travel');
+    const osSubtotal   = document.getElementById('os-subtotal');
+    const osGst        = document.getElementById('os-gst');
+    const osQst        = document.getElementById('os-qst');
+    const osTotal      = document.getElementById('os-total');
+
+    if (!selectedPkg) {
+      breakdown.innerHTML = '— Select a package to begin';
+      totalEl.className = 'pb-total custom';
+      totalEl.textContent = '—';
+      pbTotalLabel.textContent = 'Total';
+      osPkg.textContent = '—';
+      osAddonRows.innerHTML = '';
+      osSubtotal.textContent = '—';
+      osGst.textContent = '—';
+      osQst.textContent = '—';
+      osTotal.textContent = '—';
+      return;
+    }
+
+    osPkg.textContent = selectedPkg.name + (selectedPkg.isCustom ? ' (custom)' : ' — $' + selectedPkg.price);
+
+    if (selectedPkg.isCustom) {
+      osTravelLabel.textContent = `Travel (${km} km × $0.75)`;
+      osTravel.textContent = '$' + travel.toFixed(2);
+      osAddonRows.innerHTML = addonItems.map(a =>
+        `<div class="os-row os-tax-row"><span class="osl">${a.name}</span><span class="osv">+$${a.price.toFixed(2)}</span></div>`
+      ).join('');
+      breakdown.innerHTML = `<span>${selectedPkg.name}</span> + travel${addonTotal ? ' + add-ons' : ''}`;
+      totalEl.className = 'pb-total custom';
+      totalEl.textContent = 'Quote on request';
+      pbTotalLabel.textContent = 'Total';
+      osSubtotal.textContent = '—';
+      osGst.textContent = '—';
+      osQst.textContent = '—';
+      osTotal.textContent = 'Custom — quote on confirmation';
+    } else {
+      const multiplier   = selectedPkg.isSeason ? 3 : 1;
+      const base         = selectedPkg.price;
+      const addonEff     = addonTotal * multiplier;
+      const travelEff    = travel * multiplier;
+      const subtotal     = base + addonEff + travelEff;
+      const gst          = subtotal * GST_RATE;
+      const qst          = subtotal * QST_RATE;
+      const grand        = subtotal + gst + qst;
+
+      osTravelLabel.textContent = multiplier > 1
+        ? `Travel (${km} km × $0.75 × ${multiplier} matches)`
+        : `Travel (${km} km × $0.75)`;
+      osTravel.textContent = '$' + travelEff.toFixed(2);
+
+      osAddonRows.innerHTML = addonItems.map(a => {
+        const effPrice = a.price * multiplier;
+        const label = multiplier > 1 ? `${a.name} ×${multiplier}` : a.name;
+        return `<div class="os-row os-tax-row"><span class="osl">${label}</span><span class="osv">+$${effPrice.toFixed(2)}</span></div>`;
+      }).join('');
+
+      let parts = [`<span>${selectedPkg.name} $${base}</span>`];
+      if (addonEff) parts.push(`add-ons $${addonEff}`);
+      if (travelEff > 0) parts.push(`travel $${travelEff.toFixed(2)}`);
+      breakdown.innerHTML = parts.join(' · ');
+      totalEl.className = 'pb-total';
+      totalEl.textContent = '$' + grand.toFixed(2);
+      pbTotalLabel.textContent = 'Total (taxes incl.)';
+
+      osSubtotal.textContent = '$' + subtotal.toFixed(2);
+      osGst.textContent = '$' + gst.toFixed(2);
+      osQst.textContent = '$' + qst.toFixed(2);
+      osTotal.textContent = '$' + grand.toFixed(2);
+    }
+  }
+
+  // Package selection
+  document.querySelectorAll('.pkg-card').forEach(card => {
+    card.addEventListener('click', () => {
+      document.querySelectorAll('.pkg-card').forEach(c => c.classList.remove('selected'));
+      card.classList.add('selected');
+      const price = card.dataset.price;
+      selectedPkg = {
+        name: card.dataset.name,
+        price: parseFloat(price) || 0,
+        isCustom: price === 'custom',
+        isSeason: card.dataset.slug === 'season'
+      };
+      refreshPrice();
+    });
+  });
+
+  // Add-on selection
+  document.querySelectorAll('.addon-item').forEach(item => {
+    const cb = item.querySelector('input[type=checkbox]');
+    cb.addEventListener('change', () => {
+      item.classList.toggle('selected', cb.checked);
+      addonTotal = 0;
+      addonItems = [];
+      document.querySelectorAll('.addon-item.selected').forEach(a => {
+        const p = parseInt(a.dataset.price);
+        addonTotal += p;
+        addonItems.push({ name: a.dataset.name, price: p });
+      });
+      refreshPrice();
+    });
+  });
+
+  // Term checkboxes
+  ['tc1','tc2','tc3','tc4'].forEach(id => {
+    document.getElementById(id).addEventListener('change', (e) => {
+      const item = e.target.closest('.term-item');
+      item.classList.toggle('checked', e.target.checked);
+    });
+  });
+
+  // Submit
+  document.getElementById('book-btn').addEventListener('click', async () => {
+    // Validate required
+    const pkg = document.querySelector('.pkg-card.selected');
+    if (!pkg) { alert('Please select a package.'); return; }
+    const terms = ['tc1','tc2','tc3','tc4'].every(id => document.getElementById(id).checked);
+    if (!terms) {
+      document.getElementById('terms-warning').classList.add('show');
+      document.getElementById('terms-warning').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+    document.getElementById('terms-warning').classList.remove('show');
+
+    const btn = document.getElementById('book-btn');
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+
+    const { km, cost: travel } = getTravel();
+    const subtotal = selectedPkg.isCustom ? null : (selectedPkg.price + addonTotal + travel);
+    const gst      = subtotal ? (subtotal * GST_RATE) : null;
+    const qst      = subtotal ? (subtotal * QST_RATE) : null;
+    const grand    = subtotal ? (subtotal + gst + qst) : null;
+    const data = {
+      package:    document.querySelector('.pkg-card.selected').dataset.name,
+      addons:     addonItems.map(a => `${a.name} (+$${a.price})`).join(', ') || 'None',
+      km,
+      travelFee:  travel.toFixed(2),
+      subtotal:   subtotal ? ('$' + subtotal.toFixed(2)) : 'Custom',
+      gst:        gst ? ('$' + gst.toFixed(2)) : '—',
+      qst:        qst ? ('$' + qst.toFixed(2)) : '—',
+      total:      grand ? ('$' + grand.toFixed(2)) : 'Custom — quote on confirmation',
+      sport:      document.getElementById('bf-sport').value,
+      date:       document.getElementById('bf-date').value,
+      time:       document.getElementById('bf-time').value,
+      address:    document.getElementById('bf-address').value,
+      firstname:  document.getElementById('bf-fname').value,
+      lastname:   document.getElementById('bf-lname').value,
+      email:      document.getElementById('bf-email').value,
+      phone:      document.getElementById('bf-phone').value,
+      notes:      document.getElementById('bf-notes').value,
+      lang:       window.currentLang || 'en',
+    };
+
+    try {
+      const res = await fetch('/api/book', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      if (res.ok) {
+        document.getElementById('order-summary-wrap').style.display = 'none';
+        document.getElementById('book-success').style.display = 'block';
+      } else {
+        btn.textContent = 'Request Booking'; btn.disabled = false;
+        alert('Something went wrong. Please email adrlezama@gmail.com directly.');
+      }
+    } catch {
+      btn.textContent = 'Request Booking'; btn.disabled = false;
+      alert('Something went wrong. Please email adrlezama@gmail.com directly.');
+    }
+  });
+</script>
+<script src="lang.js"></script>
+</body>
+</html>
