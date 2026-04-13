@@ -256,9 +256,16 @@
     .footer-copy { font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
     .footer-ig { font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); transition: color 0.2s; }
     .footer-ig:hover { color: var(--text); }
+
+    /* ── Corner logo ── */
+    .site-logo-corner { position: fixed; top: 20px; left: 24px; z-index: 200; display: flex; align-items: center; }
+    .site-logo-corner img { height: 60px; width: auto; opacity: 0.92; transition: opacity 0.2s; }
+    .site-logo-corner:hover img { opacity: 1; }
+    @media (max-width: 640px) { .site-logo-corner { top: 14px; left: 16px; } .site-logo-corner img { height: 45px; } }
   </style>
 </head>
 <body>
+<a href="index.html" class="site-logo-corner"><img src="AL.png" alt="Adriano Lezama Photography"></a>
 
 
 <!-- ══════════ PAGE ══════════ -->
