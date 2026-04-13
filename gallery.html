@@ -52,10 +52,13 @@
       color: #fff; transition: color 0.2s;
     }
     .nav-left a:hover, .nav-left a.active { color: var(--accent); }
-    .nav-center { display: flex; align-items: center; justify-content: center; flex: 1; }
+    .nav-center { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; }
     .nav-logo { display: flex; align-items: center; }
-    .nav-logo img { height: 130px; width: auto; opacity: 0.92; transition: opacity 0.2s; }
+    .nav-logo img { height: 80px; width: auto; opacity: 0.92; transition: opacity 0.2s; }
     .nav-logo:hover img { opacity: 1; }
+    .nav-links { display: flex; align-items: center; gap: 2rem; }
+    .nav-links a { font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: #fff; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--accent); }
     .nav-right { display: flex; align-items: center; gap: 1.4rem; flex: 1; justify-content: flex-end; }
     .nav-icon { display: flex; align-items: center; color: #fff; transition: color 0.2s; }
     .nav-icon:hover { color: var(--accent); }
@@ -458,16 +461,17 @@
 
 <!-- ══════════ NAV ══════════ -->
 <nav id="navbar">
-  <div class="nav-left">
-    <a href="work.html" class="active" data-en="Gallery" data-fr="Galerie">Gallery</a>
-    <a href="about.html" data-en="About" data-fr="À propos">About</a>
-    <a href="contact.html">Contact</a>
-    <a href="book.html" data-en="Book" data-fr="Réserver" style="color:var(--accent);border:1px solid rgba(200,169,110,0.45);padding:6px 16px;border-radius:999px;transition:background 0.2s,color 0.2s;" onmouseover="this.style.background='rgba(200,169,110,0.12)'" onmouseout="this.style.background=''">Book</a>
-  </div>
+  <div class="nav-left"></div>
   <div class="nav-center">
     <a href="index.html" class="nav-logo" aria-label="Home">
       <img src="logo-al.svg" alt="AL logo">
     </a>
+    <div class="nav-links">
+      <a href="work.html" class="active" data-en="Gallery" data-fr="Galerie">Gallery</a>
+      <a href="about.html" data-en="About" data-fr="À propos">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="book.html" data-en="Book" data-fr="Réserver">Book</a>
+    </div>
   </div>
   <div class="nav-right">
     <a href="https://www.instagram.com/byadriano_/" target="_blank" rel="noopener" class="nav-icon" aria-label="Instagram">
@@ -487,22 +491,7 @@
       <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
     </button>
   </div>
-  <button class="nav-hamburger" id="mobile-menu-btn" aria-label="Menu">
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
-  </button>
 </nav>
-
-<!-- MOBILE MENU -->
-<div id="mobile-menu">
-  <button id="mobile-close" aria-label="Close">
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-  </button>
-  <a href="work.html" data-en="Gallery" data-fr="Galerie">Gallery</a>
-  <a href="about.html" data-en="About" data-fr="À propos">About</a>
-  <a href="contact.html">Contact</a>
-  <a href="book.html" data-en="Book" data-fr="Réserver" style="color:var(--accent)">Book</a>
-  <button onclick="toggleLang()" class="lang-btn" style="background:none;border:1px solid rgba(255,255,255,0.2);color:var(--muted);font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;padding:8px 20px;border-radius:999px;cursor:pointer;margin-top:1rem;">FR</button>
-</div>
 
 <!-- ══════════ HEADER ══════════ -->
 <div class="page-header">
