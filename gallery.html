@@ -461,10 +461,21 @@
     .site-logo-corner img { height: 80px; width: auto; opacity: 0.92; transition: opacity 0.2s; }
     .site-logo-corner:hover img { opacity: 1; }
     @media (max-width: 640px) { .site-logo-corner { top: 14px; left: 16px; } .site-logo-corner img { height: 55px; } }
+    .top-nav-links { position: fixed; top: 0; right: 28px; z-index: 200; display: flex; align-items: center; height: 90px; gap: 2.2rem; }
+    .top-nav-links a { font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.55); transition: color 0.2s; text-decoration: none; }
+    .top-nav-links a:hover { color: #fff; }
+    .top-nav-links .book-link { color: #c8a96e; }
+    @media (max-width: 640px) { .top-nav-links { display: none; } }
   </style>
 </head>
 <body>
 <a href="index.html" class="site-logo-corner"><img src="AL.svg" alt="Adriano Lezama Photography"></a>
+<nav class="top-nav-links">
+  <a href="work.html">Gallery</a>
+  <a href="about.html">About</a>
+  <a href="contact.html">Contact</a>
+  <a href="book.html" class="book-link">Book</a>
+</nav>
 
 
 <!-- ══════════ HEADER ══════════ -->
