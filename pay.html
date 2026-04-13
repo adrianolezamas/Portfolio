@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Complete Payment — Adriano Lezama Photography</title>
+  <script src="https://js.stripe.com/v3/"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0e0e0e;
+      color: #fff;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── Grain overlay ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── Layout ── */
+    .page {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 100vh;
+    }
+
+    @media (max-width: 720px) {
+      .page { grid-template-columns: 1fr; }
+      .left  { padding: 40px 24px 24px; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.06); }
+      .right { padding: 32px 24px 48px; }
+    }
+
+    /* ── Left — booking summary ── */
+    .left {
+      padding: 64px 56px;
+      border-right: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .wordmark {
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #c8a96e;
+      margin-bottom: 40px;
+    }
+
+    .left h1 {
+      font-size: 28px;
+      font-weight: 300;
+      letter-spacing: -0.03em;
+      color: #fff;
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+
+    .left .sub {
+      font-size: 13px;
+      color: #555;
+      margin-bottom: 40px;
+      line-height: 1.6;
+    }
+
+    .summary-card {
+      background: #141414;
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 13px 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      font-size: 13px;
+    }
+
+    .summary-row:last-child { border-bottom: none; }
+
+    .summary-row .label { color: #666; }
+    .summary-row .value { color: #e2e2e2; text-align: right; max-width: 60%; }
+
+    .summary-row.total-row {
+      padding: 16px 20px;
+      background: rgba(200,169,110,0.04);
+      border-top: 1px solid rgba(200,169,110,0.12);
+    }
+
+    .summary-row.total-row .label { color: #fff; font-size: 14px; }
+    .summary-row.total-row .value { color: #c8a96e; font-size: 18px; font-weight: 500; }
+
+    .secure-note {
+      margin-top: 20px;
+      font-size: 11px;
+      color: #444;
+      line-height: 1.7;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .secure-note svg { flex-shrink: 0; opacity: 0.5; }
+
+    /* ── Right — payment form ── */
+    .right {
+      padding: 64px 56px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .right h2 {
+      font-size: 18px;
+      font-weight: 400;
+      color: #fff;
+      letter-spacing: -0.01em;
+      margin-bottom: 6px;
+    }
+
+    .right .step-label {
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #555;
+      margin-bottom: 32px;
+    }
+
+    #payment-element {
+      margin-bottom: 24px;
+    }
+
+    /* Stripe element appearance is controlled via JS `appearance` option */
+
+    #pay-btn {
+      width: 100%;
+      background: #c8a96e;
+      color: #0a0a0a;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: none;
+      border-radius: 6px;
+      padding: 16px 24px;
+      cursor: pointer;
+      transition: opacity 0.2s ease, transform 0.15s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    #pay-btn:hover  { opacity: 0.88; }
+    #pay-btn:active { transform: scale(0.98); }
+    #pay-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+    .spinner {
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(0,0,0,0.3);
+      border-top-color: #0a0a0a;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      display: none;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    #pay-error {
+      margin-top: 14px;
+      font-size: 12px;
+      color: #f87171;
+      line-height: 1.6;
+      display: none;
+    }
+
+    #loading-state {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .skeleton {
+      background: rgba(255,255,255,0.05);
+      border-radius: 6px;
+      animation: pulse 1.4s ease-in-out infinite;
+    }
+
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+    #form-state { display: none; }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ── Left: booking summary ── -->
+  <div class="left">
+    <p class="wordmark">Adriano Lezama Photography</p>
+    <h1 id="summary-name">Secure Payment</h1>
+    <p class="sub" id="summary-date"></p>
+
+    <div class="summary-card">
+      <div class="summary-row">
+        <span class="label">Package</span>
+        <span class="value" id="s-pkg">—</span>
+      </div>
+      <div class="summary-row" id="s-addons-row" style="display:none;">
+        <span class="label">Add-ons</span>
+        <span class="value" id="s-addons">—</span>
+      </div>
+      <div class="summary-row" id="s-travel-row" style="display:none;">
+        <span class="label">Travel</span>
+        <span class="value" id="s-travel">—</span>
+      </div>
+      <div class="summary-row">
+        <span class="label">GST (5%)</span>
+        <span class="value" id="s-gst">—</span>
+      </div>
+      <div class="summary-row">
+        <span class="label">QST (9.975%)</span>
+        <span class="value" id="s-qst">—</span>
+      </div>
+      <div class="summary-row total-row">
+        <span class="label">Total (CAD)</span>
+        <span class="value" id="s-total">—</span>
+      </div>
+    </div>
+
+    <p class="secure-note">
+      <svg width="13" height="14" viewBox="0 0 13 14" fill="none">
+        <rect x="1" y="6" width="11" height="8" rx="2" stroke="#888" stroke-width="1.2"/>
+        <path d="M3.5 6V4.5a3 3 0 0 1 6 0V6" stroke="#888" stroke-width="1.2" stroke-linecap="round"/>
+      </svg>
+      Payments are processed securely by Stripe. Your card details never touch our servers.
+    </p>
+  </div>
+
+  <!-- ── Right: Stripe Payment Element ── -->
+  <div class="right">
+    <h2>Payment Details</h2>
+    <p class="step-label">Enter your card information below</p>
+
+    <!-- Skeleton while loading -->
+    <div id="loading-state">
+      <div class="skeleton" style="height:56px;width:100%;margin-bottom:4px;"></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <div class="skeleton" style="height:56px;"></div>
+        <div class="skeleton" style="height:56px;"></div>
+      </div>
+      <div class="skeleton" style="height:48px;width:100%;margin-top:20px;"></div>
+    </div>
+
+    <!-- Payment form (shown after Stripe loads) -->
+    <form id="form-state" onsubmit="handleSubmit(event)">
+      <div id="payment-element"></div>
+      <button type="submit" id="pay-btn">
+        <div class="spinner" id="btn-spinner"></div>
+        <span id="btn-text">Pay <span id="btn-amount"></span></span>
+      </button>
+      <p id="pay-error"></p>
+    </form>
+  </div>
+
+</div>
+
+<script>
+  // ── Parse URL params ──
+  const p      = new URLSearchParams(location.search);
+  const name   = p.get('name')   || 'Client';
+  const pkg    = p.get('pkg')    || '—';
+  const total  = p.get('total')  || '—';      // formatted string e.g. "$462.33"
+  const date   = p.get('date')   || '';
+  const email  = p.get('email')  || '';
+  const addons = p.get('addons') || '';
+  const travel = p.get('travel') || '';
+  const gst    = p.get('gst')    || '';
+  const qst    = p.get('qst')    || '';
+
+  // Amount in cents — strip "$" and convert
+  const totalNum    = parseFloat((p.get('total') || '0').replace(/[^0-9.]/g, '')) || 0;
+  const amountCents = Math.round(totalNum * 100);
+
+  // Parse each formatted dollar string into cents for invoice line items
+  function parseCents(str) {
+    if (!str) return 0;
+    return Math.round(parseFloat(str.replace(/[^0-9.]/g, '')) * 100) || 0;
+  }
+  const gstCents    = parseCents(gst);
+  const qstCents    = parseCents(qst);
+  const travelCents = parseCents(travel);
+  const addonCents  = parseCents(addons);
+  const baseCents   = amountCents - gstCents - qstCents - travelCents - addonCents;
+
+  // Build structured line items for Stripe Invoice
+  const lineItems = [];
+  if (baseCents > 0)   lineItems.push({ description: pkg || 'Photography Package',  amountCents: baseCents });
+  if (addonCents > 0)  lineItems.push({ description: `Add-ons: ${addons}`,          amountCents: addonCents });
+  if (travelCents > 0) lineItems.push({ description: 'Travel fee',                  amountCents: travelCents });
+  if (gstCents > 0)    lineItems.push({ description: 'GST (5%)',                    amountCents: gstCents });
+  if (qstCents > 0)    lineItems.push({ description: 'QST (9.975%)',                amountCents: qstCents });
+
+  // ── Populate summary ──
+  document.getElementById('summary-name').textContent = `Hi ${name},`;
+  document.getElementById('summary-date').textContent = date
+    ? `Your booking for ${date} is confirmed and awaiting payment.`
+    : 'Your booking is confirmed and awaiting payment.';
+
+  document.getElementById('s-pkg').textContent    = pkg;
+  document.getElementById('s-total').textContent  = total || '—';
+  document.getElementById('btn-amount').textContent = total || '';
+
+  if (addons) {
+    document.getElementById('s-addons-row').style.display = 'flex';
+    document.getElementById('s-addons').textContent = addons;
+  }
+  if (travel) {
+    document.getElementById('s-travel-row').style.display = 'flex';
+    document.getElementById('s-travel').textContent = travel;
+  }
+  if (gst) document.getElementById('s-gst').textContent = gst;
+  if (qst) document.getElementById('s-qst').textContent = qst;
+
+  // ── Init Stripe ──
+  const STRIPE_PK = 'pk_live_51TKkMBBzdtyxvnGY9dcafAmMdxG6G2165EavmIpEFJ0GPMdIwjdWrqAb4LDCBhsVSEzBGdZGTUVsgauQCPzmKyKj007x1MY7Xq';
+  let stripe, elements;
+
+  async function initStripe() {
+    try {
+      const res  = await fetch('/api/stripe-session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ amountCents, pkg, name, email, date, lineItems }),
+      });
+      const data = await res.json();
+
+      if (!res.ok || !data.clientSecret) {
+        throw new Error(data.error || 'Could not initialise payment.');
+      }
+
+      stripe = Stripe(STRIPE_PK);
+
+      elements = stripe.elements({
+        clientSecret: data.clientSecret,
+        appearance: {
+          theme: 'night',
+          variables: {
+            colorPrimary:        '#c8a96e',
+            colorBackground:     '#141414',
+            colorText:           '#e2e2e2',
+            colorDanger:         '#f87171',
+            fontFamily:          "'Helvetica Neue', Arial, sans-serif",
+            fontSizeBase:        '13px',
+            spacingUnit:         '4px',
+            borderRadius:        '6px',
+            colorTextPlaceholder:'#555',
+          },
+          rules: {
+            '.Input': {
+              border:     '1px solid rgba(255,255,255,0.1)',
+              boxShadow:  'none',
+              padding:    '12px 14px',
+            },
+            '.Input:focus': {
+              border:    '1px solid rgba(200,169,110,0.5)',
+              boxShadow: '0 0 0 3px rgba(200,169,110,0.08)',
+            },
+            '.Label': { color: '#888', fontSize: '11px', letterSpacing: '0.1em', textTransform: 'uppercase' },
+          },
+        },
+      });
+
+      const paymentElement = elements.create('payment');
+      paymentElement.mount('#payment-element');
+
+      document.getElementById('loading-state').style.display = 'none';
+      document.getElementById('form-state').style.display    = 'block';
+
+    } catch (err) {
+      document.getElementById('loading-state').innerHTML =
+        `<p style="font-size:13px;color:#f87171;line-height:1.7;">${err.message}</p>`;
+    }
+  }
+
+  // ── Handle submit ──
+  async function handleSubmit(e) {
+    e.preventDefault();
+    const btn     = document.getElementById('pay-btn');
+    const spinner = document.getElementById('btn-spinner');
+    const btnText = document.getElementById('btn-text');
+    const errEl   = document.getElementById('pay-error');
+
+    btn.disabled      = true;
+    spinner.style.display = 'block';
+    btnText.style.display = 'none';
+    errEl.style.display   = 'none';
+
+    const { error } = await stripe.confirmPayment({
+      elements,
+      confirmParams: {
+        return_url: `${location.origin}/pay-success.html?name=${encodeURIComponent(name)}&pkg=${encodeURIComponent(pkg)}&total=${encodeURIComponent(total)}`,
+        receipt_email: email || undefined,
+      },
+    });
+
+    if (error) {
+      errEl.textContent   = error.message;
+      errEl.style.display = 'block';
+      btn.disabled        = false;
+      spinner.style.display = 'none';
+      btnText.style.display = 'inline';
+    }
+    // On success, Stripe redirects automatically
+  }
+
+  initStripe();
+</script>
+</body>
+</html>
