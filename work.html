@@ -47,7 +47,7 @@
     nav.bg { background: transparent; backdrop-filter: none; -webkit-backdrop-filter: none; }
     .nav-left { display: flex; align-items: center; gap: 2.2rem; flex: 1; }
     .nav-left a {
-      font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase;
+      font-size: 0.85rem; letter-spacing: 0.14em; text-transform: uppercase;
       color: #fff; transition: color 0.2s;
     }
     .nav-left a:hover, .nav-left a.active { color: var(--accent); }
@@ -227,7 +227,13 @@
 
 <!-- ══════════ NAV ══════════ -->
 <nav id="navbar">
-  <div class="nav-left"></div>
+  <div class="nav-left">
+    <a href="work.html" class="active" data-en="Gallery" data-fr="Galerie">Gallery</a>
+    <a href="about.html" data-en="About" data-fr="À propos">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="book.html" data-en="Book" data-fr="Réserver">Book</a>
+    <a href="mediakit.html" data-en="Media Kit" data-fr="Dossier de presse">Media Kit</a>
+  </div>
   <div class="nav-center">
     <a href="index.html" class="nav-logo" aria-label="Home">
       <img src="logo-al.svg" alt="AL logo">
