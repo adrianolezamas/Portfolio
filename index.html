@@ -87,9 +87,7 @@
     /* ─── LOGOS MARQUEE ─── */
     .logos-strip {
       padding: 28px 0;
-      background: #0a0a0a;
-      border-top: 1px solid rgba(255,255,255,0.05);
-      border-bottom: 1px solid rgba(255,255,255,0.05);
+      background: transparent;
       overflow: hidden;
       position: relative;
     }
@@ -110,8 +108,8 @@
       z-index: 2;
       pointer-events: none;
     }
-    .logos-strip::before { left: 0; background: linear-gradient(to right, #0a0a0a, transparent); }
-    .logos-strip::after  { right: 0; background: linear-gradient(to left, #0a0a0a, transparent); }
+    .logos-strip::before { left: 0; background: linear-gradient(to right, #0e0e0e, transparent); }
+    .logos-strip::after  { right: 0; background: linear-gradient(to left, #0e0e0e, transparent); }
     .logos-track {
       display: flex;
       align-items: center;
@@ -120,15 +118,15 @@
       animation: logos-scroll 24s linear infinite;
     }
     .logos-track img {
-      height: 26px;
+      height: 52px;
       width: auto;
-      opacity: 0.35;
+      opacity: 0.5;
       filter: brightness(1.3);
       transition: opacity 0.25s;
       flex-shrink: 0;
       user-select: none;
     }
-    .logos-track img:hover { opacity: 0.7; }
+    .logos-track img:hover { opacity: 0.9; }
     @keyframes logos-scroll {
       from { transform: translateX(0); }
       to   { transform: translateX(-50%); }
@@ -609,6 +607,14 @@
 <div class="logos-strip">
   <p class="logos-strip-label" data-en="Trusted by" data-fr="Fait confiance par">Trusted by</p>
   <div class="logos-track">
+    <img src="logos/L1_Horizontal-blanc.png" alt="Partner logo">
+    <img src="logos/L2_Horizontal-blanc.png" alt="Partner logo">
+    <img src="logos/L3_Horizontal-blanc.png" alt="Partner logo">
+    <img src="logos/LS_PRO_Horizontal-blanc.png" alt="Partner logo">
+    <img src="logos/L1_Horizontal-blanc.png" alt="Partner logo">
+    <img src="logos/L2_Horizontal-blanc.png" alt="Partner logo">
+    <img src="logos/L3_Horizontal-blanc.png" alt="Partner logo">
+    <img src="logos/LS_PRO_Horizontal-blanc.png" alt="Partner logo">
     <img src="logos/L1_Horizontal-blanc.png" alt="Partner logo">
     <img src="logos/L2_Horizontal-blanc.png" alt="Partner logo">
     <img src="logos/L3_Horizontal-blanc.png" alt="Partner logo">
