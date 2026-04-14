@@ -6,7 +6,9 @@
     "serve": "node serve.mjs"
   },
   "dependencies": {
-    "resend": "^3.2.0"
+    "resend": "^3.2.0",
+    "stripe": "^22.0.1",
+    "vercel": "^50.43.0"
   },
   "devDependencies": {
     "puppeteer": "^22.0.0"

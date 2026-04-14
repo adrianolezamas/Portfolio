@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Payment Confirmed — Adriano Lezama Photography</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0e0e0e;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+
+    .card {
+      position: relative;
+      background: #141414;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 56px 48px;
+      max-width: 520px;
+      width: 100%;
+      text-align: center;
+    }
+
+    /* Animated checkmark ring */
+    .check-ring {
+      width: 72px;
+      height: 72px;
+      margin: 0 auto 32px;
+      position: relative;
+    }
+
+    .check-ring svg {
+      width: 72px;
+      height: 72px;
+    }
+
+    .check-circle {
+      stroke: #c8a96e;
+      stroke-width: 2;
+      fill: none;
+      stroke-dasharray: 200;
+      stroke-dashoffset: 200;
+      animation: draw-circle 0.6s ease forwards 0.1s;
+    }
+
+    .check-tick {
+      stroke: #c8a96e;
+      stroke-width: 2.5;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-dasharray: 40;
+      stroke-dashoffset: 40;
+      animation: draw-tick 0.4s ease forwards 0.7s;
+    }
+
+    @keyframes draw-circle { to { stroke-dashoffset: 0; } }
+    @keyframes draw-tick   { to { stroke-dashoffset: 0; } }
+
+    .wordmark {
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #c8a96e;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-size: 26px;
+      font-weight: 300;
+      letter-spacing: -0.03em;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+
+    .message {
+      font-size: 14px;
+      color: #888;
+      line-height: 1.7;
+      margin-bottom: 36px;
+    }
+
+    .detail-box {
+      background: #0e0e0e;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 10px;
+      padding: 20px 24px;
+      margin-bottom: 32px;
+      text-align: left;
+    }
+
+    .detail-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      padding: 7px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .detail-row:last-child { border-bottom: none; }
+    .detail-row .dl { color: #555; }
+    .detail-row .dv { color: #e2e2e2; }
+    .detail-row.total .dl { color: #fff; }
+    .detail-row.total .dv { color: #c8a96e; font-size: 15px; font-weight: 500; }
+
+    .back-link {
+      display: inline-block;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #444;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .back-link:hover { color: #888; }
+  </style>
+</head>
+<body>
+<div class="card">
+
+  <div class="check-ring">
+    <svg viewBox="0 0 72 72">
+      <circle class="check-circle" cx="36" cy="36" r="31" transform="rotate(-90 36 36)"/>
+      <polyline class="check-tick" points="22,37 31,46 50,27"/>
+    </svg>
+  </div>
+
+  <p class="wordmark">Adriano Lezama Photography</p>
+  <h1 id="h-title">Payment Confirmed</h1>
+  <p class="message" id="h-message">Your payment has been processed successfully. You'll receive a receipt by email shortly.</p>
+
+  <div class="detail-box">
+    <div class="detail-row">
+      <span class="dl">Client</span>
+      <span class="dv" id="d-name">—</span>
+    </div>
+    <div class="detail-row">
+      <span class="dl">Package</span>
+      <span class="dv" id="d-pkg">—</span>
+    </div>
+    <div class="detail-row total">
+      <span class="dl">Amount paid</span>
+      <span class="dv" id="d-total">—</span>
+    </div>
+  </div>
+
+  <a href="/" class="back-link">← Back to portfolio</a>
+</div>
+
+<script>
+  const p = new URLSearchParams(location.search);
+  const name  = p.get('name')  || '';
+  const pkg   = p.get('pkg')   || '';
+  const total = p.get('total') || '';
+
+  if (name) {
+    document.getElementById('h-title').textContent   = `Thank you, ${name}!`;
+    document.getElementById('h-message').textContent =
+      `Your payment has been processed. Adriano will be in touch with event-day details. See you on the pitch!`;
+  }
+
+  document.getElementById('d-name').textContent  = name  || '—';
+  document.getElementById('d-pkg').textContent   = pkg   || '—';
+  document.getElementById('d-total').textContent = total || '—';
+</script>
+</body>
+</html>

@@ -5,3 +5,4 @@ node_modules/
 .vercel/
 temporary screenshots/
 *.DS_Store
+.vercel

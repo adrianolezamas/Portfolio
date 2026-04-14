@@ -1,5 +1,10 @@
 {
   "rewrites": [
-    { "source": "/api/(.*)", "destination": "/api/$1" }
+    { "source": "/api/send", "destination": "/api/send" },
+    { "source": "/api/book", "destination": "/api/book" },
+    { "source": "/api/distance", "destination": "/api/distance" },
+    { "source": "/api/respond",        "destination": "/api/respond"        },
+    { "source": "/api/stripe-session",    "destination": "/api/stripe-session"    },
+    { "source": "/api/gallery-download", "destination": "/api/gallery-download" }
   ]
 }
