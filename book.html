@@ -97,7 +97,7 @@
     .gallery-img {
       position: absolute; inset: 0;
       background-size: cover; background-position: center;
-      opacity: 0; transition: opacity 0.5s ease;
+      opacity: 0; transition: opacity 0.85s cubic-bezier(0.4, 0, 0.2, 1);
     }
     .gallery-img.active { opacity: 1; }
     .gallery-overlay {
@@ -795,16 +795,36 @@
 <script>
   // Mobile menu
 
-  // Gallery switcher
-  document.querySelectorAll('.gallery-thumb').forEach(thumb => {
+  // Gallery auto-slideshow
+  const galleryImgs   = Array.from(document.querySelectorAll('.gallery-img'));
+  const galleryThumbs = Array.from(document.querySelectorAll('.gallery-thumb'));
+  let galleryCurrent  = 0;
+  let galleryTimer;
+
+  function goToSlide(idx) {
+    galleryImgs[galleryCurrent].classList.remove('active');
+    galleryThumbs[galleryCurrent].classList.remove('active');
+    galleryCurrent = idx;
+    galleryImgs[galleryCurrent].classList.add('active');
+    galleryThumbs[galleryCurrent].classList.add('active');
+  }
+
+  function startAutoSlide() {
+    clearInterval(galleryTimer);
+    galleryTimer = setInterval(() => {
+      goToSlide((galleryCurrent + 1) % galleryImgs.length);
+    }, 4000);
+  }
+
+  // Manual thumb click — reset timer so it doesn't immediately override
+  galleryThumbs.forEach(thumb => {
     thumb.addEventListener('click', () => {
-      const idx = thumb.dataset.idx;
-      document.querySelectorAll('.gallery-img').forEach(img => img.classList.remove('active'));
-      document.querySelectorAll('.gallery-thumb').forEach(t => t.classList.remove('active'));
-      document.querySelector(`.gallery-img[data-idx="${idx}"]`).classList.add('active');
-      thumb.classList.add('active');
+      goToSlide(parseInt(thumb.dataset.idx));
+      startAutoSlide();
     });
   });
+
+  startAutoSlide();
 
   // Click anywhere on date/time inputs to open picker
   document.getElementById('bf-date').addEventListener('click', function() { this.showPicker(); });
