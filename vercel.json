@@ -5,6 +5,7 @@
     { "source": "/api/distance", "destination": "/api/distance" },
     { "source": "/api/respond",        "destination": "/api/respond"        },
     { "source": "/api/stripe-session",    "destination": "/api/stripe-session"    },
+    { "source": "/api/payment-confirm",  "destination": "/api/payment-confirm"  },
     { "source": "/api/gallery-download", "destination": "/api/gallery-download" }
   ]
 }
