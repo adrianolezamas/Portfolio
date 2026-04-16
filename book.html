@@ -231,6 +231,7 @@
       font-size: 1.05rem; color: var(--accent);
     }
     .pkg-price.custom { font-family: inherit; font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+    .pkg-per { font-family: inherit; font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); vertical-align: middle; }
     .pkg-detail { font-size: 0.58rem; color: var(--muted); margin-top: 2px; letter-spacing: 0.04em; }
 
     /* Add-ons */
@@ -558,8 +559,7 @@
             <li data-en="72-hour turnaround" data-fr="Livraison en 72 heures">72-hour turnaround</li>
             <li data-en="Social media use for the club" data-fr="Utilisation réseaux sociaux pour le club">Social media use for the club</li>
           </ul>
-          <div class="pkg-price">$75</div>
-          <div class="pkg-detail" data-en="Per game · Season package $450 / 8 games" data-fr="Par match · Forfait saison 450$ / 8 matchs">Per game · Season package $450 / 8 games</div>
+          <div class="pkg-price">$75 <span class="pkg-per" data-en="/ game" data-fr="/ match">/ game</span></div>
         </label>
 
         <label class="pkg-card" data-price="150" data-name="Season Coverage" data-slug="season-coverage">
@@ -581,8 +581,7 @@
             <li data-en="Social crops (9:16 + 1:1 ready)" data-fr="Formats réseaux sociaux (9:16 + 1:1)">Social crops (9:16 + 1:1 ready)</li>
             <li data-en="1 team photo session included" data-fr="1 séance de photos d'équipe incluse">1 team photo session included</li>
           </ul>
-          <div class="pkg-price">$150</div>
-          <div class="pkg-detail" data-en="Per game · Season package $1,000 / 8 games" data-fr="Par match · Forfait saison 1 000$ / 8 matchs">Per game · Season package $1,000 / 8 games</div>
+          <div class="pkg-price">$150 <span class="pkg-per" data-en="/ game" data-fr="/ match">/ game</span></div>
         </label>
 
         <label class="pkg-card" data-price="250" data-name="Club Partner" data-slug="club-partner">
@@ -601,8 +600,7 @@
             <li data-en="Press &amp; media kit photos" data-fr="Photos pour kit presse et médias">Press &amp; media kit photos</li>
             <li data-en="Priority scheduling all season" data-fr="Priorité de calendrier toute la saison">Priority scheduling all season</li>
           </ul>
-          <div class="pkg-price">$250</div>
-          <div class="pkg-detail" data-en="Per game · Season package $1,750 / 8 games" data-fr="Par match · Forfait saison 1 750$ / 8 matchs">Per game · Season package $1,750 / 8 games</div>
+          <div class="pkg-price">$250 <span class="pkg-per" data-en="/ game" data-fr="/ match">/ game</span></div>
         </label>
 
       </div>
@@ -700,7 +698,7 @@
             <div class="addon-name" data-en="Multi-Game Block" data-fr="Bloc multi-matchs">Multi-Game Block</div>
             <div class="addon-desc" data-en="Pre-pay for a block of 4 games — get the 4th at no charge." data-fr="Prépayez un bloc de 4 matchs — le 4e est offert.">Pre-pay for a block of 4 games — get the 4th at no charge.</div>
           </div>
-          <div class="addon-price">Buy 3 get 1 free</div>
+          <div class="addon-price" id="mgb-price-label">Buy 3 get 1 free</div>
         </label>
 
         <label class="addon-item" data-price="10" data-name="Parent Gallery Access">
@@ -990,7 +988,10 @@
     } else {
       const multiplier   = selectedPkg.isSeason ? 3 : 1;
       const base         = selectedPkg.price;
-      const addonEff     = addonTotal * multiplier;
+      const mgbItem      = addonItems.find(a => a.isMgb);
+      const mgbPrice     = mgbItem ? mgbItem.price : 0;
+      const nonMgbTotal  = addonTotal - mgbPrice;
+      const addonEff     = nonMgbTotal * multiplier + mgbPrice;
       const travelEff    = travel * multiplier;
       const subtotal     = base + addonEff + travelEff;
       const gst          = subtotal * GST_RATE;
@@ -1003,8 +1004,10 @@
       osTravel.textContent = '$' + travelEff.toFixed(2);
 
       osAddonRows.innerHTML = addonItems.map(a => {
-        const effPrice = a.price * multiplier;
-        const label = multiplier > 1 ? `${a.name} ×${multiplier}` : a.name;
+        const effPrice = a.isMgb ? a.price : a.price * multiplier;
+        const label = a.isMgb
+          ? `Multi-Game Block (3 games, 1 free)`
+          : (multiplier > 1 ? `${a.name} ×${multiplier}` : a.name);
         return `<div class="os-row os-tax-row"><span class="osl">${label}</span><span class="osv">+$${effPrice.toFixed(2)}</span></div>`;
       }).join('');
 
@@ -1023,6 +1026,32 @@
     }
   }
 
+  function getMgbPrice() {
+    return selectedPkg && !selectedPkg.isCustom ? selectedPkg.price * 3 : 0;
+  }
+
+  function updateMgbLabel() {
+    const label = document.getElementById('mgb-price-label');
+    if (!selectedPkg || selectedPkg.isCustom) {
+      label.textContent = 'Buy 3 get 1 free';
+    } else {
+      const total = getMgbPrice();
+      const free  = selectedPkg.price;
+      label.textContent = '$' + total + ' — 1 game free ($' + free + ' saved)';
+    }
+  }
+
+  function rebuildAddons() {
+    addonTotal = 0;
+    addonItems = [];
+    document.querySelectorAll('.addon-item.selected').forEach(a => {
+      const isMgb = a.dataset.name === 'Multi-Game Block';
+      const p = isMgb ? getMgbPrice() : parseInt(a.dataset.price);
+      addonTotal += p;
+      addonItems.push({ name: a.dataset.name, price: p, isMgb });
+    });
+  }
+
   // Package selection
   document.querySelectorAll('.pkg-card').forEach(card => {
     card.addEventListener('click', () => {
@@ -1035,6 +1064,8 @@
         isCustom: price === 'custom',
         isSeason: card.dataset.slug === 'season'
       };
+      updateMgbLabel();
+      rebuildAddons();
       refreshPrice();
     });
   });
@@ -1044,13 +1075,7 @@
     const cb = item.querySelector('input[type=checkbox]');
     cb.addEventListener('change', () => {
       item.classList.toggle('selected', cb.checked);
-      addonTotal = 0;
-      addonItems = [];
-      document.querySelectorAll('.addon-item.selected').forEach(a => {
-        const p = parseInt(a.dataset.price);
-        addonTotal += p;
-        addonItems.push({ name: a.dataset.name, price: p });
-      });
+      rebuildAddons();
       refreshPrice();
     });
   });
