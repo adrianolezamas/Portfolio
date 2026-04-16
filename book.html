@@ -234,7 +234,8 @@
     .pkg-detail { font-size: 0.58rem; color: var(--muted); margin-top: 2px; letter-spacing: 0.04em; }
 
     /* Add-ons */
-    .addon-list { display: flex; flex-direction: column; gap: 2px; }
+    .addon-list { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    @media (max-width: 640px) { .addon-list { grid-template-columns: 1fr; } }
     .addon-item {
       display: flex; align-items: flex-start; gap: 14px;
       padding: 13px 14px; border-radius: 8px; cursor: pointer;
@@ -616,40 +617,102 @@
       </div>
       <div class="addon-list">
 
-        <label class="addon-item" data-price="25" data-name="Individual Player Pack">
-          <input type="checkbox" name="addon" value="25">
+        <!-- TIER 1 -->
+        <label class="addon-item" data-price="15" data-name="Individual Player Pack">
+          <input type="checkbox" name="addon" value="15">
           <div class="addon-box">
             <svg width="10" height="8" viewBox="0 0 10 8" fill="none" stroke="#0e0e0e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 3.5 6.5 9 1"/></svg>
           </div>
           <div class="addon-body">
             <div class="addon-name" data-en="Individual Player Pack" data-fr="Forfait joueur individuel">Individual Player Pack</div>
-            <div class="addon-desc" data-en="Full-res personal gallery for one player — perfect for parents and player profiles." data-fr="Galerie personnelle haute résolution pour un joueur — idéal pour les parents et profils de joueurs.">Full-res personal gallery for one player — perfect for parents and player profiles.</div>
+            <div class="addon-desc" data-en="Full-res gallery per player with full re-downloads. Parents buy without hesitation when they see their kid." data-fr="Galerie haute résolution par joueur avec téléchargements illimités. Les parents achètent sans hésitation.">Full-res gallery per player with full re-downloads. Parents buy without hesitation when they see their kid.</div>
           </div>
-          <div class="addon-price">+$25/player</div>
+          <div class="addon-price">+$15–20/player</div>
         </label>
 
-        <label class="addon-item" data-price="250" data-name="Extra Portrait Session">
-          <input type="checkbox" name="addon" value="250">
+        <label class="addon-item" data-price="150" data-name="Team Portrait Session">
+          <input type="checkbox" name="addon" value="150">
           <div class="addon-box">
             <svg width="10" height="8" viewBox="0 0 10 8" fill="none" stroke="#0e0e0e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 3.5 6.5 9 1"/></svg>
           </div>
           <div class="addon-body">
-            <div class="addon-name" data-en="Extra Portrait Session" data-fr="Séance de portraits supplémentaire">Extra Portrait Session</div>
-            <div class="addon-desc" data-en="2-hour dedicated portrait session with full roster coverage — great for club websites and media kits." data-fr="Séance de portraits de 2 heures avec couverture complète du groupe — idéal pour les sites web et kits médias.">2-hour dedicated portrait session with full roster coverage — great for club websites and media kits.</div>
+            <div class="addon-name" data-en="Team Portrait Session" data-fr="Séance portraits d'équipe">Team Portrait Session</div>
+            <div class="addon-desc" data-en="60-min dedicated shoot — team photo, individual headshots, action poses. Separate from game day." data-fr="Séance dédiée de 60 min — photo d'équipe, portraits individuels, poses dynamiques. Séparé du jour de match.">60-min dedicated shoot — team photo, individual headshots, action poses. Separate from game day.</div>
           </div>
-          <div class="addon-price">+$250</div>
+          <div class="addon-price">+$150/session</div>
         </label>
 
-        <label class="addon-item" data-price="75" data-name="Rush Delivery">
+        <label class="addon-item" data-price="50" data-name="Rush Delivery">
+          <input type="checkbox" name="addon" value="50">
+          <div class="addon-box">
+            <svg width="10" height="8" viewBox="0 0 10 8" fill="none" stroke="#0e0e0e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 3.5 6.5 9 1"/></svg>
+          </div>
+          <div class="addon-body">
+            <div class="addon-name" data-en="Rush Delivery" data-fr="Livraison express">Rush Delivery</div>
+            <div class="addon-desc" data-en="Delivered within 6 hours of the final whistle instead of 48–72. Flat fee, no surprises." data-fr="Livré dans les 6 heures après le match au lieu de 48–72 h. Forfait fixe, sans surprise.">Delivered within 6 hours of the final whistle instead of 48–72. Flat fee, no surprises.</div>
+          </div>
+          <div class="addon-price">+$50 flat</div>
+        </label>
+
+        <label class="addon-item" data-price="100" data-name="End-of-Season Recap">
+          <input type="checkbox" name="addon" value="100">
+          <div class="addon-box">
+            <svg width="10" height="8" viewBox="0 0 10 8" fill="none" stroke="#0e0e0e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 3.5 6.5 9 1"/></svg>
+          </div>
+          <div class="addon-body">
+            <div class="addon-name" data-en="End-of-Season Recap" data-fr="Récapitulatif de fin de saison">End-of-Season Recap</div>
+            <div class="addon-desc" data-en="Curated gallery from the full season — best moments, every player featured. Already shot before you do any extra work." data-fr="Galerie curatée de toute la saison — meilleurs moments, chaque joueur présent. Déjà shooté avant tout travail supplémentaire.">Curated gallery from the full season — best moments, every player featured. Already shot before you do any extra work.</div>
+          </div>
+          <div class="addon-price">+$100 flat</div>
+        </label>
+
+        <!-- TIER 2 -->
+        <label class="addon-item" data-price="25" data-name="Player Headshot Upgrade">
+          <input type="checkbox" name="addon" value="25">
+          <div class="addon-box">
+            <svg width="10" height="8" viewBox="0 0 10 8" fill="none" stroke="#0e0e0e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 3.5 6.5 9 1"/></svg>
+          </div>
+          <div class="addon-body">
+            <div class="addon-name" data-en="Player Headshot Upgrade" data-fr="Upgrade portraits joueurs">Player Headshot Upgrade</div>
+            <div class="addon-desc" data-en="3–5 clean professional headshots per player on white/natural bg, optimized for social media profiles." data-fr="3–5 portraits professionnels nets par joueur sur fond blanc/naturel, optimisés pour les profils réseaux sociaux.">3–5 clean professional headshots per player on white/natural bg, optimized for social media profiles.</div>
+          </div>
+          <div class="addon-price">+$25/player</div>
+        </label>
+
+        <label class="addon-item" data-price="75" data-name="Social Media Content Pack">
           <input type="checkbox" name="addon" value="75">
           <div class="addon-box">
             <svg width="10" height="8" viewBox="0 0 10 8" fill="none" stroke="#0e0e0e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 3.5 6.5 9 1"/></svg>
           </div>
           <div class="addon-body">
-            <div class="addon-name" data-en="Rush Delivery (under 6h)" data-fr="Livraison express (moins de 6h)">Rush Delivery (under 6h)</div>
-            <div class="addon-desc" data-en="Gallery delivered within 6 hours of the final whistle — perfect for same-day social posting." data-fr="Galerie livrée dans les 6 heures après le match — idéal pour publier le jour même.">Gallery delivered within 6 hours of the final whistle — perfect for same-day social posting.</div>
+            <div class="addon-name" data-en="Social Media Content Pack" data-fr="Pack contenu réseaux sociaux">Social Media Content Pack</div>
+            <div class="addon-desc" data-en="10 photos pre-cropped and captioned for Instagram — 9:16 stories + 1:1 feed, ready to post." data-fr="10 photos pré-recadrées et légendées pour Instagram — stories 9:16 + feed 1:1, prêtes à publier.">10 photos pre-cropped and captioned for Instagram — 9:16 stories + 1:1 feed, ready to post.</div>
           </div>
-          <div class="addon-price">+$75</div>
+          <div class="addon-price">+$75/game</div>
+        </label>
+
+        <label class="addon-item" data-price="0" data-name="Multi-Game Block">
+          <input type="checkbox" name="addon" value="0">
+          <div class="addon-box">
+            <svg width="10" height="8" viewBox="0 0 10 8" fill="none" stroke="#0e0e0e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 3.5 6.5 9 1"/></svg>
+          </div>
+          <div class="addon-body">
+            <div class="addon-name" data-en="Multi-Game Block" data-fr="Bloc multi-matchs">Multi-Game Block</div>
+            <div class="addon-desc" data-en="Pre-pay for a block of 4 games — get the 4th at no charge. Paid upfront, locks in your season." data-fr="Prépayez un bloc de 4 matchs — le 4e est offert. Payé à l'avance, sécurise votre saison.">Pre-pay for a block of 4 games — get the 4th at no charge. Paid upfront, locks in your season.</div>
+          </div>
+          <div class="addon-price">Buy 3 get 1 free</div>
+        </label>
+
+        <label class="addon-item" data-price="10" data-name="Parent Gallery Access">
+          <input type="checkbox" name="addon" value="10">
+          <div class="addon-box">
+            <svg width="10" height="8" viewBox="0 0 10 8" fill="none" stroke="#0e0e0e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 3.5 6.5 9 1"/></svg>
+          </div>
+          <div class="addon-body">
+            <div class="addon-name" data-en="Parent Gallery Access" data-fr="Accès galerie pour parents">Parent Gallery Access</div>
+            <div class="addon-desc" data-en="Full-season gallery access for one parent per player. Per-photo downloads, accessible anytime." data-fr="Accès galerie saison complète pour un parent par joueur. Téléchargements à l'unité, accessible à tout moment.">Full-season gallery access for one parent per player. Per-photo downloads, accessible anytime.</div>
+          </div>
+          <div class="addon-price">+$10/parent</div>
         </label>
 
       </div>
