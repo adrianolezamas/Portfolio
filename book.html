@@ -339,6 +339,9 @@
     .os-row.total .osv { font-family: 'GFS Didot', serif; font-size: 1.25rem; color: var(--accent); letter-spacing: -0.01em; }
     .os-note { font-size: 0.62rem; color: var(--muted); line-height: 1.7; margin-bottom: 20px; }
     .os-note a { color: var(--accent); }
+    .os-payment-notice { background: rgba(200,169,110,0.08); border: 1px solid rgba(200,169,110,0.3); border-radius: 8px; padding: 14px 16px; margin-bottom: 14px; }
+    .os-payment-notice p { font-size: 0.82rem; color: #e8d5a8; line-height: 1.6; margin: 0; font-weight: 500; letter-spacing: 0.01em; }
+    .os-payment-notice p span { color: var(--accent); font-weight: 700; }
     .book-btn {
       width: 100%; padding: 17px 32px;
       background: var(--accent); border: none; border-radius: 8px;
@@ -883,7 +886,10 @@
             <span class="osv" id="os-total">—</span>
           </div>
         </div>
-        <p class="os-note">100% payment required upfront to confirm your date. I'll send a payment link once I confirm availability.<br>Prefer to talk directly? <a href="mailto:adrlezama@gmail.com">adrlezama@gmail.com</a></p>
+        <div class="os-payment-notice">
+          <p><span>100% payment required upfront</span> to confirm your date. I'll send a payment link once I confirm availability.</p>
+        </div>
+        <p class="os-note">Prefer to talk directly? <a href="mailto:adrlezama@gmail.com">adrlezama@gmail.com</a></p>
         <button class="book-btn" id="book-btn" data-en="Request Booking" data-fr="Envoyer la demande">Request Booking</button>
       </div>
 
