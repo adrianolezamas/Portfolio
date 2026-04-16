@@ -33,7 +33,7 @@ export default async function handler(req, res) {
 
     // ── Confirmation email to the client ──────────────────────────────────
     await resend.emails.send({
-      from: 'Adriano Lezama Photography <onboarding@resend.dev>',
+      from: 'Adriano Lezama Photography <noreply@adrianolezamas.com>',
       to: d.email,
       reply_to: 'adrlezama@gmail.com',
       subject: `Booking request received — Adriano Lezama Photography`,
@@ -157,7 +157,7 @@ export default async function handler(req, res) {
 
     // ── Internal notification to photographer ─────────────────────────────
     await resend.emails.send({
-      from: 'Booking — Adriano Lezama <onboarding@resend.dev>',
+      from: 'Booking — Adriano Lezama <noreply@adrianolezamas.com>',
       to: 'adrimantionz5@gmail.com',
       reply_to: d.email,
       subject: `📸 New Booking Request — ${fullName} · ${d.package}`,

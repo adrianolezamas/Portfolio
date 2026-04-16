@@ -67,7 +67,7 @@ export default async function handler(req, res) {
   try {
     if (action === 'accept') {
       await resend.emails.send({
-        from: 'Adriano Lezama Photography <onboarding@resend.dev>',
+        from: 'Adriano Lezama Photography <noreply@adrianolezamas.com>',
         to:   email,
         reply_to: 'adrlezama@gmail.com',
         subject: `✅ Your Booking is Confirmed — ${pkg}`,
@@ -132,7 +132,7 @@ export default async function handler(req, res) {
 
     } else if (action === 'decline') {
       await resend.emails.send({
-        from: 'Adriano Lezama Photography <onboarding@resend.dev>',
+        from: 'Adriano Lezama Photography <noreply@adrianolezamas.com>',
         to:   email,
         reply_to: 'adrlezama@gmail.com',
         subject: `Re: Your Booking Request — ${pkg}`,
