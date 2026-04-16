@@ -36,84 +36,116 @@ export default async function handler(req, res) {
       from: 'Adriano Lezama Photography <onboarding@resend.dev>',
       to: d.email,
       reply_to: 'adrlezama@gmail.com',
-      subject: `Your booking request has been received — Adriano Lezama Photography`,
+      subject: `Booking request received — Adriano Lezama Photography`,
       html: `
 <!DOCTYPE html>
 <html lang="en">
 <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
-<body style="margin:0;padding:0;background:#0e0e0e;font-family:'Helvetica Neue',Arial,sans-serif;">
-  <table width="100%" cellpadding="0" cellspacing="0" style="background:#0e0e0e;padding:40px 0;">
+<body style="margin:0;padding:0;background:#0a0a0a;font-family:'Helvetica Neue',Arial,sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#0a0a0a;padding:48px 0 40px;">
     <tr><td align="center">
-      <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background:#141414;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.08);">
+      <table width="560" cellpadding="0" cellspacing="0" style="max-width:560px;width:100%;">
 
-        <!-- Header -->
-        <tr><td style="background:#0a0a0a;padding:36px 40px;border-bottom:1px solid rgba(255,255,255,0.07);text-align:center;">
-          <p style="margin:0 0 10px;font-size:10px;letter-spacing:0.26em;text-transform:uppercase;color:#c8a96e;">Adriano Lezama Photography</p>
-          <h1 style="margin:0;font-size:26px;font-weight:300;color:#ffffff;letter-spacing:-0.01em;line-height:1.3;">Request received.</h1>
+        <!-- Logo -->
+        <tr><td style="padding-bottom:32px;text-align:center;">
+          <a href="https://adrianolezamas.com" target="_blank">
+            <img src="https://adrianolezamas.com/AL.png" alt="Adriano Lezama Photography" width="72" height="72" style="display:inline-block;width:72px;height:auto;border:0;">
+          </a>
         </td></tr>
 
-        <!-- Body -->
-        <tr><td style="padding:36px 40px 0;">
-          <p style="margin:0 0 20px;font-size:15px;color:#e2e2e2;line-height:1.75;">Hi ${d.firstname},</p>
-          <p style="margin:0 0 20px;font-size:14px;color:#aaa;line-height:1.8;">Thank you for reaching out. I've received your booking request and will be getting back to you within a few minutes to confirm all the details.</p>
-          <p style="margin:0 0 32px;font-size:14px;color:#aaa;line-height:1.8;">In the meantime, feel free to browse my work and follow along on socials — I'd love to have you there.</p>
-        </td></tr>
+        <!-- Card -->
+        <tr><td style="background:#141414;border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,0.07);">
 
-        <!-- Booking summary -->
-        <tr><td style="padding:0 40px 32px;">
-          <table width="100%" cellpadding="0" cellspacing="0" style="background:#0e0e0e;border-radius:8px;border:1px solid rgba(255,255,255,0.06);overflow:hidden;">
-            <tr><td style="padding:14px 20px;border-bottom:1px solid rgba(255,255,255,0.05);">
-              <p style="margin:0;font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:#666;">Your Request Summary</p>
+          <!-- Header -->
+          <table width="100%" cellpadding="0" cellspacing="0">
+            <tr><td style="background:#0e0e0e;padding:36px 44px 32px;border-bottom:1px solid rgba(255,255,255,0.06);text-align:center;">
+              <p style="margin:0 0 14px;font-size:10px;letter-spacing:0.28em;text-transform:uppercase;color:#c8a96e;">Adriano Lezama Photography</p>
+              <h1 style="margin:0 0 6px;font-size:28px;font-weight:300;color:#ffffff;letter-spacing:-0.02em;line-height:1.25;">Thank you, ${d.firstname}.</h1>
+              <p style="margin:0;font-size:14px;color:#666;letter-spacing:0.01em;">Your booking request has been received.</p>
             </td></tr>
-            <tr><td style="padding:8px 20px;border-bottom:1px solid rgba(255,255,255,0.04);">
-              <table width="100%" cellpadding="0" cellspacing="0">
+          </table>
+
+          <!-- Body -->
+          <table width="100%" cellpadding="0" cellspacing="0">
+            <tr><td style="padding:36px 44px 28px;">
+              <p style="margin:0 0 18px;font-size:14px;color:#aaa;line-height:1.85;">I'm thrilled you reached out — it means a lot. I've received everything and will get back to you <strong style="color:#e2e2e2;font-weight:500;">within an hour</strong> to confirm availability and walk you through the next steps.</p>
+              <p style="margin:0;font-size:14px;color:#aaa;line-height:1.85;">In the meantime, have a look at my latest work or follow along on socials below.</p>
+            </td></tr>
+          </table>
+
+          <!-- Booking summary -->
+          <table width="100%" cellpadding="0" cellspacing="0">
+            <tr><td style="padding:0 44px 36px;">
+              <table width="100%" cellpadding="0" cellspacing="0" style="background:#0e0e0e;border-radius:10px;border:1px solid rgba(255,255,255,0.06);overflow:hidden;">
+                <tr><td style="padding:14px 22px;border-bottom:1px solid rgba(255,255,255,0.05);">
+                  <p style="margin:0;font-size:9px;letter-spacing:0.24em;text-transform:uppercase;color:#555;">Request Summary</p>
+                </td></tr>
+                <tr><td style="padding:4px 22px 16px;">
+                  <table width="100%" cellpadding="0" cellspacing="0">
+                    <tr>
+                      <td style="font-size:12px;color:#555;padding:9px 0;border-bottom:1px solid rgba(255,255,255,0.04);">Package</td>
+                      <td style="font-size:12px;color:#ccc;text-align:right;padding:9px 0;border-bottom:1px solid rgba(255,255,255,0.04);">${d.package}</td>
+                    </tr>
+                    <tr>
+                      <td style="font-size:12px;color:#555;padding:9px 0;border-bottom:1px solid rgba(255,255,255,0.04);">Date</td>
+                      <td style="font-size:12px;color:#ccc;text-align:right;padding:9px 0;border-bottom:1px solid rgba(255,255,255,0.04);">${bookingDate}</td>
+                    </tr>
+                    ${d.addons && d.addons !== 'None' ? `<tr>
+                      <td style="font-size:12px;color:#555;padding:9px 0;border-bottom:1px solid rgba(255,255,255,0.04);">Add-ons</td>
+                      <td style="font-size:12px;color:#ccc;text-align:right;padding:9px 0;border-bottom:1px solid rgba(255,255,255,0.04);">${d.addons}</td>
+                    </tr>` : ''}
+                    <tr>
+                      <td style="font-size:13px;color:#e2e2e2;font-weight:500;padding:14px 0 6px;">Estimated Total</td>
+                      <td style="font-size:17px;color:#c8a96e;font-weight:500;text-align:right;padding:14px 0 6px;">${d.total}</td>
+                    </tr>
+                  </table>
+                </td></tr>
+              </table>
+            </td></tr>
+          </table>
+
+          <!-- Divider -->
+          <table width="100%" cellpadding="0" cellspacing="0">
+            <tr><td style="padding:0 44px;"><div style="height:1px;background:rgba(255,255,255,0.05);"></div></td></tr>
+          </table>
+
+          <!-- Social links -->
+          <table width="100%" cellpadding="0" cellspacing="0">
+            <tr><td style="padding:30px 44px 36px;">
+              <p style="margin:0 0 16px;font-size:9px;letter-spacing:0.24em;text-transform:uppercase;color:#444;">Follow Along</p>
+              <table cellpadding="0" cellspacing="0">
                 <tr>
-                  <td style="font-size:12px;color:#666;padding:6px 0;">Package</td>
-                  <td style="font-size:12px;color:#e2e2e2;text-align:right;padding:6px 0;">${d.package}</td>
-                </tr>
-                <tr>
-                  <td style="font-size:12px;color:#666;padding:6px 0;">Date</td>
-                  <td style="font-size:12px;color:#e2e2e2;text-align:right;padding:6px 0;">${bookingDate}</td>
-                </tr>
-                <tr>
-                  <td style="font-size:12px;color:#666;padding:6px 0;">Total</td>
-                  <td style="font-size:13px;color:#c8a96e;text-align:right;padding:6px 0;font-weight:500;">${d.total}</td>
+                  <td style="padding-right:12px;">
+                    <a href="https://www.instagram.com/byadriano_/" target="_blank" style="display:table;background:#1a1a1a;border:1px solid rgba(255,255,255,0.09);border-radius:8px;padding:11px 18px;text-decoration:none;">
+                      <table cellpadding="0" cellspacing="0"><tr>
+                        <td style="padding-right:9px;vertical-align:middle;">
+                          <img src="https://cdn-icons-png.flaticon.com/24/2111/2111463.png" width="15" height="15" alt="" style="display:block;filter:sepia(1) saturate(3) hue-rotate(5deg) brightness(0.85);">
+                        </td>
+                        <td style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#e2e2e2;font-family:'Helvetica Neue',Arial,sans-serif;vertical-align:middle;">@byadriano_</td>
+                      </tr></table>
+                    </a>
+                  </td>
+                  <td>
+                    <a href="https://adrianolezamas.com" target="_blank" style="display:table;background:#1a1a1a;border:1px solid rgba(255,255,255,0.09);border-radius:8px;padding:11px 18px;text-decoration:none;">
+                      <table cellpadding="0" cellspacing="0"><tr>
+                        <td style="padding-right:9px;vertical-align:middle;">
+                          <img src="https://adrianolezamas.com/AL.png" width="15" height="15" alt="" style="display:block;border-radius:2px;opacity:0.8;">
+                        </td>
+                        <td style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#e2e2e2;font-family:'Helvetica Neue',Arial,sans-serif;vertical-align:middle;">adrianolezamas.com</td>
+                      </tr></table>
+                    </a>
+                  </td>
                 </tr>
               </table>
             </td></tr>
           </table>
-        </td></tr>
 
-        <!-- Divider -->
-        <tr><td style="padding:0 40px;"><div style="height:1px;background:rgba(255,255,255,0.06);"></div></td></tr>
-
-        <!-- Socials -->
-        <tr><td style="padding:32px 40px;">
-          <p style="margin:0 0 20px;font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:#555;">Follow Along</p>
-          <table cellpadding="0" cellspacing="0">
-            <tr>
-              <!-- Instagram -->
-              <td style="padding-right:16px;">
-                <a href="https://www.instagram.com/byadriano_/" target="_blank" style="display:inline-flex;align-items:center;gap:8px;background:#1a1a1a;border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:10px 16px;text-decoration:none;">
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#c8a96e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.8" fill="#c8a96e" stroke="none"/></svg>
-                  <span style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#e2e2e2;">@byadriano_</span>
-                </a>
-              </td>
-              <!-- Website -->
-              <td>
-                <a href="https://adrianolezama.com" target="_blank" style="display:inline-flex;align-items:center;gap:8px;background:#1a1a1a;border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:10px 16px;text-decoration:none;">
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#c8a96e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-                  <span style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#e2e2e2;">adrianolezama.com</span>
-                </a>
-              </td>
-            </tr>
-          </table>
         </td></tr>
 
         <!-- Footer -->
-        <tr><td style="padding:20px 40px 32px;border-top:1px solid rgba(255,255,255,0.05);">
-          <p style="margin:0;font-size:11px;color:#444;line-height:1.8;">Questions? Reply to this email or reach me at <a href="mailto:adrlezama@gmail.com" style="color:#666;text-decoration:none;">adrlezama@gmail.com</a></p>
-          <p style="margin:8px 0 0;font-size:10px;color:#333;letter-spacing:0.1em;text-transform:uppercase;">© 2026 · Adriano Lezama Photography</p>
+        <tr><td style="padding:24px 0 0;text-align:center;">
+          <p style="margin:0 0 6px;font-size:11px;color:#3a3a3a;line-height:1.7;">Questions? Reply to this email or write to <a href="mailto:adrlezama@gmail.com" style="color:#555;text-decoration:none;">adrlezama@gmail.com</a></p>
+          <p style="margin:0;font-size:10px;color:#2a2a2a;letter-spacing:0.1em;text-transform:uppercase;">© 2026 · Adriano Lezama Photography</p>
         </td></tr>
 
       </table>
