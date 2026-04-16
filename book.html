@@ -1197,12 +1197,15 @@
     });
   });
 
-  // Travel fee calculator
-  document.getElementById('travel-calc-btn').addEventListener('click', function() {
+  // Travel fee calculator — Nominatim geocoding + OSRM driving distance (no API key needed)
+  const BROSSARD_LAT = 45.4528, BROSSARD_LON = -73.4536;
+
+  document.getElementById('travel-calc-btn').addEventListener('click', async function() {
     const address = document.getElementById('bf-address').value.trim();
     const errEl   = document.getElementById('travel-calc-error');
     const resBox  = document.getElementById('travel-result-box');
     errEl.style.display = 'none';
+    resBox.style.display = 'none';
 
     if (!address) {
       errEl.textContent = 'Please enter a venue address first.';
@@ -1210,39 +1213,37 @@
       return;
     }
 
-    if (typeof google === 'undefined' || !google.maps) {
-      errEl.textContent = 'Maps API not available — contact adrlezama@gmail.com for a travel quote.';
-      errEl.style.display = 'block';
-      return;
-    }
-
-    const btn = this;
+    const btn  = this;
     const lang = window.currentLang || 'en';
     btn.textContent = '…';
     btn.disabled = true;
 
-    const service = new google.maps.DistanceMatrixService();
-    service.getDistanceMatrix({
-      origins: ['Brossard, Quebec, Canada'],
-      destinations: [address.toLowerCase().match(/\b(qc|québec|quebec|canada)\b/) ? address : address + ', QC, Canada'],
-      travelMode: google.maps.TravelMode.DRIVING,
-      unitSystem: google.maps.UnitSystem.METRIC,
-    }, (response, status) => {
-      btn.textContent = lang === 'fr' ? 'Recalculer' : 'Recalculate';
-      btn.disabled = false;
+    try {
+      // Step 1: Geocode the address with Nominatim
+      const query = address.toLowerCase().match(/\b(qc|québec|quebec|canada)\b/)
+        ? address : address + ', QC, Canada';
+      const geoRes  = await fetch(
+        'https://nominatim.openstreetmap.org/search?' +
+        new URLSearchParams({ q: query, format: 'json', limit: '1', countrycodes: 'ca' }),
+        { headers: { 'Accept-Language': 'en' } }
+      );
+      const geoData = await geoRes.json();
+      if (!geoData.length) throw new Error('not_found');
 
-      const el = response?.rows?.[0]?.elements?.[0];
-      if (status !== 'OK' || el?.status !== 'OK') {
-        errEl.textContent = lang === 'fr'
-          ? 'Adresse introuvable. Essayez une adresse plus précise.'
-          : 'Address not found. Please try a more specific address.';
-        errEl.style.display = 'block';
-        resBox.style.display = 'none';
-        return;
-      }
+      const destLat = parseFloat(geoData[0].lat);
+      const destLon = parseFloat(geoData[0].lon);
 
-      const distanceKm = el.distance.value / 1000;
-      const distanceText = el.distance.text;
+      // Step 2: Driving distance via OSRM public routing API
+      const osrmRes  = await fetch(
+        `https://router.project-osrm.org/route/v1/driving/${BROSSARD_LON},${BROSSARD_LAT};${destLon},${destLat}?overview=false`
+      );
+      const osrmData = await osrmRes.json();
+      if (osrmData.code !== 'Ok' || !osrmData.routes?.length) throw new Error('route_not_found');
+
+      const distanceKm   = osrmData.routes[0].distance / 1000;
+      const distanceText = distanceKm < 1
+        ? Math.round(distanceKm * 1000) + ' m'
+        : distanceKm.toFixed(1) + ' km';
 
       let status_, fee;
       if (distanceKm <= FREE_ZONE_KM) {
@@ -1256,7 +1257,6 @@
       calculatedKm   = status_ === 'paid' ? distanceKm : 0;
       travelIsCustom = status_ === 'far';
 
-      // Update result box
       document.getElementById('tr-distance').textContent = distanceText;
 
       const zoneEl  = document.getElementById('tr-zone');
@@ -1265,37 +1265,46 @@
       const noteEl  = document.getElementById('tr-note');
 
       if (status_ === 'free') {
-        zoneEl.textContent  = lang === 'fr' ? 'Zone locale' : 'Local zone';
-        badgeEl.textContent = lang === 'fr' ? 'Gratuit' : 'No charge';
+        zoneEl.textContent    = lang === 'fr' ? 'Zone locale' : 'Local zone';
+        badgeEl.textContent   = lang === 'fr' ? 'Gratuit' : 'No charge';
         badgeEl.style.cssText = 'color:#4a7c59;background:#0d1f15;';
-        feeEl.textContent   = '$0';
-        feeEl.style.color   = '#4a7c59';
-        noteEl.textContent  = lang === 'fr'
+        feeEl.textContent     = '$0';
+        feeEl.style.cssText   = 'font-size:1.35rem;font-family:GFS Didot,Didot,serif;color:#4a7c59;';
+        noteEl.textContent    = lang === 'fr'
           ? "Vous êtes dans ma zone locale — aucun frais de déplacement."
-          : "You're in my local zone — no travel fee applies.";
+          : "You're in my local zone — no travel fee applies. Book with confidence.";
       } else if (status_ === 'paid') {
-        zoneEl.textContent  = lang === 'fr' ? 'Zone régionale' : 'Regional zone';
-        badgeEl.textContent = lang === 'fr' ? 'Frais applicables' : 'Travel fee applies';
+        zoneEl.textContent    = lang === 'fr' ? 'Zone régionale' : 'Regional zone';
+        badgeEl.textContent   = lang === 'fr' ? 'Frais applicables' : 'Travel fee applies';
         badgeEl.style.cssText = 'color:#b8940a;background:#1a1205;';
-        feeEl.textContent   = '$' + fee;
-        feeEl.style.color   = 'var(--accent)';
-        noteEl.textContent  = lang === 'fr'
+        feeEl.textContent     = '$' + fee;
+        feeEl.style.cssText   = 'font-size:1.35rem;font-family:GFS Didot,Didot,serif;color:var(--accent);';
+        noteEl.textContent    = lang === 'fr'
           ? `Frais de déplacement de ${fee}$ ajoutés à votre forfait — calculés à ${TRAVEL_RATE}$/km depuis Brossard.`
           : `Travel fee of $${fee} added to your package — calculated at $${TRAVEL_RATE}/km from Brossard.`;
       } else {
-        zoneEl.textContent  = lang === 'fr' ? 'Zone étendue' : 'Extended zone';
-        badgeEl.textContent = lang === 'fr' ? 'Devis personnalisé' : 'Custom quote';
+        zoneEl.textContent    = lang === 'fr' ? 'Zone étendue' : 'Extended zone';
+        badgeEl.textContent   = lang === 'fr' ? 'Devis personnalisé' : 'Custom quote';
         badgeEl.style.cssText = 'color:#3a5a8a;background:#0a0f1f;';
-        feeEl.textContent   = lang === 'fr' ? 'Sur devis' : 'Contact for quote';
-        feeEl.style.cssText = 'font-size:0.85rem;color:#3a7abf;font-family:inherit;';
-        noteEl.textContent  = lang === 'fr'
+        feeEl.textContent     = lang === 'fr' ? 'Sur devis' : 'Contact for quote';
+        feeEl.style.cssText   = 'font-size:0.85rem;color:#3a7abf;font-family:inherit;';
+        noteEl.textContent    = lang === 'fr'
           ? "Pour les destinations à plus de 60 km, je vous enverrai un devis de déplacement avec la confirmation."
           : "For locations over 60 km, I'll send a custom travel quote with your booking confirmation.";
       }
 
       resBox.style.display = 'block';
       refreshPrice();
-    });
+
+    } catch (e) {
+      errEl.textContent = e.message === 'not_found'
+        ? (lang === 'fr' ? 'Adresse introuvable. Essayez une adresse plus précise.' : 'Address not found. Please try a more specific address.')
+        : (lang === 'fr' ? 'Erreur de connexion. Réessayez.' : 'Connection error. Please try again.');
+      errEl.style.display = 'block';
+    } finally {
+      btn.textContent = lang === 'fr' ? 'Recalculer' : 'Recalculate';
+      btn.disabled = false;
+    }
   });
 
   // Term checkboxes
@@ -1368,8 +1377,6 @@
     }
   });
 </script>
-<!-- Replace YOUR_GOOGLE_MAPS_API_KEY with your actual key from console.cloud.google.com -->
-<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY" async defer></script>
 <script src="lang.js"></script>
 </body>
 </html>
