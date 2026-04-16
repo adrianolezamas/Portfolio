@@ -68,8 +68,8 @@ export default async function handler(req, res) {
     if (action === 'accept') {
       await resend.emails.send({
         from: 'Adriano Lezama Photography <onboarding@resend.dev>',
-        to:   'adrimantionz5@gmail.com',   // Resend free plan — verified address only
-        reply_to: 'adrimantionz5@gmail.com',
+        to:   email,
+        reply_to: 'adrlezama@gmail.com',
         subject: `✅ Your Booking is Confirmed — ${pkg}`,
         html: `
 <!DOCTYPE html>
@@ -133,8 +133,8 @@ export default async function handler(req, res) {
     } else if (action === 'decline') {
       await resend.emails.send({
         from: 'Adriano Lezama Photography <onboarding@resend.dev>',
-        to:   'adrimantionz5@gmail.com',   // Resend free plan — verified address only
-        reply_to: 'adrimantionz5@gmail.com',
+        to:   email,
+        reply_to: 'adrlezama@gmail.com',
         subject: `Re: Your Booking Request — ${pkg}`,
         html: `
 <!DOCTYPE html>
