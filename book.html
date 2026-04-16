@@ -378,6 +378,44 @@
     .bs-check { width: 60px; height: 60px; border-radius: 50%; background: rgba(200,169,110,0.1); display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; }
     .book-success h3 { font-family: 'GFS Didot', serif; font-size: 1.6rem; color: #fff; font-weight: 400; margin-bottom: 12px; }
     .book-success p { font-size: 0.78rem; color: var(--muted); line-height: 1.8; }
+    .bs-inbox-notice {
+      margin-top: 28px;
+      background: rgba(200,169,110,0.07);
+      border: 1px solid rgba(200,169,110,0.35);
+      border-radius: 10px;
+      padding: 18px 20px;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      text-align: left;
+    }
+    .bs-inbox-icon {
+      width: 36px; height: 36px; flex-shrink: 0;
+      background: rgba(200,169,110,0.12);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .bs-inbox-text { flex: 1; }
+    .bs-inbox-text strong {
+      display: block;
+      font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--accent); font-weight: 600; margin-bottom: 5px;
+    }
+    .bs-inbox-text span {
+      font-size: 0.75rem; color: #888; line-height: 1.7;
+    }
+    .bs-inbox-email {
+      display: inline-block;
+      margin-top: 7px;
+      font-size: 0.78rem;
+      color: #e2e2e2;
+      font-weight: 500;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 5px;
+      padding: 4px 10px;
+      letter-spacing: 0.01em;
+    }
 
     /* Footer */
     footer { padding: 28px 5vw; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
@@ -891,6 +929,20 @@
         </div>
         <h3 data-en="Booking request sent." data-fr="Demande de réservation envoyée.">Booking request sent.</h3>
         <p data-en="I'll confirm within an hour with availability and next steps.<br>Check your inbox — a summary is on its way." data-fr="Je confirmerai dans l'heure avec les disponibilités et les prochaines étapes.<br>Vérifiez votre boîte mail — un résumé est en route.">I'll confirm within an hour with availability and next steps.<br>Check your inbox — a summary is on its way.</p>
+
+        <div class="bs-inbox-notice">
+          <div class="bs-inbox-icon">
+            <svg width="17" height="14" viewBox="0 0 24 20" fill="none" stroke="#c8a96e" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="4" width="20" height="16" rx="2"/>
+              <polyline points="2,4 12,13 22,4"/>
+            </svg>
+          </div>
+          <div class="bs-inbox-text">
+            <strong data-en="Check your inbox" data-fr="Vérifiez votre boîte mail">Check your inbox</strong>
+            <span data-en="A booking summary has been sent to:" data-fr="Un résumé de réservation a été envoyé à :">A booking summary has been sent to:</span>
+            <em class="bs-inbox-email" id="bs-inbox-email"></em>
+          </div>
+        </div>
       </div>
 
       <div id="order-summary-wrap">
@@ -1354,6 +1406,7 @@
       });
       if (res.ok) {
         document.getElementById('order-summary-wrap').style.display = 'none';
+        document.getElementById('bs-inbox-email').textContent = document.getElementById('bf-email').value;
         document.getElementById('book-success').style.display = 'block';
       } else {
         btn.textContent = 'Request Booking'; btn.disabled = false;
