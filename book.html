@@ -1022,15 +1022,21 @@
       const mgbPrice     = mgbItem ? mgbItem.price : 0;
       const nonMgbTotal  = addonTotal - mgbPrice;
       const addonEff     = nonMgbTotal * multiplier + mgbPrice;
-      const travelEff    = travel * multiplier;
+      const travelMult   = mgbItem ? 3 : multiplier;
+      const travelEff    = travel * travelMult;
       const subtotal     = base + addonEff + travelEff;
       const gst          = subtotal * GST_RATE;
       const qst          = subtotal * QST_RATE;
       const grand        = subtotal + gst + qst;
 
-      osTravelLabel.textContent = multiplier > 1
-        ? `Travel (${km} km × $0.75 × ${multiplier} matches)`
-        : `Travel (${km} km × $0.75)`;
+      if (mgbItem && km > 0) {
+        const saved = (travel).toFixed(2);
+        osTravelLabel.textContent = `Travel (${km} km × $0.75 × 3 games — 1 free, $${saved} saved)`;
+      } else if (travelMult > 1) {
+        osTravelLabel.textContent = `Travel (${km} km × $0.75 × ${travelMult} matches)`;
+      } else {
+        osTravelLabel.textContent = `Travel (${km} km × $0.75)`;
+      }
       osTravel.textContent = '$' + travelEff.toFixed(2);
 
       osAddonRows.innerHTML = addonItems.map(a => {
