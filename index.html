@@ -299,10 +299,20 @@
       transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.35s,
                   transform 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.35s;
     }
+    .hero-cta-wrap {
+      display: flex; flex-direction: column; align-items: center;
+      gap: 44px;
+      padding: 16px 5vw 56px;
+    }
+    .hero-btns {
+      display: flex;
+      width: 100%;
+      max-width: 640px;
+    }
     .hero-btn {
-      display: inline-block;
-      margin-top: 0;
-      padding: 23px 94px;
+      display: flex; align-items: center; justify-content: center;
+      flex: 1;
+      padding: 23px 16px;
       border: 1px solid rgba(255,255,255,0.55);
       color: #fff;
       font-size: 0.94rem;
@@ -312,12 +322,9 @@
       cursor: pointer;
       text-decoration: none;
       transition: background 0.3s ease, border-color 0.3s ease;
+      text-align: center;
     }
-    .hero-cta-wrap {
-      display: flex; flex-direction: column; align-items: center;
-      gap: 44px;
-      padding: 16px 5vw 56px;
-    }
+    .hero-btn + .hero-btn { border-left: none; }
     .hero-btn:hover {
       background: rgba(255,255,255,0.1);
       border-color: rgba(255,255,255,0.9);
@@ -648,7 +655,10 @@
 
 <div class="hero-cta-wrap">
   <span class="hero-tag" data-en="Sport Photographer" data-fr="Photographe sportif">Sport Photographer</span>
-  <a href="work.html" class="hero-btn" data-en="View Gallery" data-fr="Voir la galerie">View Gallery</a>
+  <div class="hero-btns">
+    <a href="work.html" class="hero-btn" data-en="View Gallery" data-fr="Voir la galerie">View Gallery</a>
+    <a href="book.html" class="hero-btn" data-en="Book a Session" data-fr="Réserver">Book a Session</a>
+  </div>
 </div>
 
 <!-- ══════════ LOGOS MARQUEE ══════════ -->
