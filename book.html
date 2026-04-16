@@ -1000,8 +1000,7 @@
   let calculatedKm   = 0;
   let travelIsCustom = false;
 
-  const FREE_ZONE_KM   = 15;
-  const CUSTOM_QUOTE_KM = 60;
+  const FREE_ZONE_KM = 5;
 
   function getTravel() {
     return { km: calculatedKm, cost: calculatedKm * TRAVEL_RATE };
@@ -1248,14 +1247,12 @@
       let status_, fee;
       if (distanceKm <= FREE_ZONE_KM) {
         status_ = 'free'; fee = 0;
-      } else if (distanceKm <= CUSTOM_QUOTE_KM) {
-        status_ = 'paid'; fee = Math.round(distanceKm * TRAVEL_RATE);
       } else {
-        status_ = 'far'; fee = 0;
+        status_ = 'paid'; fee = Math.round(distanceKm * TRAVEL_RATE);
       }
 
       calculatedKm   = status_ === 'paid' ? distanceKm : 0;
-      travelIsCustom = status_ === 'far';
+      travelIsCustom = false;
 
       document.getElementById('tr-distance').textContent = distanceText;
 
@@ -1273,7 +1270,7 @@
         noteEl.textContent    = lang === 'fr'
           ? "Vous êtes dans ma zone locale — aucun frais de déplacement."
           : "You're in my local zone — no travel fee applies. Book with confidence.";
-      } else if (status_ === 'paid') {
+      } else {
         zoneEl.textContent    = lang === 'fr' ? 'Zone régionale' : 'Regional zone';
         badgeEl.textContent   = lang === 'fr' ? 'Frais applicables' : 'Travel fee applies';
         badgeEl.style.cssText = 'color:#b8940a;background:#1a1205;';
@@ -1282,15 +1279,6 @@
         noteEl.textContent    = lang === 'fr'
           ? `Frais de déplacement de ${fee}$ ajoutés à votre forfait — calculés à ${TRAVEL_RATE}$/km depuis Brossard.`
           : `Travel fee of $${fee} added to your package — calculated at $${TRAVEL_RATE}/km from Brossard.`;
-      } else {
-        zoneEl.textContent    = lang === 'fr' ? 'Zone étendue' : 'Extended zone';
-        badgeEl.textContent   = lang === 'fr' ? 'Devis personnalisé' : 'Custom quote';
-        badgeEl.style.cssText = 'color:#3a5a8a;background:#0a0f1f;';
-        feeEl.textContent     = lang === 'fr' ? 'Sur devis' : 'Contact for quote';
-        feeEl.style.cssText   = 'font-size:0.85rem;color:#3a7abf;font-family:inherit;';
-        noteEl.textContent    = lang === 'fr'
-          ? "Pour les destinations à plus de 60 km, je vous enverrai un devis de déplacement avec la confirmation."
-          : "For locations over 60 km, I'll send a custom travel quote with your booking confirmation.";
       }
 
       resBox.style.display = 'block';
