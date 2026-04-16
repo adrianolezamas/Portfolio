@@ -324,7 +324,18 @@
       transition: background 0.3s ease, border-color 0.3s ease;
       text-align: center;
     }
-    .hero-btn + .hero-btn { border-left: none; }
+    .hero-btn + .hero-btn {
+      border-left: none;
+      background: #c8a96e;
+      color: #0e0e0e;
+      border-color: #c8a96e;
+      font-weight: 500;
+    }
+    .hero-btn + .hero-btn:hover {
+      background: #dfc088;
+      border-color: #dfc088;
+      color: #0e0e0e;
+    }
     .hero-btn:hover {
       background: rgba(255,255,255,0.1);
       border-color: rgba(255,255,255,0.9);
