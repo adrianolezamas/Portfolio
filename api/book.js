@@ -73,33 +73,77 @@ export default async function handler(req, res) {
             </td></tr>
           </table>
 
-          <!-- Booking summary -->
+          <!-- Invoice -->
           <table width="100%" cellpadding="0" cellspacing="0">
             <tr><td style="padding:0 44px 36px;">
               <table width="100%" cellpadding="0" cellspacing="0" style="background:#0e0e0e;border-radius:10px;border:1px solid rgba(255,255,255,0.06);overflow:hidden;">
+
+                <!-- Invoice header -->
                 <tr><td style="padding:14px 22px;border-bottom:1px solid rgba(255,255,255,0.05);">
-                  <p style="margin:0;font-size:9px;letter-spacing:0.24em;text-transform:uppercase;color:#555;">Request Summary</p>
+                  <p style="margin:0;font-size:9px;letter-spacing:0.24em;text-transform:uppercase;color:#555;">Invoice Estimate</p>
                 </td></tr>
-                <tr><td style="padding:4px 22px 16px;">
+
+                <!-- Event details -->
+                <tr><td style="padding:6px 22px 2px;">
                   <table width="100%" cellpadding="0" cellspacing="0">
                     <tr>
-                      <td style="font-size:12px;color:#555;padding:9px 0;border-bottom:1px solid rgba(255,255,255,0.04);">Package</td>
-                      <td style="font-size:12px;color:#ccc;text-align:right;padding:9px 0;border-bottom:1px solid rgba(255,255,255,0.04);">${d.package}</td>
+                      <td style="font-size:12px;color:#555;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.04);">Date</td>
+                      <td style="font-size:12px;color:#ccc;text-align:right;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.04);">${bookingDate}</td>
                     </tr>
+                    ${d.address ? `<tr>
+                      <td style="font-size:12px;color:#555;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.04);">Venue</td>
+                      <td style="font-size:12px;color:#ccc;text-align:right;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.04);">${d.address}</td>
+                    </tr>` : ''}
+                  </table>
+                </td></tr>
+
+                <!-- Line items divider -->
+                <tr><td style="padding:10px 22px 0;">
+                  <p style="margin:0;font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:#3a3a3a;">Breakdown</p>
+                </td></tr>
+
+                <!-- Line items -->
+                <tr><td style="padding:0 22px 6px;">
+                  <table width="100%" cellpadding="0" cellspacing="0">
                     <tr>
-                      <td style="font-size:12px;color:#555;padding:9px 0;border-bottom:1px solid rgba(255,255,255,0.04);">Date</td>
-                      <td style="font-size:12px;color:#ccc;text-align:right;padding:9px 0;border-bottom:1px solid rgba(255,255,255,0.04);">${bookingDate}</td>
+                      <td style="font-size:12px;color:#555;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.04);">Package — ${d.package}</td>
+                      <td style="font-size:12px;color:#ccc;text-align:right;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.04);">${d.subtotal && d.subtotal !== 'Custom' ? d.subtotal : '—'}</td>
                     </tr>
                     ${d.addons && d.addons !== 'None' ? `<tr>
-                      <td style="font-size:12px;color:#555;padding:9px 0;border-bottom:1px solid rgba(255,255,255,0.04);">Add-ons</td>
-                      <td style="font-size:12px;color:#ccc;text-align:right;padding:9px 0;border-bottom:1px solid rgba(255,255,255,0.04);">${d.addons}</td>
+                      <td style="font-size:12px;color:#555;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.04);">Add-ons</td>
+                      <td style="font-size:12px;color:#ccc;text-align:right;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.04);">${d.addons}</td>
                     </tr>` : ''}
+                    ${d.travelFee && parseFloat(d.travelFee) > 0 ? `<tr>
+                      <td style="font-size:12px;color:#555;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.04);">Travel fee${d.km ? ` (${parseFloat(d.km).toFixed(1)} km × $0.75)` : ''}</td>
+                      <td style="font-size:12px;color:#ccc;text-align:right;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.04);">$${parseFloat(d.travelFee).toFixed(2)}</td>
+                    </tr>` : ''}
+                  </table>
+                </td></tr>
+
+                <!-- Tax lines -->
+                <tr><td style="padding:0 22px 0;">
+                  <table width="100%" cellpadding="0" cellspacing="0">
+                    ${d.gst && d.gst !== '—' ? `<tr>
+                      <td style="font-size:12px;color:#444;padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.03);">GST (5%)</td>
+                      <td style="font-size:12px;color:#666;text-align:right;padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.03);">${d.gst}</td>
+                    </tr>` : ''}
+                    ${d.qst && d.qst !== '—' ? `<tr>
+                      <td style="font-size:12px;color:#444;padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.05);">QST (9.975%)</td>
+                      <td style="font-size:12px;color:#666;text-align:right;padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.05);">${d.qst}</td>
+                    </tr>` : ''}
+                  </table>
+                </td></tr>
+
+                <!-- Total -->
+                <tr><td style="padding:4px 22px 20px;">
+                  <table width="100%" cellpadding="0" cellspacing="0">
                     <tr>
-                      <td style="font-size:13px;color:#e2e2e2;font-weight:500;padding:14px 0 6px;">Estimated Total</td>
-                      <td style="font-size:17px;color:#c8a96e;font-weight:500;text-align:right;padding:14px 0 6px;">${d.total}</td>
+                      <td style="font-size:13px;color:#e2e2e2;font-weight:500;padding:14px 0 0;">Total (taxes incl.)</td>
+                      <td style="font-size:20px;color:#c8a96e;font-weight:500;text-align:right;padding:14px 0 0;">${d.total}</td>
                     </tr>
                   </table>
                 </td></tr>
+
               </table>
             </td></tr>
           </table>
