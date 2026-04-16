@@ -457,27 +457,43 @@
 <!-- ══ LOGOS MARQUEE ══ -->
 <div class="logos-strip">
   <p class="logos-strip-label" data-en="Trusted by" data-fr="Fait confiance par">Trusted by</p>
-  <div class="logos-track">
-    <img src="logos/LS_PRO_Horizontal-blanc.png" alt="Partner logo">
-    <img src="logos/carabins.png" alt="Carabins de Montréal">
-    <img src="logos/partner5.jpg" alt="Partner logo">
-    <img src="logos/LS_PRO_Horizontal-blanc.png" alt="Partner logo">
-    <img src="logos/carabins.png" alt="Carabins de Montréal">
-    <img src="logos/partner5.jpg" alt="Partner logo">
-    <img src="logos/LS_PRO_Horizontal-blanc.png" alt="Partner logo">
-    <img src="logos/carabins.png" alt="Carabins de Montréal">
-    <img src="logos/partner5.jpg" alt="Partner logo">
-    <img src="logos/LS_PRO_Horizontal-blanc.png" alt="Partner logo">
-    <img src="logos/carabins.png" alt="Carabins de Montréal">
-    <img src="logos/partner5.jpg" alt="Partner logo">
-    <img src="logos/LS_PRO_Horizontal-blanc.png" alt="Partner logo">
-    <img src="logos/carabins.png" alt="Carabins de Montréal">
-    <img src="logos/partner5.jpg" alt="Partner logo">
+    <div class="logos-track" id="logos-track">
     <img src="logos/LS_PRO_Horizontal-blanc.png" alt="Partner logo">
     <img src="logos/carabins.png" alt="Carabins de Montréal">
     <img src="logos/partner5.jpg" alt="Partner logo">
   </div>
 </div>
+<script>
+(function(){
+  function fillMarquee() {
+    document.querySelectorAll('.logos-track').forEach(function(track) {
+      var originals = Array.from(track.querySelectorAll('img'));
+      if (!originals.length) return;
+      originals.forEach(function(img) { img.dataset.orig = '1'; });
+      function fill() {
+        // Remove all clones, keep originals
+        Array.from(track.querySelectorAll('img:not([data-orig])')).forEach(function(el) { el.remove(); });
+        // Clone in pairs of the full set so translateX(-50%) loops cleanly
+        var target = window.innerWidth * 2.5;
+        var safety = 0;
+        while (track.scrollWidth < target && safety < 200) {
+          // Add 2 sets at a time (keeps count even for seamless -50% loop)
+          for (var r = 0; r < 2; r++) {
+            originals.forEach(function(img) { track.appendChild(img.cloneNode(true)); });
+          }
+          safety++;
+        }
+      }
+      var img0 = originals[0];
+      if (img0.complete && img0.naturalWidth > 0) { fill(); }
+      else { img0.addEventListener('load', fill); }
+      window.addEventListener('resize', fill);
+    });
+  }
+  if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', fillMarquee); }
+  else { fillMarquee(); }
+})();
+</script>
 
 <!-- ══ TWO-COLUMN CONFIGURATOR ══ -->
 <div class="config-layout">
