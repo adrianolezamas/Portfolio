@@ -259,6 +259,12 @@
     .addon-name { font-size: 0.77rem; color: var(--text); margin-bottom: 2px; }
     .addon-desc { font-size: 0.62rem; color: var(--muted); line-height: 1.6; }
     .addon-price { flex-shrink: 0; font-size: 0.72rem; color: var(--accent); white-space: nowrap; padding-top: 2px; }
+    .addon-qty { display: none; align-items: center; gap: 7px; margin-top: 9px; }
+    .addon-item.selected .addon-qty { display: flex; }
+    .qty-btn { width: 22px; height: 22px; border-radius: 4px; border: 1px solid var(--border2); background: var(--bg2); color: var(--text); font-size: 1rem; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 0; transition: background 0.15s, border-color 0.15s, color 0.15s; flex-shrink: 0; }
+    .qty-btn:hover { background: rgba(200,169,110,0.12); border-color: var(--accent); color: var(--accent); }
+    .qty-val { font-size: 0.8rem; color: var(--text); min-width: 18px; text-align: center; font-weight: 500; }
+    .qty-unit { font-size: 0.6rem; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; }
 
     /* Form rows */
     .bf-row { margin-bottom: 18px; }
@@ -616,7 +622,7 @@
       <div class="addon-list">
 
         <!-- TIER 1 -->
-        <label class="addon-item" data-price="15" data-name="Individual Player Pack">
+        <label class="addon-item" data-price="15" data-name="Individual Player Pack" data-per-unit="player">
           <input type="checkbox" name="addon" value="15">
           <div class="addon-box">
             <svg width="10" height="8" viewBox="0 0 10 8" fill="none" stroke="#0e0e0e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 3.5 6.5 9 1"/></svg>
@@ -624,8 +630,14 @@
           <div class="addon-body">
             <div class="addon-name" data-en="Individual Player Pack" data-fr="Forfait joueur individuel">Individual Player Pack</div>
             <div class="addon-desc" data-en="Full-res gallery per player with full re-downloads." data-fr="Galerie haute résolution par joueur avec téléchargements illimités.">Full-res gallery per player with full re-downloads.</div>
+            <div class="addon-qty">
+              <button class="qty-btn qty-minus" type="button">−</button>
+              <span class="qty-val">1</span>
+              <button class="qty-btn qty-plus" type="button">+</button>
+              <span class="qty-unit" data-en="players" data-fr="joueurs">players</span>
+            </div>
           </div>
-          <div class="addon-price">+$15–20/player</div>
+          <div class="addon-price">+$15/player</div>
         </label>
 
         <label class="addon-item" data-price="150" data-name="Team Portrait Session">
@@ -665,7 +677,7 @@
         </label>
 
         <!-- TIER 2 -->
-        <label class="addon-item" data-price="25" data-name="Player Headshot Upgrade">
+        <label class="addon-item" data-price="25" data-name="Player Headshot Upgrade" data-per-unit="player">
           <input type="checkbox" name="addon" value="25">
           <div class="addon-box">
             <svg width="10" height="8" viewBox="0 0 10 8" fill="none" stroke="#0e0e0e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 3.5 6.5 9 1"/></svg>
@@ -673,6 +685,12 @@
           <div class="addon-body">
             <div class="addon-name" data-en="Player Headshot Upgrade" data-fr="Upgrade portraits joueurs">Player Headshot Upgrade</div>
             <div class="addon-desc" data-en="3–5 clean professional headshots per player on white/natural bg, optimized for social media profiles." data-fr="3–5 portraits professionnels nets par joueur sur fond blanc/naturel, optimisés pour les profils réseaux sociaux.">3–5 clean professional headshots per player on white/natural bg, optimized for social media profiles.</div>
+            <div class="addon-qty">
+              <button class="qty-btn qty-minus" type="button">−</button>
+              <span class="qty-val">1</span>
+              <button class="qty-btn qty-plus" type="button">+</button>
+              <span class="qty-unit" data-en="players" data-fr="joueurs">players</span>
+            </div>
           </div>
           <div class="addon-price">+$25/player</div>
         </label>
@@ -701,7 +719,7 @@
           <div class="addon-price" id="mgb-price-label">Buy 3 get 1 free</div>
         </label>
 
-        <label class="addon-item" data-price="10" data-name="Parent Gallery Access">
+        <label class="addon-item" data-price="10" data-name="Parent Gallery Access" data-per-unit="parent">
           <input type="checkbox" name="addon" value="10">
           <div class="addon-box">
             <svg width="10" height="8" viewBox="0 0 10 8" fill="none" stroke="#0e0e0e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 3.5 6.5 9 1"/></svg>
@@ -709,6 +727,12 @@
           <div class="addon-body">
             <div class="addon-name" data-en="Parent Gallery Access" data-fr="Accès galerie pour parents">Parent Gallery Access</div>
             <div class="addon-desc" data-en="Full-season gallery access for one parent per player. Per-photo downloads, accessible anytime." data-fr="Accès galerie saison complète pour un parent par joueur. Téléchargements à l'unité, accessible à tout moment.">Full-season gallery access for one parent per player. Per-photo downloads, accessible anytime.</div>
+            <div class="addon-qty">
+              <button class="qty-btn qty-minus" type="button">−</button>
+              <span class="qty-val">1</span>
+              <button class="qty-btn qty-plus" type="button">+</button>
+              <span class="qty-unit" data-en="parents" data-fr="parents">parents</span>
+            </div>
           </div>
           <div class="addon-price">+$10/parent</div>
         </label>
@@ -1005,9 +1029,15 @@
 
       osAddonRows.innerHTML = addonItems.map(a => {
         const effPrice = a.isMgb ? a.price : a.price * multiplier;
-        const label = a.isMgb
-          ? `Multi-Game Block (3 games, 1 free)`
-          : (multiplier > 1 ? `${a.name} ×${multiplier}` : a.name);
+        let label;
+        if (a.isMgb) {
+          label = `Multi-Game Block (3 games, 1 free)`;
+        } else if (a.perUnit) {
+          const gameTag = multiplier > 1 ? ` ×${multiplier} games` : '';
+          label = `${a.name} (${a.qty} ${a.perUnit}${a.qty > 1 ? 's' : ''}${gameTag})`;
+        } else {
+          label = multiplier > 1 ? `${a.name} ×${multiplier}` : a.name;
+        }
         return `<div class="os-row os-tax-row"><span class="osl">${label}</span><span class="osv">+$${effPrice.toFixed(2)}</span></div>`;
       }).join('');
 
@@ -1041,14 +1071,22 @@
     }
   }
 
+  function getItemQty(item) {
+    const qtyEl = item.querySelector('.qty-val');
+    return qtyEl ? Math.max(1, parseInt(qtyEl.textContent) || 1) : 1;
+  }
+
   function rebuildAddons() {
     addonTotal = 0;
     addonItems = [];
     document.querySelectorAll('.addon-item.selected').forEach(a => {
-      const isMgb = a.dataset.name === 'Multi-Game Block';
-      const p = isMgb ? getMgbPrice() : parseInt(a.dataset.price);
+      const isMgb    = a.dataset.name === 'Multi-Game Block';
+      const perUnit  = a.dataset.perUnit || null;
+      const qty      = perUnit ? getItemQty(a) : 1;
+      const basePrice = parseInt(a.dataset.price);
+      const p = isMgb ? getMgbPrice() : basePrice * qty;
       addonTotal += p;
-      addonItems.push({ name: a.dataset.name, price: p, isMgb });
+      addonItems.push({ name: a.dataset.name, price: p, isMgb, perUnit, qty });
     });
   }
 
@@ -1075,6 +1113,32 @@
     const cb = item.querySelector('input[type=checkbox]');
     cb.addEventListener('change', () => {
       item.classList.toggle('selected', cb.checked);
+      // Reset qty to 1 when unchecked
+      if (!cb.checked) {
+        const qtyEl = item.querySelector('.qty-val');
+        if (qtyEl) qtyEl.textContent = '1';
+      }
+      rebuildAddons();
+      refreshPrice();
+    });
+  });
+
+  // Qty +/− buttons (stop propagation so label click doesn't toggle checkbox)
+  document.querySelectorAll('.addon-item[data-per-unit]').forEach(item => {
+    const qtyVal  = item.querySelector('.qty-val');
+    const btnMinus = item.querySelector('.qty-minus');
+    const btnPlus  = item.querySelector('.qty-plus');
+
+    btnMinus.addEventListener('click', e => {
+      e.preventDefault(); e.stopPropagation();
+      const cur = parseInt(qtyVal.textContent) || 1;
+      if (cur > 1) { qtyVal.textContent = cur - 1; rebuildAddons(); refreshPrice(); }
+    });
+
+    btnPlus.addEventListener('click', e => {
+      e.preventDefault(); e.stopPropagation();
+      const cur = parseInt(qtyVal.textContent) || 1;
+      qtyVal.textContent = cur + 1;
       rebuildAddons();
       refreshPrice();
     });
