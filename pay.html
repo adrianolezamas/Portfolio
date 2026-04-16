@@ -495,7 +495,7 @@
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        return_url: `${location.origin}/pay-success.html?name=${encodeURIComponent(name)}&pkg=${encodeURIComponent(pkg)}&total=${encodeURIComponent(total)}`,
+        return_url: `${location.origin}/pay-success.html?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&pkg=${encodeURIComponent(pkg)}&total=${encodeURIComponent(total)}`,
         receipt_email: email || undefined,
       },
     });

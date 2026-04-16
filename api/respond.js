@@ -70,47 +70,141 @@ export default async function handler(req, res) {
         from: 'Adriano Lezama Photography <noreply@adrianolezamas.com>',
         to:   email,
         reply_to: 'adrlezama@gmail.com',
-        subject: `✅ Your Booking is Confirmed — ${pkg}`,
+        subject: isFr ? `Merci de m'avoir choisi — votre paiement est prêt` : `Thank you for choosing me — your payment is ready`,
         html: `
 <!DOCTYPE html>
 <html lang="en">
 <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
-<body style="margin:0;padding:0;background:#0e0e0e;font-family:'Helvetica Neue',Arial,sans-serif;">
-  <table width="100%" cellpadding="0" cellspacing="0" style="background:#0e0e0e;padding:40px 0;">
+<body style="margin:0;padding:0;background:#0a0a0a;font-family:'Helvetica Neue',Arial,sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#0a0a0a;padding:48px 0 40px;">
     <tr><td align="center">
-      <table width="600" cellpadding="0" cellspacing="0" style="background:#141414;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.08);">
+      <table width="560" cellpadding="0" cellspacing="0" style="max-width:560px;width:100%;">
 
-        <tr><td style="background:#0a0a0a;padding:32px 40px;border-bottom:1px solid rgba(255,255,255,0.07);">
-          <p style="margin:0 0 4px;font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:#c8a96e;">Adriano Lezama Photography</p>
-          <h1 style="margin:0;font-size:22px;font-weight:400;color:#ffffff;letter-spacing:-0.01em;">${isFr ? 'Réservation confirmée' : 'Booking Confirmed'}</h1>
+        <!-- Logo -->
+        <tr><td style="padding-bottom:32px;text-align:center;">
+          <a href="https://adrianolezamas.com" target="_blank">
+            <img src="https://adrianolezamas.com/AL.png" alt="Adriano Lezama Photography" width="72" height="72" style="display:inline-block;width:72px;height:auto;border:0;">
+          </a>
         </td></tr>
 
-        <tr><td style="padding:32px 40px 0;">
-          <p style="margin:0 0 20px;font-size:15px;color:#e2e2e2;line-height:1.7;">${isFr ? `Bonjour ${name},` : `Hi ${name},`}</p>
-          <p style="margin:0 0 20px;font-size:14px;color:#aaa;line-height:1.7;">${isFr ? 'Votre réservation a été confirmée. Voici un résumé de ce que vous avez réservé :' : "Your booking has been confirmed. Here's a summary of what you reserved:"}</p>
-          <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:28px;">
-            <tr>
-              <td style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.05);font-size:13px;color:#888;">${isFr ? 'Forfait' : 'Package'}</td>
-              <td style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.05);font-size:13px;color:#e2e2e2;text-align:right;">${pkg}</td>
-            </tr>
-            ${date ? `<tr>
-              <td style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.05);font-size:13px;color:#888;">${isFr ? 'Date' : 'Date'}</td>
-              <td style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.05);font-size:13px;color:#e2e2e2;text-align:right;">${date}</td>
-            </tr>` : ''}
-            ${total ? `<tr>
-              <td style="padding:14px 0 6px;font-size:14px;color:#ffffff;font-weight:500;">${isFr ? 'Total (taxes incl.)' : 'Total (taxes incl.)'}</td>
-              <td style="padding:14px 0 6px;font-size:17px;color:#c8a96e;text-align:right;font-weight:500;">${total}</td>
-            </tr>` : ''}
+        <!-- Card -->
+        <tr><td style="background:#141414;border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,0.07);">
+
+          <!-- Header -->
+          <table width="100%" cellpadding="0" cellspacing="0">
+            <tr><td style="background:#0e0e0e;padding:36px 44px 32px;border-bottom:1px solid rgba(255,255,255,0.06);text-align:center;">
+              <p style="margin:0 0 14px;font-size:10px;letter-spacing:0.28em;text-transform:uppercase;color:#c8a96e;">Adriano Lezama Photography</p>
+              <h1 style="margin:0 0 8px;font-size:28px;font-weight:300;color:#ffffff;letter-spacing:-0.02em;line-height:1.25;">${isFr ? `Merci, ${name}.` : `Thank you, ${name}.`}</h1>
+              <p style="margin:0;font-size:14px;color:#666;letter-spacing:0.01em;">${isFr ? 'Votre réservation est confirmée.' : 'Your booking is confirmed.'}</p>
+            </td></tr>
           </table>
-          <p style="margin:0 0 12px;font-size:13px;color:#aaa;line-height:1.7;">${isFr ? 'Pour confirmer votre place, veuillez compléter votre paiement via le lien ci-dessous :' : 'To secure your spot, please complete your payment using the link below:'}</p>
+
+          <!-- Body -->
+          <table width="100%" cellpadding="0" cellspacing="0">
+            <tr><td style="padding:36px 44px 28px;">
+              <p style="margin:0 0 18px;font-size:14px;color:#aaa;line-height:1.85;">${isFr
+                ? `Merci de m'avoir choisi — ça compte vraiment beaucoup pour moi. Je suis impatient de couvrir votre événement et de capturer chaque moment qui compte.`
+                : `Thank you so much for choosing me — it truly means the world. I'm genuinely excited and can't wait to capture your event and every moment that matters.`
+              }</p>
+              <p style="margin:0;font-size:14px;color:#aaa;line-height:1.85;">${isFr
+                ? `Pour sécuriser votre date, complétez votre paiement via le bouton ci-dessous. Une fois reçu, vous recevrez la confirmation finale avec tous les détails.`
+                : `To lock in your date, please complete your payment using the button below. Once received, you'll get a final confirmation with all the details.`
+              }</p>
+            </td></tr>
+          </table>
+
+          <!-- Invoice block -->
+          <table width="100%" cellpadding="0" cellspacing="0">
+            <tr><td style="padding:0 44px 28px;">
+              <table width="100%" cellpadding="0" cellspacing="0" style="background:#0e0e0e;border-radius:10px;border:1px solid rgba(255,255,255,0.06);overflow:hidden;">
+                <tr><td style="padding:14px 22px;border-bottom:1px solid rgba(255,255,255,0.05);">
+                  <p style="margin:0;font-size:9px;letter-spacing:0.24em;text-transform:uppercase;color:#555;">${isFr ? 'Résumé de réservation' : 'Booking Summary'}</p>
+                </td></tr>
+                <tr><td style="padding:6px 22px 6px;">
+                  <table width="100%" cellpadding="0" cellspacing="0">
+                    <tr>
+                      <td style="font-size:12px;color:#555;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.04);">${isFr ? 'Forfait' : 'Package'}</td>
+                      <td style="font-size:12px;color:#ccc;text-align:right;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.04);">${pkg}</td>
+                    </tr>
+                    ${date ? `<tr>
+                      <td style="font-size:12px;color:#555;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.04);">${isFr ? 'Date' : 'Date'}</td>
+                      <td style="font-size:12px;color:#ccc;text-align:right;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.04);">${date}</td>
+                    </tr>` : ''}
+                    ${addons ? `<tr>
+                      <td style="font-size:12px;color:#555;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.04);">${isFr ? 'Suppléments' : 'Add-ons'}</td>
+                      <td style="font-size:12px;color:#ccc;text-align:right;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.04);">${addons}</td>
+                    </tr>` : ''}
+                    ${travel ? `<tr>
+                      <td style="font-size:12px;color:#555;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.04);">${isFr ? 'Déplacement' : 'Travel fee'}</td>
+                      <td style="font-size:12px;color:#ccc;text-align:right;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.04);">${travel}</td>
+                    </tr>` : ''}
+                    ${gst ? `<tr>
+                      <td style="font-size:12px;color:#444;padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.03);">GST (5%)</td>
+                      <td style="font-size:12px;color:#666;text-align:right;padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.03);">${gst}</td>
+                    </tr>` : ''}
+                    ${qst ? `<tr>
+                      <td style="font-size:12px;color:#444;padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.04);">QST (9.975%)</td>
+                      <td style="font-size:12px;color:#666;text-align:right;padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.04);">${qst}</td>
+                    </tr>` : ''}
+                    ${total ? `<tr>
+                      <td style="font-size:13px;color:#e2e2e2;font-weight:500;padding:14px 0 6px;">${isFr ? 'Total (taxes incl.)' : 'Total (taxes incl.)'}</td>
+                      <td style="font-size:20px;color:#c8a96e;font-weight:500;text-align:right;padding:14px 0 6px;">${total}</td>
+                    </tr>` : ''}
+                  </table>
+                </td></tr>
+              </table>
+            </td></tr>
+          </table>
+
+          <!-- Payment CTA -->
+          <table width="100%" cellpadding="0" cellspacing="0">
+            <tr><td style="padding:0 44px 36px;text-align:center;">
+              <a href="${payUrl}" style="display:inline-block;background:#c8a96e;color:#0a0a0a;font-size:13px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;padding:16px 40px;border-radius:7px;">${isFr ? 'Compléter le paiement →' : 'Complete Payment →'}</a>
+            </td></tr>
+          </table>
+
+          <!-- Divider -->
+          <table width="100%" cellpadding="0" cellspacing="0">
+            <tr><td style="padding:0 44px;"><div style="height:1px;background:rgba(255,255,255,0.05);"></div></td></tr>
+          </table>
+
+          <!-- Social links -->
+          <table width="100%" cellpadding="0" cellspacing="0">
+            <tr><td style="padding:30px 44px 36px;">
+              <p style="margin:0 0 16px;font-size:9px;letter-spacing:0.24em;text-transform:uppercase;color:#444;">${isFr ? 'Suivez mon travail' : 'Follow Along'}</p>
+              <table cellpadding="0" cellspacing="0">
+                <tr>
+                  <td style="padding-right:12px;">
+                    <a href="https://www.instagram.com/byadriano_/" target="_blank" style="display:table;background:#1a1a1a;border:1px solid rgba(255,255,255,0.09);border-radius:8px;padding:11px 18px;text-decoration:none;">
+                      <table cellpadding="0" cellspacing="0"><tr>
+                        <td style="padding-right:9px;vertical-align:middle;">
+                          <img src="https://cdn-icons-png.flaticon.com/24/2111/2111463.png" width="15" height="15" alt="" style="display:block;">
+                        </td>
+                        <td style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#e2e2e2;font-family:'Helvetica Neue',Arial,sans-serif;vertical-align:middle;">@byadriano_</td>
+                      </tr></table>
+                    </a>
+                  </td>
+                  <td>
+                    <a href="https://adrianolezamas.com" target="_blank" style="display:table;background:#1a1a1a;border:1px solid rgba(255,255,255,0.09);border-radius:8px;padding:11px 18px;text-decoration:none;">
+                      <table cellpadding="0" cellspacing="0"><tr>
+                        <td style="padding-right:9px;vertical-align:middle;">
+                          <img src="https://adrianolezamas.com/AL.png" width="15" height="15" alt="" style="display:block;border-radius:2px;opacity:0.8;">
+                        </td>
+                        <td style="font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#e2e2e2;font-family:'Helvetica Neue',Arial,sans-serif;vertical-align:middle;">adrianolezamas.com</td>
+                      </tr></table>
+                    </a>
+                  </td>
+                </tr>
+              </table>
+            </td></tr>
+          </table>
+
         </td></tr>
 
-        <tr><td style="padding:20px 40px 32px;text-align:center;">
-          <a href="${payUrl}" style="display:inline-block;background:#c8a96e;color:#0a0a0a;font-size:13px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;text-decoration:none;padding:14px 36px;border-radius:6px;">${isFr ? 'Compléter le paiement →' : 'Complete Payment →'}</a>
-        </td></tr>
-
-        <tr><td style="padding:0 40px 32px;">
-          <p style="margin:0;font-size:12px;color:#444;line-height:1.7;">${isFr ? "Des questions ? Répondez à cet email ou contactez-nous directement. Nous avons hâte de couvrir votre événement." : "Questions? Reply to this email or contact us directly. We're looking forward to shooting your event."}</p>
+        <!-- Footer -->
+        <tr><td style="padding:24px 0 0;text-align:center;">
+          <p style="margin:0 0 6px;font-size:11px;color:#3a3a3a;line-height:1.7;">${isFr ? 'Des questions ? Répondez à cet email ou écrivez à' : 'Questions? Reply to this email or write to'} <a href="mailto:adrlezama@gmail.com" style="color:#555;text-decoration:none;">adrlezama@gmail.com</a></p>
+          <p style="margin:0;font-size:10px;color:#2a2a2a;letter-spacing:0.1em;text-transform:uppercase;">© 2026 · Adriano Lezama Photography</p>
         </td></tr>
 
       </table>

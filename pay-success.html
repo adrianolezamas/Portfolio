@@ -150,6 +150,10 @@
       <span class="dl">Client</span>
       <span class="dv" id="d-name">—</span>
     </div>
+    <div class="detail-row" id="d-email-row" style="display:none;">
+      <span class="dl">Receipt sent to</span>
+      <span class="dv" id="d-email">—</span>
+    </div>
     <div class="detail-row">
       <span class="dl">Package</span>
       <span class="dv" id="d-pkg">—</span>
@@ -164,8 +168,9 @@
 </div>
 
 <script>
-  const p = new URLSearchParams(location.search);
+  const p     = new URLSearchParams(location.search);
   const name  = p.get('name')  || '';
+  const email = p.get('email') || '';
   const pkg   = p.get('pkg')   || '';
   const total = p.get('total') || '';
 
@@ -178,6 +183,21 @@
   document.getElementById('d-name').textContent  = name  || '—';
   document.getElementById('d-pkg').textContent   = pkg   || '—';
   document.getElementById('d-total').textContent = total || '—';
+
+  if (email) {
+    document.getElementById('d-email').textContent   = email;
+    document.getElementById('d-email-row').style.display = 'flex';
+  }
+
+  // Send post-payment confirmation email (once — guarded by sessionStorage)
+  if (email && name && !sessionStorage.getItem('pay_confirm_sent')) {
+    sessionStorage.setItem('pay_confirm_sent', '1');
+    fetch('/api/payment-confirm', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, email, pkg, total }),
+    }).catch(() => {}); // fire-and-forget; success page is unaffected
+  }
 </script>
 </body>
 </html>
