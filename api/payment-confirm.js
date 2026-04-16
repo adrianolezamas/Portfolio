@@ -31,10 +31,14 @@ export default async function handler(req, res) {
       <table width="560" cellpadding="0" cellspacing="0" style="max-width:560px;width:100%;">
 
         <!-- Logo -->
-        <tr><td style="padding-bottom:32px;text-align:center;">
-          <a href="https://adrianolezamas.com" target="_blank">
-            <img src="https://adrianolezamas.com/AL.png" alt="Adriano Lezama Photography" width="72" height="72" style="display:inline-block;width:72px;height:auto;border:0;">
-          </a>
+        <tr><td style="padding-bottom:32px;" align="center">
+          <table cellpadding="0" cellspacing="0" align="center">
+            <tr><td style="background:#1a1a1a;border-radius:50%;padding:14px;text-align:center;line-height:0;">
+              <a href="https://adrianolezamas.com" target="_blank" style="text-decoration:none;display:block;line-height:0;">
+                <img src="https://adrianolezamas.com/AL.png" alt="Adriano Lezama Photography" width="56" height="56" style="display:block;width:56px;height:56px;border:0;">
+              </a>
+            </td></tr>
+          </table>
         </td></tr>
 
         <!-- Card -->

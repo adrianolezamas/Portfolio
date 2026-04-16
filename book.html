@@ -1373,15 +1373,19 @@
     btn.disabled = true;
 
     const { km, cost: travel } = getTravel();
-    const subtotal = selectedPkg.isCustom ? null : (selectedPkg.price + addonTotal + travel);
+    const mgbSelected  = !!addonItems.find(a => a.isMgb);
+    const multiplier   = selectedPkg.isSeason ? 3 : 1;
+    const travelMult   = mgbSelected ? 3 : multiplier;
+    const travelEff    = travel * travelMult;
+    const subtotal = selectedPkg.isCustom ? null : (selectedPkg.price + addonTotal + travelEff);
     const gst      = subtotal ? (subtotal * GST_RATE) : null;
     const qst      = subtotal ? (subtotal * QST_RATE) : null;
     const grand    = subtotal ? (subtotal + gst + qst) : null;
     const data = {
       package:    document.querySelector('.pkg-card.selected').dataset.name,
       addons:     addonItems.map(a => `${a.name} (+$${a.price})`).join(', ') || 'None',
-      km,
-      travelFee:  travel.toFixed(2),
+      km:         travelMult > 1 ? null : km,
+      travelFee:  travelEff.toFixed(2),
       subtotal:   subtotal ? ('$' + subtotal.toFixed(2)) : 'Custom',
       gst:        gst ? ('$' + gst.toFixed(2)) : '—',
       qst:        qst ? ('$' + qst.toFixed(2)) : '—',
