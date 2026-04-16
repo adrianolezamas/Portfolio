@@ -266,6 +266,24 @@
     .qty-val { font-size: 0.8rem; color: var(--text); min-width: 18px; text-align: center; font-weight: 500; }
     .qty-unit { font-size: 0.6rem; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; }
 
+    /* Travel fee calculator */
+    .travel-calc-wrap { margin-top: 16px; }
+    .travel-origin-line { font-size: 0.62rem; color: var(--muted); display: flex; align-items: center; gap: 7px; margin-bottom: 12px; letter-spacing: 0.04em; }
+    .travel-origin-dot { width: 7px; height: 7px; border-radius: 50%; background: #4a7c59; flex-shrink: 0; }
+    .travel-calc-btn { width: 100%; padding: 11px 16px; background: transparent; border: 1px solid var(--border2); border-radius: 6px; color: var(--muted); font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; cursor: pointer; font-family: inherit; transition: background 0.15s, border-color 0.15s, color 0.15s; }
+    .travel-calc-btn:hover:not(:disabled) { background: var(--bg2); border-color: var(--accent); color: var(--accent); }
+    .travel-calc-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+    .travel-error { font-size: 0.62rem; color: #8a3030; margin-top: 8px; }
+    .travel-result-box { background: var(--bg2); border: 1px solid var(--border2); border-radius: 8px; padding: 16px; margin-top: 12px; }
+    .travel-result-row { display: flex; justify-content: space-between; align-items: center; padding: 7px 0; border-bottom: 1px solid var(--border); gap: 12px; }
+    .travel-rl { font-size: 0.65rem; color: var(--muted); }
+    .travel-rv { font-size: 0.72rem; color: var(--text); font-weight: 500; display: flex; align-items: center; gap: 7px; }
+    .travel-badge { font-size: 0.52rem; letter-spacing: 0.06em; text-transform: uppercase; padding: 2px 7px; border-radius: 3px; font-weight: 500; }
+    .travel-fee-row { display: flex; justify-content: space-between; align-items: baseline; padding-top: 14px; margin-top: 2px; }
+    .travel-fee-label { font-size: 0.65rem; color: var(--muted); }
+    .travel-fee-amount { font-size: 1.35rem; font-weight: 500; font-family: 'GFS Didot', Didot, serif; color: var(--text); }
+    .travel-note-text { font-size: 0.6rem; color: var(--muted); margin-top: 10px; line-height: 1.65; }
+
     /* Form rows */
     .bf-row { margin-bottom: 18px; }
     .bf-row:last-child { margin-bottom: 0; }
@@ -767,19 +785,36 @@
           <input type="date" id="bf-date" name="date">
         </div>
       </div>
-      <div class="bf-grid2" style="margin-bottom:18px;">
-        <div class="bf-row">
-          <label for="bf-time" data-en="Kickoff time" data-fr="Heure de début">Kickoff time</label>
-          <input type="time" id="bf-time" name="time">
-        </div>
-        <div class="bf-row">
-          <label for="bf-km" data-en="Distance from Brossard, QC (km)" data-fr="Distance depuis Brossard, QC (km)">Distance from Brossard, QC (km)</label>
-          <input type="number" id="bf-km" name="km" placeholder="e.g. 15" min="0" max="500">
-        </div>
+      <div class="bf-row" style="margin-bottom:18px;">
+        <label for="bf-time" data-en="Kickoff time" data-fr="Heure de début">Kickoff time</label>
+        <input type="time" id="bf-time" name="time">
       </div>
       <div class="bf-row" style="margin-bottom:0;">
         <label for="bf-address" data-en="Venue / Full address" data-fr="Lieu / Adresse complète">Venue / Full address</label>
         <input type="text" id="bf-address" name="address" placeholder="Arena name, street, city, province…" data-ph-en="Arena name, street, city, province…" data-ph-fr="Nom de l'aréna, rue, ville, province…" autocomplete="off">
+        <div class="travel-calc-wrap">
+          <div class="travel-origin-line">
+            <span class="travel-origin-dot"></span>
+            <span data-en="Based from Brossard, Quebec" data-fr="Au départ de Brossard, Québec">Based from Brossard, Quebec</span>
+          </div>
+          <button type="button" id="travel-calc-btn" class="travel-calc-btn" data-en="Check travel fee" data-fr="Calculer les frais de déplacement">Check travel fee</button>
+          <p id="travel-calc-error" class="travel-error" style="display:none;"></p>
+          <div id="travel-result-box" class="travel-result-box" style="display:none;">
+            <div class="travel-result-row">
+              <span class="travel-rl" data-en="Distance from Brossard" data-fr="Distance depuis Brossard">Distance from Brossard</span>
+              <span class="travel-rv" id="tr-distance">—</span>
+            </div>
+            <div class="travel-result-row">
+              <span class="travel-rl" data-en="Zone" data-fr="Zone">Zone</span>
+              <span class="travel-rv"><span id="tr-zone">—</span><span id="tr-badge" class="travel-badge"></span></span>
+            </div>
+            <div class="travel-fee-row">
+              <span class="travel-fee-label" data-en="Travel fee" data-fr="Frais de déplacement">Travel fee</span>
+              <span class="travel-fee-amount" id="tr-fee">—</span>
+            </div>
+            <p class="travel-note-text" id="tr-note"></p>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -959,17 +994,18 @@
   const QST_RATE = 0.09975;
   const TRAVEL_RATE = 0.75; // $ per km
 
-  let selectedPkg  = null;
-  let addonTotal   = 0;
-  let addonItems   = [];
+  let selectedPkg    = null;
+  let addonTotal     = 0;
+  let addonItems     = [];
+  let calculatedKm   = 0;
+  let travelIsCustom = false;
 
+  const FREE_ZONE_KM   = 15;
+  const CUSTOM_QUOTE_KM = 60;
 
   function getTravel() {
-    const km = parseFloat(document.getElementById('bf-km').value) || 0;
-    return { km, cost: km * TRAVEL_RATE };
+    return { km: calculatedKm, cost: calculatedKm * TRAVEL_RATE };
   }
-
-  document.getElementById('bf-km').addEventListener('input', refreshPrice);
 
   function refreshPrice() {
     const { km, cost: travel } = getTravel();
@@ -1029,15 +1065,20 @@
       const qst          = subtotal * QST_RATE;
       const grand        = subtotal + gst + qst;
 
-      if (mgbItem && km > 0) {
-        const saved = (travel).toFixed(2);
-        osTravelLabel.textContent = `Travel (${km} km × $0.75 × 3 games — 1 free, $${saved} saved)`;
+      if (travelIsCustom) {
+        osTravelLabel.textContent = 'Travel — custom quote on confirmation';
+        osTravel.textContent = '—';
+      } else if (mgbItem && km > 0) {
+        const saved = travel.toFixed(2);
+        osTravelLabel.textContent = `Travel (${km.toFixed(1)} km × $0.75 × 3 games — 1 free, $${saved} saved)`;
+        osTravel.textContent = '$' + travelEff.toFixed(2);
       } else if (travelMult > 1) {
-        osTravelLabel.textContent = `Travel (${km} km × $0.75 × ${travelMult} matches)`;
+        osTravelLabel.textContent = `Travel (${km.toFixed(1)} km × $0.75 × ${travelMult} matches)`;
+        osTravel.textContent = '$' + travelEff.toFixed(2);
       } else {
-        osTravelLabel.textContent = `Travel (${km} km × $0.75)`;
+        osTravelLabel.textContent = km > 0 ? `Travel (${km.toFixed(1)} km × $0.75)` : 'Travel';
+        osTravel.textContent = '$' + travelEff.toFixed(2);
       }
-      osTravel.textContent = '$' + travelEff.toFixed(2);
 
       osAddonRows.innerHTML = addonItems.map(a => {
         const effPrice = a.isMgb ? a.price : a.price * multiplier;
@@ -1156,6 +1197,107 @@
     });
   });
 
+  // Travel fee calculator
+  document.getElementById('travel-calc-btn').addEventListener('click', function() {
+    const address = document.getElementById('bf-address').value.trim();
+    const errEl   = document.getElementById('travel-calc-error');
+    const resBox  = document.getElementById('travel-result-box');
+    errEl.style.display = 'none';
+
+    if (!address) {
+      errEl.textContent = 'Please enter a venue address first.';
+      errEl.style.display = 'block';
+      return;
+    }
+
+    if (typeof google === 'undefined' || !google.maps) {
+      errEl.textContent = 'Maps API not available — contact adrlezama@gmail.com for a travel quote.';
+      errEl.style.display = 'block';
+      return;
+    }
+
+    const btn = this;
+    const lang = window.currentLang || 'en';
+    btn.textContent = '…';
+    btn.disabled = true;
+
+    const service = new google.maps.DistanceMatrixService();
+    service.getDistanceMatrix({
+      origins: ['Brossard, Quebec, Canada'],
+      destinations: [address.toLowerCase().match(/\b(qc|québec|quebec|canada)\b/) ? address : address + ', QC, Canada'],
+      travelMode: google.maps.TravelMode.DRIVING,
+      unitSystem: google.maps.UnitSystem.METRIC,
+    }, (response, status) => {
+      btn.textContent = lang === 'fr' ? 'Recalculer' : 'Recalculate';
+      btn.disabled = false;
+
+      const el = response?.rows?.[0]?.elements?.[0];
+      if (status !== 'OK' || el?.status !== 'OK') {
+        errEl.textContent = lang === 'fr'
+          ? 'Adresse introuvable. Essayez une adresse plus précise.'
+          : 'Address not found. Please try a more specific address.';
+        errEl.style.display = 'block';
+        resBox.style.display = 'none';
+        return;
+      }
+
+      const distanceKm = el.distance.value / 1000;
+      const distanceText = el.distance.text;
+
+      let status_, fee;
+      if (distanceKm <= FREE_ZONE_KM) {
+        status_ = 'free'; fee = 0;
+      } else if (distanceKm <= CUSTOM_QUOTE_KM) {
+        status_ = 'paid'; fee = Math.round(distanceKm * TRAVEL_RATE);
+      } else {
+        status_ = 'far'; fee = 0;
+      }
+
+      calculatedKm   = status_ === 'paid' ? distanceKm : 0;
+      travelIsCustom = status_ === 'far';
+
+      // Update result box
+      document.getElementById('tr-distance').textContent = distanceText;
+
+      const zoneEl  = document.getElementById('tr-zone');
+      const badgeEl = document.getElementById('tr-badge');
+      const feeEl   = document.getElementById('tr-fee');
+      const noteEl  = document.getElementById('tr-note');
+
+      if (status_ === 'free') {
+        zoneEl.textContent  = lang === 'fr' ? 'Zone locale' : 'Local zone';
+        badgeEl.textContent = lang === 'fr' ? 'Gratuit' : 'No charge';
+        badgeEl.style.cssText = 'color:#4a7c59;background:#0d1f15;';
+        feeEl.textContent   = '$0';
+        feeEl.style.color   = '#4a7c59';
+        noteEl.textContent  = lang === 'fr'
+          ? "Vous êtes dans ma zone locale — aucun frais de déplacement."
+          : "You're in my local zone — no travel fee applies.";
+      } else if (status_ === 'paid') {
+        zoneEl.textContent  = lang === 'fr' ? 'Zone régionale' : 'Regional zone';
+        badgeEl.textContent = lang === 'fr' ? 'Frais applicables' : 'Travel fee applies';
+        badgeEl.style.cssText = 'color:#b8940a;background:#1a1205;';
+        feeEl.textContent   = '$' + fee;
+        feeEl.style.color   = 'var(--accent)';
+        noteEl.textContent  = lang === 'fr'
+          ? `Frais de déplacement de ${fee}$ ajoutés à votre forfait — calculés à ${TRAVEL_RATE}$/km depuis Brossard.`
+          : `Travel fee of $${fee} added to your package — calculated at $${TRAVEL_RATE}/km from Brossard.`;
+      } else {
+        zoneEl.textContent  = lang === 'fr' ? 'Zone étendue' : 'Extended zone';
+        badgeEl.textContent = lang === 'fr' ? 'Devis personnalisé' : 'Custom quote';
+        badgeEl.style.cssText = 'color:#3a5a8a;background:#0a0f1f;';
+        feeEl.textContent   = lang === 'fr' ? 'Sur devis' : 'Contact for quote';
+        feeEl.style.cssText = 'font-size:0.85rem;color:#3a7abf;font-family:inherit;';
+        noteEl.textContent  = lang === 'fr'
+          ? "Pour les destinations à plus de 60 km, je vous enverrai un devis de déplacement avec la confirmation."
+          : "For locations over 60 km, I'll send a custom travel quote with your booking confirmation.";
+      }
+
+      resBox.style.display = 'block';
+      refreshPrice();
+    });
+  });
+
   // Term checkboxes
   ['tc1','tc2','tc3','tc4'].forEach(id => {
     document.getElementById(id).addEventListener('change', (e) => {
@@ -1226,6 +1368,8 @@
     }
   });
 </script>
+<!-- Replace YOUR_GOOGLE_MAPS_API_KEY with your actual key from console.cloud.google.com -->
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY" async defer></script>
 <script src="lang.js"></script>
 </body>
 </html>
