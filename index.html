@@ -266,7 +266,7 @@
       position: relative; z-index: 3;
       text-align: center;
       padding: 0 5vw;
-      display: flex; flex-direction: column; align-items: center; gap: 64px;
+      display: flex; flex-direction: column; align-items: center; gap: 36px;
       opacity: 1;
     }
     .hero-eyebrow {
@@ -302,16 +302,20 @@
     .hero-btn {
       display: inline-block;
       margin-top: 0;
-      padding: 14px 44px;
+      padding: 18px 72px;
       border: 1px solid rgba(255,255,255,0.55);
       color: #fff;
-      font-size: 0.65rem;
+      font-size: 0.72rem;
       letter-spacing: 0.28em;
       text-transform: uppercase;
       background: transparent;
       cursor: pointer;
       text-decoration: none;
       transition: background 0.3s ease, border-color 0.3s ease;
+    }
+    .hero-cta-wrap {
+      text-align: center;
+      padding: 56px 5vw 12px;
     }
     .hero-btn:hover {
       background: rgba(255,255,255,0.1);
@@ -339,8 +343,8 @@
     }
     #hero-bottom-left.visible { opacity: 1; transform: translateY(0); }
     .hero-tag {
-      font-size: 1rem; letter-spacing: 0.15em; text-transform: uppercase;
-      color: rgba(255,255,255,1); font-weight: 400;
+      font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase;
+      color: rgba(255,255,255,0.7); font-weight: 300;
     }
 
     /* Scroll cue */
@@ -639,9 +643,12 @@
   <div id="hero-content">
     <h1 class="hero-headline" data-en="Where Champions Are Remembered" data-fr="Là où les champions sont immortalisés">Where Champions Are Remembered</h1>
     <span class="hero-tag" data-en="Sport Photographer" data-fr="Photographe sportif">Sport Photographer</span>
-    <a href="work.html" class="hero-btn" data-en="View Gallery" data-fr="Voir la galerie">View Gallery</a>
   </div>
 </section>
+
+<div class="hero-cta-wrap">
+  <a href="work.html" class="hero-btn" data-en="View Gallery" data-fr="Voir la galerie">View Gallery</a>
+</div>
 
 <!-- ══════════ LOGOS MARQUEE ══════════ -->
 <div class="logos-strip">
