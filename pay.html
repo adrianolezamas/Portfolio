@@ -365,69 +365,50 @@
 </script>
 
 <script>
-  // ── Parse URL params ──
-  const p      = new URLSearchParams(location.search);
-  const name   = p.get('name')   || 'Client';
-  const pkg    = p.get('pkg')    || '—';
-  const total  = p.get('total')  || '—';
-  const date   = p.get('date')   || '';
-  const email  = p.get('email')  || '';
-  const addons = p.get('addons') || '';
-  const travel = p.get('travel') || '';
-  const gst    = p.get('gst')    || '';
-  const qst    = p.get('qst')    || '';
-
-  const totalNum    = parseFloat((p.get('total') || '0').replace(/[^0-9.]/g, '')) || 0;
-  const amountCents = Math.round(totalNum * 100);
-
-  function parseCents(str) {
-    if (!str) return 0;
-    return Math.round(parseFloat(str.replace(/[^0-9.]/g, '')) * 100) || 0;
-  }
-  const gstCents    = parseCents(gst);
-  const qstCents    = parseCents(qst);
-  const travelCents = parseCents(travel);
-  const addonCents  = parseCents(addons);
-  const baseCents   = amountCents - gstCents - qstCents - travelCents - addonCents;
-
-  const lineItems = [];
-  if (baseCents > 0)   lineItems.push({ description: pkg || 'Photography Package', amountCents: baseCents });
-  if (addonCents > 0)  lineItems.push({ description: `Add-ons: ${addons}`,         amountCents: addonCents });
-  if (travelCents > 0) lineItems.push({ description: 'Travel fee',                 amountCents: travelCents });
-  if (gstCents > 0)    lineItems.push({ description: 'GST (5%)',                   amountCents: gstCents });
-  if (qstCents > 0)    lineItems.push({ description: 'QST (9.975%)',               amountCents: qstCents });
-
-  // ── Populate left summary ──
-  document.getElementById('summary-name').textContent = `Hi ${name},`;
-  document.getElementById('summary-date').textContent = date
-    ? `Booking confirmed for ${date} — awaiting payment.`
-    : 'Your booking is confirmed and awaiting payment.';
-
-  document.getElementById('s-pkg').textContent    = pkg;
-  document.getElementById('s-total').textContent  = total || '—';
-  document.getElementById('btn-amount').textContent = total || '';
-
-  if (addons) { document.getElementById('s-addons-row').style.display = 'flex'; document.getElementById('s-addons').textContent = addons; }
-  if (travel) { document.getElementById('s-travel-row').style.display = 'flex'; document.getElementById('s-travel').textContent = travel; }
-  if (gst) document.getElementById('s-gst').textContent = gst;
-  if (qst) document.getElementById('s-qst').textContent = qst;
-
-  // ── Init Stripe Payment Element ──
   const STRIPE_PK = 'pk_live_51TKkMBBzdtyxvnGY9dcafAmMdxG6G2165EavmIpEFJ0GPMdIwjdWrqAb4LDCBhsVSEzBGdZGTUVsgauQCPzmKyKj007x1MY7Xq';
-  let stripe, elements;
+  const piId = new URLSearchParams(location.search).get('pi') || '';
+  let stripe, elements, clientName = '', clientEmail = '', clientPkg = '', clientTotal = '';
 
-  async function initStripe() {
+  function fmt(cents) {
+    return '$' + (cents / 100).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  }
+
+  function populateSummary(meta, amountCents) {
+    clientName  = meta.client_name  || 'Client';
+    clientEmail = meta.client_email || '';
+    clientPkg   = meta.package      || '—';
+    clientTotal = meta.total        || fmt(amountCents);
+
+    document.getElementById('summary-name').textContent = `Hi ${clientName},`;
+    document.getElementById('summary-date').textContent = meta.date
+      ? `Booking confirmed for ${meta.date} — awaiting payment.`
+      : 'Your booking is confirmed and awaiting payment.';
+
+    document.getElementById('s-pkg').textContent    = clientPkg;
+    document.getElementById('s-total').textContent  = clientTotal;
+    document.getElementById('btn-amount').textContent = clientTotal;
+
+    if (meta.addons) {
+      document.getElementById('s-addons-row').style.display = 'flex';
+      document.getElementById('s-addons').textContent = meta.addons;
+    }
+    if (meta.travel) {
+      document.getElementById('s-travel-row').style.display = 'flex';
+      document.getElementById('s-travel').textContent = meta.travel;
+    }
+    if (meta.gst) document.getElementById('s-gst').textContent = meta.gst;
+    if (meta.qst) document.getElementById('s-qst').textContent = meta.qst;
+  }
+
+  async function init() {
     try {
-      const res  = await fetch('/api/stripe-session', {
-        method:  'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body:    JSON.stringify({ amountCents, pkg, name, email, date, lineItems }),
-      });
-      const data = await res.json();
+      if (!piId) throw new Error('No payment ID found in this link. Please use the link from your confirmation email.');
 
-      if (!res.ok || !data.clientSecret) {
-        throw new Error(data.error || 'Could not initialise payment.');
-      }
+      const res  = await fetch(`/api/get-payment?pi=${encodeURIComponent(piId)}`);
+      const data = await res.json();
+      if (!res.ok || !data.clientSecret) throw new Error(data.error || 'Could not load payment details.');
+
+      populateSummary(data.metadata, data.amount);
 
       stripe   = Stripe(STRIPE_PK);
       elements = stripe.elements({
@@ -447,9 +428,9 @@
           },
           rules: {
             '.Input': {
-              border:    '1px solid rgba(255,255,255,0.09)',
-              boxShadow: 'none',
-              padding:   '12px 14px',
+              border:     '1px solid rgba(255,255,255,0.09)',
+              boxShadow:  'none',
+              padding:    '12px 14px',
               background: '#111',
             },
             '.Input:focus': {
@@ -457,17 +438,16 @@
               boxShadow: '0 0 0 3px rgba(200,169,110,0.07)',
             },
             '.Label': {
-              color:          '#666',
-              fontSize:       '10px',
-              letterSpacing:  '0.1em',
-              textTransform:  'uppercase',
+              color:         '#666',
+              fontSize:      '10px',
+              letterSpacing: '0.1em',
+              textTransform: 'uppercase',
             },
           },
         },
       });
 
       elements.create('payment').mount('#payment-element');
-
       document.getElementById('loading-state').style.display = 'none';
       document.getElementById('form-state').style.display    = 'block';
 
@@ -477,7 +457,6 @@
     }
   }
 
-  // ── Submit ──
   async function handleSubmit(e) {
     e.preventDefault();
     const btn     = document.getElementById('pay-btn');
@@ -493,8 +472,8 @@
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        return_url:    `${location.origin}/pay-success.html?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&pkg=${encodeURIComponent(pkg)}&total=${encodeURIComponent(total)}`,
-        receipt_email: email || undefined,
+        return_url:    `${location.origin}/pay-success.html?name=${encodeURIComponent(clientName)}&email=${encodeURIComponent(clientEmail)}&pkg=${encodeURIComponent(clientPkg)}&total=${encodeURIComponent(clientTotal)}`,
+        receipt_email: clientEmail || undefined,
       },
     });
 
@@ -507,7 +486,7 @@
     }
   }
 
-  initStripe();
+  init();
 </script>
 <script src="lang.js"></script>
 </body>
