@@ -171,13 +171,17 @@ export default async function handler(req, res) {
               ? `Pour sécuriser votre date, complétez votre paiement en cliquant sur le bouton ci-dessous :`
               : `To secure your spot, please complete your payment using the link below:`
             }</p>
-            <table width="100%" cellpadding="0" cellspacing="0">
+            <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
               <tr>
-                <td style="background:#c8a96e;border-radius:7px;text-align:center;">
-                  <a href="${payUrl}" target="_blank" style="display:block;padding:17px 24px;font-size:12px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;text-decoration:none;color:#0a0a0a;font-family:'Helvetica Neue',Arial,sans-serif;">${isFr ? 'Compléter le paiement &nbsp;&rarr;' : 'Complete Payment &nbsp;&rarr;'}</a>
+                <td align="center">
+                  <a href="${payUrl}" target="_blank"
+                     style="display:inline-block;background-color:#c8a96e;border-radius:7px;padding:16px 32px;font-size:12px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;text-decoration:none;color:#0a0a0a;font-family:'Helvetica Neue',Arial,sans-serif;mso-padding-alt:0;width:100%;box-sizing:border-box;text-align:center;">
+                    ${isFr ? 'Compléter le paiement &nbsp;&#8594;' : 'Complete Payment &nbsp;&#8594;'}
+                  </a>
                 </td>
               </tr>
             </table>
+            <p style="margin:16px 0 0;font-size:11px;color:#444;line-height:1.7;word-break:break-all;">${isFr ? 'Lien direct :' : 'Or copy this link:'} <a href="${payUrl}" style="color:#c8a96e;text-decoration:underline;">${payUrl}</a></p>
             <p style="margin:20px 0 0;font-size:12px;color:#555;line-height:1.7;">${isFr
               ? `Des questions ? Répondez à cet email ou contactez-nous directement. Nous avons hâte de capturer votre événement.`
               : `Questions? Reply to this email or contact us directly. We're looking forward to shooting your event.`
