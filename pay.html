@@ -410,6 +410,10 @@
 
       populateSummary(data.metadata, data.amount);
 
+      if (typeof Stripe === 'undefined') {
+        throw new Error('Stripe.js failed to load. Please check your internet connection and try again.');
+      }
+
       stripe   = Stripe(STRIPE_PK);
       elements = stripe.elements({
         clientSecret: data.clientSecret,
@@ -447,7 +451,20 @@
         },
       });
 
-      elements.create('payment').mount('#payment-element');
+      const paymentEl = elements.create('payment');
+      paymentEl.on('loaderror', function(event) {
+        document.getElementById('loading-state').innerHTML =
+          `<p style="font-size:13px;color:#f87171;line-height:1.7;">
+            Payment form failed to load: ${event.error?.message || 'Unknown error'}.<br><br>
+            <span style="color:#555;">This is usually caused by a restriction on the Stripe publishable key. Go to
+            <strong style="color:#888;">stripe.com/dashboard → Developers → API Keys</strong>,
+            click your publishable key, and remove all domain/IP restrictions.</span>
+          </p>`;
+        document.getElementById('form-state').style.display = 'none';
+        document.getElementById('loading-state').style.display = 'block';
+      });
+      paymentEl.mount('#payment-element');
+
       document.getElementById('loading-state').style.display = 'none';
       document.getElementById('form-state').style.display    = 'block';
 

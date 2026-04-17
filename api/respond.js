@@ -71,6 +71,7 @@ export default async function handler(req, res) {
 
   // Create Stripe PaymentIntent up-front; email links to pay.html?pi=<id>
   let payUrl = `${BASE_URL}/pay.html`; // fallback (no params)
+  let piError = null;
   try {
     const amountCents = toCents(total);
     if (amountCents >= 50) {
@@ -92,8 +93,11 @@ export default async function handler(req, res) {
         'metadata[lang]':                     lang,
       });
       payUrl = `${BASE_URL}/pay.html?pi=${pi.id}`;
+    } else {
+      piError = `Amount too low to charge (parsed ${toCents(total)} cents from "${total}"). Check the total value being passed.`;
     }
   } catch (e) {
+    piError = e.message;
     console.error('PI creation failed:', e.message);
   }
 
@@ -197,11 +201,13 @@ export default async function handler(req, res) {
       res.statusCode = 200;
       res.setHeader('Content-Type', 'text/html');
       res.end(page(
-        'Booking Accepted',
-        '✅',
-        'Booking Accepted',
-        `A payment email has been sent to <span class="accent">${name}</span> for <span class="accent">${pkg}</span>${total ? ` — ${total}` : ''}. They'll receive instructions to complete their payment.`,
-        '#4ade80'
+        piError ? 'Email Sent — Payment Link Failed' : 'Booking Accepted',
+        piError ? '⚠️' : '✅',
+        piError ? 'Email Sent — But Payment Link Failed' : 'Booking Accepted',
+        piError
+          ? `The confirmation email was sent to <span class="accent">${name}</span>, but the Stripe payment link could not be created.<br><br><strong style="color:#f87171;font-size:12px;">Stripe error: ${piError}</strong><br><br><span style="font-size:12px;color:#666;">Fix: Check that your <code>STRIPE_SECRET_KEY</code> in Vercel has <strong>Payment Intents: Write</strong> permission, then re-accept the booking.</span>`
+          : `A payment email has been sent to <span class="accent">${name}</span> for <span class="accent">${pkg}</span>${total ? ` — ${total}` : ''}. They'll receive instructions to complete their payment.`,
+        piError ? '#f87171' : '#4ade80'
       ));
 
     } else if (action === 'decline') {
