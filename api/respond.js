@@ -171,11 +171,7 @@ export default async function handler(req, res) {
               ? `Pour sécuriser votre date, complétez votre paiement en cliquant sur le bouton ci-dessous :`
               : `To secure your spot, please complete your payment using the link below:`
             }</p>
-            <table cellpadding="0" cellspacing="0"><tr>
-              <td>
-                <a href="${payUrl}" target="_blank" style="display:inline-block;background:#c8a96e;color:#0a0a0a;font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;padding:13px 28px;border-radius:6px;">${isFr ? '&#8594; Compléter le paiement' : 'Complete Payment &#8594;'}</a>
-              </td>
-            </tr></table>
+            <a href="${payUrl}" style="display:inline-block;background:#c8a96e;color:#0a0a0a;font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;padding:13px 28px;border-radius:6px;">${isFr ? '&#8594; Compléter le paiement' : 'Complete Payment &#8594;'}</a>
             <p style="margin:16px 0 0;font-size:11px;color:#444;line-height:1.7;word-break:break-all;">${isFr ? 'Lien direct :' : 'Or copy this link:'} <a href="${payUrl}" style="color:#c8a96e;text-decoration:underline;">${payUrl}</a></p>
             <p style="margin:20px 0 0;font-size:12px;color:#555;line-height:1.7;">${isFr
               ? `Des questions ? Répondez à cet email ou contactez-nous directement. Nous avons hâte de capturer votre événement.`
