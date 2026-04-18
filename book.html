@@ -483,13 +483,13 @@
 <nav class="site-nav">
   <div class="site-nav-left">
     <button class="lang-btn" onclick="toggleLang()">FR</button>
-    <a href="work.html">Gallery</a>
-    <a href="about.html">About</a>
+    <a href="work.html"><span data-en="Gallery" data-fr="Galerie">Gallery</span></a>
+    <a href="about.html"><span data-en="About" data-fr="À propos">About</span></a>
   </div>
   <a href="index.html" class="site-nav-center"><img src="AL.svg" alt="Adriano Lezama Photography"></a>
   <div class="site-nav-right">
-    <a href="contact.html">Contact</a>
-    <a href="book.html" class="book-link">Book</a>
+    <a href="contact.html"><span data-en="Contact" data-fr="Contact">Contact</span></a>
+    <a href="book.html" class="book-link"><span data-en="Book" data-fr="Réserver">Book</span></a>
   </div>
   <button class="site-nav-hamburger" id="site-menu-open" aria-label="Open menu">
     <svg width="22" height="16" viewBox="0 0 22 16" fill="none"><line x1="0" y1="1" x2="22" y2="1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="0" y1="8" x2="22" y2="8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="0" y1="15" x2="22" y2="15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
@@ -499,10 +499,10 @@
   <button id="site-menu-close" aria-label="Close menu">
     <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><line x1="2" y1="2" x2="18" y2="18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="18" y1="2" x2="2" y2="18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
   </button>
-  <a href="work.html">Gallery</a>
-  <a href="about.html">About</a>
-  <a href="contact.html">Contact</a>
-  <a href="book.html" class="book-link">Book</a>
+  <a href="work.html"><span data-en="Gallery" data-fr="Galerie">Gallery</span></a>
+  <a href="about.html"><span data-en="About" data-fr="À propos">About</span></a>
+  <a href="contact.html"><span data-en="Contact" data-fr="Contact">Contact</span></a>
+  <a href="book.html" class="book-link"><span data-en="Book" data-fr="Réserver">Book</span></a>
 </div>
 <script>
 (function(){
@@ -593,10 +593,10 @@
     <div class="price-bar">
       <div class="pb-left">
         <span class="pb-label" data-en="Your Booking" data-fr="Votre réservation">Your Booking</span>
-        <div class="pb-breakdown" id="pb-breakdown">— Select a package to begin</div>
+        <div class="pb-breakdown" id="pb-breakdown" data-en="— Select a package to begin" data-fr="— Choisissez un forfait pour commencer">— Select a package to begin</div>
       </div>
       <div class="pb-right">
-        <span class="pb-total-label">Total</span>
+        <span class="pb-total-label" data-en="Total" data-fr="Total">Total</span>
         <div class="pb-total" id="pb-total">—</div>
       </div>
     </div>
@@ -634,7 +634,7 @@
           </div>
           <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
             <div class="pkg-name" style="margin-bottom:0;" data-en="Season Coverage" data-fr="Season Coverage">Season Coverage</div>
-            <span class="pkg-badge">Best Value</span>
+            <span class="pkg-badge" data-en="Best Value" data-fr="Meilleur rapport">Best Value</span>
           </div>
           <div class="pkg-desc" data-en="Competitive enough to win against no photographer at all. Justifiable with individual player galleries as proof of value." data-fr="Assez compétitif pour convaincre face à l'absence de photographe. Justifiable grâce aux galeries individuelles.">Competitive enough to win against no photographer at all. Justifiable with individual player galleries as proof of value.</div>
           <ul class="pkg-includes">
@@ -775,7 +775,7 @@
             <div class="addon-name" data-en="Multi-Game Block" data-fr="Bloc multi-matchs">Multi-Game Block</div>
             <div class="addon-desc" data-en="Pre-pay for a block of 4 games — get the 4th at no charge." data-fr="Prépayez un bloc de 4 matchs — le 4e est offert.">Pre-pay for a block of 4 games — get the 4th at no charge.</div>
           </div>
-          <div class="addon-price" id="mgb-price-label">Buy 3 get 1 free</div>
+          <div class="addon-price" id="mgb-price-label" data-en="Buy 3 get 1 free" data-fr="Achetez 3, obtenez 1 gratuit">Buy 3 get 1 free</div>
         </label>
 
         <label class="addon-item" data-price="10" data-name="Parent Gallery Access" data-per-unit="parent">
@@ -809,13 +809,13 @@
         <div class="bf-row">
           <label for="bf-sport" data-en="Sport / Event type" data-fr="Sport / Type d'événement">Sport / Event type</label>
           <select id="bf-sport" name="sport">
-            <option value="" disabled selected>Select…</option>
-            <option>Soccer — outdoor</option>
-            <option>Futsal — indoor</option>
-            <option>Basketball</option>
-            <option>Volleyball</option>
-            <option>Hockey</option>
-            <option>Other</option>
+            <option value="" disabled selected data-en="Select…" data-fr="Sélectionner…">Select…</option>
+            <option data-en="Soccer — outdoor" data-fr="Soccer — extérieur">Soccer — outdoor</option>
+            <option data-en="Futsal — indoor" data-fr="Futsal — intérieur">Futsal — indoor</option>
+            <option data-en="Basketball" data-fr="Basketball">Basketball</option>
+            <option data-en="Volleyball" data-fr="Volleyball">Volleyball</option>
+            <option data-en="Hockey" data-fr="Hockey">Hockey</option>
+            <option data-en="Other" data-fr="Autre">Other</option>
           </select>
         </div>
         <div class="bf-row">
@@ -917,7 +917,7 @@
           <span class="term-text" data-en="<strong>Cancellation Policy:</strong> I understand that cancellations result in a fee of 25% of the total payment." data-fr="<strong>Politique d'annulation :</strong> Je comprends que les annulations entraînent des frais de 25% du paiement total."><strong>Cancellation Policy:</strong> I understand that cancellations result in a fee of 25% of the total payment.</span>
         </label>
       </div>
-      <div class="terms-warning" id="terms-warning">Please accept all 4 terms to continue.</div>
+      <div class="terms-warning" id="terms-warning" data-en="Please accept all 4 terms to continue." data-fr="Veuillez accepter les 4 conditions pour continuer.">Please accept all 4 terms to continue.</div>
     </div>
 
     <!-- ══ SUBMIT ══ -->
@@ -948,35 +948,35 @@
       <div id="order-summary-wrap">
         <div class="order-summary-table" id="order-summary">
           <div class="os-row">
-            <span class="osl">Package</span>
+            <span class="osl" data-en="Package" data-fr="Forfait">Package</span>
             <span class="osv" id="os-pkg">—</span>
           </div>
           <div id="os-addon-rows"></div>
           <div class="os-row">
-            <span class="osl" id="os-travel-label">Travel (0 km × $0.75)</span>
+            <span class="osl" id="os-travel-label" data-en="Travel (0 km × $0.75)" data-fr="Déplacement (0 km × 0,75 $)">Travel (0 km × $0.75)</span>
             <span class="osv" id="os-travel">$0.00</span>
           </div>
           <div class="os-row os-tax-row">
-            <span class="osl">Subtotal</span>
+            <span class="osl" data-en="Subtotal" data-fr="Sous-total">Subtotal</span>
             <span class="osv" id="os-subtotal">—</span>
           </div>
           <div class="os-row os-tax-row">
-            <span class="osl">GST (5%)</span>
+            <span class="osl" data-en="GST (5%)" data-fr="TPS (5%)">GST (5%)</span>
             <span class="osv" id="os-gst">—</span>
           </div>
           <div class="os-row os-tax-row" style="border-bottom: 1px solid rgba(255,255,255,0.08);">
-            <span class="osl">QST (9.975%)</span>
+            <span class="osl" data-en="QST (9.975%)" data-fr="TVQ (9,975%)">QST (9.975%)</span>
             <span class="osv" id="os-qst">—</span>
           </div>
           <div class="os-row total">
-            <span class="osl">Total (taxes incl.)</span>
+            <span class="osl" data-en="Total (taxes incl.)" data-fr="Total (taxes incl.)">Total (taxes incl.)</span>
             <span class="osv" id="os-total">—</span>
           </div>
         </div>
         <div class="os-payment-notice">
-          <p><span>100% payment required upfront</span> to confirm your date. I'll send a payment link once I confirm availability.</p>
+          <p data-en="<span>100% payment required upfront</span> to confirm your date. I'll send a payment link once I confirm availability." data-fr="<span>100% du paiement requis à l'avance</span> pour confirmer votre date. Je vous enverrai un lien de paiement une fois la disponibilité confirmée."><span>100% payment required upfront</span> to confirm your date. I'll send a payment link once I confirm availability.</p>
         </div>
-        <p class="os-note">Prefer to talk directly? <a href="mailto:adrlezama@gmail.com">adrlezama@gmail.com</a></p>
+        <p class="os-note" data-en="Prefer to talk directly? <a href='mailto:adrlezama@gmail.com'>adrlezama@gmail.com</a>" data-fr="Vous préférez discuter directement ? <a href='mailto:adrlezama@gmail.com'>adrlezama@gmail.com</a>">Prefer to talk directly? <a href="mailto:adrlezama@gmail.com">adrlezama@gmail.com</a></p>
         <button class="book-btn" id="book-btn" data-en="Request Booking" data-fr="Envoyer la demande">Request Booking</button>
       </div>
 
@@ -993,7 +993,7 @@
   </div>
   <div class="footer-right">
     <a href="https://www.instagram.com/byadriano_/" target="_blank" rel="noopener" class="footer-ig">@byadriano_</a>
-    <span class="footer-copy">© 2026 · All rights reserved</span>
+    <span class="footer-copy" data-en="© 2026 · All rights reserved" data-fr="© 2026 · Tous droits réservés">© 2026 · All rights reserved</span>
   </div>
 </footer>
 
@@ -1073,10 +1073,10 @@
     const osTotal      = document.getElementById('os-total');
 
     if (!selectedPkg) {
-      breakdown.innerHTML = '— Select a package to begin';
+      breakdown.innerHTML = t('— Select a package to begin', '— Choisissez un forfait pour commencer');
       totalEl.className = 'pb-total custom';
       totalEl.textContent = '—';
-      pbTotalLabel.textContent = 'Total';
+      pbTotalLabel.textContent = t('Total', 'Total');
       osPkg.textContent = '—';
       osAddonRows.innerHTML = '';
       osSubtotal.textContent = '—';
@@ -1086,22 +1086,22 @@
       return;
     }
 
-    osPkg.textContent = selectedPkg.name + (selectedPkg.isCustom ? ' (custom)' : ' — $' + selectedPkg.price);
+    osPkg.textContent = selectedPkg.name + (selectedPkg.isCustom ? t(' (custom)', ' (personnalisé)') : ' — $' + selectedPkg.price);
 
     if (selectedPkg.isCustom) {
-      osTravelLabel.textContent = `Travel (${km} km × $0.75)`;
+      osTravelLabel.textContent = t(`Travel (${km} km × $0.75)`, `Déplacement (${km} km × 0,75 $)`);
       osTravel.textContent = '$' + travel.toFixed(2);
       osAddonRows.innerHTML = addonItems.map(a =>
         `<div class="os-row os-tax-row"><span class="osl">${a.name}</span><span class="osv">+$${a.price.toFixed(2)}</span></div>`
       ).join('');
-      breakdown.innerHTML = `<span>${selectedPkg.name}</span> + travel${addonTotal ? ' + add-ons' : ''}`;
+      breakdown.innerHTML = `<span>${selectedPkg.name}</span> + ${t('travel', 'déplacement')}${addonTotal ? ' + ' + t('add-ons', 'suppléments') : ''}`;
       totalEl.className = 'pb-total custom';
-      totalEl.textContent = 'Quote on request';
-      pbTotalLabel.textContent = 'Total';
+      totalEl.textContent = t('Quote on request', 'Devis sur demande');
+      pbTotalLabel.textContent = t('Total', 'Total');
       osSubtotal.textContent = '—';
       osGst.textContent = '—';
       osQst.textContent = '—';
-      osTotal.textContent = 'Custom — quote on confirmation';
+      osTotal.textContent = t('Custom — quote on confirmation', 'Personnalisé — devis à la confirmation');
     } else {
       const multiplier   = selectedPkg.isSeason ? 3 : 1;
       const base         = selectedPkg.price;
@@ -1117,17 +1117,25 @@
       const grand        = subtotal + gst + qst;
 
       if (travelIsCustom) {
-        osTravelLabel.textContent = 'Travel — custom quote on confirmation';
+        osTravelLabel.textContent = t('Travel — custom quote on confirmation', 'Déplacement — devis à la confirmation');
         osTravel.textContent = '—';
       } else if (mgbItem && km > 0) {
         const saved = travel.toFixed(2);
-        osTravelLabel.textContent = `Travel (${km.toFixed(1)} km × $0.75 × 3 games — 1 free, $${saved} saved)`;
+        osTravelLabel.textContent = t(
+          `Travel (${km.toFixed(1)} km × $0.75 × 3 games — 1 free, $${saved} saved)`,
+          `Déplacement (${km.toFixed(1)} km × 0,75 $ × 3 matchs — 1 gratuit, ${saved}$ économisés)`
+        );
         osTravel.textContent = '$' + travelEff.toFixed(2);
       } else if (travelMult > 1) {
-        osTravelLabel.textContent = `Travel (${km.toFixed(1)} km × $0.75 × ${travelMult} matches)`;
+        osTravelLabel.textContent = t(
+          `Travel (${km.toFixed(1)} km × $0.75 × ${travelMult} matches)`,
+          `Déplacement (${km.toFixed(1)} km × 0,75 $ × ${travelMult} matchs)`
+        );
         osTravel.textContent = '$' + travelEff.toFixed(2);
       } else {
-        osTravelLabel.textContent = km > 0 ? `Travel (${km.toFixed(1)} km × $0.75)` : 'Travel';
+        osTravelLabel.textContent = km > 0
+          ? t(`Travel (${km.toFixed(1)} km × $0.75)`, `Déplacement (${km.toFixed(1)} km × 0,75 $)`)
+          : t('Travel', 'Déplacement');
         osTravel.textContent = '$' + travelEff.toFixed(2);
       }
 
@@ -1135,9 +1143,9 @@
         const effPrice = a.isMgb ? a.price : a.price * multiplier;
         let label;
         if (a.isMgb) {
-          label = `Multi-Game Block (3 games, 1 free)`;
+          label = t('Multi-Game Block (3 games, 1 free)', 'Bloc multi-matchs (3 matchs, 1 gratuit)');
         } else if (a.perUnit) {
-          const gameTag = multiplier > 1 ? ` ×${multiplier} games` : '';
+          const gameTag = multiplier > 1 ? ` ×${multiplier} ${t('games', 'matchs')}` : '';
           label = `${a.name} (${a.qty} ${a.perUnit}${a.qty > 1 ? 's' : ''}${gameTag})`;
         } else {
           label = multiplier > 1 ? `${a.name} ×${multiplier}` : a.name;
@@ -1146,12 +1154,12 @@
       }).join('');
 
       let parts = [`<span>${selectedPkg.name} $${base}</span>`];
-      if (addonEff) parts.push(`add-ons $${addonEff}`);
-      if (travelEff > 0) parts.push(`travel $${travelEff.toFixed(2)}`);
+      if (addonEff) parts.push(`${t('add-ons', 'suppléments')} $${addonEff}`);
+      if (travelEff > 0) parts.push(`${t('travel', 'déplacement')} $${travelEff.toFixed(2)}`);
       breakdown.innerHTML = parts.join(' · ');
       totalEl.className = 'pb-total';
       totalEl.textContent = '$' + grand.toFixed(2);
-      pbTotalLabel.textContent = 'Total (taxes incl.)';
+      pbTotalLabel.textContent = t('Total (taxes incl.)', 'Total (taxes incl.)');
 
       osSubtotal.textContent = '$' + subtotal.toFixed(2);
       osGst.textContent = '$' + gst.toFixed(2);
@@ -1167,11 +1175,14 @@
   function updateMgbLabel() {
     const label = document.getElementById('mgb-price-label');
     if (!selectedPkg || selectedPkg.isCustom) {
-      label.textContent = 'Buy 3 get 1 free';
+      label.textContent = t('Buy 3 get 1 free', 'Achetez 3, obtenez 1 gratuit');
     } else {
       const total = getMgbPrice();
       const free  = selectedPkg.price;
-      label.textContent = '$' + total + ' — 1 game free ($' + free + ' saved)';
+      label.textContent = t(
+        '$' + total + ' — 1 game free ($' + free + ' saved)',
+        total + '$ — 1 match gratuit (' + free + '$ économisés)'
+      );
     }
   }
 
@@ -1359,7 +1370,7 @@
   document.getElementById('book-btn').addEventListener('click', async () => {
     // Validate required
     const pkg = document.querySelector('.pkg-card.selected');
-    if (!pkg) { alert('Please select a package.'); return; }
+    if (!pkg) { alert(t('Please select a package.', 'Veuillez choisir un forfait.')); return; }
     const terms = ['tc1','tc2','tc3','tc4'].every(id => document.getElementById(id).checked);
     if (!terms) {
       document.getElementById('terms-warning').classList.add('show');
@@ -1369,7 +1380,7 @@
     document.getElementById('terms-warning').classList.remove('show');
 
     const btn = document.getElementById('book-btn');
-    btn.textContent = 'Sending…';
+    btn.textContent = t('Sending…', 'Envoi…');
     btn.disabled = true;
 
     const { km, cost: travel } = getTravel();
@@ -1413,14 +1424,20 @@
         document.getElementById('bs-inbox-email').textContent = document.getElementById('bf-email').value;
         document.getElementById('book-success').style.display = 'block';
       } else {
-        btn.textContent = 'Request Booking'; btn.disabled = false;
-        alert('Something went wrong. Please email adrlezama@gmail.com directly.');
+        btn.textContent = t('Request Booking', 'Envoyer la demande'); btn.disabled = false;
+        alert(t('Something went wrong. Please email adrlezama@gmail.com directly.', 'Une erreur est survenue. Contactez adrlezama@gmail.com directement.'));
       }
     } catch {
-      btn.textContent = 'Request Booking'; btn.disabled = false;
-      alert('Something went wrong. Please email adrlezama@gmail.com directly.');
+      btn.textContent = t('Request Booking', 'Envoyer la demande'); btn.disabled = false;
+      alert(t('Something went wrong. Please email adrlezama@gmail.com directly.', 'Une erreur est survenue. Contactez adrlezama@gmail.com directement.'));
     }
   });
+
+  // ── Language change hook — refresh all JS-driven text ──
+  window.onLangChange = function() {
+    refreshPrice();
+    updateMgbLabel();
+  };
 </script>
 <script src="lang.js"></script>
 </body>
