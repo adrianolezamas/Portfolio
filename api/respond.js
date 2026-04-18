@@ -171,10 +171,10 @@ export default async function handler(req, res) {
               ? `Pour sécuriser votre date, complétez votre paiement en cliquant sur le bouton ci-dessous :`
               : `To secure your spot, please complete your payment using the link below:`
             }</p>
-            <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="margin:0;">
+            <table cellpadding="0" cellspacing="0" border="0">
               <tr>
-                <td align="center" bgcolor="#c8a96e" style="border-radius:6px;background:#c8a96e;">
-                  <a href="${payUrl}" target="_blank" style="display:inline-block;color:#0a0a0a;font-family:sans-serif;font-size:12px;font-weight:700;letter-spacing:0.08em;line-height:1;text-decoration:none;text-transform:uppercase;padding:13px 28px;border-radius:6px;">${isFr ? '&#8594; Compléter le paiement' : 'Complete Payment &#8594;'}</a>
+                <td bgcolor="#c8a96e" style="border-radius:6px;padding:0;">
+                  <a href="${payUrl}" style="border-radius:6px;color:#0a0a0a;display:block;font-family:Arial,Helvetica,sans-serif;font-size:13px;font-weight:700;letter-spacing:1px;padding:14px 32px;text-align:center;text-decoration:none;text-transform:uppercase;">${isFr ? 'Compléter le paiement' : 'Complete Payment'} &#8594;</a>
                 </td>
               </tr>
             </table>
