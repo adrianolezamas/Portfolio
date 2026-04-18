@@ -899,12 +899,15 @@
       });
 
       // Single click on photo = open lightbox; if in selection mode, toggle
+      // Long-press only on non-touch (desktop); on mobile use checkbox only
       let pressTimer;
-      el.addEventListener('pointerdown', () => {
+      el.addEventListener('pointerdown', e => {
+        if (e.pointerType === 'touch') return;
         pressTimer = setTimeout(() => { toggleSelect(el.dataset.src, el); }, 400);
       });
       el.addEventListener('pointerup', () => clearTimeout(pressTimer));
       el.addEventListener('pointerleave', () => clearTimeout(pressTimer));
+      el.addEventListener('pointermove', () => clearTimeout(pressTimer));
 
       el.addEventListener('click', e => {
         if (selected.size > 0) { toggleSelect(el.dataset.src, el); return; }
