@@ -125,6 +125,7 @@ export default async function handler(req, res) {
 
         <!-- Card -->
         <tr><td style="background:#1a1a1a;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.08);">
+          <table width="100%" cellpadding="0" cellspacing="0">
 
           <!-- Header -->
           <tr><td style="padding:36px 44px 28px;border-bottom:1px solid rgba(255,255,255,0.07);">
@@ -173,8 +174,8 @@ export default async function handler(req, res) {
             }</p>
             <table cellpadding="0" cellspacing="0" border="0">
               <tr>
-                <td bgcolor="#c8a96e" style="border-radius:6px;padding:0;">
-                  <a href="${payUrl}" style="border-radius:6px;color:#0a0a0a;display:block;font-family:Arial,Helvetica,sans-serif;font-size:13px;font-weight:700;letter-spacing:1px;padding:14px 32px;text-align:center;text-decoration:none;text-transform:uppercase;">${isFr ? 'Compléter le paiement' : 'Complete Payment'} &#8594;</a>
+                <td bgcolor="#c8a96e" style="border-radius:6px;">
+                  <a href="${payUrl}" style="color:#0a0a0a;display:block;font-family:Arial,Helvetica,sans-serif;font-size:13px;font-weight:700;letter-spacing:1px;padding:14px 32px;text-align:center;text-decoration:none;text-transform:uppercase;">${isFr ? 'Compléter le paiement' : 'Complete Payment'} &#8594;</a>
                 </td>
               </tr>
             </table>
@@ -185,6 +186,7 @@ export default async function handler(req, res) {
             }</p>
           </td></tr>
 
+          </table>
         </td></tr>
 
         <!-- Footer -->
