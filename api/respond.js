@@ -171,16 +171,11 @@ export default async function handler(req, res) {
               ? `Pour sécuriser votre date, complétez votre paiement en cliquant sur le bouton ci-dessous :`
               : `To secure your spot, please complete your payment using the link below:`
             }</p>
-            <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
-              <tr>
-                <td align="center">
-                  <a href="${payUrl}" target="_blank"
-                     style="display:inline-block;background-color:#c8a96e;border-radius:7px;padding:16px 32px;font-size:12px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;text-decoration:none;color:#0a0a0a;font-family:'Helvetica Neue',Arial,sans-serif;mso-padding-alt:0;width:100%;box-sizing:border-box;text-align:center;">
-                    ${isFr ? 'Compléter le paiement &nbsp;&#8594;' : 'Complete Payment &nbsp;&#8594;'}
-                  </a>
-                </td>
-              </tr>
-            </table>
+            <table cellpadding="0" cellspacing="0"><tr>
+              <td>
+                <a href="${payUrl}" target="_blank" style="display:inline-block;background:#c8a96e;color:#0a0a0a;font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;padding:13px 28px;border-radius:6px;">${isFr ? '&#8594; Compléter le paiement' : 'Complete Payment &#8594;'}</a>
+              </td>
+            </tr></table>
             <p style="margin:16px 0 0;font-size:11px;color:#444;line-height:1.7;word-break:break-all;">${isFr ? 'Lien direct :' : 'Or copy this link:'} <a href="${payUrl}" style="color:#c8a96e;text-decoration:underline;">${payUrl}</a></p>
             <p style="margin:20px 0 0;font-size:12px;color:#555;line-height:1.7;">${isFr
               ? `Des questions ? Répondez à cet email ou contactez-nous directement. Nous avons hâte de capturer votre événement.`
