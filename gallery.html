@@ -516,13 +516,13 @@
 <nav class="site-nav">
   <div class="site-nav-left">
     <button class="lang-btn" onclick="toggleLang()">FR</button>
-    <a href="work.html">Gallery</a>
-    <a href="about.html">About</a>
+    <a href="work.html"><span data-en="Gallery" data-fr="Galerie">Gallery</span></a>
+    <a href="about.html"><span data-en="About" data-fr="À propos">About</span></a>
   </div>
   <a href="index.html" class="site-nav-center"><img src="AL.svg" alt="Adriano Lezama Photography"></a>
   <div class="site-nav-right">
-    <a href="contact.html">Contact</a>
-    <a href="book.html" class="book-link">Book</a>
+    <a href="contact.html"><span data-en="Contact" data-fr="Contact">Contact</span></a>
+    <a href="book.html" class="book-link"><span data-en="Book" data-fr="Réserver">Book</span></a>
   </div>
   <button class="site-nav-hamburger" id="site-menu-open" aria-label="Open menu">
     <svg width="22" height="16" viewBox="0 0 22 16" fill="none"><line x1="0" y1="1" x2="22" y2="1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="0" y1="8" x2="22" y2="8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="0" y1="15" x2="22" y2="15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
@@ -532,10 +532,10 @@
   <button id="site-menu-close" aria-label="Close menu">
     <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><line x1="2" y1="2" x2="18" y2="18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="18" y1="2" x2="2" y2="18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
   </button>
-  <a href="work.html">Gallery</a>
-  <a href="about.html">About</a>
-  <a href="contact.html">Contact</a>
-  <a href="book.html" class="book-link">Book</a>
+  <a href="work.html"><span data-en="Gallery" data-fr="Galerie">Gallery</span></a>
+  <a href="about.html"><span data-en="About" data-fr="À propos">About</span></a>
+  <a href="contact.html"><span data-en="Contact" data-fr="Contact">Contact</span></a>
+  <a href="book.html" class="book-link"><span data-en="Book" data-fr="Réserver">Book</span></a>
 </div>
 <script>
 (function(){
@@ -656,7 +656,7 @@
       </div>
       <button class="dl-submit" id="dl-submit">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        Download Photos
+        <span data-en="Download Photos" data-fr="Télécharger les photos">Download Photos</span>
       </button>
       <p class="dl-commercial-note" data-en="Need this for commercial use?<br><a href='mailto:adrlezama@gmail.com?subject=Commercial%20License%20Request'>Contact me for licensing →</a>" data-fr="Usage commercial ?<br><a href='mailto:adrlezama@gmail.com?subject=Commercial%20License%20Request'>Contactez-moi pour une licence →</a>">
         Need this for commercial use?<br>
@@ -954,6 +954,22 @@
   });
 
   renderGrid();
+
+  // ── Language change hook — refresh all JS-driven text ──
+  window.onLangChange = function() {
+    // Header eyebrow
+    document.getElementById('header-eyebrow').textContent =
+      photos.length ? `${photos[0].year} · ${t('Sports Photography', 'Photographie sportive')}` : t('Gallery', 'Galerie');
+    // Selection bar count (re-renders with correct plural)
+    updateSelBar();
+    // If download modal is open, refresh its subtitle
+    const modal = document.getElementById('dl-modal');
+    if (modal.classList.contains('open')) {
+      const n = selected.size;
+      document.getElementById('dl-modal-subtitle').textContent =
+        `${n} photo${n !== 1 ? 's' : ''} ${t('selected', 'sélectionnée' + (n !== 1 ? 's' : ''))}`;
+    }
+  };
 
   // ── Card scroll slide-in ──
   (function() {

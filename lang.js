@@ -14,10 +14,12 @@
     window.currentLang = window.currentLang === 'en' ? 'fr' : 'en';
     localStorage.setItem('al_lang', window.currentLang);
     applyLang(window.currentLang);
+    if (typeof window.onLangChange === 'function') window.onLangChange(window.currentLang);
   };
 
   document.addEventListener('DOMContentLoaded', function () {
-    if (window.currentLang === 'fr') applyLang('fr');
-    else applyLang('en');
+    const lang = window.currentLang;
+    applyLang(lang);
+    if (lang === 'fr' && typeof window.onLangChange === 'function') window.onLangChange(lang);
   });
 })();
