@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adriano Lezama — Sport Photographer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=GFS+Didot&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0e0e0e;
+      --surface: #141414;
+      --accent: #c8a96e;
+      --muted: rgba(255,255,255,0.38);
+      --line: rgba(255,255,255,0.09);
+      --serif: 'GFS Didot', Didot, Georgia, serif;
+      --sans: 'Helvetica Neue', Arial, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: #fff;
+      font-family: var(--sans);
+      font-size: 14px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ── NAV ─────────────────────────────────────────────────────── */
+    .site-nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      display: grid; grid-template-columns: 1fr auto 1fr;
+      align-items: center; height: 80px;
+      padding: 0 4vw;
+      transition: background 0.4s, transform 0.35s cubic-bezier(0.4,0,0.2,1);
+    }
+    .site-nav.scrolled { background: rgba(14,14,14,0.92); backdrop-filter: blur(10px); }
+    .site-nav-left  { display: flex; align-items: center; gap: 2.2rem; }
+    .site-nav-right { display: flex; align-items: center; gap: 2.2rem; justify-content: flex-end; }
+    .site-nav-center img { height: 54px; width: auto; opacity: 0.9; transition: opacity 0.2s; }
+    .site-nav-center img:hover { opacity: 1; }
+    .site-nav a {
+      font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase;
+      color: rgba(255,255,255,0.5); transition: color 0.2s;
+    }
+    .site-nav a:hover { color: #fff; }
+    .site-nav .book-link {
+      color: #0e0e0e !important; background: var(--accent);
+      border-radius: 999px; padding: 7px 18px; letter-spacing: 0.12em;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .site-nav .book-link:hover { background: #dfc088 !important; transform: translateY(-1px); }
+
+    /* ── HERO ────────────────────────────────────────────────────── */
+    .hero {
+      position: relative; height: 100vh; min-height: 600px;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; overflow: hidden;
+    }
+    .hero-video {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; object-position: center;
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(14,14,14,0.88) 0%, rgba(14,14,14,0.35) 50%, rgba(14,14,14,0.25) 100%);
+    }
+    .hero-content {
+      position: relative; z-index: 2;
+      display: flex; flex-direction: column; align-items: center; gap: 1.2rem;
+    }
+    .hero-eyebrow {
+      font-size: 0.65rem; letter-spacing: 0.28em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 0.4rem;
+    }
+    .hero-name {
+      font-family: var(--serif);
+      font-size: clamp(3.2rem, 8vw, 7rem);
+      font-weight: 400; line-height: 1;
+      letter-spacing: -0.01em;
+    }
+    .hero-tagline {
+      font-size: 0.78rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: rgba(255,255,255,0.5); margin-top: 0.4rem;
+    }
+    .hero-socials {
+      display: flex; align-items: center; gap: 1.6rem; margin-top: 1rem;
+    }
+    .hero-socials a {
+      font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: rgba(255,255,255,0.4); transition: color 0.2s;
+    }
+    .hero-socials a:hover { color: var(--accent); }
+    .hero-scroll {
+      position: absolute; bottom: 2.8rem; left: 50%; transform: translateX(-50%);
+      z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+      animation: bob 2.2s ease-in-out infinite;
+    }
+    .hero-scroll span {
+      font-size: 0.58rem; letter-spacing: 0.22em; text-transform: uppercase;
+      color: rgba(255,255,255,0.28);
+    }
+    .hero-scroll svg { opacity: 0.28; }
+    @keyframes bob { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(6px)} }
+
+    /* ── SECTION BASE ────────────────────────────────────────────── */
+    section { padding: 100px 6vw; }
+    .section-rule { width: 40px; height: 1px; background: var(--accent); margin-bottom: 2.2rem; }
+    .section-eyebrow {
+      font-size: 0.62rem; letter-spacing: 0.26em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: var(--serif);
+      font-size: clamp(2.4rem, 5vw, 4.2rem);
+      font-weight: 400; line-height: 1.05;
+      letter-spacing: -0.01em; margin-bottom: 1.6rem;
+    }
+    .section-desc {
+      font-size: 0.85rem; color: rgba(255,255,255,0.5);
+      max-width: 480px; line-height: 1.8; margin-bottom: 3rem;
+    }
+
+    /* ── ABOUT ───────────────────────────────────────────────────── */
+    .about-section {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 6vw;
+      align-items: center; padding: 120px 6vw;
+    }
+    .about-img-wrap {
+      aspect-ratio: 3/4; overflow: hidden; border-radius: 2px;
+    }
+    .about-img-wrap img {
+      width: 100%; height: 100%; object-fit: cover; object-position: top center;
+      display: block;
+    }
+    .about-text { display: flex; flex-direction: column; }
+    .about-text .section-title { font-size: clamp(2rem, 3.5vw, 3.2rem); }
+    .about-bio {
+      font-size: 0.9rem; color: rgba(255,255,255,0.55); line-height: 1.9;
+      margin-bottom: 2.4rem;
+    }
+    .about-stats {
+      display: flex; gap: 3rem; border-top: 1px solid var(--line); padding-top: 2rem;
+    }
+    .stat-num {
+      font-family: var(--serif); font-size: 2rem; color: var(--accent);
+      display: block; line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--muted); margin-top: 0.4rem; display: block;
+    }
+
+    /* ── GRID ITEMS ──────────────────────────────────────────────── */
+    .grid-item {
+      background: #1a1a1a; cursor: pointer;
+      position: relative; overflow: hidden;
+      transition: opacity 0.25s;
+    }
+    .grid-item:hover { opacity: 0.85; }
+    .grid-item img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+
+    /* ── PORTFOLIO GRID ──────────────────────────────────────────── */
+    .portfolio-section { background: var(--surface); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 4px; margin-top: 2rem;
+    }
+    .portfolio-grid .grid-item { aspect-ratio: 3/2; }
+    .portfolio-grid .grid-item.tall { aspect-ratio: 2/3; }
+    .portfolio-grid .grid-item.wide { grid-column: span 2; aspect-ratio: unset; }
+
+    /* ── CATEGORY SECTION ────────────────────────────────────────── */
+    .category-section { padding: 100px 6vw; border-bottom: 1px solid var(--line); }
+    .category-header {
+      display: flex; justify-content: space-between; align-items: flex-end;
+      margin-bottom: 3rem;
+    }
+    .view-all {
+      font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--accent); border-bottom: 1px solid currentColor;
+      padding-bottom: 2px; transition: opacity 0.2s; white-space: nowrap;
+    }
+    .view-all:hover { opacity: 0.7; }
+    .category-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px;
+    }
+    .category-grid .grid-item { aspect-ratio: 2/3; }
+    .category-grid .grid-item.landscape { aspect-ratio: 3/2; }
+
+    /* ── VIDEO SECTION ───────────────────────────────────────────── */
+    .video-section {
+      padding: 100px 6vw; background: var(--surface);
+      border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+    }
+    .video-row {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 2.4rem;
+    }
+    .video-wrap {
+      position: relative; aspect-ratio: 16/9; background: #111;
+      border-radius: 2px; overflow: hidden;
+    }
+    .video-wrap video {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+    .video-wrap .video-label {
+      position: absolute; bottom: 14px; left: 16px;
+      font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: rgba(255,255,255,0.5); pointer-events: none;
+    }
+
+    /* ── SPLIT FEATURE ───────────────────────────────────────────── */
+    .feature-section {
+      display: grid; grid-template-columns: 1fr 1fr;
+      min-height: 70vh; border-bottom: 1px solid var(--line);
+    }
+    .feature-img {
+      overflow: hidden; min-height: 500px;
+      border-right: 1px solid var(--line);
+    }
+    .feature-img img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+    .feature-text {
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 6vw 6vw 6vw 5vw;
+    }
+
+    /* ── CTA ─────────────────────────────────────────────────────── */
+    .cta-section {
+      padding: 130px 6vw; text-align: center;
+      display: flex; flex-direction: column; align-items: center; gap: 1.6rem;
+    }
+    .cta-section .section-eyebrow { margin-bottom: 0; }
+    .cta-section .section-title { font-size: clamp(2.6rem, 5.5vw, 5rem); margin-bottom: 0; }
+    .cta-section .section-desc { text-align: center; margin-bottom: 0; }
+    .cta-btn {
+      display: inline-block; margin-top: 1.2rem;
+      background: var(--accent); color: #0e0e0e;
+      font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase;
+      padding: 14px 36px; border-radius: 999px;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .cta-btn:hover { background: #dfc088; transform: translateY(-1px); }
+
+    /* ── FOOTER ──────────────────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--line);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 2.2rem 6vw; gap: 1rem; flex-wrap: wrap;
+    }
+    .footer-brand { display: flex; flex-direction: column; gap: 0.2rem; }
+    .footer-name { font-family: var(--serif); font-size: 1.05rem; }
+    .footer-tagline { font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
+    .footer-right { display: flex; align-items: center; gap: 2rem; }
+    .footer-ig { font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); transition: color 0.2s; }
+    .footer-ig:hover { color: #fff; }
+    .footer-copy { font-size: 0.62rem; color: rgba(255,255,255,0.2); }
+
+    /* ── MOBILE ──────────────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .site-nav { height: 64px; grid-template-columns: auto 1fr auto; }
+      .site-nav-left { display: none; }
+      .site-nav-right { gap: 1.2rem; }
+      .site-nav-center img { height: 40px; }
+      .site-nav-right .book-link { padding: 6px 14px; font-size: 0.65rem; }
+      section { padding: 70px 5vw; }
+      .about-section { grid-template-columns: 1fr; gap: 3rem; padding: 70px 5vw; }
+      .about-img-wrap { aspect-ratio: 4/3; }
+      .about-stats { gap: 2rem; }
+      .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
+      .category-grid { grid-template-columns: repeat(2, 1fr); }
+      .video-row { grid-template-columns: 1fr; }
+      .feature-section { grid-template-columns: 1fr; }
+      .feature-img { min-height: 280px; border-right: none; border-bottom: 1px solid var(--line); }
+      .cta-section { padding: 90px 5vw; }
+      footer { flex-direction: column; align-items: flex-start; gap: 1.4rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════ NAV ══════════ -->
+<nav class="site-nav" id="site-nav">
+  <div class="site-nav-left">
+    <a href="work.html">Gallery</a>
+    <a href="about.html">About</a>
+  </div>
+  <div class="site-nav-center">
+    <a href="index.html"><img src="AL-white.svg" alt="Adriano Lezama"></a>
+  </div>
+  <div class="site-nav-right">
+    <a href="contact.html">Contact</a>
+    <a href="book.html" class="book-link">Book</a>
+  </div>
+</nav>
+
+<!-- ══════════ HERO ══════════ -->
+<section class="hero">
+  <video class="hero-video" autoplay muted loop playsinline preload="auto">
+    <source src="video/hero-web.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Sport Photography · Montréal</p>
+    <h1 class="hero-name">Adriano Lezama</h1>
+    <p class="hero-tagline">Freeze the moment. Tell the story.</p>
+    <div class="hero-socials">
+      <a href="https://www.instagram.com/byadriano_/" target="_blank" rel="noopener">Instagram</a>
+      <a href="mailto:adrlezama@gmail.com">Contact</a>
+      <a href="book.html">Book a session</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="2 5 7 10 12 5"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ══════════ ABOUT ══════════ -->
+<section class="about-section">
+  <div class="about-img-wrap">
+    <img src="photos/Hero HOME PAGE PHOTO.jpg" alt="Adriano Lezama" loading="lazy">
+  </div>
+  <div class="about-text">
+    <div class="section-rule"></div>
+    <p class="section-eyebrow">About</p>
+    <h2 class="section-title">I grew up playing<br>the game.</h2>
+    <p class="about-bio">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.<br><br>
+      Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.
+    </p>
+    <div class="about-stats">
+      <div>
+        <span class="stat-num">4+</span>
+        <span class="stat-label">Years active</span>
+      </div>
+      <div>
+        <span class="stat-num">12+</span>
+        <span class="stat-label">Clubs covered</span>
+      </div>
+      <div>
+        <span class="stat-num">500+</span>
+        <span class="stat-label">Games shot</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ PORTFOLIO GRID ══════════ -->
+<section class="portfolio-section">
+  <div class="section-rule"></div>
+  <p class="section-eyebrow">Portfolio</p>
+  <h2 class="section-title">My Work</h2>
+  <p class="section-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore.</p>
+  <div class="portfolio-grid">
+    <div class="grid-item"><img src="photos/DSC09364.jpg" alt="" loading="lazy"></div>
+    <div class="grid-item tall"><img src="photos/DSC09177.jpg" alt="" loading="lazy"></div>
+    <div class="grid-item"><img src="photos/DSC09510.jpg" alt="" loading="lazy"></div>
+    <div class="grid-item wide"><img src="photos/DSC08942-copy.jpg" alt="" loading="lazy"></div>
+    <div class="grid-item"><img src="photos/DSC09001.jpg" alt="" loading="lazy"></div>
+  </div>
+</section>
+
+<!-- ══════════ SOCCER ══════════ -->
+<section class="category-section">
+  <div class="category-header">
+    <div class="category-header-left">
+      <div class="section-rule"></div>
+      <p class="section-eyebrow">01 — Soccer</p>
+      <h2 class="section-title">Soccer</h2>
+      <p class="section-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+    </div>
+    <a href="work.html" class="view-all">View all →</a>
+  </div>
+  <div class="category-grid">
+    <div class="grid-item"><img src="photos/DSC00010.jpg" alt="" loading="lazy"></div>
+    <div class="grid-item"><img src="photos/DSC00134.jpg" alt="" loading="lazy"></div>
+    <div class="grid-item"><img src="photos/DSC00153.jpg" alt="" loading="lazy"></div>
+    <div class="grid-item"><img src="photos/DSC00425.jpg" alt="" loading="lazy"></div>
+  </div>
+</section>
+
+<!-- ══════════ FUTSAL — SPLIT ══════════ -->
+<section class="feature-section">
+  <div class="feature-img">
+    <img src="photos/DSC02708.jpg" alt="" loading="lazy">
+  </div>
+  <div class="feature-text">
+    <div class="section-rule"></div>
+    <p class="section-eyebrow">02 — Futsal</p>
+    <h2 class="section-title">Futsal</h2>
+    <p class="section-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+    <a href="work.html" class="view-all" style="margin-top:1rem;">View all →</a>
+  </div>
+</section>
+
+<!-- ══════════ BASKETBALL ══════════ -->
+<section class="category-section">
+  <div class="category-header">
+    <div class="category-header-left">
+      <div class="section-rule"></div>
+      <p class="section-eyebrow">03 — Basketball</p>
+      <h2 class="section-title">Basketball</h2>
+      <p class="section-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+    </div>
+    <a href="work.html" class="view-all">View all →</a>
+  </div>
+  <div class="category-grid">
+    <div class="grid-item landscape"><img src="photos/DSC07843.jpg" alt="" loading="lazy"></div>
+    <div class="grid-item landscape"><img src="photos/DSC07913.jpg" alt="" loading="lazy"></div>
+    <div class="grid-item landscape"><img src="photos/DSC09028.jpg" alt="" loading="lazy"></div>
+    <div class="grid-item landscape"><img src="photos/DSC09156.jpg" alt="" loading="lazy"></div>
+  </div>
+</section>
+
+<!-- ══════════ VIDEO ══════════ -->
+<section class="video-section">
+  <div class="section-rule"></div>
+  <p class="section-eyebrow">Highlights</p>
+  <h2 class="section-title">Video & Reels</h2>
+  <p class="section-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore.</p>
+  <div class="video-row">
+    <div class="video-wrap">
+      <video controls preload="metadata" poster="">
+        <source src="video/reel-web.mp4" type="video/mp4">
+      </video>
+      <span class="video-label">Reel — First Point</span>
+    </div>
+    <div class="video-wrap">
+      <video controls preload="metadata" poster="">
+        <source src="video/soccer-web.mp4" type="video/mp4">
+      </video>
+      <span class="video-label">Match Edit — Soccer</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ TEAM COVERAGE ══════════ -->
+<section class="category-section">
+  <div class="category-header">
+    <div class="category-header-left">
+      <div class="section-rule"></div>
+      <p class="section-eyebrow">04 — Teams</p>
+      <h2 class="section-title">Team Photography</h2>
+      <p class="section-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+    </div>
+    <a href="work.html" class="view-all">View all →</a>
+  </div>
+  <div class="category-grid">
+    <div class="grid-item"><img src="photos/DSC01796.jpg" alt="" loading="lazy"></div>
+    <div class="grid-item"><img src="photos/DSC02393.jpg" alt="" loading="lazy"></div>
+    <div class="grid-item"><img src="photos/DSC02739.jpg" alt="" loading="lazy"></div>
+    <div class="grid-item"><img src="photos/DSC09371.jpg" alt="" loading="lazy"></div>
+  </div>
+</section>
+
+<!-- ══════════ CTA ══════════ -->
+<section class="cta-section">
+  <p class="section-eyebrow">Available 2026</p>
+  <h2 class="section-title">Ready to work<br>together?</h2>
+  <p class="section-desc">Sport photography in Montréal. Packages starting at $75. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+  <a href="book.html" class="cta-btn">Book a Session</a>
+</section>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer>
+  <div class="footer-brand">
+    <span class="footer-name">Adriano Lezama</span>
+    <span class="footer-tagline">Sport Photographer · Montréal</span>
+  </div>
+  <div class="footer-right">
+    <a href="https://www.instagram.com/byadriano_/" target="_blank" rel="noopener" class="footer-ig">@byadriano_</a>
+    <span class="footer-copy">© 2026 · All rights reserved</span>
+  </div>
+</footer>
+
+<script>
+  var nav = document.getElementById('site-nav');
+  var last = 0;
+  window.addEventListener('scroll', function() {
+    var y = window.scrollY;
+    nav.classList.toggle('scrolled', y > 20);
+    nav.style.transform = y > last && y > 80 ? 'translateY(-100%)' : 'translateY(0)';
+    last = y;
+  }, { passive: true });
+</script>
+<script src="lang.js"></script>
+</body>
+</html>
