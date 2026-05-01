@@ -1166,6 +1166,11 @@
   minDate.setDate(minDate.getDate() + 7);
   dateInput.min = minDate.toISOString().split('T')[0];
 
+  // ── Bilingual helper ──
+  function t(en, fr) {
+    return (window.currentLang === 'fr') ? fr : en;
+  }
+
   // ── Live price state ──
   const GST_RATE = 0.05;
   const QST_RATE = 0.09975;
