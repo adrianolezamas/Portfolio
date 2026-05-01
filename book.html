@@ -444,6 +444,49 @@
     }
     .pb-total.pop { animation: price-pop 0.38s cubic-bezier(0.34,1.56,0.64,1); }
 
+    /* ── LIVE PRICE ESTIMATE PANEL ── */
+    .live-estimate {
+      border-bottom: 1px solid var(--border);
+      padding: 24px 36px;
+      background: rgba(200,169,110,0.018);
+      display: none;
+    }
+    @media (max-width: 640px) { .live-estimate { padding: 20px 20px; } }
+    .live-estimate.visible { display: block; }
+    .le-hd {
+      font-size: 0.5rem; letter-spacing: 0.24em; text-transform: uppercase;
+      color: rgba(200,169,110,0.55); margin-bottom: 16px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .le-hd::after { content: ''; flex: 1; height: 1px; background: rgba(200,169,110,0.14); }
+    .le-row {
+      display: flex; justify-content: space-between; align-items: baseline;
+      padding: 6px 0; font-size: 0.74rem;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .le-lbl { color: var(--muted); }
+    .le-val { color: var(--text); }
+    .le-val.accent { color: var(--accent); }
+    .le-sep { height: 1px; background: rgba(255,255,255,0.08); margin: 10px 0 6px; }
+    .le-total-row {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-top: 16px; padding-top: 16px;
+      border-top: 1px solid rgba(200,169,110,0.15);
+    }
+    .le-total-label-wrap { display: flex; flex-direction: column; gap: 4px; }
+    .le-total-label { font-size: 0.52rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
+    .le-total-sub { font-size: 0.58rem; color: rgba(200,169,110,0.4); }
+    .le-total-num {
+      font-family: 'GFS Didot', Didot, serif;
+      font-size: 2.4rem; color: var(--accent); letter-spacing: -0.02em; line-height: 1;
+    }
+    @keyframes le-pop {
+      0%   { transform: scale(1); }
+      35%  { transform: scale(1.07); color: #f0e08a; }
+      100% { transform: scale(1); }
+    }
+    .le-total-num.pop { animation: le-pop 0.38s cubic-bezier(0.34,1.56,0.64,1) forwards; }
+
     /* Footer */
     footer { padding: 28px 5vw; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
     .footer-brand { display: flex; flex-direction: column; gap: 5px; }
@@ -711,6 +754,19 @@
         </div>
       </div>
 
+    </div>
+
+    <!-- ══ LIVE PRICE ESTIMATE ══ -->
+    <div class="live-estimate" id="live-estimate">
+      <div class="le-hd" data-en="Live price estimate" data-fr="Estimation en direct">Live price estimate</div>
+      <div id="le-lines"></div>
+      <div class="le-total-row">
+        <div class="le-total-label-wrap">
+          <span class="le-total-label" data-en="Total incl. taxes" data-fr="Total taxes incl.">Total incl. taxes</span>
+          <span class="le-total-sub" id="le-tax-hint"></span>
+        </div>
+        <div class="le-total-num" id="le-total">—</div>
+      </div>
     </div>
 
     <!-- ══ STEP 2: ADD-ONS ══ -->
@@ -1126,6 +1182,7 @@
       osGst.textContent = '—';
       osQst.textContent = '—';
       osTotal.textContent = '—';
+      document.getElementById('live-estimate').classList.remove('visible');
       return;
     }
 
@@ -1147,6 +1204,12 @@
       osGst.textContent = '—';
       osQst.textContent = '—';
       osTotal.textContent = t('Custom — quote on confirmation', 'Personnalisé — devis à la confirmation');
+      // Live estimate panel — custom
+      document.getElementById('live-estimate').classList.add('visible');
+      document.getElementById('le-lines').innerHTML = `<div class="le-row"><span class="le-lbl">${selectedPkg.name}</span><span class="le-val">—</span></div>`;
+      const leTotalElC = document.getElementById('le-total');
+      leTotalElC.textContent = t('Custom quote', 'Devis personnalisé');
+      document.getElementById('le-tax-hint').textContent = '';
     } else {
       const multiplier   = gamesCount;
       const base         = selectedPkg.price;
@@ -1216,6 +1279,33 @@
       osGst.textContent = '$' + gst.toFixed(2);
       osQst.textContent = '$' + qst.toFixed(2);
       osTotal.textContent = '$' + grand.toFixed(2);
+
+      // ── Live estimate panel ──
+      const leBox = document.getElementById('live-estimate');
+      const leLines = document.getElementById('le-lines');
+      const leTotalEl = document.getElementById('le-total');
+      const leTaxHint = document.getElementById('le-tax-hint');
+      leBox.classList.add('visible');
+
+      let leHtml = `<div class="le-row"><span class="le-lbl">${selectedPkg.name}${gamesCount > 1 ? t(' × ' + gamesCount + ' games', ' × ' + gamesCount + ' matchs') : ''}</span><span class="le-val accent">$${(base * gamesCount).toFixed(0)}</span></div>`;
+      addonItems.forEach(a => {
+        const effPrice = a.isMgb ? a.price : a.price * multiplier;
+        leHtml += `<div class="le-row"><span class="le-lbl">${a.name}</span><span class="le-val">+$${effPrice.toFixed(0)}</span></div>`;
+      });
+      if (travelEff > 0 && !travelIsCustom) {
+        leHtml += `<div class="le-row"><span class="le-lbl">${t('Travel', 'Déplacement')}</span><span class="le-val">+$${travelEff.toFixed(2)}</span></div>`;
+      }
+      leHtml += `<div class="le-sep"></div><div class="le-row"><span class="le-lbl">${t('Subtotal', 'Sous-total')}</span><span class="le-val">$${subtotal.toFixed(2)}</span></div><div class="le-row"><span class="le-lbl">${t('GST (5%) + QST (9.975%)', 'TPS (5%) + TVQ (9,975%)')}</span><span class="le-val">+$${(gst + qst).toFixed(2)}</span></div>`;
+      leLines.innerHTML = leHtml;
+
+      const newLTotal = '$' + grand.toFixed(2);
+      if (leTotalEl.textContent !== newLTotal) {
+        leTotalEl.classList.remove('pop');
+        void leTotalEl.offsetWidth;
+        leTotalEl.classList.add('pop');
+      }
+      leTotalEl.textContent = newLTotal;
+      leTaxHint.textContent = t('GST + QST included', 'TPS + TVQ incluses');
     }
   }
 
