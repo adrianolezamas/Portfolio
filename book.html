@@ -1219,9 +1219,14 @@
       return;
     }
 
+    const freeGamesPreview = (selectedPkg && !selectedPkg.isCustom) ? Math.floor(gamesCount / 4) : 0;
     osPkg.textContent = selectedPkg.name + (selectedPkg.isCustom
       ? t(' (custom)', ' (personnalisé)')
-      : ' — $' + selectedPkg.price + (gamesCount > 1 ? t(' × ' + gamesCount + ' games', ' × ' + gamesCount + ' matchs') : ''));
+      : ' — $' + selectedPkg.price + (gamesCount > 1
+          ? (freeGamesPreview > 0
+              ? t(` × ${gamesCount} games (${freeGamesPreview} free)`, ` × ${gamesCount} matchs (${freeGamesPreview} gratuit${freeGamesPreview > 1 ? 's' : ''})`)
+              : t(' × ' + gamesCount + ' games', ' × ' + gamesCount + ' matchs'))
+          : ''));
 
     if (selectedPkg.isCustom) {
       osTravelLabel.textContent = t(`Travel (${km} km × $0.75)`, `Déplacement (${km} km × 0,75 $)`);
@@ -1258,13 +1263,16 @@
     } else {
       const multiplier   = gamesCount;
       const base         = selectedPkg.price;
+      const freeGames    = Math.floor(gamesCount / 4);
+      const paidGames    = gamesCount - freeGames;
+      const packageCost  = base * paidGames;
       const mgbItem      = addonItems.find(a => a.isMgb);
       const mgbPrice     = mgbItem ? mgbItem.price : 0;
       const nonMgbTotal  = addonTotal - mgbPrice;
       const addonEff     = nonMgbTotal * multiplier + mgbPrice;
       const travelMult   = mgbItem ? 3 : multiplier;
       const travelEff    = travel * travelMult;
-      const subtotal     = base * gamesCount + addonEff + travelEff;
+      const subtotal     = packageCost + addonEff + travelEff;
       const gst          = subtotal * GST_RATE;
       const qst          = subtotal * QST_RATE;
       const grand        = subtotal + gst + qst;
@@ -1306,7 +1314,12 @@
         return `<div class="os-row os-tax-row"><span class="osl">${label}</span><span class="osv">+$${effPrice.toFixed(2)}</span></div>`;
       }).join('');
 
-      let parts = [`<span>${selectedPkg.name} $${base}${gamesCount > 1 ? ' ×' + gamesCount : ''}</span>`];
+      const gamesLabel = gamesCount > 1
+        ? (freeGames > 0
+            ? t(` ×${gamesCount} games (${freeGames} free)`, ` ×${gamesCount} matchs (${freeGames} gratuit${freeGames > 1 ? 's' : ''})`)
+            : t(' ×' + gamesCount + ' games', ' ×' + gamesCount + ' matchs'))
+        : '';
+      let parts = [`<span>${selectedPkg.name} $${packageCost.toFixed(0)}${gamesLabel}</span>`];
       if (addonEff) parts.push(`${t('add-ons', 'suppléments')} $${addonEff}`);
       if (travelEff > 0) parts.push(`${t('travel', 'déplacement')} $${travelEff.toFixed(2)}`);
       breakdown.innerHTML = parts.join(' · ');
@@ -1332,7 +1345,11 @@
       const leTaxHint = document.getElementById('le-tax-hint');
       leBox.classList.add('visible');
 
-      let leHtml = `<div class="le-row"><span class="le-lbl">${selectedPkg.name}${gamesCount > 1 ? t(' × ' + gamesCount + ' games', ' × ' + gamesCount + ' matchs') : ''}</span><span class="le-val accent">$${(base * gamesCount).toFixed(0)}</span></div>`;
+      let leHtml = `<div class="le-row"><span class="le-lbl">${selectedPkg.name}${gamesCount > 1 ? t(' × ' + gamesCount + ' games', ' × ' + gamesCount + ' matchs') : ''}</span><span class="le-val accent">$${packageCost.toFixed(0)}</span></div>`;
+      if (freeGames > 0) {
+        const savedAmt = base * freeGames;
+        leHtml += `<div class="le-row"><span class="le-lbl" style="color:var(--accent)">${t(`4-Game Deal — ${freeGames} game${freeGames > 1 ? 's' : ''} free`, `Offre 4 matchs — ${freeGames} match${freeGames > 1 ? 's' : ''} gratuit${freeGames > 1 ? 's' : ''}`)}</span><span class="le-val" style="color:var(--accent)">-$${savedAmt.toFixed(0)}</span></div>`;
+      }
       addonItems.forEach(a => {
         const effPrice = a.isMgb ? a.price : a.price * multiplier;
         leHtml += `<div class="le-row"><span class="le-lbl">${a.name}</span><span class="le-val">+$${effPrice.toFixed(0)}</span></div>`;
@@ -1358,7 +1375,11 @@
       const gpTotal = document.getElementById('gp-total');
       gpBox.classList.add('visible');
 
-      let gpHtml = `<div class="gp-row"><span class="gp-lbl">${selectedPkg.name}${gamesCount > 1 ? t(' × ' + gamesCount + ' games', ' × ' + gamesCount + ' matchs') : ''}</span><span class="gp-val">$${(base * gamesCount).toFixed(0)}</span></div>`;
+      let gpHtml = `<div class="gp-row"><span class="gp-lbl">${selectedPkg.name}${gamesCount > 1 ? t(' × ' + gamesCount + ' games', ' × ' + gamesCount + ' matchs') : ''}</span><span class="gp-val">$${packageCost.toFixed(0)}</span></div>`;
+      if (freeGames > 0) {
+        const savedAmt = base * freeGames;
+        gpHtml += `<div class="gp-row"><span class="gp-lbl" style="color:var(--accent)">${t(`${freeGames} game${freeGames > 1 ? 's' : ''} free`, `${freeGames} match${freeGames > 1 ? 's' : ''} gratuit${freeGames > 1 ? 's' : ''}`)}</span><span class="gp-val" style="color:var(--accent)">-$${savedAmt.toFixed(0)}</span></div>`;
+      }
       addonItems.forEach(a => {
         const effPrice = a.isMgb ? a.price : a.price * multiplier;
         gpHtml += `<div class="gp-row"><span class="gp-lbl">${a.name}</span><span class="gp-val">+$${effPrice.toFixed(0)}</span></div>`;
@@ -1404,11 +1425,22 @@
       el.innerHTML = '';
       return;
     }
-    const total = selectedPkg.price * gamesCount;
-    el.innerHTML = t(
-      `$${selectedPkg.price} × ${gamesCount} = <strong>$${total}</strong> <span style="font-size:0.62rem">before tax</span>`,
-      `${selectedPkg.price}$ × ${gamesCount} = <strong>${total}$</strong> <span style="font-size:0.62rem">avant taxes</span>`
-    );
+    const freeG  = Math.floor(gamesCount / 4);
+    const paidG  = gamesCount - freeG;
+    const paid   = selectedPkg.price * paidG;
+    const saved  = selectedPkg.price * freeG;
+    if (freeG > 0) {
+      el.innerHTML = t(
+        `$${selectedPkg.price} × ${paidG} paid + <strong style="color:var(--accent)">${freeG} free</strong> = <strong>$${paid}</strong> <span style="font-size:0.62rem">before tax — save $${saved}</span>`,
+        `${selectedPkg.price}$ × ${paidG} payé + <strong style="color:var(--accent)">${freeG} gratuit</strong> = <strong>${paid}$</strong> <span style="font-size:0.62rem">avant taxes — économie de ${saved}$</span>`
+      );
+    } else {
+      const total = selectedPkg.price * gamesCount;
+      el.innerHTML = t(
+        `$${selectedPkg.price} × ${gamesCount} = <strong>$${total}</strong> <span style="font-size:0.62rem">before tax</span>`,
+        `${selectedPkg.price}$ × ${gamesCount} = <strong>${total}$</strong> <span style="font-size:0.62rem">avant taxes</span>`
+      );
+    }
   }
 
   function getItemQty(item) {
