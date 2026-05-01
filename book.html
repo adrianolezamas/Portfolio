@@ -167,11 +167,11 @@
       padding: 14px 36px;
       display: flex; align-items: center; justify-content: space-between; gap: 20px;
     }
-    .pb-left { display: flex; flex-direction: column; gap: 2px; flex-shrink: 0; }
-    .pb-right { display: flex; flex-direction: column; gap: 4px; flex: 1; text-align: right; }
+    .pb-left { display: flex; flex-direction: column; gap: 4px; flex: 1; }
     .pb-label { font-size: 0.52rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); }
     .pb-breakdown { font-size: 0.72rem; color: var(--muted); line-height: 1.6; }
     .pb-breakdown span { color: var(--text); }
+    .pb-right { text-align: right; flex-shrink: 0; }
     .pb-total-label { font-size: 0.5rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 2px; }
     .pb-total { font-family: 'GFS Didot', Didot, serif; font-size: 1.6rem; color: var(--accent); letter-spacing: -0.01em; }
     .pb-total.custom { font-size: 0.9rem; color: var(--muted); letter-spacing: 0.04em; font-family: inherit; margin-top: 4px; }
@@ -689,12 +689,12 @@
     <!-- Sticky price bar -->
     <div class="price-bar">
       <div class="pb-left">
-        <span class="pb-total-label" data-en="Total" data-fr="Total">Total</span>
-        <div class="pb-total" id="pb-total">—</div>
-      </div>
-      <div class="pb-right">
         <span class="pb-label" data-en="Your Booking" data-fr="Votre réservation">Your Booking</span>
         <div class="pb-breakdown" id="pb-breakdown" data-en="— Select a package to begin" data-fr="— Choisissez un forfait pour commencer">— Select a package to begin</div>
+      </div>
+      <div class="pb-right">
+        <span class="pb-total-label" data-en="Total (taxes incl.)" data-fr="Total (taxes incl.)">Total (taxes incl.)</span>
+        <div class="pb-total" id="pb-total">—</div>
       </div>
     </div>
 
@@ -1202,7 +1202,7 @@
       breakdown.innerHTML = t('— Select a package to begin', '— Choisissez un forfait pour commencer');
       totalEl.className = 'pb-total custom';
       totalEl.textContent = '—';
-      pbTotalLabel.textContent = t('Total', 'Total');
+      pbTotalLabel.textContent = t('Total (taxes incl.)', 'Total (taxes incl.)');
       osPkg.textContent = '—';
       osAddonRows.innerHTML = '';
       osSubtotal.textContent = '—';
@@ -1227,7 +1227,7 @@
       breakdown.innerHTML = `<span>${selectedPkg.name}</span> + ${t('travel', 'déplacement')}${addonTotal ? ' + ' + t('add-ons', 'suppléments') : ''}`;
       totalEl.className = 'pb-total custom';
       totalEl.textContent = t('Quote on request', 'Devis sur demande');
-      pbTotalLabel.textContent = t('Total', 'Total');
+      pbTotalLabel.textContent = t('Total (taxes incl.)', 'Total (taxes incl.)');
       osSubtotal.textContent = '—';
       osGst.textContent = '—';
       osQst.textContent = '—';
