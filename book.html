@@ -131,8 +131,28 @@
       font-size: 0.52rem; letter-spacing: 0.22em; text-transform: uppercase;
       color: rgba(200,169,110,0.85); background: rgba(14,14,14,0.7);
       padding: 5px 10px; border-radius: 3px; backdrop-filter: blur(4px);
-      pointer-events: none;
+      pointer-events: none; transition: opacity 0.3s;
     }
+    .gallery-price.visible ~ .gallery-badge { opacity: 0; }
+
+    /* Left gallery price overlay */
+    .gallery-price {
+      position: absolute; bottom: 0; left: 0; right: 0; z-index: 3;
+      padding: 48px 22px 18px;
+      background: linear-gradient(to top, rgba(8,8,8,0.98) 0%, rgba(8,8,8,0.88) 55%, transparent 100%);
+      display: none;
+    }
+    .gallery-price.visible { display: block; }
+    .gp-row { display: flex; justify-content: space-between; align-items: baseline; padding: 3px 0; gap: 12px; }
+    .gp-lbl { font-size: 0.71rem; color: rgba(255,255,255,0.45); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 65%; }
+    .gp-val { font-size: 0.71rem; color: rgba(255,255,255,0.75); white-space: nowrap; flex-shrink: 0; }
+    .gp-sep { height: 1px; background: rgba(255,255,255,0.07); margin: 7px 0; }
+    .gp-total-row { display: flex; justify-content: space-between; align-items: flex-end; padding-top: 8px; }
+    .gp-total-label { font-size: 0.5rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.35); line-height: 1; }
+    .gp-total { font-family: 'GFS Didot', Didot, serif; font-size: 2rem; color: var(--accent); letter-spacing: -0.02em; line-height: 1; }
+    .gp-total.custom { font-size: 0.82rem; color: var(--muted); font-family: inherit; letter-spacing: 0.04em; line-height: 1.3; }
+    @keyframes gp-pop { 0% { transform: scale(1); } 35% { transform: scale(1.07); color: #f0e08a; } 100% { transform: scale(1); } }
+    .gp-total.pop { animation: gp-pop 0.38s cubic-bezier(0.34,1.56,0.64,1) forwards; }
 
     /* RIGHT: config column */
     .config-right { min-height: calc(100vh - var(--nav-h)); }
@@ -645,6 +665,13 @@
       <div class="gallery-img" style="background-image:url('photos/DSC09510.jpg')" data-idx="3"></div>
       <div class="gallery-img" style="background-image:url('photos/DSC08942-copy.jpg')" data-idx="4"></div>
       <div class="gallery-overlay"></div>
+      <div class="gallery-price" id="gallery-price">
+        <div id="gp-top"></div>
+        <div class="gp-total-row">
+          <span class="gp-total-label" data-en="Total (taxes incl.)" data-fr="Total (taxes incl.)">Total (taxes incl.)</span>
+          <span class="gp-total" id="gp-total">—</span>
+        </div>
+      </div>
       <span class="gallery-badge">@byadriano_</span>
     </div>
     <div class="gallery-thumbs" id="gallery-thumbs">
@@ -1183,6 +1210,7 @@
       osQst.textContent = '—';
       osTotal.textContent = '—';
       document.getElementById('live-estimate').classList.remove('visible');
+      document.getElementById('gallery-price').classList.remove('visible');
       return;
     }
 
@@ -1210,6 +1238,18 @@
       const leTotalElC = document.getElementById('le-total');
       leTotalElC.textContent = t('Custom quote', 'Devis personnalisé');
       document.getElementById('le-tax-hint').textContent = '';
+      // Left gallery panel — custom
+      const gpBoxC = document.getElementById('gallery-price');
+      const gpTopC = document.getElementById('gp-top');
+      const gpTotalC = document.getElementById('gp-total');
+      gpBoxC.classList.add('visible');
+      let gpHtmlC = `<div class="gp-row"><span class="gp-lbl">${selectedPkg.name}</span><span class="gp-val">—</span></div>`;
+      addonItems.forEach(a => {
+        gpHtmlC += `<div class="gp-row"><span class="gp-lbl">${a.name}</span><span class="gp-val">+$${a.price.toFixed(0)}</span></div>`;
+      });
+      gpTopC.innerHTML = gpHtmlC;
+      gpTotalC.className = 'gp-total custom';
+      gpTotalC.textContent = t('Quote on request', 'Devis sur demande');
     } else {
       const multiplier   = gamesCount;
       const base         = selectedPkg.price;
@@ -1306,6 +1346,31 @@
       }
       leTotalEl.textContent = newLTotal;
       leTaxHint.textContent = t('GST + QST included', 'TPS + TVQ incluses');
+
+      // ── Left gallery price overlay ──
+      const gpBox = document.getElementById('gallery-price');
+      const gpTop = document.getElementById('gp-top');
+      const gpTotal = document.getElementById('gp-total');
+      gpBox.classList.add('visible');
+
+      let gpHtml = `<div class="gp-row"><span class="gp-lbl">${selectedPkg.name}${gamesCount > 1 ? t(' × ' + gamesCount + ' games', ' × ' + gamesCount + ' matchs') : ''}</span><span class="gp-val">$${(base * gamesCount).toFixed(0)}</span></div>`;
+      addonItems.forEach(a => {
+        const effPrice = a.isMgb ? a.price : a.price * multiplier;
+        gpHtml += `<div class="gp-row"><span class="gp-lbl">${a.name}</span><span class="gp-val">+$${effPrice.toFixed(0)}</span></div>`;
+      });
+      if (travelEff > 0 && !travelIsCustom) {
+        gpHtml += `<div class="gp-row"><span class="gp-lbl">${t('Travel', 'Déplacement')}</span><span class="gp-val">+$${travelEff.toFixed(2)}</span></div>`;
+      }
+      gpHtml += `<div class="gp-sep"></div><div class="gp-row"><span class="gp-lbl">${t('Subtotal', 'Sous-total')}</span><span class="gp-val">$${subtotal.toFixed(2)}</span></div><div class="gp-row"><span class="gp-lbl">GST + QST</span><span class="gp-val">+$${(gst + qst).toFixed(2)}</span></div>`;
+      gpTop.innerHTML = gpHtml;
+
+      const newGpTotal = '$' + grand.toFixed(2);
+      if (gpTotal.textContent !== newGpTotal) {
+        gpTotal.className = 'gp-total';
+        void gpTotal.offsetWidth;
+        gpTotal.className = 'gp-total pop';
+      }
+      gpTotal.textContent = newGpTotal;
     }
   }
 
