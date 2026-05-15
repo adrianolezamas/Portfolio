@@ -6,7 +6,9 @@
     { "source": "/api/respond",        "destination": "/api/respond"        },
     { "source": "/api/stripe-session",    "destination": "/api/stripe-session"    },
     { "source": "/api/payment-confirm",  "destination": "/api/payment-confirm"  },
-    { "source": "/api/gallery-download", "destination": "/api/gallery-download" },
-    { "source": "/api/get-payment",      "destination": "/api/get-payment"      }
+    { "source": "/api/gallery-download",  "destination": "/api/gallery-download"  },
+    { "source": "/api/get-payment",       "destination": "/api/get-payment"       },
+    { "source": "/api/gallery-request",  "destination": "/api/gallery-request"  },
+    { "source": "/api/gallery-photos",   "destination": "/api/gallery-photos"   }
   ]
 }

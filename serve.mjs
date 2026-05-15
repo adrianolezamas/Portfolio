@@ -472,6 +472,8 @@ const server = http.createServer((req, res) => {
   let urlPath = req.url === '/' ? '/index.html' : req.url;
   // Strip query strings
   urlPath = urlPath.split('?')[0];
+  // Decode percent-encoded characters (e.g. %20 → space) so folder names with spaces resolve correctly
+  try { urlPath = decodeURIComponent(urlPath); } catch {}
 
   const filePath = path.join(__dirname, urlPath);
   const ext = path.extname(filePath).toLowerCase();
