@@ -36,6 +36,7 @@
   }
   </script>
   <link href="https://fonts.googleapis.com/css2?family=GFS+Didot&family=Jost:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Cormorant+Garamond:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="photos/LSPRO/DSC09028.jpg">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; font-size: 16px; }
@@ -188,10 +189,16 @@
       overflow: hidden;
       border-radius: 18px;
       position: relative;
+      background: #1a1a1a;
     }
     .sc-img-wrap img {
       width: 100%; height: 100%; object-fit: cover; display: block;
       transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      opacity: 0;
+      transition: opacity 0.5s ease, transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .sc-img-wrap img.loaded {
+      opacity: 1;
     }
     .sc-card:hover .sc-img-wrap img { transform: scale(1.04); }
 
@@ -552,14 +559,8 @@
 
     /* ─── SCROLL SLIDE-IN ─── */
     .sc-card {
-      opacity: 0;
-      transform: translateY(48px);
-      transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-                  transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-    .sc-card.in-view {
       opacity: 1;
-      transform: translateY(0);
+      transform: none;
     }
 
     /* ── Top navigation ── */
@@ -833,7 +834,7 @@
     grid.innerHTML = showcase.map((p, i) => `
       <div class="sc-card" data-index="${i}" role="button" tabindex="0" aria-label="${p.title}">
         <div class="sc-img-wrap">
-          <img src="${p.src}" alt="${p.title}" loading="${i < 3 ? 'eager' : 'lazy'}">
+          <img src="${p.src}" alt="${p.title}" loading="eager">
           <div class="sc-overlay">
             <span class="sc-overlay-title">${p.title}</span>
             <span class="sc-overlay-year">${p.sport} · ${p.year}</span>
@@ -845,6 +846,11 @@
     grid.querySelectorAll('.sc-card').forEach(el => {
       el.addEventListener('click', () => { lbIndex = +el.dataset.index; openLb(photos); });
       el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { lbIndex = +el.dataset.index; openLb(photos); } });
+    });
+    // Fade images in as they load
+    grid.querySelectorAll('img').forEach(img => {
+      if (img.complete && img.naturalWidth > 0) { img.classList.add('loaded'); }
+      else { img.addEventListener('load', () => img.classList.add('loaded')); }
     });
   }
 
