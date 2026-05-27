@@ -279,6 +279,8 @@ input::placeholder,textarea::placeholder{color:var(--mid);}
 .live-bar-currency{font-size:12px;color:var(--mid);font-family:'Syne',sans-serif;font-weight:400;margin-left:4px;}
 @keyframes price-pop{0%{transform:scale(1);}35%{transform:scale(1.06);}100%{transform:scale(1);}}
 .live-bar-price.pop{animation:price-pop 0.32s cubic-bezier(0.34,1.56,0.64,1) forwards;}
+.live-bar-tax-line{font-size:10px;color:var(--mid);margin-top:3px;letter-spacing:0.03em;}
+.pkg-tax-note{font-size:10px;color:var(--mid);margin-top:3px;opacity:0.7;letter-spacing:0.02em;}
 
 /* CONFIRM */
 .confirm-box{text-align:center;padding:60px 20px;}
@@ -493,6 +495,9 @@ input::placeholder,textarea::placeholder{color:var(--mid);}
       <div class="summary-line" id="sum-travel-row" style="display:none;"><span class="summary-label">Travel fee</span><span class="summary-val" id="sum-travel">—</span></div>
       <div class="summary-line" id="sum-players-row" style="display:none;"><span class="summary-label">Extra players</span><span class="summary-val" id="sum-players">—</span></div>
       <div class="summary-line"><span class="summary-label">Delivery</span><span class="summary-val">24–72 hours</span></div>
+      <div class="summary-line"><span class="summary-label">Subtotal</span><span class="summary-val" id="sum-subtotal">—</span></div>
+      <div class="summary-line"><span class="summary-label">GST (5%)</span><span class="summary-val" id="sum-gst">—</span></div>
+      <div class="summary-line"><span class="summary-label">QST (9.975%)</span><span class="summary-val" id="sum-qst">—</span></div>
       <div class="summary-line"><span class="summary-label">Payment due (100% upfront)</span><span class="summary-val" id="sum-deposit">—</span></div>
       <div class="summary-total">
         <div>
@@ -527,11 +532,12 @@ input::placeholder,textarea::placeholder{color:var(--mid);}
     <div class="live-bar-detail" id="live-bar-detail">No package selected</div>
   </div>
   <div class="live-bar-right">
-    <span class="live-bar-price-label">Running total</span>
+    <span class="live-bar-price-label">Total (taxes incl.)</span>
     <div>
       <span class="live-bar-price gold" id="live-bar-price">$0</span>
       <span class="live-bar-currency">CAD</span>
     </div>
+    <div class="live-bar-tax-line" id="live-bar-tax-line"></div>
   </div>
 </div>
 
@@ -602,6 +608,14 @@ const data = {
 let who=null, selectedPkg=null, selectedAddons=new Set();
 let travelKm=0, extraPlayers=0;
 
+// ── TAX HELPER ────────────────────────────────────────────────────
+function calcTax(subtotal) {
+  const gst  = Math.round(subtotal * 0.05    * 100) / 100;
+  const qst  = Math.round(subtotal * 0.09975 * 100) / 100;
+  return { gst, qst, tax: gst + qst, total: Math.round((subtotal + gst + qst) * 100) / 100 };
+}
+function fmt(n){ return n % 1 === 0 ? '$'+n : '$'+n.toFixed(2); }
+
 // ── LIVE PRICE ────────────────────────────────────────────────────
 function updateLivePrice() {
   if (!who || !selectedPkg) { document.getElementById('live-bar').classList.remove('visible'); return; }
@@ -611,19 +625,22 @@ function updateLivePrice() {
   const travelFee = km>5 ? Math.round((km-5)*0.75) : 0;
   const playerFee = players*25;
   const addons = d.addons.filter(a => selectedAddons.has(a.id));
-  const total = selectedPkg.price + addons.reduce((s,a)=>s+a.price,0) + travelFee + playerFee;
+  const subtotal = selectedPkg.price + addons.reduce((s,a)=>s+a.price,0) + travelFee + playerFee;
+  const { gst, qst, tax, total } = calcTax(subtotal);
 
   const bar = document.getElementById('live-bar');
   const barPrice = document.getElementById('live-bar-price');
   const barDetail = document.getElementById('live-bar-detail');
+  const barTax = document.getElementById('live-bar-tax-line');
 
-  let parts = [selectedPkg.name+' ($'+selectedPkg.price+')'];
+  let parts = [selectedPkg.name+' ('+fmt(selectedPkg.price)+')'];
   addons.forEach(a => parts.push(a.name+' ('+a.priceLabel+')'));
-  if (travelFee>0) parts.push('Travel ($'+travelFee+')');
-  if (playerFee>0) parts.push(players+' extra player'+(players>1?'s':'')+' ($'+playerFee+')');
+  if (travelFee>0) parts.push('Travel ('+fmt(travelFee)+')');
+  if (playerFee>0) parts.push(players+' extra player'+(players>1?'s':'')+' ('+fmt(playerFee)+')');
   barDetail.textContent = parts.join(' + ');
+  barTax.textContent = 'incl. '+fmt(gst)+' GST + '+fmt(qst)+' QST';
 
-  const next = '$'+total;
+  const next = fmt(total);
   if (barPrice.textContent !== next) {
     barPrice.textContent = next;
     barPrice.className = 'live-bar-price '+d.accent;
@@ -678,6 +695,7 @@ function renderPackages(){
       <div class="pkg-right">
         <div class="pkg-price">$${pkg.price}</div>
         <div class="pkg-unit">${pkg.unit}</div>
+        <div class="pkg-tax-note">+ GST &amp; QST</div>
         <div class="pkg-radio"></div>
       </div>`;
     pl.appendChild(div);
@@ -743,22 +761,26 @@ function buildSummary(){
   const players=parseInt(document.getElementById('extra-players')?.value)||0;
   const travelFee=km>5?Math.round((km-5)*0.75):0;
   const playerFee=players*25;
-  const total=(selectedPkg?selectedPkg.price:0)+addons.reduce((s,a)=>s+a.price,0)+travelFee+playerFee;
+  const subtotal=(selectedPkg?selectedPkg.price:0)+addons.reduce((s,a)=>s+a.price,0)+travelFee+playerFee;
+  const { gst, qst, total } = calcTax(subtotal);
 
   const whoLabels={individual:'Individual — Player / Athlete',club:'Club / Association',photo:'Buying Photos from Instagram'};
   document.getElementById('sum-who').textContent=whoLabels[who];
-  document.getElementById('sum-pkg').textContent=selectedPkg?`${selectedPkg.name} — $${selectedPkg.price} CAD`:'—';
+  document.getElementById('sum-pkg').textContent=selectedPkg?`${selectedPkg.name} — ${fmt(selectedPkg.price)} CAD`:'—';
   document.getElementById('sum-addons').textContent=addons.length?addons.map(a=>a.name).join(', '):'None';
 
   const tr=document.getElementById('sum-travel-row'),pr=document.getElementById('sum-players-row');
-  if(travelFee>0){tr.style.display='flex';document.getElementById('sum-travel').textContent=`$${travelFee} CAD (${km} km)`;}
+  if(travelFee>0){tr.style.display='flex';document.getElementById('sum-travel').textContent=`${fmt(travelFee)} CAD (${km} km)`;}
   else{tr.style.display='none';}
-  if(playerFee>0){pr.style.display='flex';document.getElementById('sum-players').textContent=`$${playerFee} CAD (${players} extra player${players>1?'s':''})`;}
+  if(playerFee>0){pr.style.display='flex';document.getElementById('sum-players').textContent=`${fmt(playerFee)} CAD (${players} extra player${players>1?'s':''})`;}
   else{pr.style.display='none';}
 
-  document.getElementById('sum-deposit').textContent=`$${total} CAD`;
+  document.getElementById('sum-subtotal').textContent=`${fmt(subtotal)} CAD`;
+  document.getElementById('sum-gst').textContent=`${fmt(gst)} CAD`;
+  document.getElementById('sum-qst').textContent=`${fmt(qst)} CAD`;
+  document.getElementById('sum-deposit').textContent=`${fmt(total)} CAD`;
   const tp=document.getElementById('total-price-val');
-  tp.textContent='$'+total; tp.className=d.accent;
+  tp.textContent=fmt(total); tp.className=d.accent;
   const cb=document.getElementById('confirm-btn');
   const cls={individual:'btn-gold',club:'btn-blue',photo:'btn-purple'};
   cb.className='btn '+cls[who];
@@ -806,15 +828,17 @@ function submitBooking(){
   const players=parseInt(document.getElementById('extra-players')?.value)||0;
   const travelFee=km>5?Math.round((km-5)*0.75):0;
   const playerFee=players*25;
-  const total=selectedPkg.price+addons.reduce((s,a)=>s+a.price,0)+travelFee+playerFee;
+  const subtotal=selectedPkg.price+addons.reduce((s,a)=>s+a.price,0)+travelFee+playerFee;
+  const { gst, qst, total } = calcTax(subtotal);
   const subject=encodeURIComponent(`Booking Request — ${selectedPkg.name}`);
   const body=encodeURIComponent(
     `Hello Adriano,\n\nBooking request:\n\n`+
-    `Type: ${who}\nPackage: ${selectedPkg.name} ($${selectedPkg.price} CAD)\n`+
+    `Type: ${who}\nPackage: ${selectedPkg.name} (${fmt(selectedPkg.price)} CAD)\n`+
     `Add-ons: ${addons.length?addons.map(a=>a.name).join(', '):'None'}\n`+
-    (travelFee>0?`Travel fee: $${travelFee} (${km} km)\n`:'')+
-    (playerFee>0?`Extra players: ${players} × $25 = $${playerFee}\n`:'')+
-    `Total: $${total} CAD (100% due upfront)\n\n`+
+    (travelFee>0?`Travel fee: ${fmt(travelFee)} (${km} km)\n`:'')+
+    (playerFee>0?`Extra players: ${players} × $25 = ${fmt(playerFee)}\n`:'')+
+    `Subtotal: ${fmt(subtotal)} CAD\nGST (5%): ${fmt(gst)} CAD\nQST (9.975%): ${fmt(qst)} CAD\n`+
+    `Total: ${fmt(total)} CAD (100% due upfront)\n\n`+
     `Name: ${document.getElementById('fname').value} ${document.getElementById('lname').value}\n`+
     `Email: ${document.getElementById('email').value}\n`+
     `Phone: ${document.getElementById('phone').value||'N/A'}\n`+
