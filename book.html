@@ -471,8 +471,8 @@ input::placeholder,textarea::placeholder{color:var(--mid);}
       <div class="field"><label>Last Name</label><input type="text" placeholder="Lezama" id="lname"></div>
       <div class="field full"><label>Email</label><input type="email" placeholder="you@example.com" id="email"></div>
       <div class="field"><label>Phone (optional)</label><input type="tel" placeholder="438-000-0000" id="phone"></div>
-      <div class="field"><label>Preferred Date</label><input type="date" id="pdate"></div>
-      <div class="field full"><label>Location / Club Name</label><input type="text" placeholder="ASB Brossard, Complexe Sportif CN..." id="location"></div>
+      <div class="field"><label id="label-date">Preferred Date</label><input type="date" id="pdate"></div>
+      <div class="field full"><label id="label-location">Location / Club Name</label><input type="text" placeholder="ASB Brossard, Complexe Sportif CN..." id="location"></div>
       <div class="field full"><label>Instagram Post / Notes</label><textarea placeholder="Link to the Instagram post where you saw the photo, player name, jersey number, or any other details..." id="notes"></textarea></div>
     </div>
     <div class="btn-row">
@@ -767,6 +767,12 @@ function buildSummary(){
 // ── NAVIGATION ────────────────────────────────────────────────────
 function goTo(step){
   if(step===2) renderPackages();
+  if(step===3){
+    const isPhoto = who==='photo';
+    document.getElementById('label-date').textContent = isPhoto ? 'Match Date' : 'Preferred Date';
+    document.getElementById('label-location').textContent = isPhoto ? 'Club Name & Player Number' : 'Location / Club Name';
+    document.getElementById('location').placeholder = isPhoto ? 'ASB Brossard · #10' : 'ASB Brossard, Complexe Sportif CN...';
+  }
   if(step===4) buildSummary();
 
   const liveBar=document.getElementById('live-bar');
