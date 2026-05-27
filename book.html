@@ -444,7 +444,7 @@ input::placeholder,textarea::placeholder{color:var(--mid);}
         <div class="extra-field" id="extra-players-field" style="display:none;">
           <div class="extra-label">Additional Players</div>
           <input type="number" id="extra-players" min="0" placeholder="0" oninput="updateExtras()">
-          <div class="extra-note">+$50 per extra player</div>
+          <div class="extra-note">+$25 per extra player</div>
         </div>
       </div>
       <div class="extra-total">
@@ -554,7 +554,7 @@ const data = {
     theme:"gold-theme", accent:"gold",
     showExtras:true, showPlayers:true,
     packages:[
-      { id:"i1", name:"Solo Session", tag:"1 Player", desc:"Portrait + action session for one player. $50 per additional player.", price:115, unit:"CAD / session", feats:["25–40 edited photos","On-location session","24h delivery","Social media rights","+$50 per extra player"] },
+      { id:"i1", name:"Solo Session", tag:"1 Player", desc:"Portrait + action session for one player. $25 per additional player.", price:115, unit:"CAD / session", feats:["25–40 edited photos","On-location session","24h delivery","Social media rights","+$25 per extra player"] },
     ],
     addons:[
       { id:"ia1", name:"Highlight Video", desc:"60-sec cinematic reel, Instagram-ready", price:100, priceLabel:"+$100" },
@@ -609,7 +609,7 @@ function updateLivePrice() {
   const km = parseFloat(document.getElementById('travel-km')?.value)||0;
   const players = parseInt(document.getElementById('extra-players')?.value)||0;
   const travelFee = km>20 ? Math.round((km-20)*0.75) : 0;
-  const playerFee = players*50;
+  const playerFee = players*25;
   const addons = d.addons.filter(a => selectedAddons.has(a.id));
   const total = selectedPkg.price + addons.reduce((s,a)=>s+a.price,0) + travelFee + playerFee;
 
@@ -729,7 +729,7 @@ function updateExtras(){
   const players=parseInt(document.getElementById('extra-players')?.value)||0;
   travelKm=km; extraPlayers=players;
   const travelFee=km>20?Math.round((km-20)*0.75):0;
-  const playerFee=players*50;
+  const playerFee=players*25;
   const ev=document.getElementById('extras-val');
   if(ev){ ev.textContent='$'+(travelFee+playerFee); ev.className='extra-total-val '+(data[who]?.accent||'gold'); }
   updateLivePrice();
@@ -742,7 +742,7 @@ function buildSummary(){
   const km=parseFloat(document.getElementById('travel-km').value)||0;
   const players=parseInt(document.getElementById('extra-players')?.value)||0;
   const travelFee=km>20?Math.round((km-20)*0.75):0;
-  const playerFee=players*50;
+  const playerFee=players*25;
   const total=(selectedPkg?selectedPkg.price:0)+addons.reduce((s,a)=>s+a.price,0)+travelFee+playerFee;
 
   const whoLabels={individual:'Individual — Player / Athlete',club:'Club / Association',photo:'Buying Photos from Instagram'};
@@ -799,7 +799,7 @@ function submitBooking(){
   const km=parseFloat(document.getElementById('travel-km').value)||0;
   const players=parseInt(document.getElementById('extra-players')?.value)||0;
   const travelFee=km>20?Math.round((km-20)*0.75):0;
-  const playerFee=players*50;
+  const playerFee=players*25;
   const total=selectedPkg.price+addons.reduce((s,a)=>s+a.price,0)+travelFee+playerFee;
   const subject=encodeURIComponent(`Booking Request — ${selectedPkg.name}`);
   const body=encodeURIComponent(
@@ -807,7 +807,7 @@ function submitBooking(){
     `Type: ${who}\nPackage: ${selectedPkg.name} ($${selectedPkg.price} CAD)\n`+
     `Add-ons: ${addons.length?addons.map(a=>a.name).join(', '):'None'}\n`+
     (travelFee>0?`Travel fee: $${travelFee} (${km} km)\n`:'')+
-    (playerFee>0?`Extra players: ${players} × $50 = $${playerFee}\n`:'')+
+    (playerFee>0?`Extra players: ${players} × $25 = $${playerFee}\n`:'')+
     `Total: $${total} CAD\nDeposit (50%): $${Math.round(total*0.5)} CAD\n\n`+
     `Name: ${document.getElementById('fname').value} ${document.getElementById('lname').value}\n`+
     `Email: ${document.getElementById('email').value}\n`+
