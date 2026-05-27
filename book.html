@@ -201,7 +201,11 @@ h1 span{font-family:'Instrument Serif',serif;font-style:italic;color:var(--gold)
 /* TRAVEL & EXTRAS */
 .extras-section{background:var(--card2);border:1px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:24px;}
 .extras-title{font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--light);margin-bottom:14px;}
-.extras-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.extras-grid{display:grid;grid-template-columns:1fr;gap:12px;}
+.addr-row{display:flex;gap:8px;align-items:stretch;}
+.addr-row input[type=text]{flex:1;}
+.addr-calc-btn{white-space:nowrap;padding:10px 18px;font-size:12px;flex-shrink:0;border-radius:10px;}
+.travel-result{font-size:11px;margin-top:6px;min-height:16px;transition:color 0.2s;}
 .extra-field{display:flex;flex-direction:column;gap:6px;}
 .extra-label{font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--mid);}
 .extra-note{font-size:10px;color:var(--mid);margin-top:2px;}
@@ -437,12 +441,18 @@ input::placeholder,textarea::placeholder{color:var(--mid);}
     <!-- EXTRAS (travel + players) -->
     <div class="extras-section" id="extras-section" style="display:none;">
       <div class="extras-title">📍 Travel & Extra Players</div>
-      <div class="extras-grid">
-        <div class="extra-field">
-          <div class="extra-label">Distance from Brossard (km)</div>
-          <input type="number" id="travel-km" min="0" placeholder="0" oninput="updateExtras()">
-          <div class="extra-note">$0.75/km · First 5 km free</div>
+      <!-- Address lookup -->
+      <div class="extra-field" style="margin-bottom:14px;">
+        <div class="extra-label">Match Address</div>
+        <div class="addr-row">
+          <input type="text" id="travel-address" placeholder="e.g. 4500 Rue de la Passerelle, Longueuil, QC" oninput="resetDistance()">
+          <button class="btn btn-ghost addr-calc-btn" id="calc-dist-btn" onclick="calcDistance()">Calculate →</button>
         </div>
+        <div class="travel-result" id="travel-result"></div>
+        <input type="hidden" id="travel-km" value="0">
+      </div>
+      <!-- Extra players (individual only) -->
+      <div class="extras-grid">
         <div class="extra-field" id="extra-players-field" style="display:none;">
           <div class="extra-label">Additional Players</div>
           <input type="number" id="extra-players" min="0" placeholder="0" oninput="updateExtras()">
@@ -672,7 +682,10 @@ function renderPackages(){
   const extSec=document.getElementById('extras-section');
   extSec.style.display=d.showExtras?'block':'none';
   document.getElementById('extra-players-field').style.display=d.showPlayers?'flex':'none';
-  const tkm=document.getElementById('travel-km'); if(tkm) tkm.value='';
+  const tkm=document.getElementById('travel-km'); if(tkm) tkm.value='0';
+  const ta=document.getElementById('travel-address'); if(ta) ta.value='';
+  const tr=document.getElementById('travel-result'); if(tr){tr.textContent='';tr.style.color='';}
+  const cb=document.getElementById('calc-dist-btn'); if(cb){cb.textContent='Calculate →';cb.disabled=false;}
   const ep=document.getElementById('extra-players'); if(ep) ep.value='';
   const ev=document.getElementById('extras-val');
   ev.textContent='$0'; ev.className='extra-total-val '+d.accent;
@@ -740,6 +753,44 @@ function toggleAddon(addon,el){
     el.querySelector('.addon-check').textContent='✓';
   }
   updateLivePrice();
+}
+
+function resetDistance(){
+  document.getElementById('travel-km').value='0';
+  const r=document.getElementById('travel-result');
+  r.textContent=''; r.style.color='';
+  const btn=document.getElementById('calc-dist-btn');
+  btn.textContent='Calculate →'; btn.disabled=false;
+  updateExtras();
+}
+
+async function calcDistance(){
+  const addr=document.getElementById('travel-address').value.trim();
+  if(!addr) return;
+  const btn=document.getElementById('calc-dist-btn');
+  const result=document.getElementById('travel-result');
+  btn.textContent='Calculating…'; btn.disabled=true;
+  result.textContent=''; result.style.color='';
+  try {
+    const resp=await fetch('/api/distance?destination='+encodeURIComponent(addr));
+    const json=await resp.json();
+    if(!json.ok){
+      result.textContent='⚠ Address not found — try a more specific address';
+      result.style.color='var(--red)';
+      document.getElementById('travel-km').value='0';
+    } else {
+      const km=json.km;
+      const fee=km>5?Math.round((km-5)*0.75):0;
+      result.textContent=km+' km from Brossard'+(fee>0?' · Travel fee: $'+fee+' CAD':' · No travel fee (within 5 km free radius)');
+      result.style.color='var(--green)';
+      document.getElementById('travel-km').value=km;
+    }
+    updateExtras();
+  } catch(e){
+    result.textContent='⚠ Could not reach server — please try again';
+    result.style.color='var(--red)';
+  }
+  btn.textContent='Recalculate →'; btn.disabled=false;
 }
 
 function updateExtras(){
@@ -835,7 +886,7 @@ function submitBooking(){
     `Hello Adriano,\n\nBooking request:\n\n`+
     `Type: ${who}\nPackage: ${selectedPkg.name} (${fmt(selectedPkg.price)} CAD)\n`+
     `Add-ons: ${addons.length?addons.map(a=>a.name).join(', '):'None'}\n`+
-    (travelFee>0?`Travel fee: ${fmt(travelFee)} (${km} km)\n`:'')+
+    (travelFee>0?`Travel fee: ${fmt(travelFee)} (${km} km from Brossard)\nMatch address: ${document.getElementById('travel-address').value||'N/A'}\n`:'')+
     (playerFee>0?`Extra players: ${players} × $25 = ${fmt(playerFee)}\n`:'')+
     `Subtotal: ${fmt(subtotal)} CAD\nGST (5%): ${fmt(gst)} CAD\nQST (9.975%): ${fmt(qst)} CAD\n`+
     `Total: ${fmt(total)} CAD (100% due upfront)\n\n`+
