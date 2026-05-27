@@ -439,7 +439,7 @@ input::placeholder,textarea::placeholder{color:var(--mid);}
         <div class="extra-field">
           <div class="extra-label">Distance from Brossard (km)</div>
           <input type="number" id="travel-km" min="0" placeholder="0" oninput="updateExtras()">
-          <div class="extra-note">$0.75/km · First 20 km free</div>
+          <div class="extra-note">$0.75/km · First 5 km free</div>
         </div>
         <div class="extra-field" id="extra-players-field" style="display:none;">
           <div class="extra-label">Additional Players</div>
@@ -608,7 +608,7 @@ function updateLivePrice() {
   const d = data[who];
   const km = parseFloat(document.getElementById('travel-km')?.value)||0;
   const players = parseInt(document.getElementById('extra-players')?.value)||0;
-  const travelFee = km>20 ? Math.round((km-20)*0.75) : 0;
+  const travelFee = km>5 ? Math.round((km-5)*0.75) : 0;
   const playerFee = players*25;
   const addons = d.addons.filter(a => selectedAddons.has(a.id));
   const total = selectedPkg.price + addons.reduce((s,a)=>s+a.price,0) + travelFee + playerFee;
@@ -728,7 +728,7 @@ function updateExtras(){
   const km=parseFloat(document.getElementById('travel-km').value)||0;
   const players=parseInt(document.getElementById('extra-players')?.value)||0;
   travelKm=km; extraPlayers=players;
-  const travelFee=km>20?Math.round((km-20)*0.75):0;
+  const travelFee=km>5?Math.round((km-5)*0.75):0;
   const playerFee=players*25;
   const ev=document.getElementById('extras-val');
   if(ev){ ev.textContent='$'+(travelFee+playerFee); ev.className='extra-total-val '+(data[who]?.accent||'gold'); }
@@ -741,7 +741,7 @@ function buildSummary(){
   const addons=d.addons.filter(a=>selectedAddons.has(a.id));
   const km=parseFloat(document.getElementById('travel-km').value)||0;
   const players=parseInt(document.getElementById('extra-players')?.value)||0;
-  const travelFee=km>20?Math.round((km-20)*0.75):0;
+  const travelFee=km>5?Math.round((km-5)*0.75):0;
   const playerFee=players*25;
   const total=(selectedPkg?selectedPkg.price:0)+addons.reduce((s,a)=>s+a.price,0)+travelFee+playerFee;
 
@@ -798,7 +798,7 @@ function submitBooking(){
   const addons=d.addons.filter(a=>selectedAddons.has(a.id));
   const km=parseFloat(document.getElementById('travel-km').value)||0;
   const players=parseInt(document.getElementById('extra-players')?.value)||0;
-  const travelFee=km>20?Math.round((km-20)*0.75):0;
+  const travelFee=km>5?Math.round((km-5)*0.75):0;
   const playerFee=players*25;
   const total=selectedPkg.price+addons.reduce((s,a)=>s+a.price,0)+travelFee+playerFee;
   const subject=encodeURIComponent(`Booking Request — ${selectedPkg.name}`);
