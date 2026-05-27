@@ -14,287 +14,289 @@
   <link rel="canonical" href="https://adrianolezamas.com/book.html">
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Instrument+Serif:ital@0;1&family=Syne:wght@400;500;600;700&family=GFS+Didot&family=Jost:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
   <style>
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-    html{scroll-behavior:smooth;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --bg:#06090F;--surface:#0B1018;--card:#0F1620;--card2:#131D2A;
+  --border:#1A2638;--border2:#223248;
+  --gold:#D4A843;--gold2:#F0C55A;
+  --blue:#3B82F6;--green:#0EA572;--purple:#8B5CF6;
+  --red:#E8523A;--white:#EEF2F7;--mid:#4A6080;--light:#7A90A8;
+  --nav-h:110px;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--white);font-family:'Syne',sans-serif;min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(255,255,255,0.015) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.015) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;z-index:0;}
+a{text-decoration:none;color:inherit;}
+::-webkit-scrollbar{width:2px;}::-webkit-scrollbar-track{background:var(--bg);}::-webkit-scrollbar-thumb{background:var(--gold);}
 
-    :root{
-      /* Site palette */
-      --bg:#0e0e0e; --bg2:#0B1018; --surface:#0B1018;
-      --card:#0F1620; --card2:#131D2A;
-      --border:rgba(255,255,255,0.07); --border2:#223248;
-      --text:#e2e2e2; --muted:#777; --accent:#c8a96e;
-      --gold:#D4A843; --gold2:#F0C55A;
-      --blue:#3B82F6; --green:#0EA572;
-      --white:#EEF2F7; --mid:#4A6080; --light:#7A90A8;
-      --nav-h:110px;
-    }
+.glow-gold{position:fixed;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(212,168,67,0.06) 0%,transparent 70%);top:-200px;right:-100px;pointer-events:none;z-index:0;}
+.glow-blue{position:fixed;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(59,130,246,0.05) 0%,transparent 70%);bottom:-100px;left:-100px;pointer-events:none;z-index:0;}
 
-    body{
-      background:var(--bg);
-      color:var(--white);
-      font-family:'Syne',sans-serif;
-      font-weight:400;
-      line-height:1.6;
-      overflow-x:hidden;
-      -webkit-font-smoothing:antialiased;
-    }
+/* ── SITE NAV ── */
+.site-nav{position:fixed;top:0;left:0;right:0;z-index:200;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:var(--nav-h);transition:transform 0.35s cubic-bezier(0.4,0,0.2,1);}
+.site-nav-left{display:flex;align-items:center;gap:2.5rem;justify-content:center;}
+.site-nav-center{display:flex;align-items:center;justify-content:center;padding:0 3vw;}
+.site-nav-center img{height:110px;width:auto;opacity:0.92;transition:opacity 0.2s;}
+.site-nav-center:hover img{opacity:1;}
+.site-nav-right{display:flex;align-items:center;gap:2.5rem;justify-content:center;}
+.site-nav-left a,.site-nav-right a{font-size:0.85rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--white);transition:color 0.2s;}
+.site-nav-left a:hover,.site-nav-right a:hover,.site-nav-left a.active,.site-nav-right a.active{color:var(--gold);}
+.book-link{color:var(--gold)!important;border:1px solid rgba(212,168,67,0.45);padding:5px 16px;border-radius:999px;transition:background 0.2s!important;}
+.book-link:hover,.book-link.active{background:rgba(212,168,67,0.1)!important;}
+.lang-btn{background:transparent;border:1.5px solid rgba(212,168,67,0.4);cursor:pointer;font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);padding:5px 14px;border-radius:999px;font-family:inherit;transition:background 0.2s,border-color 0.2s;}
+.lang-btn:hover{background:rgba(212,168,67,0.1);border-color:var(--gold);}
+.site-nav-hamburger{display:none;background:none;border:none;cursor:pointer;color:var(--mid);padding:4px;}
+@media(max-width:640px){
+  .site-nav-left,.site-nav-right{display:none;}
+  .site-nav-center img{height:70px;}
+  .site-nav{height:80px;}
+  :root{--nav-h:80px;}
+  .site-nav-hamburger{display:flex;position:absolute;right:5vw;}
+}
+#site-mobile-menu{display:none;position:fixed;inset:0;background:rgba(6,9,15,0.98);z-index:300;flex-direction:column;align-items:center;justify-content:center;gap:2.8rem;}
+#site-mobile-menu.open{display:flex;}
+#site-mobile-menu a{font-family:'GFS Didot',serif;font-size:clamp(2.2rem,9vw,3.6rem);color:var(--white);letter-spacing:0.04em;transition:color 0.2s;}
+#site-mobile-menu a:hover{color:var(--gold);}
+#site-mobile-menu .book-link{font-family:'GFS Didot',serif;color:#06090F!important;background:var(--gold);border-radius:999px;padding:10px 32px;border:none;}
+#site-menu-close{position:absolute;top:20px;right:24px;background:none;border:none;cursor:pointer;color:var(--mid);}
+#site-menu-close:hover{color:var(--white);}
+#site-mobile-menu .lang-btn{font-family:'Syne',sans-serif;}
 
-    ::-webkit-scrollbar{width:2px;}
-    ::-webkit-scrollbar-track{background:var(--bg);}
-    ::-webkit-scrollbar-thumb{background:var(--accent);}
-    a{text-decoration:none;color:inherit;}
+/* ── LOGOS STRIP ── */
+.logos-strip{padding:20px 0;overflow:hidden;position:relative;border-bottom:1px solid rgba(255,255,255,0.05);}
+.logos-strip-label{text-align:center;font-size:0.6rem;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.2);margin-bottom:14px;}
+.logos-strip::before,.logos-strip::after{content:'';position:absolute;top:0;bottom:0;width:100px;z-index:2;pointer-events:none;}
+.logos-strip::before{left:0;background:linear-gradient(to right,var(--bg),transparent);}
+.logos-strip::after{right:0;background:linear-gradient(to left,var(--bg),transparent);}
+.logos-track{display:flex;align-items:center;gap:72px;width:max-content;animation:logos-scroll 24s linear infinite;}
+.logos-track img{height:48px;width:auto;opacity:0.45;filter:brightness(1.3);transition:opacity 0.25s;flex-shrink:0;user-select:none;}
+.logos-track img:hover{opacity:0.85;}
+@keyframes logos-scroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
 
-    /* ── GRID PATTERN BG ── */
-    body::before{
-      content:'';
-      position:fixed;inset:0;
-      background-image:
-        linear-gradient(rgba(255,255,255,0.012) 1px,transparent 1px),
-        linear-gradient(90deg,rgba(255,255,255,0.012) 1px,transparent 1px);
-      background-size:60px 60px;
-      pointer-events:none;z-index:0;
-    }
+/* ── FOOTER ── */
+footer{padding:28px 5vw;border-top:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;position:relative;z-index:1;}
+.footer-brand{display:flex;flex-direction:column;gap:5px;}
+.footer-name{font-family:'GFS Didot',Didot,serif;font-size:0.9rem;letter-spacing:0.05em;color:var(--mid);}
+.footer-tagline{font-size:0.52rem;letter-spacing:0.18em;text-transform:uppercase;color:#3a4a5a;}
+.footer-right{display:flex;flex-direction:column;align-items:flex-end;gap:4px;}
+.footer-ig{font-size:0.56rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--mid);transition:color 0.2s;}
+.footer-ig:hover{color:var(--white);}
+.footer-copy{font-size:0.52rem;letter-spacing:0.16em;text-transform:uppercase;color:#3a4a5a;}
+@media(max-width:640px){footer{flex-direction:column;align-items:center;text-align:center;gap:24px;}.footer-right{align-items:center;}}
 
-    /* ── GLOWS ── */
-    .glow-gold{position:fixed;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(212,168,67,0.05) 0%,transparent 70%);top:-200px;right:-100px;pointer-events:none;z-index:0;}
-    .glow-blue{position:fixed;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(59,130,246,0.04) 0%,transparent 70%);bottom:-100px;left:-100px;pointer-events:none;z-index:0;}
+/* ── BOOKING WIZARD ── */
+.wrap{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:0 20px 160px;}
+header{padding:52px 0 0;text-align:center;}
+.logo-line{font-size:11px;letter-spacing:0.24em;text-transform:uppercase;color:var(--gold);margin-bottom:24px;display:flex;align-items:center;justify-content:center;gap:16px;}
+.logo-line::before,.logo-line::after{content:'';height:1px;width:60px;background:linear-gradient(to right,transparent,var(--gold));}
+.logo-line::after{background:linear-gradient(to left,transparent,var(--gold));}
+h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(56px,12vw,110px);line-height:0.88;letter-spacing:0.02em;margin-bottom:4px;}
+h1 span{font-family:'Instrument Serif',serif;font-style:italic;color:var(--gold);display:block;}
+.header-note{font-size:14px;color:var(--light);margin-top:20px;letter-spacing:0.02em;}
 
-    /* ── SITE NAV ── */
-    .site-nav{position:fixed;top:0;left:0;right:0;z-index:200;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:var(--nav-h);transition:transform 0.35s cubic-bezier(0.4,0,0.2,1);}
-    .site-nav-left{display:flex;align-items:center;gap:2.5rem;justify-content:center;}
-    .site-nav-center{display:flex;align-items:center;justify-content:center;padding:0 3vw;}
-    .site-nav-center img{height:110px;width:auto;opacity:0.92;transition:opacity 0.2s;}
-    .site-nav-center:hover img{opacity:1;}
-    .site-nav-right{display:flex;align-items:center;gap:2.5rem;justify-content:center;}
-    .site-nav-left a,.site-nav-right a{font-size:0.85rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--text);transition:color 0.2s;}
-    .site-nav-left a:hover,.site-nav-right a:hover,.site-nav-left a.active,.site-nav-right a.active{color:var(--accent);}
-    .book-link{color:var(--accent)!important;border:1px solid rgba(200,169,110,0.5);padding:5px 16px;border-radius:999px;transition:background 0.2s!important;}
-    .book-link:hover,.book-link.active{background:rgba(200,169,110,0.1)!important;}
-    .lang-btn{background:transparent;border:1.5px solid rgba(200,169,110,0.4);cursor:pointer;font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);padding:5px 14px;border-radius:999px;font-family:inherit;transition:background 0.2s,border-color 0.2s;}
-    .lang-btn:hover{background:rgba(200,169,110,0.1);border-color:var(--accent);}
-    .site-nav-hamburger{display:none;background:none;border:none;cursor:pointer;color:var(--muted);padding:4px;}
-    @media(max-width:640px){
-      .site-nav-left,.site-nav-right{display:none;}
-      .site-nav-center img{height:70px;}
-      .site-nav{height:80px;}
-      :root{--nav-h:80px;}
-      .site-nav-hamburger{display:flex;position:absolute;right:5vw;}
-    }
+/* STEPS */
+.steps{display:flex;align-items:center;justify-content:center;gap:0;margin:52px 0 48px;}
+.step-dot{display:flex;flex-direction:column;align-items:center;gap:6px;}
+.dot{width:36px;height:36px;border-radius:50%;border:1.5px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--mid);background:var(--surface);transition:all 0.3s;position:relative;z-index:1;}
+.dot.active{border-color:var(--gold);color:var(--gold);background:#131008;}
+.dot.done{border-color:var(--green);color:var(--green);background:#070F0A;}
+.dot-label{font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--mid);transition:color 0.3s;}
+.dot-label.active{color:var(--gold);}
+.dot-label.done{color:var(--green);}
+.step-line{width:80px;height:1.5px;background:var(--border);margin:0 8px;margin-bottom:22px;transition:background 0.3s;}
+.step-line.done{background:var(--green);}
 
-    /* Mobile menu */
-    #site-mobile-menu{display:none;position:fixed;inset:0;background:rgba(14,14,14,0.98);z-index:300;flex-direction:column;align-items:center;justify-content:center;gap:2.8rem;}
-    #site-mobile-menu.open{display:flex;}
-    #site-mobile-menu a{font-family:'GFS Didot',serif;font-size:clamp(2.2rem,9vw,3.6rem);color:var(--text);letter-spacing:0.04em;transition:color 0.2s;}
-    #site-mobile-menu a:hover{color:var(--accent);}
-    #site-mobile-menu .book-link{font-family:'GFS Didot',serif;color:#0e0e0e!important;background:var(--accent);border-radius:999px;padding:10px 32px;}
-    #site-menu-close{position:absolute;top:20px;right:24px;background:none;border:none;cursor:pointer;color:var(--muted);}
-    #site-menu-close:hover{color:var(--text);}
-    #site-mobile-menu .lang-btn{background:transparent;border:1.5px solid rgba(200,169,110,0.55);cursor:pointer;font-size:0.7rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);padding:8px 22px;border-radius:999px;font-family:inherit;}
+/* SECTIONS */
+.section{display:none;animation:fadeSlide 0.4s ease;}
+.section.active{display:block;}
+@keyframes fadeSlide{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+.section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(28px,5vw,44px);letter-spacing:0.04em;color:var(--white);margin-bottom:6px;}
+.section-sub{font-size:13px;color:var(--light);margin-bottom:32px;letter-spacing:0.02em;}
 
-    /* ── LOGOS STRIP ── */
-    .logos-strip{padding:20px 0;overflow:hidden;position:relative;border-bottom:1px solid rgba(255,255,255,0.05);}
-    .logos-strip-label{text-align:center;font-size:0.6rem;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.2);margin-bottom:14px;}
-    .logos-strip::before,.logos-strip::after{content:'';position:absolute;top:0;bottom:0;width:100px;z-index:2;pointer-events:none;}
-    .logos-strip::before{left:0;background:linear-gradient(to right,#0e0e0e,transparent);}
-    .logos-strip::after{right:0;background:linear-gradient(to left,#0e0e0e,transparent);}
-    .logos-track{display:flex;align-items:center;gap:72px;width:max-content;animation:logos-scroll 24s linear infinite;}
-    .logos-track img{height:48px;width:auto;opacity:0.45;filter:brightness(1.3);transition:opacity 0.25s;flex-shrink:0;user-select:none;}
-    .logos-track img:hover{opacity:0.85;}
-    @keyframes logos-scroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+/* WHO GRID — 3 cards */
+.who-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:32px;}
+.who-card{background:var(--card);border:1.5px solid var(--border);border-radius:20px;padding:28px 22px;cursor:pointer;transition:all 0.25s;position:relative;overflow:hidden;}
+.who-card::after{content:'';position:absolute;inset:0;border-radius:20px;opacity:0;transition:opacity 0.25s;}
+.who-card.individual::after{background:radial-gradient(ellipse at top left,rgba(212,168,67,0.08) 0%,transparent 60%);}
+.who-card.club::after{background:radial-gradient(ellipse at top right,rgba(59,130,246,0.08) 0%,transparent 60%);}
+.who-card.photo::after{background:radial-gradient(ellipse at top,rgba(139,92,246,0.08) 0%,transparent 60%);}
+.who-card:hover{transform:translateY(-2px);}
+.who-card.individual:hover{border-color:rgba(212,168,67,0.4);}
+.who-card.club:hover{border-color:rgba(59,130,246,0.4);}
+.who-card.photo:hover{border-color:rgba(139,92,246,0.4);}
+.who-card.selected.individual{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold);}
+.who-card.selected.club{border-color:var(--blue);box-shadow:0 0 0 1px var(--blue);}
+.who-card.selected.photo{border-color:var(--purple);box-shadow:0 0 0 1px var(--purple);}
+.who-card.selected::after{opacity:1;}
+.who-icon{font-size:32px;margin-bottom:12px;display:block;}
+.who-title{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:0.04em;margin-bottom:6px;}
+.who-card.individual .who-title{color:var(--gold);}
+.who-card.club .who-title{color:var(--blue);}
+.who-card.photo .who-title{color:var(--purple);}
+.who-desc{font-size:12px;color:var(--light);line-height:1.6;}
+.who-tag{display:inline-flex;gap:6px;align-items:center;margin-top:12px;font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;padding:4px 10px;border-radius:20px;}
+.individual .who-tag{background:rgba(212,168,67,0.1);color:var(--gold);border:1px solid rgba(212,168,67,0.2);}
+.club .who-tag{background:rgba(59,130,246,0.1);color:var(--blue);border:1px solid rgba(59,130,246,0.2);}
+.photo .who-tag{background:rgba(139,92,246,0.1);color:var(--purple);border:1px solid rgba(139,92,246,0.2);}
+.check-ring{position:absolute;top:14px;right:14px;width:22px;height:22px;border-radius:50%;border:1.5px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:11px;transition:all 0.2s;}
+.who-card.selected.individual .check-ring{background:var(--gold);border-color:var(--gold);color:#0A0800;}
+.who-card.selected.club .check-ring{background:var(--blue);border-color:var(--blue);color:white;}
+.who-card.selected.photo .check-ring{background:var(--purple);border-color:var(--purple);color:white;}
 
-    /* ── FOOTER ── */
-    footer{padding:28px 5vw;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;position:relative;z-index:1;}
-    .footer-brand{display:flex;flex-direction:column;gap:5px;}
-    .footer-name{font-family:'GFS Didot',Didot,serif;font-size:0.9rem;letter-spacing:0.05em;color:var(--muted);}
-    .footer-tagline{font-size:0.52rem;letter-spacing:0.18em;text-transform:uppercase;color:#555;}
-    .footer-right{display:flex;flex-direction:column;align-items:flex-end;gap:4px;}
-    .footer-ig{font-size:0.56rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);transition:color 0.2s;}
-    .footer-ig:hover{color:var(--text);}
-    .footer-copy{font-size:0.52rem;letter-spacing:0.16em;text-transform:uppercase;color:#555;}
-    @media(max-width:640px){footer{flex-direction:column;align-items:center;text-align:center;gap:24px;}.footer-right{align-items:center;}}
+/* PACKAGES */
+.packages{display:flex;flex-direction:column;gap:12px;margin-bottom:32px;}
+.pkg{background:var(--card);border:1.5px solid var(--border);border-radius:16px;padding:20px 24px;cursor:pointer;transition:all 0.22s;display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;position:relative;overflow:hidden;}
+.pkg:hover{transform:translateX(4px);}
+.pkg.gold-theme:hover{border-color:rgba(212,168,67,0.35);}
+.pkg.blue-theme:hover{border-color:rgba(59,130,246,0.35);}
+.pkg.purple-theme:hover{border-color:rgba(139,92,246,0.35);}
+.pkg.selected.gold-theme{border-color:var(--gold);background:linear-gradient(135deg,#131008 0%,#0F1620 100%);}
+.pkg.selected.blue-theme{border-color:var(--blue);background:linear-gradient(135deg,#080F1E 0%,#0F1620 100%);}
+.pkg.selected.purple-theme{border-color:var(--purple);background:linear-gradient(135deg,#0E0A1E 0%,#0F1620 100%);}
+.pkg-badge{position:absolute;top:0;right:0;font-size:9px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;padding:5px 14px 5px 10px;border-radius:0 16px 0 16px;}
+.pkg-badge.gold-bg{background:var(--gold);color:#0A0800;}
+.pkg-badge.blue-bg{background:var(--blue);color:white;}
+.pkg-badge.purple-bg{background:var(--purple);color:white;}
+.pkg-tag{font-size:9px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:4px;}
+.gold-theme .pkg-tag{color:var(--gold);}
+.blue-theme .pkg-tag{color:var(--blue);}
+.purple-theme .pkg-tag{color:var(--purple);}
+.pkg-name{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:0.04em;color:var(--white);margin-bottom:4px;}
+.pkg-desc{font-size:12px;color:var(--light);line-height:1.5;}
+.pkg-feats{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;max-height:0;overflow:hidden;transition:max-height 0.4s ease,margin-top 0.3s;}
+.pkg.selected .pkg-feats{max-height:200px;}
+.feat-pill{font-size:11px;padding:3px 10px;border-radius:20px;background:rgba(255,255,255,0.04);border:1px solid var(--border);color:var(--light);}
+.pkg-right{text-align:right;flex-shrink:0;}
+.pkg-price{font-family:'Bebas Neue',sans-serif;font-size:40px;letter-spacing:0.02em;line-height:1;}
+.gold-theme .pkg-price{color:var(--gold);}
+.blue-theme .pkg-price{color:var(--blue);}
+.purple-theme .pkg-price{color:var(--purple);}
+.pkg-unit{font-size:11px;color:var(--mid);margin-top:2px;}
+.pkg-radio{width:20px;height:20px;border-radius:50%;border:1.5px solid var(--border2);display:flex;align-items:center;justify-content:center;margin-left:auto;margin-top:8px;transition:all 0.2s;font-size:9px;}
+.pkg.selected.gold-theme .pkg-radio{background:var(--gold);border-color:var(--gold);color:#0A0800;}
+.pkg.selected.blue-theme .pkg-radio{background:var(--blue);border-color:var(--blue);color:white;}
+.pkg.selected.purple-theme .pkg-radio{background:var(--purple);border-color:var(--purple);color:white;}
 
-    /* ─────────────────────────────────────────────
-       BOOKING WIZARD
-    ───────────────────────────────────────────── */
-    .wrap{position:relative;z-index:1;max-width:860px;margin:0 auto;padding:0 24px 160px;}
+/* ADDONS */
+.addons-title{font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--light);margin-bottom:16px;}
+.addons-list{display:flex;flex-direction:column;gap:8px;margin-bottom:24px;}
+.addon-row{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;transition:all 0.2s;gap:12px;}
+.addon-row:hover{border-color:var(--border2);}
+.addon-row.selected.gold-theme{border-color:rgba(212,168,67,0.3);background:rgba(212,168,67,0.04);}
+.addon-row.selected.blue-theme{border-color:rgba(59,130,246,0.3);background:rgba(59,130,246,0.04);}
+.addon-row.selected.purple-theme{border-color:rgba(139,92,246,0.3);background:rgba(139,92,246,0.04);}
+.addon-info{flex:1;}
+.addon-name{font-size:13px;font-weight:600;color:var(--white);margin-bottom:2px;}
+.addon-desc{font-size:11px;color:var(--mid);}
+.addon-right{display:flex;align-items:center;gap:12px;}
+.addon-price{font-size:14px;font-weight:700;}
+.gold-theme .addon-price{color:var(--gold);}
+.blue-theme .addon-price{color:var(--blue);}
+.purple-theme .addon-price{color:var(--purple);}
+.addon-check{width:20px;height:20px;border-radius:6px;border:1.5px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0;transition:all 0.2s;}
+.addon-row.selected.gold-theme .addon-check{background:var(--gold);border-color:var(--gold);color:#0A0800;}
+.addon-row.selected.blue-theme .addon-check{background:var(--blue);border-color:var(--blue);color:white;}
+.addon-row.selected.purple-theme .addon-check{background:var(--purple);border-color:var(--purple);color:white;}
 
-    /* PAGE HEADER */
-    .page-header{padding:60px 0 0;text-align:center;}
-    .logo-line{font-size:11px;letter-spacing:0.24em;text-transform:uppercase;color:var(--gold);margin-bottom:24px;display:flex;align-items:center;justify-content:center;gap:16px;}
-    .logo-line::before,.logo-line::after{content:'';height:1px;width:60px;background:linear-gradient(to right,transparent,var(--gold));}
-    .logo-line::after{background:linear-gradient(to left,transparent,var(--gold));}
-    .page-h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(52px,11vw,100px);line-height:0.88;letter-spacing:0.02em;margin-bottom:4px;}
-    .page-h1 span{font-family:'Instrument Serif',serif;font-style:italic;color:var(--gold);display:block;}
-    .header-note{font-size:14px;color:var(--light);margin-top:16px;letter-spacing:0.02em;}
+/* TRAVEL & EXTRAS */
+.extras-section{background:var(--card2);border:1px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:24px;}
+.extras-title{font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--light);margin-bottom:14px;}
+.extras-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.extra-field{display:flex;flex-direction:column;gap:6px;}
+.extra-label{font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--mid);}
+.extra-note{font-size:10px;color:var(--mid);margin-top:2px;}
+.extra-total{display:flex;justify-content:space-between;align-items:center;padding-top:14px;margin-top:14px;border-top:1px solid var(--border);}
+.extra-total-label{font-size:11px;color:var(--mid);text-transform:uppercase;letter-spacing:0.08em;}
+.extra-total-val{font-family:'Bebas Neue',sans-serif;font-size:22px;}
+.extra-total-val.gold{color:var(--gold);}
+.extra-total-val.blue{color:var(--blue);}
+.extra-total-val.purple{color:var(--purple);}
+input[type=number]{background:var(--surface);border:1.5px solid var(--border);border-radius:10px;padding:12px 14px;color:var(--white);font-family:'Syne',sans-serif;font-size:13px;outline:none;transition:border-color 0.2s;width:100%;}
+input[type=number]:focus{border-color:var(--gold);}
 
-    /* STEP INDICATOR */
-    .steps{display:flex;align-items:center;justify-content:center;gap:0;margin:48px 0 44px;}
-    .step-dot{display:flex;flex-direction:column;align-items:center;gap:6px;}
-    .dot{width:36px;height:36px;border-radius:50%;border:1.5px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--mid);background:var(--surface);transition:all 0.3s;position:relative;z-index:1;}
-    .dot.active{border-color:var(--gold);color:var(--gold);background:#131008;}
-    .dot.done{border-color:var(--green);color:var(--green);background:#070F0A;}
-    .dot-label{font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--mid);transition:color 0.3s;}
-    .dot-label.active{color:var(--gold);}
-    .dot-label.done{color:var(--green);}
-    .step-line{width:80px;height:1.5px;background:rgba(255,255,255,0.07);margin:0 8px;margin-bottom:22px;transition:background 0.3s;}
-    .step-line.done{background:var(--green);}
+/* SUMMARY */
+.summary-box{background:var(--card2);border:1.5px solid var(--border2);border-radius:16px;padding:24px;margin-bottom:24px;}
+.summary-header{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:0.04em;color:var(--white);margin-bottom:16px;}
+.summary-line{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:13px;}
+.summary-line:last-of-type{border-bottom:none;}
+.summary-label{color:var(--light);}
+.summary-val{font-weight:600;color:var(--white);}
+.summary-total{display:flex;justify-content:space-between;align-items:center;padding-top:16px;margin-top:8px;border-top:1px solid var(--border2);}
+.total-label{font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--mid);}
+.total-price{font-family:'Bebas Neue',sans-serif;font-size:48px;letter-spacing:0.02em;}
+#total-price-val.gold{color:var(--gold);}
+#total-price-val.blue{color:var(--blue);}
+#total-price-val.purple{color:var(--purple);}
 
-    /* SECTION */
-    .section{display:none;animation:fadeSlide 0.4s ease;}
-    .section.active{display:block;}
-    @keyframes fadeSlide{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
-    .section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(28px,5vw,42px);letter-spacing:0.04em;color:var(--white);margin-bottom:6px;}
-    .section-sub{font-size:13px;color:var(--light);margin-bottom:32px;letter-spacing:0.02em;}
+/* FORM */
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px;}
+.field{display:flex;flex-direction:column;gap:6px;}
+.field.full{grid-column:1/-1;}
+.field label{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--light);}
+input[type=text],input[type=email],input[type=tel],input[type=date],select,textarea{background:var(--surface);border:1.5px solid var(--border);border-radius:10px;padding:12px 14px;color:var(--white);font-family:'Syne',sans-serif;font-size:13px;outline:none;transition:border-color 0.2s;width:100%;}
+input[type=text]:focus,input[type=email]:focus,input[type=tel]:focus,input[type=date]:focus,select:focus,textarea:focus{border-color:var(--gold);}
+select option{background:var(--card);}
+textarea{resize:vertical;min-height:80px;}
+input::placeholder,textarea::placeholder{color:var(--mid);}
 
-    /* WHO SELECTION */
-    .who-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:32px;}
-    .who-card{background:var(--card);border:1.5px solid rgba(255,255,255,0.07);border-radius:20px;padding:32px 28px;cursor:pointer;transition:all 0.25s;position:relative;overflow:hidden;}
-    .who-card::after{content:'';position:absolute;inset:0;border-radius:20px;opacity:0;transition:opacity 0.25s;}
-    .who-card.individual::after{background:radial-gradient(ellipse at top left,rgba(212,168,67,0.08) 0%,transparent 60%);}
-    .who-card.club::after{background:radial-gradient(ellipse at top right,rgba(59,130,246,0.08) 0%,transparent 60%);}
-    .who-card:hover{transform:translateY(-2px);}
-    .who-card.individual:hover{border-color:rgba(212,168,67,0.35);}
-    .who-card.club:hover{border-color:rgba(59,130,246,0.35);}
-    .who-card.selected.individual{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold);}
-    .who-card.selected.club{border-color:var(--blue);box-shadow:0 0 0 1px var(--blue);}
-    .who-card.selected::after{opacity:1;}
-    .who-icon{font-size:36px;margin-bottom:14px;display:block;}
-    .who-title{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:0.04em;margin-bottom:6px;}
-    .who-card.individual .who-title{color:var(--gold);}
-    .who-card.club .who-title{color:var(--blue);}
-    .who-desc{font-size:12.5px;color:var(--light);line-height:1.6;}
-    .who-tag{display:inline-flex;gap:6px;align-items:center;margin-top:14px;font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;padding:4px 10px;border-radius:20px;}
-    .individual .who-tag{background:rgba(212,168,67,0.1);color:var(--gold);border:1px solid rgba(212,168,67,0.2);}
-    .club .who-tag{background:rgba(59,130,246,0.1);color:var(--blue);border:1px solid rgba(59,130,246,0.2);}
-    .check-ring{position:absolute;top:16px;right:16px;width:22px;height:22px;border-radius:50%;border:1.5px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;font-size:11px;transition:all 0.2s;}
-    .who-card.selected.individual .check-ring{background:var(--gold);border-color:var(--gold);color:#0A0800;}
-    .who-card.selected.club .check-ring{background:var(--blue);border-color:var(--blue);color:white;}
+/* BUTTONS */
+.btn-row{display:flex;gap:12px;justify-content:flex-end;}
+.btn{padding:14px 28px;border-radius:12px;font-family:'Syne',sans-serif;font-size:14px;font-weight:600;cursor:pointer;border:none;transition:all 0.2s;letter-spacing:0.02em;}
+.btn:disabled{opacity:0.4;cursor:not-allowed;}
+.btn-ghost{background:transparent;border:1.5px solid var(--border);color:var(--light);}
+.btn-ghost:hover{border-color:var(--border2);color:var(--white);}
+.btn-gold{background:var(--gold);color:#0A0800;}
+.btn-gold:hover:not(:disabled){background:var(--gold2);}
+.btn-blue{background:var(--blue);color:white;}
+.btn-blue:hover:not(:disabled){background:#5B9DF8;}
+.btn-purple{background:var(--purple);color:white;}
+.btn-purple:hover:not(:disabled){background:#A78BFA;}
 
-    /* PACKAGES */
-    .packages{display:flex;flex-direction:column;gap:12px;margin-bottom:32px;}
-    .pkg{background:var(--card);border:1.5px solid rgba(255,255,255,0.07);border-radius:16px;padding:20px 24px;cursor:pointer;transition:all 0.22s;display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;position:relative;overflow:hidden;}
-    .pkg:hover{transform:translateX(4px);}
-    .pkg.gold-theme:hover{border-color:rgba(212,168,67,0.3);}
-    .pkg.blue-theme:hover{border-color:rgba(59,130,246,0.3);}
-    .pkg.selected.gold-theme{border-color:var(--gold);background:linear-gradient(135deg,#131008 0%,#0F1620 100%);}
-    .pkg.selected.blue-theme{border-color:var(--blue);background:linear-gradient(135deg,#080F1E 0%,#0F1620 100%);}
-    .pkg-badge{position:absolute;top:0;right:0;font-size:9px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;padding:5px 14px 5px 10px;border-radius:0 16px 0 16px;}
-    .pkg-badge.gold-bg{background:var(--gold);color:#0A0800;}
-    .pkg-badge.blue-bg{background:var(--blue);color:white;}
-    .pkg-tag{font-size:9px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:4px;}
-    .gold-theme .pkg-tag{color:var(--gold);}
-    .blue-theme .pkg-tag{color:var(--blue);}
-    .pkg-name{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:0.04em;color:var(--white);margin-bottom:4px;}
-    .pkg-desc{font-size:12px;color:var(--light);line-height:1.5;}
-    .pkg-feats{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;max-height:0;overflow:hidden;transition:max-height 0.4s ease,margin-top 0.3s;}
-    .pkg.selected .pkg-feats{max-height:200px;}
-    .feat-pill{font-size:11px;padding:3px 10px;border-radius:20px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);color:var(--light);}
-    .pkg-right{text-align:right;flex-shrink:0;}
-    .pkg-price{font-family:'Bebas Neue',sans-serif;font-size:40px;letter-spacing:0.02em;line-height:1;}
-    .gold-theme .pkg-price{color:var(--gold);}
-    .blue-theme .pkg-price{color:var(--blue);}
-    .pkg-unit{font-size:11px;color:var(--mid);margin-top:2px;}
-    .pkg-radio{width:20px;height:20px;border-radius:50%;border:1.5px solid rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;margin-left:auto;margin-top:8px;transition:all 0.2s;font-size:9px;}
-    .pkg.selected.gold-theme .pkg-radio{background:var(--gold);border-color:var(--gold);color:#0A0800;}
-    .pkg.selected.blue-theme .pkg-radio{background:var(--blue);border-color:var(--blue);color:white;}
+/* LIVE PRICE BAR */
+.live-bar{
+  position:fixed;bottom:0;left:0;right:0;z-index:150;
+  background:rgba(6,9,15,0.97);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-top:1px solid rgba(255,255,255,0.07);
+  padding:14px 5vw;
+  display:none;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  transform:translateY(100%);
+  transition:transform 0.35s cubic-bezier(0.34,1.2,0.64,1);
+}
+.live-bar.visible{display:flex;transform:translateY(0);}
+.live-bar-left{flex:1;min-width:0;}
+.live-bar-label{font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--mid);display:block;margin-bottom:3px;}
+.live-bar-detail{font-size:12px;color:var(--light);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.live-bar-right{text-align:right;flex-shrink:0;}
+.live-bar-price-label{font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--mid);display:block;margin-bottom:2px;}
+.live-bar-price{font-family:'Bebas Neue',sans-serif;font-size:36px;letter-spacing:0.02em;line-height:1;transition:color 0.3s;}
+.live-bar-price.gold{color:var(--gold);}
+.live-bar-price.blue{color:var(--blue);}
+.live-bar-price.purple{color:var(--purple);}
+.live-bar-currency{font-size:12px;color:var(--mid);font-family:'Syne',sans-serif;font-weight:400;margin-left:4px;}
+@keyframes price-pop{0%{transform:scale(1);}35%{transform:scale(1.06);}100%{transform:scale(1);}}
+.live-bar-price.pop{animation:price-pop 0.32s cubic-bezier(0.34,1.56,0.64,1) forwards;}
 
-    /* ADDONS */
-    .addons-title{font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--light);margin-bottom:16px;}
-    .addons-list{display:flex;flex-direction:column;gap:8px;margin-bottom:32px;}
-    .addon-row{background:var(--surface);border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;transition:all 0.2s;gap:12px;}
-    .addon-row:hover{border-color:rgba(255,255,255,0.12);}
-    .addon-row.selected.gold-theme{border-color:rgba(212,168,67,0.3);background:rgba(212,168,67,0.04);}
-    .addon-row.selected.blue-theme{border-color:rgba(59,130,246,0.3);background:rgba(59,130,246,0.04);}
-    .addon-info{flex:1;}
-    .addon-name{font-size:13px;font-weight:600;color:var(--white);margin-bottom:2px;}
-    .addon-desc{font-size:11px;color:var(--mid);}
-    .addon-right{display:flex;align-items:center;gap:12px;}
-    .addon-price{font-size:14px;font-weight:700;}
-    .gold-theme .addon-price{color:var(--gold);}
-    .blue-theme .addon-price{color:var(--blue);}
-    .addon-check{width:20px;height:20px;border-radius:6px;border:1.5px solid rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0;transition:all 0.2s;}
-    .addon-row.selected.gold-theme .addon-check{background:var(--gold);border-color:var(--gold);color:#0A0800;}
-    .addon-row.selected.blue-theme .addon-check{background:var(--blue);border-color:var(--blue);color:white;}
+/* CONFIRM */
+.confirm-box{text-align:center;padding:60px 20px;}
+.confirm-icon{font-size:64px;margin-bottom:24px;}
+.confirm-title{font-family:'Bebas Neue',sans-serif;font-size:48px;letter-spacing:0.04em;color:var(--gold);margin-bottom:8px;}
+.confirm-sub{font-size:14px;color:var(--light);line-height:1.7;max-width:400px;margin:0 auto;}
+.nav-note{font-size:11px;color:var(--mid);text-align:center;margin-top:16px;letter-spacing:0.04em;}
 
-    /* ── LIVE PRICE BAR ── */
-    .live-bar{
-      position:fixed;bottom:0;left:0;right:0;z-index:150;
-      background:rgba(9,13,20,0.97);
-      backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
-      border-top:1px solid rgba(255,255,255,0.08);
-      padding:14px 5vw;
-      display:none;
-      align-items:center;
-      justify-content:space-between;
-      gap:16px;
-      transform:translateY(100%);
-      transition:transform 0.35s cubic-bezier(0.34,1.2,0.64,1);
-    }
-    .live-bar.visible{display:flex;transform:translateY(0);}
-    .live-bar-left{flex:1;min-width:0;}
-    .live-bar-label{font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--mid);display:block;margin-bottom:3px;}
-    .live-bar-detail{font-size:12px;color:var(--light);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-    .live-bar-right{text-align:right;flex-shrink:0;}
-    .live-bar-price-label{font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--mid);display:block;margin-bottom:2px;}
-    .live-bar-price{font-family:'Bebas Neue',sans-serif;font-size:36px;letter-spacing:0.02em;line-height:1;transition:color 0.3s;}
-    .live-bar-price.gold{color:var(--gold);}
-    .live-bar-price.blue{color:var(--blue);}
-    .live-bar-currency{font-size:12px;color:var(--mid);font-family:'Syne',sans-serif;font-weight:400;margin-left:4px;}
-    @keyframes price-pop{0%{transform:scale(1);}35%{transform:scale(1.06);}100%{transform:scale(1);}}
-    .live-bar-price.pop{animation:price-pop 0.32s cubic-bezier(0.34,1.56,0.64,1) forwards;}
-
-    /* SUMMARY BOX */
-    .summary-box{background:var(--card2);border:1.5px solid rgba(255,255,255,0.1);border-radius:16px;padding:24px;margin-bottom:24px;}
-    .summary-header{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:0.04em;color:var(--white);margin-bottom:16px;}
-    .summary-line{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.05);font-size:13px;}
-    .summary-line:last-of-type{border-bottom:none;}
-    .summary-label{color:var(--light);}
-    .summary-val{font-weight:600;color:var(--white);}
-    .summary-total{display:flex;justify-content:space-between;align-items:center;padding-top:16px;margin-top:8px;border-top:1px solid rgba(255,255,255,0.1);}
-    .total-label{font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--mid);}
-    .total-price{font-family:'Bebas Neue',sans-serif;font-size:48px;letter-spacing:0.02em;}
-    #total-price-val.gold{color:var(--gold);}
-    #total-price-val.blue{color:var(--blue);}
-
-    /* FORM */
-    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px;}
-    .field{display:flex;flex-direction:column;gap:6px;}
-    .field.full{grid-column:1/-1;}
-    label.field-label{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--light);}
-    input,select,textarea{background:var(--surface);border:1.5px solid rgba(255,255,255,0.08);border-radius:10px;padding:12px 14px;color:var(--white);font-family:'Syne',sans-serif;font-size:13px;outline:none;transition:border-color 0.2s;width:100%;}
-    input:focus,select:focus,textarea:focus{border-color:var(--gold);}
-    select option{background:var(--card);}
-    textarea{resize:vertical;min-height:80px;}
-    input::placeholder,textarea::placeholder{color:var(--mid);}
-
-    /* BUTTONS */
-    .btn-row{display:flex;gap:12px;justify-content:flex-end;}
-    .btn{padding:14px 28px;border-radius:12px;font-family:'Syne',sans-serif;font-size:14px;font-weight:600;cursor:pointer;border:none;transition:all 0.2s;letter-spacing:0.02em;}
-    .btn:disabled{opacity:0.4;cursor:not-allowed;}
-    .btn-ghost{background:transparent;border:1.5px solid rgba(255,255,255,0.1);color:var(--light);}
-    .btn-ghost:hover{border-color:rgba(255,255,255,0.18);color:var(--white);}
-    .btn-gold{background:var(--gold);color:#0A0800;}
-    .btn-gold:hover:not(:disabled){background:var(--gold2);}
-    .btn-blue{background:var(--blue);color:white;}
-    .btn-blue:hover:not(:disabled){background:#5B9DF8;}
-
-    /* CONFIRMATION */
-    .confirm-box{text-align:center;padding:60px 20px;}
-    .confirm-icon{font-size:64px;margin-bottom:24px;}
-    .confirm-title{font-family:'Bebas Neue',sans-serif;font-size:48px;letter-spacing:0.04em;color:var(--gold);margin-bottom:8px;}
-    .confirm-sub{font-size:14px;color:var(--light);line-height:1.7;max-width:420px;margin:0 auto;}
-
-    .nav-note{font-size:11px;color:var(--mid);text-align:center;margin-top:16px;letter-spacing:0.04em;}
-
-    @media(max-width:600px){
-      .who-grid{grid-template-columns:1fr;}
-      .form-grid{grid-template-columns:1fr;}
-      .field.full{grid-column:1;}
-      .step-line{width:40px;}
-      .btn-row{flex-direction:column;}
-      .live-bar{flex-direction:column;gap:8px;padding:14px 20px;}
-      .live-bar-right{width:100%;display:flex;align-items:center;justify-content:space-between;}
-    }
+@media(max-width:700px){
+  .who-grid{grid-template-columns:1fr;}
+  .form-grid{grid-template-columns:1fr;}
+  .field.full{grid-column:1;}
+  .step-line{width:36px;}
+  .btn-row{flex-direction:column;}
+  .extras-grid{grid-template-columns:1fr;}
+  .live-bar{flex-direction:column;gap:8px;padding:14px 20px;}
+  .live-bar-right{width:100%;display:flex;align-items:center;justify-content:space-between;}
+}
   </style>
 </head>
 <body>
@@ -318,7 +320,6 @@
     <svg width="22" height="16" viewBox="0 0 22 16" fill="none"><line x1="0" y1="1" x2="22" y2="1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="0" y1="8" x2="22" y2="8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="0" y1="15" x2="22" y2="15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
   </button>
 </nav>
-
 <div id="site-mobile-menu">
   <button id="site-menu-close" aria-label="Close menu">
     <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><line x1="2" y1="2" x2="18" y2="18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="18" y1="2" x2="2" y2="18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
@@ -330,15 +331,13 @@
 </div>
 <script>
 (function(){
-  var open=document.getElementById('site-menu-open');
-  var close=document.getElementById('site-menu-close');
-  var menu=document.getElementById('site-mobile-menu');
-  if(open) open.addEventListener('click',function(){menu.classList.add('open');document.body.style.overflow='hidden';});
-  if(close) close.addEventListener('click',function(){menu.classList.remove('open');document.body.style.overflow='';});
+  var o=document.getElementById('site-menu-open'),c=document.getElementById('site-menu-close'),m=document.getElementById('site-mobile-menu');
+  if(o) o.addEventListener('click',function(){m.classList.add('open');document.body.style.overflow='hidden';});
+  if(c) c.addEventListener('click',function(){m.classList.remove('open');document.body.style.overflow='';});
 })();
 </script>
 
-<!-- ══ TOP SPACER FOR FIXED NAV ══ -->
+<!-- ══ TOP SPACER ══ -->
 <div style="height:var(--nav-h);"></div>
 
 <!-- ══ LOGOS STRIP ══ -->
@@ -366,85 +365,95 @@
         }
       }
       var img0=originals[0];
-      if(img0.complete&&img0.naturalWidth>0){fill();}
-      else{img0.addEventListener('load',fill);}
+      if(img0.complete&&img0.naturalWidth>0){fill();}else{img0.addEventListener('load',fill);}
       window.addEventListener('resize',fill);
     });
   }
-  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',fillMarquee);}
-  else{fillMarquee();}
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',fillMarquee);}else{fillMarquee();}
 })();
 </script>
 
 <!-- ══ BOOKING WIZARD ══ -->
 <div class="wrap">
 
-  <!-- PAGE HEADER -->
-  <div class="page-header">
+  <header>
     <div class="logo-line">Adriano Photography · Montréal</div>
-    <h1 class="page-h1">Book<span>a Session</span></h1>
+    <h1>Book<span>a Session</span></h1>
     <p class="header-note">25–40 edited photos · 24-hour delivery · Montréal & Rive-Sud</p>
-  </div>
+  </header>
 
-  <!-- STEP INDICATOR -->
+  <!-- STEPS -->
   <div class="steps">
-    <div class="step-dot">
-      <div class="dot active" id="dot1">1</div>
-      <div class="dot-label active" id="dl1">Who</div>
-    </div>
+    <div class="step-dot"><div class="dot active" id="dot1">1</div><div class="dot-label active" id="dl1">Who</div></div>
     <div class="step-line" id="line1"></div>
-    <div class="step-dot">
-      <div class="dot" id="dot2">2</div>
-      <div class="dot-label" id="dl2">Package</div>
-    </div>
+    <div class="step-dot"><div class="dot" id="dot2">2</div><div class="dot-label" id="dl2">Package</div></div>
     <div class="step-line" id="line2"></div>
-    <div class="step-dot">
-      <div class="dot" id="dot3">3</div>
-      <div class="dot-label" id="dl3">Details</div>
-    </div>
+    <div class="step-dot"><div class="dot" id="dot3">3</div><div class="dot-label" id="dl3">Details</div></div>
     <div class="step-line" id="line3"></div>
-    <div class="step-dot">
-      <div class="dot" id="dot4">4</div>
-      <div class="dot-label" id="dl4">Confirm</div>
-    </div>
+    <div class="step-dot"><div class="dot" id="dot4">4</div><div class="dot-label" id="dl4">Confirm</div></div>
   </div>
 
-  <!-- ── STEP 1: WHO ── -->
+  <!-- STEP 1 — WHO -->
   <div class="section active" id="step1">
     <div class="section-title">Who are you booking for?</div>
     <div class="section-sub">Select your profile — pricing and packages are tailored to each.</div>
-
     <div class="who-grid">
       <div class="who-card individual" onclick="selectWho('individual')">
         <div class="check-ring" id="check-individual"></div>
         <span class="who-icon">⚽</span>
         <div class="who-title">Individual</div>
-        <div class="who-desc">Parent looking for game photos of their child, or a player wanting personal branding content.</div>
-        <div class="who-tag">Parent · Player · Athlete</div>
+        <div class="who-desc">A player or parent booking a personal branding session or athlete shoot.</div>
+        <div class="who-tag">Player · Athlete · Parent</div>
       </div>
       <div class="who-card club" onclick="selectWho('club')">
         <div class="check-ring" id="check-club"></div>
         <span class="who-icon">🏟️</span>
         <div class="who-title">Club / Team</div>
-        <div class="who-desc">Soccer club, association, or organization looking for professional game day coverage.</div>
+        <div class="who-desc">Soccer club, association, or league looking for professional game day coverage.</div>
         <div class="who-tag">Club · Association · League</div>
       </div>
+      <div class="who-card photo" onclick="selectWho('photo')">
+        <div class="check-ring" id="check-photo"></div>
+        <span class="who-icon">📸</span>
+        <div class="who-title">Buy My Photos</div>
+        <div class="who-desc">Saw your child's or your own photo on Instagram? Purchase a digital pack here.</div>
+        <div class="who-tag">Parent · Player · Fan</div>
+      </div>
     </div>
-
     <div class="btn-row">
       <button class="btn btn-gold" onclick="goTo(2)" id="btn-who" disabled>Continue →</button>
     </div>
     <p class="nav-note">Select one option to continue</p>
   </div>
 
-  <!-- ── STEP 2: PACKAGES ── -->
+  <!-- STEP 2 — PACKAGES -->
   <div class="section" id="step2">
     <div class="section-title" id="pkg-title">Choose your package</div>
-    <div class="section-sub" id="pkg-sub">Select the coverage that fits your needs.</div>
-
+    <div class="section-sub" id="pkg-sub">Select the option that fits your needs.</div>
     <div class="packages" id="packages-list"></div>
 
-    <div class="addons-title">Optional Add-Ons</div>
+    <!-- EXTRAS (travel + players) -->
+    <div class="extras-section" id="extras-section" style="display:none;">
+      <div class="extras-title">📍 Travel & Extra Players</div>
+      <div class="extras-grid">
+        <div class="extra-field">
+          <div class="extra-label">Distance from Brossard (km)</div>
+          <input type="number" id="travel-km" min="0" placeholder="0" oninput="updateExtras()">
+          <div class="extra-note">$0.75/km · First 20 km free</div>
+        </div>
+        <div class="extra-field" id="extra-players-field" style="display:none;">
+          <div class="extra-label">Additional Players</div>
+          <input type="number" id="extra-players" min="0" placeholder="0" oninput="updateExtras()">
+          <div class="extra-note">+$50 per extra player</div>
+        </div>
+      </div>
+      <div class="extra-total">
+        <div class="extra-total-label">Extras total</div>
+        <div class="extra-total-val gold" id="extras-val">$0</div>
+      </div>
+    </div>
+
+    <div class="addons-title" id="addons-header">Optional Add-Ons</div>
     <div class="addons-list" id="addons-list"></div>
 
     <div class="btn-row">
@@ -453,82 +462,59 @@
     </div>
   </div>
 
-  <!-- ── STEP 3: DETAILS ── -->
+  <!-- STEP 3 — DETAILS -->
   <div class="section" id="step3">
     <div class="section-title">Your Details</div>
-    <div class="section-sub">Fill in your information and preferred date — I'll confirm within 24 hours.</div>
-
+    <div class="section-sub">Fill in your information — I'll confirm within 24 hours.</div>
     <div class="form-grid">
-      <div class="field">
-        <label class="field-label">First Name</label>
-        <input type="text" placeholder="Adriano" id="fname">
-      </div>
-      <div class="field">
-        <label class="field-label">Last Name</label>
-        <input type="text" placeholder="Lezama" id="lname">
-      </div>
-      <div class="field full">
-        <label class="field-label">Email</label>
-        <input type="email" placeholder="you@example.com" id="email">
-      </div>
-      <div class="field">
-        <label class="field-label">Phone (optional)</label>
-        <input type="tel" placeholder="438-000-0000" id="phone">
-      </div>
-      <div class="field">
-        <label class="field-label">Preferred Date</label>
-        <input type="date" id="pdate">
-      </div>
-      <div class="field full">
-        <label class="field-label">Location / Club Name</label>
-        <input type="text" placeholder="ASB Brossard, Complexe Sportif CN..." id="location">
-      </div>
-      <div class="field full">
-        <label class="field-label">Notes (optional)</label>
-        <textarea placeholder="Any specific requests, player name, number of players, match details..." id="notes"></textarea>
-      </div>
+      <div class="field"><label>First Name</label><input type="text" placeholder="Adriano" id="fname"></div>
+      <div class="field"><label>Last Name</label><input type="text" placeholder="Lezama" id="lname"></div>
+      <div class="field full"><label>Email</label><input type="email" placeholder="you@example.com" id="email"></div>
+      <div class="field"><label>Phone (optional)</label><input type="tel" placeholder="438-000-0000" id="phone"></div>
+      <div class="field"><label>Preferred Date</label><input type="date" id="pdate"></div>
+      <div class="field full"><label>Location / Club Name</label><input type="text" placeholder="ASB Brossard, Complexe Sportif CN..." id="location"></div>
+      <div class="field full"><label>Instagram Post / Notes</label><textarea placeholder="Link to the Instagram post where you saw the photo, player name, jersey number, or any other details..." id="notes"></textarea></div>
     </div>
-
     <div class="btn-row">
       <button class="btn btn-ghost" onclick="goTo(2)">← Back</button>
-      <button class="btn btn-gold" onclick="goTo(4)">Review Booking →</button>
+      <button class="btn btn-gold" id="btn-details" onclick="goTo(4)">Review Booking →</button>
     </div>
   </div>
 
-  <!-- ── STEP 4: SUMMARY ── -->
+  <!-- STEP 4 — SUMMARY -->
   <div class="section" id="step4">
     <div class="section-title">Review &amp; Confirm</div>
     <div class="section-sub">Review your booking before sending the request.</div>
-
     <div class="summary-box">
       <div class="summary-header">Booking Summary</div>
       <div class="summary-line"><span class="summary-label">Client type</span><span class="summary-val" id="sum-who">—</span></div>
       <div class="summary-line"><span class="summary-label">Package</span><span class="summary-val" id="sum-pkg">—</span></div>
       <div class="summary-line"><span class="summary-label">Add-ons</span><span class="summary-val" id="sum-addons">None</span></div>
+      <div class="summary-line" id="sum-travel-row" style="display:none;"><span class="summary-label">Travel fee</span><span class="summary-val" id="sum-travel">—</span></div>
+      <div class="summary-line" id="sum-players-row" style="display:none;"><span class="summary-label">Extra players</span><span class="summary-val" id="sum-players">—</span></div>
       <div class="summary-line"><span class="summary-label">Delivery</span><span class="summary-val">24–72 hours</span></div>
-      <div class="summary-line"><span class="summary-label">Deposit required</span><span class="summary-val" id="sum-deposit">—</span></div>
+      <div class="summary-line"><span class="summary-label">Deposit required (50%)</span><span class="summary-val" id="sum-deposit">—</span></div>
       <div class="summary-total">
         <div>
           <div class="total-label">Total</div>
           <div class="total-price"><span id="total-price-val">—</span> <span style="font-size:16px;color:var(--mid);font-family:Syne,sans-serif;font-weight:400;">CAD</span></div>
         </div>
-        <div style="text-align:right;font-size:12px;color:var(--mid);max-width:180px;line-height:1.6;">50% deposit to confirm.<br>Balance on delivery.</div>
+        <div style="text-align:right;font-size:12px;color:var(--mid);max-width:180px;line-height:1.6;">50% deposit confirms your booking.<br>Balance on delivery.</div>
       </div>
     </div>
-
     <div class="btn-row">
       <button class="btn btn-ghost" onclick="goTo(3)">← Back</button>
       <button class="btn btn-gold" id="confirm-btn" onclick="submitBooking()">Send Booking Request →</button>
     </div>
-    <p class="nav-note">You'll receive a confirmation email within 24 hours · adriano@adrianolezamas.com</p>
+    <p class="nav-note">You'll receive a confirmation within 24 hours · adriano@adrianolezamas.com</p>
   </div>
 
-  <!-- ── STEP 5: DONE ── -->
+  <!-- STEP 5 — DONE -->
   <div class="section" id="step5">
     <div class="confirm-box">
       <div class="confirm-icon">✅</div>
       <div class="confirm-title">Request Sent!</div>
-      <div class="confirm-sub">Your booking request has been received. I'll confirm your session within 24 hours at your email address.<br><br>In the meantime, follow the work on Instagram: <strong>@byadriano_</strong></div>
+      <div class="confirm-sub">Your booking request has been received. I'll confirm your session within 24 hours.<br><br>Follow the work on Instagram: <strong>@byadriano_</strong></div>
     </div>
   </div>
 
@@ -561,123 +547,128 @@
 </footer>
 
 <script>
-// ── DATA ──────────────────────────────────────────────────────────────────────
-const bookingData = {
+const data = {
   individual: {
-    title: "Individual Packages",
-    sub: "For parents and athletes — photos delivered to your phone within 24 hours.",
-    theme: "gold-theme",
-    accent: "gold",
-    packages: [
-      { id:"p1", name:"Single Photo",     tag:"Option 01",               desc:"One perfect moment, high resolution.",                                            price:15,  unit:"CAD",            feats:["1 edited photo","Private gallery download","Print & share rights"] },
-      { id:"p2", name:"Basic Pack",       tag:"Option 02",               desc:"The 5 best photos of your child from the game.",                                  price:25,  unit:"CAD",            feats:["5 edited photos","High resolution","24h delivery","Personal use"] },
-      { id:"p3", name:"Full Game Pack",   tag:"Option 03 ⭐ Most Popular", desc:"10–15 photos covering the full match.",                                           price:40,  unit:"CAD",            feats:["10–15 edited photos","Action + team moments","24h delivery","Print & share rights"], best:true },
-      { id:"p4", name:"Season Pack",      tag:"Option 04",               desc:"All home games covered all season long.",                                          price:120, unit:"CAD / season",   feats:["All home matches","10–15 photos/game","Running gallery","Best value/game"] },
-      { id:"p5", name:"Athlete Session",  tag:"Personal Branding",       desc:"Portrait + action session to build your Instagram presence.",                     price:225, unit:"CAD / session",  feats:["25–40 edited photos","On-location session","24h delivery","Social media rights"] },
-      { id:"p6", name:"Complete Bundle",  tag:"Photos + Video 🎬",        desc:"Athlete session + a 60-second cinematic highlight reel.",                        price:300, unit:"CAD / session",  feats:["Everything in Athlete Session","60-sec highlight video","Instagram-ready cuts","24h delivery"], best:true },
+    title:"Individual Session",
+    sub:"Personal branding shoot — one player, on location, 24h delivery.",
+    theme:"gold-theme", accent:"gold",
+    showExtras:true, showPlayers:true,
+    packages:[
+      { id:"i1", name:"Solo Session", tag:"1 Player", desc:"Portrait + action session for one player. $50 per additional player.", price:115, unit:"CAD / session", feats:["25–40 edited photos","On-location session","24h delivery","Social media rights","+$50 per extra player"] },
     ],
-    addons: [
-      { id:"a1", name:"Rush Delivery",    desc:"Delivered within 6 hours",                    price:50,  priceLabel:"+$50"      },
-      { id:"a2", name:"Extra Photos (+10)", desc:"20 additional edited photos",               price:30,  priceLabel:"+$30"      },
-      { id:"a3", name:"Printed 8×10",     desc:"Printed photo shipped to you via Printful",   price:30,  priceLabel:"+$30/print" },
+    addons:[
+      { id:"ia1", name:"Highlight Video", desc:"60-sec cinematic reel, Instagram-ready", price:100, priceLabel:"+$100" },
+      { id:"ia2", name:"Rush Delivery", desc:"Delivered within 6 hours", price:50, priceLabel:"+$50" },
+      { id:"ia3", name:"Printed 8×10", desc:"Printed photo shipped via Printful", price:30, priceLabel:"+$30/print" },
     ]
   },
   club: {
-    title: "Club Packages",
-    sub: "Professional game day coverage for clubs, associations, and leagues.",
-    theme: "blue-theme",
-    accent: "blue",
-    packages: [
-      { id:"c1", name:"Game Day Starter", tag:"Tier 01",               desc:"Everything your club needs to fuel social media after a game.",                    price:150, unit:"CAD / game",     feats:["1.5–2h sideline coverage","25–40 edited photos","Private Pixieset gallery","72h turnaround","Social media rights"] },
-      { id:"c2", name:"Season Coverage",  tag:"Tier 02 ⭐ Best Value",  desc:"Consistent visuals all season — content your comms team will use.",              price:275, unit:"CAD / game",     feats:["Full coverage 2–5h","50–60 edited photos","Individual player galleries","48h turnaround","Social crops 9:16 + 1:1","1 team portrait session/season"], best:true },
-      { id:"c3", name:"Club Partner",     tag:"Tier 03",               desc:"A dedicated photo partner for your entire organization.",                          price:400, unit:"CAD / game",     feats:["2 teams same day","80+ edited photos","Full roster headshots","24h turnaround guaranteed","Press & media kit photos","Full commercial rights"] },
+    title:"Club Packages",
+    sub:"Professional game day coverage for clubs, associations, and leagues.",
+    theme:"blue-theme", accent:"blue",
+    showExtras:true, showPlayers:false,
+    packages:[
+      { id:"c1", name:"Game Day Starter", tag:"Tier 01", desc:"Everything your club needs to fuel social media after a game.", price:150, unit:"CAD / game", feats:["1.5–2h sideline coverage","25–40 edited photos","Pixieset gallery","72h turnaround","Social media rights"] },
+      { id:"c2", name:"Season Coverage", tag:"Tier 02 ⭐ Best Value", desc:"Consistent visuals all season — content your comms team will use.", price:275, unit:"CAD / game", feats:["Full coverage 2–5h","50–60 edited photos","Individual player galleries","48h turnaround","Social crops 9:16 + 1:1","1 team portrait session/season"], best:true },
+      { id:"c3", name:"Club Partner", tag:"Tier 03", desc:"A dedicated photo partner for your entire organization.", price:400, unit:"CAD / game", feats:["2 teams same day","80+ edited photos","Full roster headshots","24h turnaround","Press & media kit photos","Full commercial rights"] },
     ],
-    addons: [
-      { id:"b1", name:"Individual Player Pack", desc:"Full-res gallery per player",                                price:10,  priceLabel:"+$10/player"  },
-      { id:"b2", name:"Team Portrait Session",  desc:"60-min dedicated shoot, separate from game day",            price:200, priceLabel:"+$200/session" },
-      { id:"b3", name:"Rush Delivery",          desc:"Delivered within 6 hours of final whistle",                 price:50,  priceLabel:"+$50 flat"    },
-      { id:"b4", name:"End-of-Season Recap",    desc:"Curated gallery — best moments, every player featured",     price:150, priceLabel:"+$150 flat"   },
-      { id:"b5", name:"Player Headshots",       desc:"3–5 clean shots per player, social-ready",                  price:15,  priceLabel:"+$15/player"  },
-      { id:"b6", name:"Highlight Video",        desc:"60-sec cinematic match reel, color graded",                 price:100, priceLabel:"+$100 flat"   },
+    addons:[
+      { id:"b1", name:"Individual Player Pack", desc:"Full-res gallery per player", price:10, priceLabel:"+$10/player" },
+      { id:"b2", name:"Team Portrait Session", desc:"60-min dedicated shoot, separate from game day", price:200, priceLabel:"+$200/session" },
+      { id:"b3", name:"Rush Delivery", desc:"Within 6 hours of final whistle", price:50, priceLabel:"+$50 flat" },
+      { id:"b4", name:"End-of-Season Recap", desc:"Curated gallery — best moments, every player", price:150, priceLabel:"+$150 flat" },
+      { id:"b5", name:"Player Headshots", desc:"3–5 clean shots per player, social-ready", price:15, priceLabel:"+$15/player" },
+      { id:"b6", name:"Highlight Video", desc:"60-sec cinematic match reel, color graded", price:100, priceLabel:"+$100 flat" },
+    ]
+  },
+  photo: {
+    title:"Buy Your Photos",
+    sub:"Saw your photo on Instagram? Choose a pack — delivered to your inbox in 24 hours.",
+    theme:"purple-theme", accent:"purple",
+    showExtras:false, showPlayers:false,
+    packages:[
+      { id:"ph1", name:"Starter Pack", tag:"Option 01", desc:"5 of the best photos of you or your child from the game.", price:25, unit:"CAD", feats:["5 edited photos","High resolution download","Personal use rights","24h delivery","Print, frame & share freely"] },
+      { id:"ph2", name:"Pro Pack", tag:"Option 02 ⭐ Most Popular", desc:"15 photos covering different moments from the match.", price:50, unit:"CAD", feats:["15 edited photos","Full coverage of the game","High resolution","24h delivery","Personal use — print & share"], best:true },
+      { id:"ph3", name:"Full Gallery", tag:"Option 03 — Best Value", desc:"Every photo taken of you or your child — the complete set.", price:75, unit:"CAD", feats:["All photos of you / your child","Complete game coverage","Highest resolution","24h delivery","Personal use — print, frame & share"] },
+    ],
+    addons:[
+      { id:"pa1", name:"Rush Delivery", desc:"Your gallery within 3 hours of payment", price:20, priceLabel:"+$20" },
+      { id:"pa2", name:"Printed 8×10", desc:"Professional print shipped to you via Printful", price:30, priceLabel:"+$30/print" },
+      { id:"pa3", name:"Season Pass", desc:"All future home game photos all season long", price:120, priceLabel:"+$120 / season" },
     ]
   }
 };
 
-// ── STATE ─────────────────────────────────────────────────────────────────────
-let who = null, selectedPkg = null, selectedAddons = new Set();
+let who=null, selectedPkg=null, selectedAddons=new Set();
+let travelKm=0, extraPlayers=0;
 
-// ── LIVE PRICE ────────────────────────────────────────────────────────────────
+// ── LIVE PRICE ────────────────────────────────────────────────────
 function updateLivePrice() {
-  if (!who) return;
-  const d = bookingData[who];
+  if (!who || !selectedPkg) { document.getElementById('live-bar').classList.remove('visible'); return; }
+  const d = data[who];
+  const km = parseFloat(document.getElementById('travel-km')?.value)||0;
+  const players = parseInt(document.getElementById('extra-players')?.value)||0;
+  const travelFee = km>20 ? Math.round((km-20)*0.75) : 0;
+  const playerFee = players*50;
+  const addons = d.addons.filter(a => selectedAddons.has(a.id));
+  const total = selectedPkg.price + addons.reduce((s,a)=>s+a.price,0) + travelFee + playerFee;
+
   const bar = document.getElementById('live-bar');
   const barPrice = document.getElementById('live-bar-price');
   const barDetail = document.getElementById('live-bar-detail');
 
-  if (!selectedPkg) {
-    bar.classList.remove('visible');
-    return;
-  }
-
-  let total = selectedPkg.price;
-  const activeAddons = d.addons.filter(a => selectedAddons.has(a.id));
-  activeAddons.forEach(a => total += a.price);
-
-  // Build detail string
-  let parts = [selectedPkg.name + ' ($' + selectedPkg.price + ')'];
-  activeAddons.forEach(a => parts.push(a.name + ' (' + a.priceLabel + ')'));
+  let parts = [selectedPkg.name+' ($'+selectedPkg.price+')'];
+  addons.forEach(a => parts.push(a.name+' ('+a.priceLabel+')'));
+  if (travelFee>0) parts.push('Travel ($'+travelFee+')');
+  if (playerFee>0) parts.push(players+' extra player'+(players>1?'s':'')+' ($'+playerFee+')');
   barDetail.textContent = parts.join(' + ');
 
-  // Animate price
-  const prev = barPrice.textContent;
-  const next = '$' + total;
-  if (prev !== next) {
+  const next = '$'+total;
+  if (barPrice.textContent !== next) {
     barPrice.textContent = next;
-    barPrice.classList.remove('pop');
-    void barPrice.offsetWidth; // reflow to restart animation
+    barPrice.className = 'live-bar-price '+d.accent;
+    void barPrice.offsetWidth;
     barPrice.classList.add('pop');
   }
-
-  // Color
-  barPrice.className = 'live-bar-price ' + (who === 'individual' ? 'gold' : 'blue') + ' pop';
-
-  // Show bar (slide in)
   bar.classList.add('visible');
 }
 
-// ── WHO SELECTION ─────────────────────────────────────────────────────────────
-function selectWho(type) {
-  who = type;
-  selectedPkg = null;
-  selectedAddons = new Set();
-
-  document.querySelectorAll('.who-card').forEach(c => c.classList.remove('selected'));
-  document.querySelector('.who-card.' + type).classList.add('selected');
-  document.getElementById('check-individual').textContent = '';
-  document.getElementById('check-club').textContent = '';
-  document.getElementById('check-' + type).textContent = '✓';
-
-  const btn = document.getElementById('btn-who');
-  btn.disabled = false;
-  btn.className = 'btn ' + (type === 'individual' ? 'btn-gold' : 'btn-blue');
+// ── WHO SELECTION ─────────────────────────────────────────────────
+function selectWho(type){
+  who=type; selectedPkg=null; selectedAddons=new Set(); travelKm=0; extraPlayers=0;
+  document.querySelectorAll('.who-card').forEach(c=>c.classList.remove('selected'));
+  document.querySelector('.who-card.'+type).classList.add('selected');
+  ['individual','club','photo'].forEach(t=>{ document.getElementById('check-'+t).textContent=''; });
+  document.getElementById('check-'+type).textContent='✓';
+  const btn=document.getElementById('btn-who');
+  btn.disabled=false;
+  const cls={individual:'btn-gold',club:'btn-blue',photo:'btn-purple'};
+  btn.className='btn '+cls[type];
 }
 
-// ── RENDER PACKAGES ───────────────────────────────────────────────────────────
-function renderPackages() {
-  const d = bookingData[who];
-  document.getElementById('pkg-title').textContent = d.title;
-  document.getElementById('pkg-sub').textContent = d.sub;
+// ── RENDER PACKAGES ───────────────────────────────────────────────
+function renderPackages(){
+  const d=data[who];
+  document.getElementById('pkg-title').textContent=d.title;
+  document.getElementById('pkg-sub').textContent=d.sub;
 
-  // Packages
-  const pl = document.getElementById('packages-list');
-  pl.innerHTML = '';
-  d.packages.forEach(pkg => {
-    const div = document.createElement('div');
-    div.className = 'pkg ' + d.theme;
-    div.id = 'pkg-' + pkg.id;
-    div.onclick = () => selectPkg(pkg);
-    div.innerHTML =
-      (pkg.best ? `<div class="pkg-badge ${who==='individual'?'gold-bg':'blue-bg'}">Most Popular</div>` : '') +
+  const extSec=document.getElementById('extras-section');
+  extSec.style.display=d.showExtras?'block':'none';
+  document.getElementById('extra-players-field').style.display=d.showPlayers?'flex':'none';
+  const tkm=document.getElementById('travel-km'); if(tkm) tkm.value='';
+  const ep=document.getElementById('extra-players'); if(ep) ep.value='';
+  const ev=document.getElementById('extras-val');
+  ev.textContent='$0'; ev.className='extra-total-val '+d.accent;
+
+  const pl=document.getElementById('packages-list');
+  pl.innerHTML='';
+  d.packages.forEach(pkg=>{
+    const div=document.createElement('div');
+    div.className='pkg '+d.theme;
+    div.id='pkg-'+pkg.id;
+    div.onclick=()=>selectPkg(pkg);
+    div.innerHTML=
+      (pkg.best?`<div class="pkg-badge ${d.accent}-bg">Most Popular</div>`:'')+
       `<div class="pkg-left">
         <div class="pkg-tag">${pkg.tag}</div>
         <div class="pkg-name">${pkg.name}</div>
@@ -692,175 +683,148 @@ function renderPackages() {
     pl.appendChild(div);
   });
 
-  // Addons
-  const al = document.getElementById('addons-list');
-  al.innerHTML = '';
-  d.addons.forEach(addon => {
-    const div = document.createElement('div');
-    div.className = 'addon-row ' + d.theme;
-    div.id = 'addon-' + addon.id;
-    div.onclick = () => toggleAddon(addon, div);
-    div.innerHTML =
-      `<div class="addon-info">
-        <div class="addon-name">${addon.name}</div>
-        <div class="addon-desc">${addon.desc}</div>
-      </div>
-      <div class="addon-right">
-        <div class="addon-price">${addon.priceLabel}</div>
-        <div class="addon-check"></div>
-      </div>`;
+  const al=document.getElementById('addons-list');
+  al.innerHTML='';
+  document.getElementById('addons-header').style.display=d.addons.length?'block':'none';
+  d.addons.forEach(addon=>{
+    const div=document.createElement('div');
+    div.className='addon-row '+d.theme;
+    div.id='addon-'+addon.id;
+    div.onclick=()=>toggleAddon(addon,div);
+    div.innerHTML=
+      `<div class="addon-info"><div class="addon-name">${addon.name}</div><div class="addon-desc">${addon.desc}</div></div>
+       <div class="addon-right"><div class="addon-price">${addon.priceLabel}</div><div class="addon-check"></div></div>`;
     al.appendChild(div);
   });
-
-  // Re-apply selections if user came back
-  if (selectedPkg) {
-    const el = document.getElementById('pkg-' + selectedPkg.id);
-    if (el) { el.classList.add('selected'); el.querySelector('.pkg-radio').textContent = '✓'; }
-  }
-  selectedAddons.forEach(id => {
-    const el = document.getElementById('addon-' + id);
-    if (el) { el.classList.add('selected'); el.querySelector('.addon-check').textContent = '✓'; }
-  });
-  updateLivePrice();
 }
 
-function selectPkg(pkg) {
-  selectedPkg = pkg;
-  document.querySelectorAll('.pkg').forEach(p => {
-    p.classList.remove('selected');
-    p.querySelector('.pkg-radio').textContent = '';
-  });
-  const el = document.getElementById('pkg-' + pkg.id);
+function selectPkg(pkg){
+  selectedPkg=pkg;
+  document.querySelectorAll('.pkg').forEach(p=>{p.classList.remove('selected');p.querySelector('.pkg-radio').textContent='';});
+  const el=document.getElementById('pkg-'+pkg.id);
   el.classList.add('selected');
-  el.querySelector('.pkg-radio').textContent = '✓';
-
-  const btn = document.getElementById('btn-pkg');
-  btn.disabled = false;
-  btn.className = 'btn ' + (who === 'individual' ? 'btn-gold' : 'btn-blue');
-
+  el.querySelector('.pkg-radio').textContent='✓';
+  const btn=document.getElementById('btn-pkg');
+  btn.disabled=false;
+  const cls={individual:'btn-gold',club:'btn-blue',photo:'btn-purple'};
+  btn.className='btn '+cls[who];
   updateLivePrice();
 }
 
-function toggleAddon(addon, el) {
-  if (selectedAddons.has(addon.id)) {
+function toggleAddon(addon,el){
+  if(selectedAddons.has(addon.id)){
     selectedAddons.delete(addon.id);
     el.classList.remove('selected');
-    el.querySelector('.addon-check').textContent = '';
+    el.querySelector('.addon-check').textContent='';
   } else {
     selectedAddons.add(addon.id);
     el.classList.add('selected');
-    el.querySelector('.addon-check').textContent = '✓';
+    el.querySelector('.addon-check').textContent='✓';
   }
   updateLivePrice();
 }
 
-// ── SUMMARY ───────────────────────────────────────────────────────────────────
-function buildSummary() {
-  const d = bookingData[who];
-  const addons = d.addons.filter(a => selectedAddons.has(a.id));
-  const total = (selectedPkg ? selectedPkg.price : 0) + addons.reduce((s,a)=>s+a.price,0);
-
-  document.getElementById('sum-who').textContent = who === 'individual' ? 'Individual (Parent / Player)' : 'Club / Association';
-  document.getElementById('sum-pkg').textContent = selectedPkg ? `${selectedPkg.name} — $${selectedPkg.price} CAD` : '—';
-  document.getElementById('sum-addons').textContent = addons.length ? addons.map(a=>a.name).join(', ') : 'None';
-  document.getElementById('sum-deposit').textContent = `$${Math.round(total * 0.5)} CAD`;
-
-  const tp = document.getElementById('total-price-val');
-  tp.textContent = '$' + total;
-  tp.className = who === 'individual' ? 'gold' : 'blue';
-
-  const cb = document.getElementById('confirm-btn');
-  cb.className = 'btn ' + (who === 'individual' ? 'btn-gold' : 'btn-blue');
+function updateExtras(){
+  const km=parseFloat(document.getElementById('travel-km').value)||0;
+  const players=parseInt(document.getElementById('extra-players')?.value)||0;
+  travelKm=km; extraPlayers=players;
+  const travelFee=km>20?Math.round((km-20)*0.75):0;
+  const playerFee=players*50;
+  const ev=document.getElementById('extras-val');
+  if(ev){ ev.textContent='$'+(travelFee+playerFee); ev.className='extra-total-val '+(data[who]?.accent||'gold'); }
+  updateLivePrice();
 }
 
-// ── NAVIGATION ────────────────────────────────────────────────────────────────
-function goTo(step) {
-  if (step === 2) renderPackages();
-  if (step === 4) buildSummary();
+// ── SUMMARY ───────────────────────────────────────────────────────
+function buildSummary(){
+  const d=data[who];
+  const addons=d.addons.filter(a=>selectedAddons.has(a.id));
+  const km=parseFloat(document.getElementById('travel-km').value)||0;
+  const players=parseInt(document.getElementById('extra-players')?.value)||0;
+  const travelFee=km>20?Math.round((km-20)*0.75):0;
+  const playerFee=players*50;
+  const total=(selectedPkg?selectedPkg.price:0)+addons.reduce((s,a)=>s+a.price,0)+travelFee+playerFee;
 
-  // Hide live bar when leaving step 2
-  const liveBar = document.getElementById('live-bar');
-  if (step !== 2) { liveBar.classList.remove('visible'); }
+  const whoLabels={individual:'Individual — Player / Athlete',club:'Club / Association',photo:'Buying Photos from Instagram'};
+  document.getElementById('sum-who').textContent=whoLabels[who];
+  document.getElementById('sum-pkg').textContent=selectedPkg?`${selectedPkg.name} — $${selectedPkg.price} CAD`:'—';
+  document.getElementById('sum-addons').textContent=addons.length?addons.map(a=>a.name).join(', '):'None';
 
-  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-  document.getElementById('step' + step).classList.add('active');
+  const tr=document.getElementById('sum-travel-row'),pr=document.getElementById('sum-players-row');
+  if(travelFee>0){tr.style.display='flex';document.getElementById('sum-travel').textContent=`$${travelFee} CAD (${km} km)`;}
+  else{tr.style.display='none';}
+  if(playerFee>0){pr.style.display='flex';document.getElementById('sum-players').textContent=`$${playerFee} CAD (${players} extra player${players>1?'s':''})`;}
+  else{pr.style.display='none';}
 
-  for (let i = 1; i <= 4; i++) {
-    const dot = document.getElementById('dot' + i);
-    const label = document.getElementById('dl' + i);
-    dot.classList.remove('active','done');
-    label.classList.remove('active','done');
-    if (i < step) { dot.classList.add('done'); dot.textContent = '✓'; label.classList.add('done'); }
-    else if (i === step) { dot.classList.add('active'); dot.textContent = i; label.classList.add('active'); }
-    else { dot.textContent = i; }
-  }
-  for (let i = 1; i <= 3; i++) {
-    const line = document.getElementById('line' + i);
-    if (line) line.className = 'step-line' + (i < step ? ' done' : '');
-  }
-
-  // Re-show live bar if returning to step 2
-  if (step === 2 && selectedPkg) updateLivePrice();
-
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  document.getElementById('sum-deposit').textContent=`$${Math.round(total*0.5)} CAD`;
+  const tp=document.getElementById('total-price-val');
+  tp.textContent='$'+total; tp.className=d.accent;
+  const cb=document.getElementById('confirm-btn');
+  const cls={individual:'btn-gold',club:'btn-blue',photo:'btn-purple'};
+  cb.className='btn '+cls[who];
 }
 
-// ── SUBMIT ────────────────────────────────────────────────────────────────────
-async function submitBooking() {
-  const btn = document.getElementById('confirm-btn');
-  btn.textContent = 'Sending…';
-  btn.disabled = true;
+// ── NAVIGATION ────────────────────────────────────────────────────
+function goTo(step){
+  if(step===2) renderPackages();
+  if(step===4) buildSummary();
 
-  const d = bookingData[who];
-  const addons = d.addons.filter(a => selectedAddons.has(a.id));
-  const total = selectedPkg.price + addons.reduce((s,a) => s+a.price, 0);
+  const liveBar=document.getElementById('live-bar');
+  if(step!==2){ liveBar.classList.remove('visible'); }
 
-  const payload = {
-    package:   selectedPkg.name,
-    games:     1,
-    addons:    addons.length ? addons.map(a=>`${a.name} (+$${a.price})`).join(', ') : 'None',
-    km:        null,
-    travelFee: '0.00',
-    subtotal:  '$' + total.toFixed(2),
-    gst:       '—',
-    qst:       '—',
-    total:     '$' + total.toFixed(2) + ' CAD',
-    sport:     'Soccer',
-    date:      document.getElementById('pdate').value || 'TBD',
-    time:      '',
-    address:   document.getElementById('location').value || 'TBD',
-    firstname: document.getElementById('fname').value,
-    lastname:  document.getElementById('lname').value,
-    email:     document.getElementById('email').value,
-    phone:     document.getElementById('phone').value || 'N/A',
-    notes:     document.getElementById('notes').value || 'None',
-    lang:      'en',
-    clientType: who === 'individual' ? 'Individual (Parent/Player)' : 'Club/Association',
-  };
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.getElementById('step'+step).classList.add('active');
 
-  try {
-    const res = await fetch('/api/book', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
-    });
-    if (res.ok) {
-      document.getElementById('live-bar').classList.remove('visible');
-      goTo(5);
-    } else {
-      throw new Error('Server error');
-    }
-  } catch(e) {
-    btn.textContent = 'Send Booking Request →';
-    btn.disabled = false;
-    alert('Something went wrong. Please email adriano@adrianolezamas.com directly.');
+  for(let i=1;i<=4;i++){
+    const dot=document.getElementById('dot'+i),label=document.getElementById('dl'+i);
+    dot.classList.remove('active','done'); label.classList.remove('active','done');
+    if(i<step){dot.classList.add('done');dot.textContent='✓';label.classList.add('done');}
+    else if(i===step){dot.classList.add('active');dot.textContent=i;label.classList.add('active');}
+    else{dot.textContent=i;}
   }
+  for(let i=1;i<=3;i++){
+    const line=document.getElementById('line'+i);
+    if(line) line.className='step-line'+(i<step?' done':'');
+  }
+  if(step===2&&selectedPkg) updateLivePrice();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ── SUBMIT ────────────────────────────────────────────────────────
+function submitBooking(){
+  const btn=document.getElementById('confirm-btn');
+  btn.textContent='Sending…'; btn.disabled=true;
+  const d=data[who];
+  const addons=d.addons.filter(a=>selectedAddons.has(a.id));
+  const km=parseFloat(document.getElementById('travel-km').value)||0;
+  const players=parseInt(document.getElementById('extra-players')?.value)||0;
+  const travelFee=km>20?Math.round((km-20)*0.75):0;
+  const playerFee=players*50;
+  const total=selectedPkg.price+addons.reduce((s,a)=>s+a.price,0)+travelFee+playerFee;
+  const subject=encodeURIComponent(`Booking Request — ${selectedPkg.name}`);
+  const body=encodeURIComponent(
+    `Hello Adriano,\n\nBooking request:\n\n`+
+    `Type: ${who}\nPackage: ${selectedPkg.name} ($${selectedPkg.price} CAD)\n`+
+    `Add-ons: ${addons.length?addons.map(a=>a.name).join(', '):'None'}\n`+
+    (travelFee>0?`Travel fee: $${travelFee} (${km} km)\n`:'')+
+    (playerFee>0?`Extra players: ${players} × $50 = $${playerFee}\n`:'')+
+    `Total: $${total} CAD\nDeposit (50%): $${Math.round(total*0.5)} CAD\n\n`+
+    `Name: ${document.getElementById('fname').value} ${document.getElementById('lname').value}\n`+
+    `Email: ${document.getElementById('email').value}\n`+
+    `Phone: ${document.getElementById('phone').value||'N/A'}\n`+
+    `Date: ${document.getElementById('pdate').value||'TBD'}\n`+
+    `Location: ${document.getElementById('location').value||'TBD'}\n`+
+    `Notes: ${document.getElementById('notes').value||'None'}\n\nThank you!`
+  );
+  window.open(`mailto:adriano@adrianolezamas.com?subject=${subject}&body=${body}`);
+  document.getElementById('live-bar').classList.remove('visible');
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.getElementById('step5').classList.add('active');
 }
 </script>
 
 <script src="lang.js"></script>
 <script>
-// Nav hide on scroll
 (function(){
   var nav=document.querySelector('.site-nav'),last=0;
   window.addEventListener('scroll',function(){
