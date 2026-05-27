@@ -493,13 +493,13 @@ input::placeholder,textarea::placeholder{color:var(--mid);}
       <div class="summary-line" id="sum-travel-row" style="display:none;"><span class="summary-label">Travel fee</span><span class="summary-val" id="sum-travel">—</span></div>
       <div class="summary-line" id="sum-players-row" style="display:none;"><span class="summary-label">Extra players</span><span class="summary-val" id="sum-players">—</span></div>
       <div class="summary-line"><span class="summary-label">Delivery</span><span class="summary-val">24–72 hours</span></div>
-      <div class="summary-line"><span class="summary-label">Deposit required (50%)</span><span class="summary-val" id="sum-deposit">—</span></div>
+      <div class="summary-line"><span class="summary-label">Payment due (100% upfront)</span><span class="summary-val" id="sum-deposit">—</span></div>
       <div class="summary-total">
         <div>
           <div class="total-label">Total</div>
           <div class="total-price"><span id="total-price-val">—</span> <span style="font-size:16px;color:var(--mid);font-family:Syne,sans-serif;font-weight:400;">CAD</span></div>
         </div>
-        <div style="text-align:right;font-size:12px;color:var(--mid);max-width:180px;line-height:1.6;">50% deposit confirms your booking.<br>Balance on delivery.</div>
+        <div style="text-align:right;font-size:12px;color:var(--mid);max-width:180px;line-height:1.6;">100% payment required upfront to confirm your booking.</div>
       </div>
     </div>
     <div class="btn-row">
@@ -756,7 +756,7 @@ function buildSummary(){
   if(playerFee>0){pr.style.display='flex';document.getElementById('sum-players').textContent=`$${playerFee} CAD (${players} extra player${players>1?'s':''})`;}
   else{pr.style.display='none';}
 
-  document.getElementById('sum-deposit').textContent=`$${Math.round(total*0.5)} CAD`;
+  document.getElementById('sum-deposit').textContent=`$${total} CAD`;
   const tp=document.getElementById('total-price-val');
   tp.textContent='$'+total; tp.className=d.accent;
   const cb=document.getElementById('confirm-btn');
@@ -814,7 +814,7 @@ function submitBooking(){
     `Add-ons: ${addons.length?addons.map(a=>a.name).join(', '):'None'}\n`+
     (travelFee>0?`Travel fee: $${travelFee} (${km} km)\n`:'')+
     (playerFee>0?`Extra players: ${players} × $25 = $${playerFee}\n`:'')+
-    `Total: $${total} CAD\nDeposit (50%): $${Math.round(total*0.5)} CAD\n\n`+
+    `Total: $${total} CAD (100% due upfront)\n\n`+
     `Name: ${document.getElementById('fname').value} ${document.getElementById('lname').value}\n`+
     `Email: ${document.getElementById('email').value}\n`+
     `Phone: ${document.getElementById('phone').value||'N/A'}\n`+
