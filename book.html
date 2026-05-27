@@ -4,572 +4,305 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Book a Session — Adriano Lezama Sports Photography Montréal</title>
-  <meta name="description" content="Book Adriano Lezama for your next game or season. Club packages starting at $75/game — soccer, futsal, and team sports photography in Montréal and Québec.">
+  <meta name="description" content="Book Adriano Lezama for your next game or season. Individual and club packages — soccer, futsal, and team sports photography in Montréal and Québec.">
   <meta name="keywords" content="book sports photographer Montreal, hire soccer photographer Quebec, club photography packages, sports photography pricing Montreal">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://adrianolezamas.com/book.html">
   <meta property="og:title" content="Book a Session — Adriano Lezama Sports Photography">
-  <meta property="og:description" content="Club photography packages starting at $75/game. Soccer, futsal, and team sports photography in Montréal, Québec.">
+  <meta property="og:description" content="Individual and club photography packages. Soccer, futsal, and team sports photography in Montréal, Québec.">
   <meta property="og:image" content="https://adrianolezamas.com/photos/IMG_0571.JPG">
   <link rel="canonical" href="https://adrianolezamas.com/book.html">
-  <link href="https://fonts.googleapis.com/css2?family=GFS+Didot&family=Jost:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Cormorant+Garamond:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Instrument+Serif:ital@0;1&family=Syne:wght@400;500;600;700&family=GFS+Didot&family=Jost:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; font-size: 16px; }
-    :root {
-      --bg: #0e0e0e; --bg2: #141414; --bg3: #181818;
-      --border: rgba(255,255,255,0.07); --border2: rgba(255,255,255,0.11);
-      --text: #e2e2e2; --muted: #777; --accent: #c8a96e; --nav-h: 130px;
-    }
-    body { background: var(--bg); color: var(--text); font-family: Futura, 'Jost', 'Century Gothic', sans-serif; font-weight: 300; line-height: 1.6; -webkit-font-smoothing: antialiased; }
-    ::-webkit-scrollbar { width: 2px; } ::-webkit-scrollbar-track { background: var(--bg); } ::-webkit-scrollbar-thumb { background: var(--accent); }
-    a { text-decoration: none; color: inherit; }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
 
-    /* ── NAV ── */
-    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 5vw; height: var(--nav-h); background: rgba(14,14,14,0.96); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
-    .nav-left { display: flex; align-items: center; gap: 2.2rem; flex: 1; }
-    .nav-left a { font-size: 0.85rem; letter-spacing: 0.14em; text-transform: uppercase; color: #fff; transition: color 0.2s; }
-    .nav-left a:hover, .nav-left a.active { color: var(--accent); }
-    .nav-book-pill { color: var(--accent) !important; border: 1px solid rgba(200,169,110,0.5) !important; padding: 5px 14px; border-radius: 999px; }
-    .nav-book-pill.active, .nav-book-pill:hover { background: rgba(200,169,110,0.12) !important; }
-    .nav-center { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; }
-    .nav-logo { display: flex; align-items: center; }
-    .nav-logo img { height: 80px; width: auto; opacity: 0.92; transition: opacity 0.2s; }
-    .nav-logo:hover img { opacity: 1; }
-    .nav-links { display: flex; align-items: center; gap: 2rem; }
-    .nav-links a { font-size: 0.85rem; letter-spacing: 0.14em; text-transform: uppercase; color: #fff; transition: color 0.2s; }
-    .nav-links a:hover, .nav-links a.active { color: var(--accent); }
-    .nav-right { display: flex; align-items: center; gap: 1.4rem; justify-content: flex-end; flex: 1; }
-    .nav-icon { display: flex; align-items: center; color: #666; transition: color 0.2s; }
-    .nav-icon:hover { color: #fff; }
-    .nav-hamburger { display: none; background: none; border: none; cursor: pointer; color: var(--muted); padding: 4px; }
-    @media (max-width: 640px) { .nav-left { display: none; } .nav-right { display: none; } .nav-links { display: none; } .nav-logo img { height: 55px; } nav { height: 80px; } .nav-hamburger { display: flex; position: absolute; right: 5vw; } }
-    #mobile-menu { display: none; position: fixed; inset: 0; background: rgba(14,14,14,0.98); z-index: 200; flex-direction: column; align-items: center; justify-content: center; gap: 2.8rem; }
-    #mobile-menu a { font-family: 'GFS Didot', serif; font-size: clamp(2.2rem, 9vw, 3.6rem); color: var(--text); letter-spacing: 0.04em; transition: color 0.2s; }
-    #mobile-menu a:hover { color: var(--accent); }
-    #mobile-close { position: absolute; top: 20px; right: 24px; background: none; border: none; cursor: pointer; color: var(--muted); }
-    #mobile-close:hover { color: var(--text); }
-
-    @media (max-width: 640px) {
-      :root { --nav-h: 70px; }
-      .page-strip-sub { display: none; }
+    :root{
+      /* Site palette */
+      --bg:#0e0e0e; --bg2:#0B1018; --surface:#0B1018;
+      --card:#0F1620; --card2:#131D2A;
+      --border:rgba(255,255,255,0.07); --border2:#223248;
+      --text:#e2e2e2; --muted:#777; --accent:#c8a96e;
+      --gold:#D4A843; --gold2:#F0C55A;
+      --blue:#3B82F6; --green:#0EA572;
+      --white:#EEF2F7; --mid:#4A6080; --light:#7A90A8;
+      --nav-h:110px;
     }
 
-    /* ── PAGE HEADING STRIP ── */
-    .page-strip {
-      margin-top: var(--nav-h);
-      padding: 28px 5vw 24px;
-      border-bottom: 1px solid var(--border);
-      display: flex; align-items: baseline; gap: 20px;
-    }
-    .page-strip-label { font-size: 0.58rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--accent); }
-    .page-strip-title { font-family: 'GFS Didot', Didot, serif; font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 400; color: #fff; letter-spacing: -0.01em; }
-    .page-strip-sub { font-size: 0.72rem; color: var(--muted); letter-spacing: 0.04em; margin-left: auto; }
-
-    /* ── LOGOS MARQUEE ── */
-    .logos-strip { padding: 28px 0; background: transparent; overflow: hidden; position: relative; }
-    .logos-strip-label { text-align: center; font-size: 0.6rem; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.2); margin-bottom: 18px; }
-    .logos-strip::before, .logos-strip::after { content: ''; position: absolute; top: 0; bottom: 0; width: 100px; z-index: 2; pointer-events: none; }
-    .logos-strip::before { left: 0; background: linear-gradient(to right, #0e0e0e, transparent); }
-    .logos-strip::after  { right: 0; background: linear-gradient(to left, #0e0e0e, transparent); }
-    .logos-track { display: flex; align-items: center; gap: 72px; width: max-content; animation: logos-scroll 24s linear infinite; }
-    .logos-track img { height: 52px; width: auto; opacity: 0.5; filter: brightness(1.3); transition: opacity 0.25s; flex-shrink: 0; user-select: none; }
-    .logos-track img:hover { opacity: 0.9; }
-    @keyframes logos-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-
-    /* ── TWO-COLUMN CONFIGURATOR ── */
-    .config-layout {
-      display: grid;
-      grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-      align-items: start;
-    }
-    @media (max-width: 900px) { .config-layout { grid-template-columns: 1fr; } }
-
-    /* LEFT: sticky gallery */
-    .config-gallery {
-      position: sticky;
-      top: var(--nav-h);
-      height: calc(100vh - var(--nav-h));
-      display: flex;
-      flex-direction: column;
-      border-right: 1px solid var(--border);
-      overflow: hidden;
-      background: #080808;
-    }
-    @media (max-width: 900px) { .config-gallery { position: relative; height: 60vw; max-height: 460px; top: 0; border-right: none; border-bottom: 1px solid var(--border); } }
-    .gallery-main {
-      flex: 1;
-      position: relative;
-      overflow: hidden;
-    }
-    .gallery-img {
-      position: absolute; inset: 0;
-      background-size: cover; background-position: center;
-      opacity: 0; transition: opacity 0.85s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    .gallery-img.active { opacity: 1; }
-    .gallery-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(8,8,8,0.7) 0%, transparent 50%);
-      pointer-events: none;
-    }
-    .gallery-thumbs {
-      display: flex; gap: 6px; padding: 10px 12px;
-      background: #0a0a0a; border-top: 1px solid var(--border);
-    }
-    .gallery-thumb {
-      width: 52px; height: 52px; flex-shrink: 0;
-      background-size: cover; background-position: center;
-      border: 1px solid transparent; border-radius: 4px;
-      cursor: pointer; transition: border-color 0.2s, opacity 0.2s;
-      opacity: 0.5;
-    }
-    .gallery-thumb.active { border-color: var(--accent); opacity: 1; }
-    .gallery-thumb:hover { opacity: 0.85; }
-    .gallery-badge {
-      position: absolute; bottom: 66px; left: 16px;
-      font-size: 0.52rem; letter-spacing: 0.22em; text-transform: uppercase;
-      color: rgba(200,169,110,0.85); background: rgba(14,14,14,0.7);
-      padding: 5px 10px; border-radius: 3px; backdrop-filter: blur(4px);
-      pointer-events: none; transition: opacity 0.3s;
-    }
-    .gallery-price.visible ~ .gallery-badge { opacity: 0; }
-
-    /* Left gallery price overlay */
-    .gallery-price {
-      position: absolute; bottom: 0; left: 0; right: 0; z-index: 3;
-      padding: 48px 22px 18px;
-      background: linear-gradient(to top, rgba(8,8,8,0.98) 0%, rgba(8,8,8,0.88) 55%, transparent 100%);
-      display: none;
-    }
-    .gallery-price.visible { display: block; }
-    .gp-row { display: flex; justify-content: space-between; align-items: baseline; padding: 3px 0; gap: 12px; }
-    .gp-lbl { font-size: 0.71rem; color: rgba(255,255,255,0.45); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 65%; }
-    .gp-val { font-size: 0.71rem; color: rgba(255,255,255,0.75); white-space: nowrap; flex-shrink: 0; }
-    .gp-sep { height: 1px; background: rgba(255,255,255,0.07); margin: 7px 0; }
-    .gp-total-row { display: flex; justify-content: space-between; align-items: flex-end; padding-top: 8px; }
-    .gp-total-label { font-size: 0.5rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.35); line-height: 1; }
-    .gp-total { font-family: 'GFS Didot', Didot, serif; font-size: 2rem; color: var(--accent); letter-spacing: -0.02em; line-height: 1; }
-    .gp-total.custom { font-size: 0.82rem; color: var(--muted); font-family: inherit; letter-spacing: 0.04em; line-height: 1.3; }
-    @keyframes gp-pop { 0% { transform: scale(1); } 35% { transform: scale(1.07); color: #f0e08a; } 100% { transform: scale(1); } }
-    .gp-total.pop { animation: gp-pop 0.38s cubic-bezier(0.34,1.56,0.64,1) forwards; }
-
-    /* RIGHT: config column */
-    .config-right { min-height: calc(100vh - var(--nav-h)); }
-
-    /* Sticky price bar */
-    .price-bar {
-      position: sticky;
-      top: var(--nav-h);
-      z-index: 50;
-      background: var(--bg);
-      border-bottom: 1px solid var(--border2);
-      padding: 14px 36px;
-      display: flex; align-items: center; justify-content: space-between; gap: 20px;
-    }
-    .pb-left { display: flex; flex-direction: column; gap: 4px; flex: 1; }
-    .pb-label { font-size: 0.52rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); }
-    .pb-breakdown { font-size: 0.72rem; color: var(--muted); line-height: 1.6; }
-    .pb-breakdown span { color: var(--text); }
-    .pb-right { text-align: right; flex-shrink: 0; }
-    .pb-total-label { font-size: 0.5rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 2px; }
-    .pb-total { font-family: 'GFS Didot', Didot, serif; font-size: 1.6rem; color: var(--accent); letter-spacing: -0.01em; }
-    .pb-total.custom { font-size: 0.9rem; color: var(--muted); letter-spacing: 0.04em; font-family: inherit; margin-top: 4px; }
-    @media (max-width: 640px) { .price-bar { padding: 12px 20px; } .pb-total { font-size: 1.2rem; } }
-
-    /* Config steps */
-    .config-step {
-      padding: 32px 36px;
-      border-bottom: 1px solid var(--border);
-    }
-    @media (max-width: 640px) { .config-step { padding: 24px 20px; } }
-    .step-hd {
-      display: flex; align-items: center; gap: 14px;
-      margin-bottom: 22px;
-    }
-    .step-n {
-      font-size: 0.5rem; letter-spacing: 0.22em; text-transform: uppercase;
-      color: var(--accent); border: 1px solid rgba(200,169,110,0.3);
-      padding: 4px 9px; border-radius: 3px; flex-shrink: 0;
-    }
-    .step-title {
-      font-family: 'GFS Didot', Didot, serif;
-      font-size: 0.95rem; color: #fff; letter-spacing: 0.01em;
-    }
-    .step-hint { font-size: 0.68rem; color: var(--muted); margin-left: auto; text-align: right; }
-
-    /* Package cards */
-    .pkg-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
-    }
-    .pkg-card--full { grid-column: 1 / -1; }
-    @media (max-width: 520px) { .pkg-grid { grid-template-columns: 1fr; } .pkg-card--full { grid-column: auto; } }
-    .pkg-includes {
-      list-style: none; margin: 0 0 14px; padding: 0;
-      display: flex; flex-direction: column; gap: 5px;
-    }
-    .pkg-includes li {
-      font-size: 0.62rem; color: var(--muted); line-height: 1.5; padding-left: 14px; position: relative;
-    }
-    .pkg-includes li::before {
-      content: '—'; position: absolute; left: 0; color: rgba(200,169,110,0.45);
-    }
-    .pkg-badge {
-      font-size: 0.48rem; letter-spacing: 0.18em; text-transform: uppercase;
-      color: #0e0e0e; background: var(--accent); padding: 3px 9px; border-radius: 999px;
-      white-space: nowrap; flex-shrink: 0;
-    }
-    .pkg-card {
-      display: block; cursor: pointer;
-      border: 1px solid var(--border2);
-      border-radius: 10px; padding: 18px 20px;
-      background: var(--bg2);
-      transition: border-color 0.2s, background 0.2s;
-      position: relative; overflow: hidden;
-    }
-    .pkg-card:hover { border-color: rgba(200,169,110,0.28); background: var(--bg3); }
-    .pkg-card input[type=radio] { position: absolute; opacity: 0; pointer-events: none; }
-    .pkg-card.selected { border-color: var(--accent); background: rgba(200,169,110,0.06); }
-    .pkg-card.selected::before {
-      content: '';
-      position: absolute; top: 0; left: 0; right: 0; height: 2px;
-      background: var(--accent);
-    }
-    .pkg-check {
-      width: 18px; height: 18px; border-radius: 50%;
-      border: 1px solid var(--border2); background: var(--bg);
-      display: flex; align-items: center; justify-content: center;
-      margin-bottom: 12px; transition: border-color 0.2s, background 0.2s;
-    }
-    .pkg-card.selected .pkg-check { border-color: var(--accent); background: var(--accent); }
-    .pkg-check svg { opacity: 0; transition: opacity 0.2s; }
-    .pkg-card.selected .pkg-check svg { opacity: 1; }
-    .pkg-name { font-size: 0.78rem; color: #fff; margin-bottom: 5px; letter-spacing: 0.02em; }
-    .pkg-desc { font-size: 0.65rem; color: var(--muted); line-height: 1.65; margin-bottom: 12px; }
-    .pkg-price {
-      font-family: 'GFS Didot', Didot, serif;
-      font-size: 1.05rem; color: var(--accent);
-    }
-    .pkg-price.custom { font-family: inherit; font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
-    .pkg-per { font-family: inherit; font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); vertical-align: middle; }
-    .pkg-detail { font-size: 0.58rem; color: var(--muted); margin-top: 2px; letter-spacing: 0.04em; }
-
-    /* Add-ons */
-    .addon-list { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-    @media (max-width: 640px) { .addon-list { grid-template-columns: 1fr; } }
-    .addon-item {
-      display: flex; align-items: flex-start; gap: 14px;
-      padding: 13px 14px; border-radius: 8px; cursor: pointer;
-      border: 1px solid transparent;
-      transition: background 0.15s, border-color 0.15s;
-    }
-    .addon-item:hover { background: var(--bg2); }
-    .addon-item.selected { background: rgba(74,130,217,0.07); border-color: rgba(74,130,217,0.35); }
-    .addon-item input[type=checkbox] { display: none; }
-    .addon-box {
-      flex-shrink: 0; width: 18px; height: 18px; border-radius: 4px;
-      border: 1px solid var(--border2); background: var(--bg2);
-      display: flex; align-items: center; justify-content: center;
-      margin-top: 2px; transition: border-color 0.2s, background 0.2s;
-    }
-    .addon-item.selected .addon-box { border-color: #4a82d9; background: #4a82d9; }
-    .addon-box svg { opacity: 0; transition: opacity 0.15s; }
-    .addon-item.selected .addon-box svg { opacity: 1; }
-    .addon-body { flex: 1; }
-    .addon-name { font-size: 0.77rem; color: var(--text); margin-bottom: 2px; }
-    .addon-desc { font-size: 0.62rem; color: var(--muted); line-height: 1.6; }
-    .addon-price { flex-shrink: 0; font-size: 0.72rem; color: var(--accent); white-space: nowrap; padding-top: 2px; }
-    .addon-qty { display: none; align-items: center; gap: 7px; margin-top: 9px; }
-    .addon-item.selected .addon-qty { display: flex; }
-    .qty-btn { width: 22px; height: 22px; border-radius: 4px; border: 1px solid var(--border2); background: var(--bg2); color: var(--text); font-size: 1rem; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 0; transition: background 0.15s, border-color 0.15s, color 0.15s; flex-shrink: 0; }
-    .qty-btn:hover { background: rgba(200,169,110,0.12); border-color: var(--accent); color: var(--accent); }
-    .qty-val { font-size: 0.8rem; color: var(--text); min-width: 18px; text-align: center; font-weight: 500; }
-    .qty-unit { font-size: 0.6rem; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; }
-
-    /* Travel fee calculator */
-    .travel-calc-wrap { margin-top: 16px; }
-    .travel-origin-line { font-size: 0.62rem; color: var(--muted); display: flex; align-items: center; gap: 7px; margin-bottom: 12px; letter-spacing: 0.04em; }
-    .travel-origin-dot { width: 7px; height: 7px; border-radius: 50%; background: #4a7c59; flex-shrink: 0; }
-    .travel-calc-btn { width: 100%; padding: 11px 16px; background: transparent; border: 1px solid var(--border2); border-radius: 6px; color: var(--muted); font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; cursor: pointer; font-family: inherit; transition: background 0.15s, border-color 0.15s, color 0.15s; }
-    .travel-calc-btn:hover:not(:disabled) { background: var(--bg2); border-color: var(--accent); color: var(--accent); }
-    .travel-calc-btn:disabled { opacity: 0.45; cursor: not-allowed; }
-    .travel-error { font-size: 0.62rem; color: #8a3030; margin-top: 8px; }
-    .travel-result-box { background: var(--bg2); border: 1px solid var(--border2); border-radius: 8px; padding: 16px; margin-top: 12px; }
-    .travel-result-row { display: flex; justify-content: space-between; align-items: center; padding: 7px 0; border-bottom: 1px solid var(--border); gap: 12px; }
-    .travel-rl { font-size: 0.65rem; color: var(--muted); }
-    .travel-rv { font-size: 0.72rem; color: var(--text); font-weight: 500; display: flex; align-items: center; gap: 7px; }
-    .travel-badge { font-size: 0.52rem; letter-spacing: 0.06em; text-transform: uppercase; padding: 2px 7px; border-radius: 3px; font-weight: 500; }
-    .travel-fee-row { display: flex; justify-content: space-between; align-items: baseline; padding-top: 14px; margin-top: 2px; }
-    .travel-fee-label { font-size: 0.65rem; color: var(--muted); }
-    .travel-fee-amount { font-size: 1.35rem; font-weight: 500; font-family: 'GFS Didot', Didot, serif; color: var(--text); }
-    .travel-note-text { font-size: 0.6rem; color: var(--muted); margin-top: 10px; line-height: 1.65; }
-
-    /* Form rows */
-    .bf-row { margin-bottom: 18px; }
-    .bf-row:last-child { margin-bottom: 0; }
-    .bf-row label { display: block; font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 9px; }
-    .bf-row input, .bf-row select, .bf-row textarea {
-      width: 100%; background: var(--bg2); border: 1px solid var(--border2);
-      border-radius: 8px; color: var(--text); font-family: inherit;
-      font-weight: 300; font-size: 0.84rem; padding: 12px 16px; outline: none;
-      transition: border-color 0.2s, background 0.2s; resize: none; appearance: none;
-    }
-    .bf-row select {
-      background-image: url("data:image/svg+xml,%3Csvg width='10' height='7' viewBox='0 0 10 7' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 6L9 1' stroke='%23666' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-      background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; cursor: pointer;
-    }
-    .bf-row select option { background: #1a1a1a; }
-    .bf-row input::placeholder, .bf-row textarea::placeholder { color: #3a3a3a; }
-    .bf-row input:focus, .bf-row select:focus, .bf-row textarea:focus { border-color: rgba(200,169,110,0.45); background: rgba(200,169,110,0.03); }
-    input[type="date"]::-webkit-calendar-picker-indicator,
-    input[type="time"]::-webkit-calendar-picker-indicator {
-      filter: invert(1); opacity: 0.75; cursor: pointer;
-    }
-    input[type="date"]::-webkit-calendar-picker-indicator:hover,
-    input[type="time"]::-webkit-calendar-picker-indicator:hover { opacity: 1; }
-    .bf-row textarea { height: 100px; }
-    .bf-grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-    @media (max-width: 480px) { .bf-grid2 { grid-template-columns: 1fr; } }
-    .bf-grid2 .bf-row { margin-bottom: 0; }
-    .bf-travel-result { font-size: 0.68rem; min-height: 22px; padding: 0 2px; line-height: 1.6; transition: color 0.2s; }
-    .bf-travel-result.loading { color: var(--muted); display: flex; align-items: center; gap: 7px; }
-    .bf-travel-result.loading::before { content: ''; display: inline-block; width: 10px; height: 10px; border: 1.5px solid rgba(255,255,255,0.15); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.7s linear infinite; flex-shrink: 0; }
-    @keyframes spin { to { transform: rotate(360deg); } }
-    .bf-travel-result.ok { color: #7ab87a; }
-    .bf-travel-result.ok strong { color: #9dd49d; }
-    .bf-travel-result.error { color: #e07a7a; }
-    .book-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important; }
-
-    /* Terms */
-    .term-item {
-      display: flex; align-items: flex-start; gap: 13px;
-      padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.04); cursor: pointer;
-    }
-    .term-item:last-child { border-bottom: none; }
-    .term-item input[type=checkbox] { display: none; }
-    .term-box {
-      flex-shrink: 0; width: 17px; height: 17px; border-radius: 3px;
-      border: 1px solid var(--border2); background: var(--bg2);
-      display: flex; align-items: center; justify-content: center; margin-top: 2px;
-      transition: border-color 0.2s, background 0.2s;
-    }
-    .term-item.checked .term-box { border-color: var(--accent); background: var(--accent); }
-    .term-box svg { opacity: 0; transition: opacity 0.15s; }
-    .term-item.checked .term-box svg { opacity: 1; }
-    .term-text { font-size: 0.72rem; color: var(--muted); line-height: 1.75; }
-    .term-text strong { color: var(--text); font-weight: 400; }
-    .terms-warning { display: none; font-size: 0.62rem; color: #e05b5b; margin-top: 12px; letter-spacing: 0.06em; }
-    .terms-warning.show { display: block; }
-
-    /* Submit area */
-    .submit-section {
-      padding: 28px 36px 40px;
-    }
-    @media (max-width: 640px) { .submit-section { padding: 24px 20px 36px; } }
-    .order-summary-table { margin-bottom: 24px; }
-    .os-row { display: flex; justify-content: space-between; align-items: center; padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.04); font-size: 0.78rem; }
-    .os-row:last-child { border-bottom: none; }
-    .os-row .osl { color: var(--muted); }
-    .os-row .osv { color: var(--text); }
-    .os-tax-row .osl, .os-tax-row .osv { font-size: 0.72rem; opacity: 0.65; }
-    .os-row.total { padding-top: 16px; }
-    .os-row.total .osl { font-family: 'GFS Didot', serif; font-size: 0.88rem; color: #fff; }
-    .os-row.total .osv { font-family: 'GFS Didot', serif; font-size: 1.25rem; color: var(--accent); letter-spacing: -0.01em; }
-    .os-note { font-size: 0.62rem; color: var(--muted); line-height: 1.7; margin-bottom: 20px; }
-    .os-note a { color: var(--accent); }
-    .os-payment-notice { background: rgba(200,169,110,0.08); border: 1px solid rgba(200,169,110,0.3); border-radius: 8px; padding: 14px 16px; margin-bottom: 14px; }
-    .os-payment-notice p { font-size: 0.82rem; color: #e8d5a8; line-height: 1.6; margin: 0; font-weight: 500; letter-spacing: 0.01em; }
-    .os-payment-notice p span { color: var(--accent); font-weight: 700; }
-    .book-btn {
-      width: 100%; padding: 17px 32px;
-      background: var(--accent); border: none; border-radius: 8px;
-      color: #0e0e0e; font-family: inherit; font-weight: 500;
-      font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase;
-      cursor: pointer; transition: opacity 0.2s, transform 0.15s;
-    }
-    .book-btn:hover { opacity: 0.88; transform: translateY(-1px); }
-    .book-btn:active { transform: translateY(0); }
-    .book-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important; }
-
-    /* Success */
-    .book-success {
-      display: none; text-align: center; padding: 60px 36px;
-    }
-    .bs-check { width: 60px; height: 60px; border-radius: 50%; background: rgba(200,169,110,0.1); display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; }
-    .book-success h3 { font-family: 'GFS Didot', serif; font-size: 1.6rem; color: #fff; font-weight: 400; margin-bottom: 12px; }
-    .book-success p { font-size: 0.78rem; color: var(--muted); line-height: 1.8; }
-    .bs-inbox-notice {
-      margin-top: 28px;
-      background: rgba(200,169,110,0.07);
-      border: 1px solid rgba(200,169,110,0.35);
-      border-radius: 10px;
-      padding: 18px 20px;
-      display: flex;
-      align-items: flex-start;
-      gap: 14px;
-      text-align: left;
-    }
-    .bs-inbox-icon {
-      width: 36px; height: 36px; flex-shrink: 0;
-      background: rgba(200,169,110,0.12);
-      border-radius: 8px;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .bs-inbox-text { flex: 1; }
-    .bs-inbox-text strong {
-      display: block;
-      font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--accent); font-weight: 600; margin-bottom: 5px;
-    }
-    .bs-inbox-text span {
-      font-size: 0.75rem; color: #888; line-height: 1.7;
-    }
-    .bs-inbox-email {
-      display: inline-block;
-      margin-top: 7px;
-      font-size: 0.78rem;
-      color: #e2e2e2;
-      font-weight: 500;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 5px;
-      padding: 4px 10px;
-      letter-spacing: 0.01em;
+    body{
+      background:var(--bg);
+      color:var(--white);
+      font-family:'Syne',sans-serif;
+      font-weight:400;
+      line-height:1.6;
+      overflow-x:hidden;
+      -webkit-font-smoothing:antialiased;
     }
 
-    /* Games counter row */
-    .games-row {
-      display: none;
-      margin-top: 20px;
-      padding: 16px 18px;
-      background: rgba(200,169,110,0.05);
-      border: 1px solid rgba(200,169,110,0.2);
-      border-radius: 10px;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-    }
-    .games-row.visible { display: flex; }
-    .games-lbl { font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 5px; }
-    .games-subtotal { font-size: 0.72rem; color: var(--muted); min-height: 1.2em; }
-    .games-subtotal strong { color: var(--accent); font-family: 'GFS Didot', serif; font-size: 1.05rem; font-weight: 400; }
-    .games-ctrl { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
-    .games-num { font-family: 'GFS Didot', serif; font-size: 1.7rem; color: var(--accent); min-width: 44px; text-align: center; line-height: 1; }
-    @media (max-width: 480px) { .games-row { flex-direction: column; align-items: flex-start; } }
+    ::-webkit-scrollbar{width:2px;}
+    ::-webkit-scrollbar-track{background:var(--bg);}
+    ::-webkit-scrollbar-thumb{background:var(--accent);}
+    a{text-decoration:none;color:inherit;}
 
-    @keyframes price-pop {
-      0%   { transform: scale(1); }
-      45%  { transform: scale(1.09); color: #e8cf8a; }
-      100% { transform: scale(1); }
+    /* ── GRID PATTERN BG ── */
+    body::before{
+      content:'';
+      position:fixed;inset:0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.012) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,0.012) 1px,transparent 1px);
+      background-size:60px 60px;
+      pointer-events:none;z-index:0;
     }
-    .pb-total.pop { animation: price-pop 0.38s cubic-bezier(0.34,1.56,0.64,1); }
 
-    /* ── LIVE PRICE ESTIMATE PANEL ── */
-    .live-estimate {
-      border-bottom: 1px solid var(--border);
-      padding: 24px 36px;
-      background: rgba(200,169,110,0.018);
-      display: none;
-    }
-    @media (max-width: 640px) { .live-estimate { padding: 20px 20px; } }
-    .live-estimate.visible { display: block; }
-    .le-hd {
-      font-size: 0.5rem; letter-spacing: 0.24em; text-transform: uppercase;
-      color: rgba(200,169,110,0.55); margin-bottom: 16px;
-      display: flex; align-items: center; gap: 12px;
-    }
-    .le-hd::after { content: ''; flex: 1; height: 1px; background: rgba(200,169,110,0.14); }
-    .le-row {
-      display: flex; justify-content: space-between; align-items: baseline;
-      padding: 6px 0; font-size: 0.74rem;
-      border-bottom: 1px solid rgba(255,255,255,0.04);
-    }
-    .le-lbl { color: var(--muted); }
-    .le-val { color: var(--text); }
-    .le-val.accent { color: var(--accent); }
-    .le-sep { height: 1px; background: rgba(255,255,255,0.08); margin: 10px 0 6px; }
-    .le-total-row {
-      display: flex; justify-content: space-between; align-items: center;
-      margin-top: 16px; padding-top: 16px;
-      border-top: 1px solid rgba(200,169,110,0.15);
-    }
-    .le-total-label-wrap { display: flex; flex-direction: column; gap: 4px; }
-    .le-total-label { font-size: 0.52rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
-    .le-total-sub { font-size: 0.58rem; color: rgba(200,169,110,0.4); }
-    .le-total-num {
-      font-family: 'GFS Didot', Didot, serif;
-      font-size: 2.4rem; color: var(--accent); letter-spacing: -0.02em; line-height: 1;
-    }
-    @keyframes le-pop {
-      0%   { transform: scale(1); }
-      35%  { transform: scale(1.07); color: #f0e08a; }
-      100% { transform: scale(1); }
-    }
-    .le-total-num.pop { animation: le-pop 0.38s cubic-bezier(0.34,1.56,0.64,1) forwards; }
+    /* ── GLOWS ── */
+    .glow-gold{position:fixed;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(212,168,67,0.05) 0%,transparent 70%);top:-200px;right:-100px;pointer-events:none;z-index:0;}
+    .glow-blue{position:fixed;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(59,130,246,0.04) 0%,transparent 70%);bottom:-100px;left:-100px;pointer-events:none;z-index:0;}
 
-    /* Footer */
-    footer { padding: 28px 5vw; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
-    .footer-brand { display: flex; flex-direction: column; gap: 5px; }
-    .footer-name { font-family: 'GFS Didot', Didot, 'Bodoni MT', serif; font-size: 0.9rem; letter-spacing: 0.05em; color: var(--muted); }
-    .footer-tagline { font-size: 0.52rem; letter-spacing: 0.18em; text-transform: uppercase; color: #555; }
-    .footer-links { display: flex; align-items: center; gap: 1.8rem; flex-wrap: wrap; justify-content: center; }
-    .footer-links a { font-size: 0.56rem; letter-spacing: 0.18em; text-transform: uppercase; color: #555; transition: color 0.2s; }
-    .footer-links a:hover { color: var(--text); }
-    .footer-right { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
-    .footer-ig { font-size: 0.56rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); transition: color 0.2s; }
-    .footer-ig:hover { color: var(--text); }
-    .footer-copy { font-size: 0.52rem; letter-spacing: 0.16em; text-transform: uppercase; color: #555; }
-    @media (max-width: 640px) { footer { flex-direction: column; align-items: center; text-align: center; gap: 24px; } .footer-right { align-items: center; } }
+    /* ── SITE NAV ── */
+    .site-nav{position:fixed;top:0;left:0;right:0;z-index:200;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:var(--nav-h);transition:transform 0.35s cubic-bezier(0.4,0,0.2,1);}
+    .site-nav-left{display:flex;align-items:center;gap:2.5rem;justify-content:center;}
+    .site-nav-center{display:flex;align-items:center;justify-content:center;padding:0 3vw;}
+    .site-nav-center img{height:110px;width:auto;opacity:0.92;transition:opacity 0.2s;}
+    .site-nav-center:hover img{opacity:1;}
+    .site-nav-right{display:flex;align-items:center;gap:2.5rem;justify-content:center;}
+    .site-nav-left a,.site-nav-right a{font-size:0.85rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--text);transition:color 0.2s;}
+    .site-nav-left a:hover,.site-nav-right a:hover,.site-nav-left a.active,.site-nav-right a.active{color:var(--accent);}
+    .book-link{color:var(--accent)!important;border:1px solid rgba(200,169,110,0.5);padding:5px 16px;border-radius:999px;transition:background 0.2s!important;}
+    .book-link:hover,.book-link.active{background:rgba(200,169,110,0.1)!important;}
+    .lang-btn{background:transparent;border:1.5px solid rgba(200,169,110,0.4);cursor:pointer;font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);padding:5px 14px;border-radius:999px;font-family:inherit;transition:background 0.2s,border-color 0.2s;}
+    .lang-btn:hover{background:rgba(200,169,110,0.1);border-color:var(--accent);}
+    .site-nav-hamburger{display:none;background:none;border:none;cursor:pointer;color:var(--muted);padding:4px;}
+    @media(max-width:640px){
+      .site-nav-left,.site-nav-right{display:none;}
+      .site-nav-center img{height:70px;}
+      .site-nav{height:80px;}
+      :root{--nav-h:80px;}
+      .site-nav-hamburger{display:flex;position:absolute;right:5vw;}
+    }
 
-    /* ── Top navigation ── */
-    .site-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; height: 110px; transition: transform 0.35s cubic-bezier(0.4,0,0.2,1); }
-    .site-nav-left  { display: flex; align-items: center; gap: 2.5rem; justify-content: center; }
-    .site-nav-center { display: flex; align-items: center; justify-content: center; padding: 0 3vw; }
-    .site-nav-center img { height: 110px; width: auto; opacity: 0.92; transition: opacity 0.2s; }
-    .site-nav-center:hover img { opacity: 1; }
-    .site-nav-right { display: flex; align-items: center; gap: 2.5rem; justify-content: center; }
-    .site-nav-left a, .site-nav-right a { font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.55); transition: color 0.2s; text-decoration: none; }
-    .site-nav-left a:hover, .site-nav-right a:hover { color: #fff; }
-    .site-nav-right .book-link { color: #0e0e0e !important; background: #c8a96e; border-radius: 999px; padding: 7px 18px; letter-spacing: 0.12em; transition: background 0.2s, transform 0.15s; }
-    .site-nav-right .book-link:hover { background: #dfc088 !important; color: #0e0e0e !important; transform: translateY(-1px); }
-    .lang-btn { background: transparent; border: 1.5px solid rgba(200,169,110,0.55); cursor: pointer; font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: #c8a96e; padding: 6px 16px; border-radius: 999px; transition: background 0.2s, border-color 0.2s, transform 0.15s; font-family: inherit; }
-    .lang-btn:hover { background: rgba(200,169,110,0.1); border-color: #c8a96e; transform: translateY(-1px); }
-    #site-mobile-menu .lang-btn { background: transparent; border: 1.5px solid rgba(200,169,110,0.55); cursor: pointer; font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: #c8a96e; padding: 8px 22px; border-radius: 999px; font-family: inherit; transition: background 0.2s, border-color 0.2s, transform 0.15s; }
-    #site-mobile-menu .lang-btn:hover { background: rgba(200,169,110,0.1); border-color: #c8a96e; transform: translateY(-1px); }
-    .site-nav-hamburger { display: none; background: none; border: none; cursor: pointer; color: rgba(255,255,255,0.65); padding: 8px; position: absolute; right: 5vw; top: 50%; transform: translateY(-50%); z-index: 201; transition: color 0.2s; }
-    .site-nav-hamburger:hover { color: #fff; }
-    @media (max-width: 640px) {
-      .site-nav { height: 70px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; }
-      .site-nav-center img { height: 55px; }
-      .site-nav-left a, .site-nav-right { display: none; }
-      .site-nav-left { justify-content: flex-start; padding-left: 5vw; }
-      .site-nav-hamburger { display: flex; }
+    /* Mobile menu */
+    #site-mobile-menu{display:none;position:fixed;inset:0;background:rgba(14,14,14,0.98);z-index:300;flex-direction:column;align-items:center;justify-content:center;gap:2.8rem;}
+    #site-mobile-menu.open{display:flex;}
+    #site-mobile-menu a{font-family:'GFS Didot',serif;font-size:clamp(2.2rem,9vw,3.6rem);color:var(--text);letter-spacing:0.04em;transition:color 0.2s;}
+    #site-mobile-menu a:hover{color:var(--accent);}
+    #site-mobile-menu .book-link{font-family:'GFS Didot',serif;color:#0e0e0e!important;background:var(--accent);border-radius:999px;padding:10px 32px;}
+    #site-menu-close{position:absolute;top:20px;right:24px;background:none;border:none;cursor:pointer;color:var(--muted);}
+    #site-menu-close:hover{color:var(--text);}
+    #site-mobile-menu .lang-btn{background:transparent;border:1.5px solid rgba(200,169,110,0.55);cursor:pointer;font-size:0.7rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);padding:8px 22px;border-radius:999px;font-family:inherit;}
+
+    /* ── LOGOS STRIP ── */
+    .logos-strip{padding:20px 0;overflow:hidden;position:relative;border-bottom:1px solid rgba(255,255,255,0.05);}
+    .logos-strip-label{text-align:center;font-size:0.6rem;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.2);margin-bottom:14px;}
+    .logos-strip::before,.logos-strip::after{content:'';position:absolute;top:0;bottom:0;width:100px;z-index:2;pointer-events:none;}
+    .logos-strip::before{left:0;background:linear-gradient(to right,#0e0e0e,transparent);}
+    .logos-strip::after{right:0;background:linear-gradient(to left,#0e0e0e,transparent);}
+    .logos-track{display:flex;align-items:center;gap:72px;width:max-content;animation:logos-scroll 24s linear infinite;}
+    .logos-track img{height:48px;width:auto;opacity:0.45;filter:brightness(1.3);transition:opacity 0.25s;flex-shrink:0;user-select:none;}
+    .logos-track img:hover{opacity:0.85;}
+    @keyframes logos-scroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+    /* ── FOOTER ── */
+    footer{padding:28px 5vw;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;position:relative;z-index:1;}
+    .footer-brand{display:flex;flex-direction:column;gap:5px;}
+    .footer-name{font-family:'GFS Didot',Didot,serif;font-size:0.9rem;letter-spacing:0.05em;color:var(--muted);}
+    .footer-tagline{font-size:0.52rem;letter-spacing:0.18em;text-transform:uppercase;color:#555;}
+    .footer-right{display:flex;flex-direction:column;align-items:flex-end;gap:4px;}
+    .footer-ig{font-size:0.56rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);transition:color 0.2s;}
+    .footer-ig:hover{color:var(--text);}
+    .footer-copy{font-size:0.52rem;letter-spacing:0.16em;text-transform:uppercase;color:#555;}
+    @media(max-width:640px){footer{flex-direction:column;align-items:center;text-align:center;gap:24px;}.footer-right{align-items:center;}}
+
+    /* ─────────────────────────────────────────────
+       BOOKING WIZARD
+    ───────────────────────────────────────────── */
+    .wrap{position:relative;z-index:1;max-width:860px;margin:0 auto;padding:0 24px 160px;}
+
+    /* PAGE HEADER */
+    .page-header{padding:60px 0 0;text-align:center;}
+    .logo-line{font-size:11px;letter-spacing:0.24em;text-transform:uppercase;color:var(--gold);margin-bottom:24px;display:flex;align-items:center;justify-content:center;gap:16px;}
+    .logo-line::before,.logo-line::after{content:'';height:1px;width:60px;background:linear-gradient(to right,transparent,var(--gold));}
+    .logo-line::after{background:linear-gradient(to left,transparent,var(--gold));}
+    .page-h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(52px,11vw,100px);line-height:0.88;letter-spacing:0.02em;margin-bottom:4px;}
+    .page-h1 span{font-family:'Instrument Serif',serif;font-style:italic;color:var(--gold);display:block;}
+    .header-note{font-size:14px;color:var(--light);margin-top:16px;letter-spacing:0.02em;}
+
+    /* STEP INDICATOR */
+    .steps{display:flex;align-items:center;justify-content:center;gap:0;margin:48px 0 44px;}
+    .step-dot{display:flex;flex-direction:column;align-items:center;gap:6px;}
+    .dot{width:36px;height:36px;border-radius:50%;border:1.5px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--mid);background:var(--surface);transition:all 0.3s;position:relative;z-index:1;}
+    .dot.active{border-color:var(--gold);color:var(--gold);background:#131008;}
+    .dot.done{border-color:var(--green);color:var(--green);background:#070F0A;}
+    .dot-label{font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--mid);transition:color 0.3s;}
+    .dot-label.active{color:var(--gold);}
+    .dot-label.done{color:var(--green);}
+    .step-line{width:80px;height:1.5px;background:rgba(255,255,255,0.07);margin:0 8px;margin-bottom:22px;transition:background 0.3s;}
+    .step-line.done{background:var(--green);}
+
+    /* SECTION */
+    .section{display:none;animation:fadeSlide 0.4s ease;}
+    .section.active{display:block;}
+    @keyframes fadeSlide{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+    .section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(28px,5vw,42px);letter-spacing:0.04em;color:var(--white);margin-bottom:6px;}
+    .section-sub{font-size:13px;color:var(--light);margin-bottom:32px;letter-spacing:0.02em;}
+
+    /* WHO SELECTION */
+    .who-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:32px;}
+    .who-card{background:var(--card);border:1.5px solid rgba(255,255,255,0.07);border-radius:20px;padding:32px 28px;cursor:pointer;transition:all 0.25s;position:relative;overflow:hidden;}
+    .who-card::after{content:'';position:absolute;inset:0;border-radius:20px;opacity:0;transition:opacity 0.25s;}
+    .who-card.individual::after{background:radial-gradient(ellipse at top left,rgba(212,168,67,0.08) 0%,transparent 60%);}
+    .who-card.club::after{background:radial-gradient(ellipse at top right,rgba(59,130,246,0.08) 0%,transparent 60%);}
+    .who-card:hover{transform:translateY(-2px);}
+    .who-card.individual:hover{border-color:rgba(212,168,67,0.35);}
+    .who-card.club:hover{border-color:rgba(59,130,246,0.35);}
+    .who-card.selected.individual{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold);}
+    .who-card.selected.club{border-color:var(--blue);box-shadow:0 0 0 1px var(--blue);}
+    .who-card.selected::after{opacity:1;}
+    .who-icon{font-size:36px;margin-bottom:14px;display:block;}
+    .who-title{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:0.04em;margin-bottom:6px;}
+    .who-card.individual .who-title{color:var(--gold);}
+    .who-card.club .who-title{color:var(--blue);}
+    .who-desc{font-size:12.5px;color:var(--light);line-height:1.6;}
+    .who-tag{display:inline-flex;gap:6px;align-items:center;margin-top:14px;font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;padding:4px 10px;border-radius:20px;}
+    .individual .who-tag{background:rgba(212,168,67,0.1);color:var(--gold);border:1px solid rgba(212,168,67,0.2);}
+    .club .who-tag{background:rgba(59,130,246,0.1);color:var(--blue);border:1px solid rgba(59,130,246,0.2);}
+    .check-ring{position:absolute;top:16px;right:16px;width:22px;height:22px;border-radius:50%;border:1.5px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;font-size:11px;transition:all 0.2s;}
+    .who-card.selected.individual .check-ring{background:var(--gold);border-color:var(--gold);color:#0A0800;}
+    .who-card.selected.club .check-ring{background:var(--blue);border-color:var(--blue);color:white;}
+
+    /* PACKAGES */
+    .packages{display:flex;flex-direction:column;gap:12px;margin-bottom:32px;}
+    .pkg{background:var(--card);border:1.5px solid rgba(255,255,255,0.07);border-radius:16px;padding:20px 24px;cursor:pointer;transition:all 0.22s;display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;position:relative;overflow:hidden;}
+    .pkg:hover{transform:translateX(4px);}
+    .pkg.gold-theme:hover{border-color:rgba(212,168,67,0.3);}
+    .pkg.blue-theme:hover{border-color:rgba(59,130,246,0.3);}
+    .pkg.selected.gold-theme{border-color:var(--gold);background:linear-gradient(135deg,#131008 0%,#0F1620 100%);}
+    .pkg.selected.blue-theme{border-color:var(--blue);background:linear-gradient(135deg,#080F1E 0%,#0F1620 100%);}
+    .pkg-badge{position:absolute;top:0;right:0;font-size:9px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;padding:5px 14px 5px 10px;border-radius:0 16px 0 16px;}
+    .pkg-badge.gold-bg{background:var(--gold);color:#0A0800;}
+    .pkg-badge.blue-bg{background:var(--blue);color:white;}
+    .pkg-tag{font-size:9px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:4px;}
+    .gold-theme .pkg-tag{color:var(--gold);}
+    .blue-theme .pkg-tag{color:var(--blue);}
+    .pkg-name{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:0.04em;color:var(--white);margin-bottom:4px;}
+    .pkg-desc{font-size:12px;color:var(--light);line-height:1.5;}
+    .pkg-feats{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;max-height:0;overflow:hidden;transition:max-height 0.4s ease,margin-top 0.3s;}
+    .pkg.selected .pkg-feats{max-height:200px;}
+    .feat-pill{font-size:11px;padding:3px 10px;border-radius:20px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);color:var(--light);}
+    .pkg-right{text-align:right;flex-shrink:0;}
+    .pkg-price{font-family:'Bebas Neue',sans-serif;font-size:40px;letter-spacing:0.02em;line-height:1;}
+    .gold-theme .pkg-price{color:var(--gold);}
+    .blue-theme .pkg-price{color:var(--blue);}
+    .pkg-unit{font-size:11px;color:var(--mid);margin-top:2px;}
+    .pkg-radio{width:20px;height:20px;border-radius:50%;border:1.5px solid rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;margin-left:auto;margin-top:8px;transition:all 0.2s;font-size:9px;}
+    .pkg.selected.gold-theme .pkg-radio{background:var(--gold);border-color:var(--gold);color:#0A0800;}
+    .pkg.selected.blue-theme .pkg-radio{background:var(--blue);border-color:var(--blue);color:white;}
+
+    /* ADDONS */
+    .addons-title{font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--light);margin-bottom:16px;}
+    .addons-list{display:flex;flex-direction:column;gap:8px;margin-bottom:32px;}
+    .addon-row{background:var(--surface);border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;transition:all 0.2s;gap:12px;}
+    .addon-row:hover{border-color:rgba(255,255,255,0.12);}
+    .addon-row.selected.gold-theme{border-color:rgba(212,168,67,0.3);background:rgba(212,168,67,0.04);}
+    .addon-row.selected.blue-theme{border-color:rgba(59,130,246,0.3);background:rgba(59,130,246,0.04);}
+    .addon-info{flex:1;}
+    .addon-name{font-size:13px;font-weight:600;color:var(--white);margin-bottom:2px;}
+    .addon-desc{font-size:11px;color:var(--mid);}
+    .addon-right{display:flex;align-items:center;gap:12px;}
+    .addon-price{font-size:14px;font-weight:700;}
+    .gold-theme .addon-price{color:var(--gold);}
+    .blue-theme .addon-price{color:var(--blue);}
+    .addon-check{width:20px;height:20px;border-radius:6px;border:1.5px solid rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0;transition:all 0.2s;}
+    .addon-row.selected.gold-theme .addon-check{background:var(--gold);border-color:var(--gold);color:#0A0800;}
+    .addon-row.selected.blue-theme .addon-check{background:var(--blue);border-color:var(--blue);color:white;}
+
+    /* ── LIVE PRICE BAR ── */
+    .live-bar{
+      position:fixed;bottom:0;left:0;right:0;z-index:150;
+      background:rgba(9,13,20,0.97);
+      backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+      border-top:1px solid rgba(255,255,255,0.08);
+      padding:14px 5vw;
+      display:none;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      transform:translateY(100%);
+      transition:transform 0.35s cubic-bezier(0.34,1.2,0.64,1);
     }
-    #site-mobile-menu {
-      display: none; position: fixed; inset: 0; z-index: 300;
-      background: rgba(14,14,14,0.98);
-      flex-direction: column; align-items: center; justify-content: center; gap: 2.6rem;
+    .live-bar.visible{display:flex;transform:translateY(0);}
+    .live-bar-left{flex:1;min-width:0;}
+    .live-bar-label{font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--mid);display:block;margin-bottom:3px;}
+    .live-bar-detail{font-size:12px;color:var(--light);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .live-bar-right{text-align:right;flex-shrink:0;}
+    .live-bar-price-label{font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--mid);display:block;margin-bottom:2px;}
+    .live-bar-price{font-family:'Bebas Neue',sans-serif;font-size:36px;letter-spacing:0.02em;line-height:1;transition:color 0.3s;}
+    .live-bar-price.gold{color:var(--gold);}
+    .live-bar-price.blue{color:var(--blue);}
+    .live-bar-currency{font-size:12px;color:var(--mid);font-family:'Syne',sans-serif;font-weight:400;margin-left:4px;}
+    @keyframes price-pop{0%{transform:scale(1);}35%{transform:scale(1.06);}100%{transform:scale(1);}}
+    .live-bar-price.pop{animation:price-pop 0.32s cubic-bezier(0.34,1.56,0.64,1) forwards;}
+
+    /* SUMMARY BOX */
+    .summary-box{background:var(--card2);border:1.5px solid rgba(255,255,255,0.1);border-radius:16px;padding:24px;margin-bottom:24px;}
+    .summary-header{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:0.04em;color:var(--white);margin-bottom:16px;}
+    .summary-line{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.05);font-size:13px;}
+    .summary-line:last-of-type{border-bottom:none;}
+    .summary-label{color:var(--light);}
+    .summary-val{font-weight:600;color:var(--white);}
+    .summary-total{display:flex;justify-content:space-between;align-items:center;padding-top:16px;margin-top:8px;border-top:1px solid rgba(255,255,255,0.1);}
+    .total-label{font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--mid);}
+    .total-price{font-family:'Bebas Neue',sans-serif;font-size:48px;letter-spacing:0.02em;}
+    #total-price-val.gold{color:var(--gold);}
+    #total-price-val.blue{color:var(--blue);}
+
+    /* FORM */
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px;}
+    .field{display:flex;flex-direction:column;gap:6px;}
+    .field.full{grid-column:1/-1;}
+    label.field-label{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--light);}
+    input,select,textarea{background:var(--surface);border:1.5px solid rgba(255,255,255,0.08);border-radius:10px;padding:12px 14px;color:var(--white);font-family:'Syne',sans-serif;font-size:13px;outline:none;transition:border-color 0.2s;width:100%;}
+    input:focus,select:focus,textarea:focus{border-color:var(--gold);}
+    select option{background:var(--card);}
+    textarea{resize:vertical;min-height:80px;}
+    input::placeholder,textarea::placeholder{color:var(--mid);}
+
+    /* BUTTONS */
+    .btn-row{display:flex;gap:12px;justify-content:flex-end;}
+    .btn{padding:14px 28px;border-radius:12px;font-family:'Syne',sans-serif;font-size:14px;font-weight:600;cursor:pointer;border:none;transition:all 0.2s;letter-spacing:0.02em;}
+    .btn:disabled{opacity:0.4;cursor:not-allowed;}
+    .btn-ghost{background:transparent;border:1.5px solid rgba(255,255,255,0.1);color:var(--light);}
+    .btn-ghost:hover{border-color:rgba(255,255,255,0.18);color:var(--white);}
+    .btn-gold{background:var(--gold);color:#0A0800;}
+    .btn-gold:hover:not(:disabled){background:var(--gold2);}
+    .btn-blue{background:var(--blue);color:white;}
+    .btn-blue:hover:not(:disabled){background:#5B9DF8;}
+
+    /* CONFIRMATION */
+    .confirm-box{text-align:center;padding:60px 20px;}
+    .confirm-icon{font-size:64px;margin-bottom:24px;}
+    .confirm-title{font-family:'Bebas Neue',sans-serif;font-size:48px;letter-spacing:0.04em;color:var(--gold);margin-bottom:8px;}
+    .confirm-sub{font-size:14px;color:var(--light);line-height:1.7;max-width:420px;margin:0 auto;}
+
+    .nav-note{font-size:11px;color:var(--mid);text-align:center;margin-top:16px;letter-spacing:0.04em;}
+
+    @media(max-width:600px){
+      .who-grid{grid-template-columns:1fr;}
+      .form-grid{grid-template-columns:1fr;}
+      .field.full{grid-column:1;}
+      .step-line{width:40px;}
+      .btn-row{flex-direction:column;}
+      .live-bar{flex-direction:column;gap:8px;padding:14px 20px;}
+      .live-bar-right{width:100%;display:flex;align-items:center;justify-content:space-between;}
     }
-    #site-mobile-menu.open { display: flex; }
-    #site-mobile-menu a {
-      font-family: 'GFS Didot', Didot, 'Bodoni MT', Georgia, serif;
-      font-size: clamp(2rem, 8vw, 3.2rem);
-      color: rgba(255,255,255,0.82);
-      letter-spacing: 0.04em;
-      transition: color 0.2s;
-      text-decoration: none;
-    }
-    #site-mobile-menu a:hover { color: #c8a96e; }
-    #site-mobile-menu .book-link { color: #0e0e0e !important; background: #c8a96e; border-radius: 999px; padding: 10px 32px; }
-    #site-menu-close {
-      position: absolute; top: 22px; right: 22px;
-      background: none; border: none; cursor: pointer;
-      color: rgba(255,255,255,0.4); transition: color 0.2s; padding: 8px;
-    }
-    #site-menu-close:hover { color: #fff; }
   </style>
 </head>
 <body>
+
+<div class="glow-gold"></div>
+<div class="glow-blue"></div>
+
+<!-- ══ SITE NAV ══ -->
 <nav class="site-nav">
   <div class="site-nav-left">
     <button class="lang-btn" onclick="toggleLang()">FR</button>
@@ -579,12 +312,13 @@
   <a href="index.html" class="site-nav-center"><img src="AL.svg" alt="Adriano Lezama Photography"></a>
   <div class="site-nav-right">
     <a href="contact.html"><span data-en="Contact" data-fr="Contact">Contact</span></a>
-    <a href="book.html" class="book-link"><span data-en="Book" data-fr="Réserver">Book</span></a>
+    <a href="book.html" class="book-link active"><span data-en="Book" data-fr="Réserver">Book</span></a>
   </div>
   <button class="site-nav-hamburger" id="site-menu-open" aria-label="Open menu">
     <svg width="22" height="16" viewBox="0 0 22 16" fill="none"><line x1="0" y1="1" x2="22" y2="1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="0" y1="8" x2="22" y2="8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="0" y1="15" x2="22" y2="15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
   </button>
 </nav>
+
 <div id="site-mobile-menu">
   <button id="site-menu-close" aria-label="Close menu">
     <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><line x1="2" y1="2" x2="18" y2="18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="18" y1="2" x2="2" y2="18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
@@ -596,491 +330,225 @@
 </div>
 <script>
 (function(){
-  var open = document.getElementById('site-menu-open');
-  var close = document.getElementById('site-menu-close');
-  var menu = document.getElementById('site-mobile-menu');
-  if(open) open.addEventListener('click', function(){ menu.classList.add('open'); document.body.style.overflow='hidden'; });
-  if(close) close.addEventListener('click', function(){ menu.classList.remove('open'); document.body.style.overflow=''; });
+  var open=document.getElementById('site-menu-open');
+  var close=document.getElementById('site-menu-close');
+  var menu=document.getElementById('site-mobile-menu');
+  if(open) open.addEventListener('click',function(){menu.classList.add('open');document.body.style.overflow='hidden';});
+  if(close) close.addEventListener('click',function(){menu.classList.remove('open');document.body.style.overflow='';});
 })();
 </script>
 
+<!-- ══ TOP SPACER FOR FIXED NAV ══ -->
+<div style="height:var(--nav-h);"></div>
 
-<!-- ══ PAGE HEADING ══ -->
-<div class="page-strip">
-  <span class="page-strip-label" data-en="Sports Photography" data-fr="Photographie sportive">Sports Photography</span>
-  <h1 class="page-strip-title" data-en="Build your booking" data-fr="Créez votre réservation">Build your booking</h1>
-  <span class="page-strip-sub" data-en="Configure below · Price updates live" data-fr="Configurez ci-dessous · Prix mis à jour en temps réel">Configure below · Price updates live</span>
-</div>
-
-<!-- ══ LOGOS MARQUEE ══ -->
+<!-- ══ LOGOS STRIP ══ -->
 <div class="logos-strip">
   <p class="logos-strip-label" data-en="Trusted by" data-fr="Fait confiance par">Trusted by</p>
-    <div class="logos-track" id="logos-track">
-    <img src="logos/LS_PRO_Horizontal-blanc.png" alt="Partner logo">
+  <div class="logos-track" id="logos-track">
+    <img src="logos/LS_PRO_Horizontal-blanc.png" alt="LS Pro">
     <img src="logos/carabins.png" alt="Carabins de Montréal">
-    <img src="logos/partner5.jpg" alt="Partner logo">
+    <img src="logos/partner5.jpg" alt="Partner">
   </div>
 </div>
 <script>
 (function(){
-  function fillMarquee() {
-    document.querySelectorAll('.logos-track').forEach(function(track) {
-      var originals = Array.from(track.querySelectorAll('img'));
-      if (!originals.length) return;
-      originals.forEach(function(img) { img.dataset.orig = '1'; });
-      function fill() {
-        // Remove all clones, keep originals
-        Array.from(track.querySelectorAll('img:not([data-orig])')).forEach(function(el) { el.remove(); });
-        // Clone in pairs of the full set so translateX(-50%) loops cleanly
-        var target = window.innerWidth * 2.5;
-        var safety = 0;
-        while (track.scrollWidth < target && safety < 200) {
-          // Add 2 sets at a time (keeps count even for seamless -50% loop)
-          for (var r = 0; r < 2; r++) {
-            originals.forEach(function(img) { track.appendChild(img.cloneNode(true)); });
-          }
+  function fillMarquee(){
+    document.querySelectorAll('.logos-track').forEach(function(track){
+      var originals=Array.from(track.querySelectorAll('img'));
+      if(!originals.length) return;
+      originals.forEach(function(img){img.dataset.orig='1';});
+      function fill(){
+        Array.from(track.querySelectorAll('img:not([data-orig])')).forEach(function(el){el.remove();});
+        var target=window.innerWidth*2.5,safety=0;
+        while(track.scrollWidth<target&&safety<200){
+          for(var r=0;r<2;r++){originals.forEach(function(img){track.appendChild(img.cloneNode(true));});}
           safety++;
         }
       }
-      var img0 = originals[0];
-      if (img0.complete && img0.naturalWidth > 0) { fill(); }
-      else { img0.addEventListener('load', fill); }
-      window.addEventListener('resize', fill);
+      var img0=originals[0];
+      if(img0.complete&&img0.naturalWidth>0){fill();}
+      else{img0.addEventListener('load',fill);}
+      window.addEventListener('resize',fill);
     });
   }
-  if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', fillMarquee); }
-  else { fillMarquee(); }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',fillMarquee);}
+  else{fillMarquee();}
 })();
 </script>
 
-<!-- ══ TWO-COLUMN CONFIGURATOR ══ -->
-<div class="config-layout">
+<!-- ══ BOOKING WIZARD ══ -->
+<div class="wrap">
 
-  <!-- ══ LEFT: GALLERY ══ -->
-  <div class="config-gallery">
-    <div class="gallery-main">
-      <div class="gallery-img active" style="background-image:url('photos/LSPRO/DSC09028.jpg')" data-idx="0"></div>
-      <div class="gallery-img" style="background-image:url('photos/Longueuil_masculin/5D7A1758.jpg')" data-idx="1"></div>
-      <div class="gallery-img" style="background-image:url('photos/Fc_laval/5D7A6724.jpg')" data-idx="2"></div>
-      <div class="gallery-img" style="background-image:url('photos/St_hubert_masculin/5D7A7377.jpg')" data-idx="3"></div>
-      <div class="gallery-img" style="background-image:url('photos/dave/DSC08525.jpg')" data-idx="4"></div>
-      <div class="gallery-overlay"></div>
-      <div class="gallery-price" id="gallery-price">
-        <div id="gp-top"></div>
-        <div class="gp-total-row">
-          <span class="gp-total-label" data-en="Total (taxes incl.)" data-fr="Total (taxes incl.)">Total (taxes incl.)</span>
-          <span class="gp-total" id="gp-total">—</span>
-        </div>
-      </div>
-      <span class="gallery-badge">@byadriano_</span>
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="logo-line">Adriano Photography · Montréal</div>
+    <h1 class="page-h1">Book<span>a Session</span></h1>
+    <p class="header-note">25–40 edited photos · 24-hour delivery · Montréal & Rive-Sud</p>
+  </div>
+
+  <!-- STEP INDICATOR -->
+  <div class="steps">
+    <div class="step-dot">
+      <div class="dot active" id="dot1">1</div>
+      <div class="dot-label active" id="dl1">Who</div>
     </div>
-    <div class="gallery-thumbs" id="gallery-thumbs">
-      <div class="gallery-thumb active" style="background-image:url('photos/LSPRO/DSC09028.jpg')" data-idx="0"></div>
-      <div class="gallery-thumb" style="background-image:url('photos/Longueuil_masculin/5D7A1758.jpg')" data-idx="1"></div>
-      <div class="gallery-thumb" style="background-image:url('photos/Fc_laval/5D7A6724.jpg')" data-idx="2"></div>
-      <div class="gallery-thumb" style="background-image:url('photos/St_hubert_masculin/5D7A7377.jpg')" data-idx="3"></div>
-      <div class="gallery-thumb" style="background-image:url('photos/dave/DSC08525.jpg')" data-idx="4"></div>
+    <div class="step-line" id="line1"></div>
+    <div class="step-dot">
+      <div class="dot" id="dot2">2</div>
+      <div class="dot-label" id="dl2">Package</div>
+    </div>
+    <div class="step-line" id="line2"></div>
+    <div class="step-dot">
+      <div class="dot" id="dot3">3</div>
+      <div class="dot-label" id="dl3">Details</div>
+    </div>
+    <div class="step-line" id="line3"></div>
+    <div class="step-dot">
+      <div class="dot" id="dot4">4</div>
+      <div class="dot-label" id="dl4">Confirm</div>
     </div>
   </div>
 
-  <!-- ══ RIGHT: CONFIGURATOR ══ -->
-  <div class="config-right" id="config-right">
+  <!-- ── STEP 1: WHO ── -->
+  <div class="section active" id="step1">
+    <div class="section-title">Who are you booking for?</div>
+    <div class="section-sub">Select your profile — pricing and packages are tailored to each.</div>
 
-    <!-- Sticky price bar -->
-    <div class="price-bar">
-      <div class="pb-left">
-        <span class="pb-label" data-en="Your Booking" data-fr="Votre réservation">Your Booking</span>
-        <div class="pb-breakdown" id="pb-breakdown" data-en="— Select a package to begin" data-fr="— Choisissez un forfait pour commencer">— Select a package to begin</div>
+    <div class="who-grid">
+      <div class="who-card individual" onclick="selectWho('individual')">
+        <div class="check-ring" id="check-individual"></div>
+        <span class="who-icon">⚽</span>
+        <div class="who-title">Individual</div>
+        <div class="who-desc">Parent looking for game photos of their child, or a player wanting personal branding content.</div>
+        <div class="who-tag">Parent · Player · Athlete</div>
       </div>
-      <div class="pb-right">
-        <span class="pb-total-label" data-en="Total (taxes incl.)" data-fr="Total (taxes incl.)">Total (taxes incl.)</span>
-        <div class="pb-total" id="pb-total">—</div>
+      <div class="who-card club" onclick="selectWho('club')">
+        <div class="check-ring" id="check-club"></div>
+        <span class="who-icon">🏟️</span>
+        <div class="who-title">Club / Team</div>
+        <div class="who-desc">Soccer club, association, or organization looking for professional game day coverage.</div>
+        <div class="who-tag">Club · Association · League</div>
       </div>
     </div>
 
-    <!-- ══ STEP 1: PACKAGE ══ -->
-    <div class="config-step">
-      <div class="step-hd">
-        <span class="step-n">01</span>
-        <span class="step-title" data-en="Choose your package" data-fr="Choisissez votre forfait">Choose your package</span>
-        <span class="step-hint" data-en="Min. 7 days notice" data-fr="Min. 7 jours à l'avance">Min. 7 days notice</span>
+    <div class="btn-row">
+      <button class="btn btn-gold" onclick="goTo(2)" id="btn-who" disabled>Continue →</button>
+    </div>
+    <p class="nav-note">Select one option to continue</p>
+  </div>
+
+  <!-- ── STEP 2: PACKAGES ── -->
+  <div class="section" id="step2">
+    <div class="section-title" id="pkg-title">Choose your package</div>
+    <div class="section-sub" id="pkg-sub">Select the coverage that fits your needs.</div>
+
+    <div class="packages" id="packages-list"></div>
+
+    <div class="addons-title">Optional Add-Ons</div>
+    <div class="addons-list" id="addons-list"></div>
+
+    <div class="btn-row">
+      <button class="btn btn-ghost" onclick="goTo(1)">← Back</button>
+      <button class="btn btn-gold" id="btn-pkg" onclick="goTo(3)" disabled>Continue →</button>
+    </div>
+  </div>
+
+  <!-- ── STEP 3: DETAILS ── -->
+  <div class="section" id="step3">
+    <div class="section-title">Your Details</div>
+    <div class="section-sub">Fill in your information and preferred date — I'll confirm within 24 hours.</div>
+
+    <div class="form-grid">
+      <div class="field">
+        <label class="field-label">First Name</label>
+        <input type="text" placeholder="Adriano" id="fname">
       </div>
-      <div class="pkg-grid" id="pkg-grid">
-
-        <label class="pkg-card" data-price="150" data-name="Game Day Starter" data-slug="game-day-starter">
-          <input type="radio" name="package" value="150">
-          <div class="pkg-check">
-            <svg width="10" height="8" viewBox="0 0 10 8" fill="none" stroke="#0e0e0e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 3.5 6.5 9 1"/></svg>
-          </div>
-          <div class="pkg-name" data-en="Game Day Starter" data-fr="Game Day Starter">Game Day Starter</div>
-          <div class="pkg-desc" data-en="Everything your club needs to fuel social media after a game — sharp action shots, fast delivery, zero hassle for your media team." data-fr="Tout ce qu'il faut à votre club pour alimenter les réseaux après un match — photos d'action nettes, livraison rapide, zéro friction pour votre équipe médias.">Everything your club needs to fuel social media after a game — sharp action shots, fast delivery, zero hassle for your media team.</div>
-          <ul class="pkg-includes">
-            <li data-en="1.5–2 hours coverage" data-fr="1,5–2 heures de couverture">1.5–2 hours coverage</li>
-            <li data-en="25–40 edited photos" data-fr="25–40 photos éditées">25–40 edited photos</li>
-            <li data-en="Private gallery link delivered" data-fr="Lien vers galerie privée livré">Private gallery link delivered</li>
-            <li data-en="72-hour turnaround" data-fr="Livraison en 72 heures">72-hour turnaround</li>
-            <li data-en="Social media use for the club" data-fr="Utilisation réseaux sociaux pour le club">Social media use for the club</li>
-          </ul>
-          <div class="pkg-price">$150 <span class="pkg-per" data-en="/ game" data-fr="/ match">/ game</span></div>
-        </label>
-
-        <label class="pkg-card" data-price="275" data-name="Season Coverage" data-slug="season-coverage">
-          <input type="radio" name="package" value="275">
-          <div class="pkg-check">
-            <svg width="10" height="8" viewBox="0 0 10 8" fill="none" stroke="#0e0e0e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 3.5 6.5 9 1"/></svg>
-          </div>
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
-            <div class="pkg-name" style="margin-bottom:0;" data-en="Season Coverage" data-fr="Season Coverage">Season Coverage</div>
-            <span class="pkg-badge" data-en="Best Value" data-fr="Meilleur rapport">Best Value</span>
-          </div>
-          <div class="pkg-desc" data-en="Consistent visuals across your season — player action shots, sponsor visibility, and content your comms team can actually use." data-fr="Des visuels cohérents tout au long de la saison — photos d'action, visibilité des commanditaires et contenu exploitable par votre équipe de communication.">Consistent visuals across your season — player action shots, sponsor visibility, and content your comms team can actually use.</div>
-          <ul class="pkg-includes">
-            <li data-en="Everything in Starter, plus:" data-fr="Tout ce qui est inclus dans Starter, plus :">Everything in Starter, plus:</li>
-            <li data-en="Full game coverage (2–5 hrs)" data-fr="Couverture complète du match (2–5 h)">Full game coverage (2–5 hrs)</li>
-            <li data-en="50–60 edited photos" data-fr="50–60 photos éditées">50–60 edited photos</li>
-            <li data-en="Individual player galleries" data-fr="Galeries individuelles par joueur">Individual player galleries</li>
-            <li data-en="48-hour turnaround" data-fr="Livraison en 48 heures">48-hour turnaround</li>
-            <li data-en="Social crops (9:16 + 1:1 ready)" data-fr="Formats réseaux sociaux (9:16 + 1:1)">Social crops (9:16 + 1:1 ready)</li>
-            <li data-en="1 team photo session included" data-fr="1 séance de photos d'équipe incluse">1 team photo session included</li>
-          </ul>
-          <div class="pkg-price">$275 <span class="pkg-per" data-en="/ game" data-fr="/ match">/ game</span></div>
-        </label>
-
-        <label class="pkg-card" data-price="400" data-name="Club Partner" data-slug="club-partner">
-          <input type="radio" name="package" value="400">
-          <div class="pkg-check">
-            <svg width="10" height="8" viewBox="0 0 10 8" fill="none" stroke="#0e0e0e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 3.5 6.5 9 1"/></svg>
-          </div>
-          <div class="pkg-name" data-en="Club Partner" data-fr="Club Partner">Club Partner</div>
-          <div class="pkg-desc" data-en="A dedicated photo partner for your organization — multiple teams, full season, unified visual identity across all your platforms." data-fr="Un partenaire photo dédié à votre organisation — plusieurs équipes, saison complète, identité visuelle unifiée sur toutes vos plateformes.">A dedicated photo partner for your organization — multiple teams, full season, unified visual identity across all your platforms.</div>
-          <ul class="pkg-includes">
-            <li data-en="Everything in Season, plus:" data-fr="Tout ce qui est inclus dans Season, plus :">Everything in Season, plus:</li>
-            <li data-en="Coverage of 2 teams same day" data-fr="Couverture de 2 équipes le même jour">Coverage of 2 teams same day</li>
-            <li data-en="80+ edited photos per session" data-fr="80+ photos éditées par session">80+ edited photos per session</li>
-            <li data-en="Full roster headshot session" data-fr="Séance de portraits pour tous les joueurs">Full roster headshot session</li>
-            <li data-en="24-hour turnaround" data-fr="Livraison en 24 heures">24-hour turnaround</li>
-            <li data-en="Press &amp; media kit photos" data-fr="Photos pour kit presse et médias">Press &amp; media kit photos</li>
-            <li data-en="Priority scheduling all season" data-fr="Priorité de calendrier toute la saison">Priority scheduling all season</li>
-          </ul>
-          <div class="pkg-price">$400 <span class="pkg-per" data-en="/ game" data-fr="/ match">/ game</span></div>
-        </label>
-
+      <div class="field">
+        <label class="field-label">Last Name</label>
+        <input type="text" placeholder="Lezama" id="lname">
       </div>
+      <div class="field full">
+        <label class="field-label">Email</label>
+        <input type="email" placeholder="you@example.com" id="email">
+      </div>
+      <div class="field">
+        <label class="field-label">Phone (optional)</label>
+        <input type="tel" placeholder="438-000-0000" id="phone">
+      </div>
+      <div class="field">
+        <label class="field-label">Preferred Date</label>
+        <input type="date" id="pdate">
+      </div>
+      <div class="field full">
+        <label class="field-label">Location / Club Name</label>
+        <input type="text" placeholder="ASB Brossard, Complexe Sportif CN..." id="location">
+      </div>
+      <div class="field full">
+        <label class="field-label">Notes (optional)</label>
+        <textarea placeholder="Any specific requests, player name, number of players, match details..." id="notes"></textarea>
+      </div>
+    </div>
 
-      <!-- Games counter — appears after package selected -->
-      <div class="games-row" id="games-row">
+    <div class="btn-row">
+      <button class="btn btn-ghost" onclick="goTo(2)">← Back</button>
+      <button class="btn btn-gold" onclick="goTo(4)">Review Booking →</button>
+    </div>
+  </div>
+
+  <!-- ── STEP 4: SUMMARY ── -->
+  <div class="section" id="step4">
+    <div class="section-title">Review &amp; Confirm</div>
+    <div class="section-sub">Review your booking before sending the request.</div>
+
+    <div class="summary-box">
+      <div class="summary-header">Booking Summary</div>
+      <div class="summary-line"><span class="summary-label">Client type</span><span class="summary-val" id="sum-who">—</span></div>
+      <div class="summary-line"><span class="summary-label">Package</span><span class="summary-val" id="sum-pkg">—</span></div>
+      <div class="summary-line"><span class="summary-label">Add-ons</span><span class="summary-val" id="sum-addons">None</span></div>
+      <div class="summary-line"><span class="summary-label">Delivery</span><span class="summary-val">24–72 hours</span></div>
+      <div class="summary-line"><span class="summary-label">Deposit required</span><span class="summary-val" id="sum-deposit">—</span></div>
+      <div class="summary-total">
         <div>
-          <div class="games-lbl" data-en="Number of games" data-fr="Nombre de matchs">Number of games</div>
-          <div class="games-subtotal" id="games-subtotal"></div>
+          <div class="total-label">Total</div>
+          <div class="total-price"><span id="total-price-val">—</span> <span style="font-size:16px;color:var(--mid);font-family:Syne,sans-serif;font-weight:400;">CAD</span></div>
         </div>
-        <div class="games-ctrl">
-          <button class="qty-btn" id="games-minus" type="button">−</button>
-          <span class="games-num" id="games-num">1</span>
-          <button class="qty-btn" id="games-plus" type="button">+</button>
-          <span class="qty-unit" data-en="games" data-fr="matchs">games</span>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- ══ LIVE PRICE ESTIMATE ══ -->
-    <div class="live-estimate" id="live-estimate">
-      <div class="le-hd" data-en="Live price estimate" data-fr="Estimation en direct">Live price estimate</div>
-      <div id="le-lines"></div>
-      <div class="le-total-row">
-        <div class="le-total-label-wrap">
-          <span class="le-total-label" data-en="Total incl. taxes" data-fr="Total taxes incl.">Total incl. taxes</span>
-          <span class="le-total-sub" id="le-tax-hint"></span>
-        </div>
-        <div class="le-total-num" id="le-total">—</div>
+        <div style="text-align:right;font-size:12px;color:var(--mid);max-width:180px;line-height:1.6;">50% deposit to confirm.<br>Balance on delivery.</div>
       </div>
     </div>
 
-    <!-- ══ STEP 2: ADD-ONS ══ -->
-    <div class="config-step">
-      <div class="step-hd">
-        <span class="step-n">02</span>
-        <span class="step-title" data-en="Add-ons" data-fr="Suppléments">Add-ons</span>
-        <span class="step-hint" data-en="Optional extras" data-fr="Options facultatives">Optional extras</span>
-      </div>
-      <div class="addon-list">
-
-        <!-- TIER 1 -->
-        <label class="addon-item" data-price="10" data-name="Individual Player Pack" data-per-unit="player">
-          <input type="checkbox" name="addon" value="15">
-          <div class="addon-box">
-            <svg width="10" height="8" viewBox="0 0 10 8" fill="none" stroke="#0e0e0e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 3.5 6.5 9 1"/></svg>
-          </div>
-          <div class="addon-body">
-            <div class="addon-name" data-en="Individual Player Pack" data-fr="Forfait joueur individuel">Individual Player Pack</div>
-            <div class="addon-desc" data-en="Full-res gallery per player with full re-downloads." data-fr="Galerie haute résolution par joueur avec téléchargements illimités.">Full-res gallery per player with full re-downloads.</div>
-            <div class="addon-qty">
-              <button class="qty-btn qty-minus" type="button">−</button>
-              <span class="qty-val">1</span>
-              <button class="qty-btn qty-plus" type="button">+</button>
-              <span class="qty-unit" data-en="players" data-fr="joueurs">players</span>
-            </div>
-          </div>
-          <div class="addon-price">+$10/player</div>
-        </label>
-
-        <label class="addon-item" data-price="200" data-name="Team Portrait Session">
-          <input type="checkbox" name="addon" value="200">
-          <div class="addon-box">
-            <svg width="10" height="8" viewBox="0 0 10 8" fill="none" stroke="#0e0e0e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 3.5 6.5 9 1"/></svg>
-          </div>
-          <div class="addon-body">
-            <div class="addon-name" data-en="Team Portrait Session" data-fr="Séance portraits d'équipe">Team Portrait Session</div>
-            <div class="addon-desc" data-en="60-min dedicated shoot — team photo, individual headshots, action poses. Separate from game day." data-fr="Séance dédiée de 60 min — photo d'équipe, portraits individuels, poses dynamiques. Séparé du jour de match.">60-min dedicated shoot — team photo, individual headshots, action poses. Separate from game day.</div>
-          </div>
-          <div class="addon-price">+$200/session</div>
-        </label>
-
-        <label class="addon-item" data-price="50" data-name="Rush Delivery">
-          <input type="checkbox" name="addon" value="50">
-          <div class="addon-box">
-            <svg width="10" height="8" viewBox="0 0 10 8" fill="none" stroke="#0e0e0e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 3.5 6.5 9 1"/></svg>
-          </div>
-          <div class="addon-body">
-            <div class="addon-name" data-en="Rush Delivery" data-fr="Livraison express">Rush Delivery</div>
-            <div class="addon-desc" data-en="Delivered within 6 hours of the final whistle instead of 48–72. Flat fee, no surprises." data-fr="Livré dans les 6 heures après le match au lieu de 48–72 h. Forfait fixe, sans surprise.">Delivered within 6 hours of the final whistle instead of 48–72. Flat fee, no surprises.</div>
-          </div>
-          <div class="addon-price">+$50 flat</div>
-        </label>
-
-        <label class="addon-item" data-price="150" data-name="End-of-Season Recap">
-          <input type="checkbox" name="addon" value="150">
-          <div class="addon-box">
-            <svg width="10" height="8" viewBox="0 0 10 8" fill="none" stroke="#0e0e0e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 3.5 6.5 9 1"/></svg>
-          </div>
-          <div class="addon-body">
-            <div class="addon-name" data-en="End-of-Season Recap" data-fr="Récapitulatif de fin de saison">End-of-Season Recap</div>
-            <div class="addon-desc" data-en="Curated gallery from the full season — best moments, every player featured." data-fr="Galerie curatée de toute la saison — meilleurs moments, chaque joueur présent.">Curated gallery from the full season — best moments, every player featured.</div>
-          </div>
-          <div class="addon-price">+$150 flat</div>
-        </label>
-
-        <!-- TIER 2 -->
-        <label class="addon-item" data-price="15" data-name="Player Headshot Upgrade" data-per-unit="player">
-          <input type="checkbox" name="addon" value="25">
-          <div class="addon-box">
-            <svg width="10" height="8" viewBox="0 0 10 8" fill="none" stroke="#0e0e0e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 3.5 6.5 9 1"/></svg>
-          </div>
-          <div class="addon-body">
-            <div class="addon-name" data-en="Player Headshot Upgrade" data-fr="Upgrade portraits joueurs">Player Headshot Upgrade</div>
-            <div class="addon-desc" data-en="3–5 clean professional headshots per player on white/natural bg, optimized for social media profiles." data-fr="3–5 portraits professionnels nets par joueur sur fond blanc/naturel, optimisés pour les profils réseaux sociaux.">3–5 clean professional headshots per player on white/natural bg, optimized for social media profiles.</div>
-            <div class="addon-qty">
-              <button class="qty-btn qty-minus" type="button">−</button>
-              <span class="qty-val">1</span>
-              <button class="qty-btn qty-plus" type="button">+</button>
-              <span class="qty-unit" data-en="players" data-fr="joueurs">players</span>
-            </div>
-          </div>
-          <div class="addon-price">+$15/player</div>
-        </label>
-
-        <label class="addon-item" data-price="100" data-name="Highlight Video">
-          <input type="checkbox" name="addon" value="100">
-          <div class="addon-box">
-            <svg width="10" height="8" viewBox="0 0 10 8" fill="none" stroke="#0e0e0e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 3.5 6.5 9 1"/></svg>
-          </div>
-          <div class="addon-body">
-            <div class="addon-name" data-en="Highlight Video" data-fr="Vidéo de faits saillants">Highlight Video</div>
-            <div class="addon-desc" data-en="60-sec cinematic reel, color graded, Instagram-ready — vertical and horizontal cut included." data-fr="Réel cinématique de 60 sec, étalonné, prêt pour Instagram — format vertical et horizontal inclus.">60-sec cinematic reel, color graded, Instagram-ready — vertical and horizontal cut included.</div>
-          </div>
-          <div class="addon-price">+$100 flat</div>
-        </label>
-
-      </div>
+    <div class="btn-row">
+      <button class="btn btn-ghost" onclick="goTo(3)">← Back</button>
+      <button class="btn btn-gold" id="confirm-btn" onclick="submitBooking()">Send Booking Request →</button>
     </div>
+    <p class="nav-note">You'll receive a confirmation email within 24 hours · adriano@adrianolezamas.com</p>
+  </div>
 
-    <!-- ══ STEP 3: EVENT DETAILS ══ -->
-    <div class="config-step">
-      <div class="step-hd">
-        <span class="step-n">03</span>
-        <span class="step-title" data-en="Event details" data-fr="Détails de l'événement">Event details</span>
-      </div>
-      <div class="bf-grid2" style="margin-bottom:18px;">
-        <div class="bf-row">
-          <label for="bf-sport" data-en="Sport / Event type" data-fr="Sport / Type d'événement">Sport / Event type</label>
-          <select id="bf-sport" name="sport">
-            <option value="" disabled selected data-en="Select…" data-fr="Sélectionner…">Select…</option>
-            <option data-en="Soccer — outdoor" data-fr="Soccer — extérieur">Soccer — outdoor</option>
-            <option data-en="Futsal — indoor" data-fr="Futsal — intérieur">Futsal — indoor</option>
-            <option data-en="Basketball" data-fr="Basketball">Basketball</option>
-            <option data-en="Volleyball" data-fr="Volleyball">Volleyball</option>
-            <option data-en="Hockey" data-fr="Hockey">Hockey</option>
-            <option data-en="Other" data-fr="Autre">Other</option>
-          </select>
-        </div>
-        <div class="bf-row">
-          <label for="bf-date"><span data-en="Event date" data-fr="Date de l'événement">Event date</span> <span style="font-size:0.5rem;color:#444;">(7+ <span data-en="days" data-fr="jours">days</span>)</span></label>
-          <input type="date" id="bf-date" name="date">
-        </div>
-      </div>
-      <div class="bf-row" style="margin-bottom:18px;">
-        <label for="bf-time" data-en="Kickoff time" data-fr="Heure de début">Kickoff time</label>
-        <input type="time" id="bf-time" name="time">
-      </div>
-      <div class="bf-row" style="margin-bottom:0;">
-        <label for="bf-address" data-en="Venue / Full address" data-fr="Lieu / Adresse complète">Venue / Full address</label>
-        <input type="text" id="bf-address" name="address" placeholder="Arena name, street, city, province…" data-ph-en="Arena name, street, city, province…" data-ph-fr="Nom de l'aréna, rue, ville, province…" autocomplete="off">
-        <div class="travel-calc-wrap">
-          <div class="travel-origin-line">
-            <span class="travel-origin-dot"></span>
-            <span data-en="Based from Brossard, Quebec" data-fr="Au départ de Brossard, Québec">Based from Brossard, Quebec</span>
-          </div>
-          <button type="button" id="travel-calc-btn" class="travel-calc-btn" data-en="Check travel fee" data-fr="Calculer les frais de déplacement">Check travel fee</button>
-          <p id="travel-calc-error" class="travel-error" style="display:none;"></p>
-          <div id="travel-result-box" class="travel-result-box" style="display:none;">
-            <div class="travel-result-row">
-              <span class="travel-rl" data-en="Distance from Brossard" data-fr="Distance depuis Brossard">Distance from Brossard</span>
-              <span class="travel-rv" id="tr-distance">—</span>
-            </div>
-            <div class="travel-result-row">
-              <span class="travel-rl" data-en="Zone" data-fr="Zone">Zone</span>
-              <span class="travel-rv"><span id="tr-zone">—</span><span id="tr-badge" class="travel-badge"></span></span>
-            </div>
-            <div class="travel-fee-row">
-              <span class="travel-fee-label" data-en="Travel fee" data-fr="Frais de déplacement">Travel fee</span>
-              <span class="travel-fee-amount" id="tr-fee">—</span>
-            </div>
-            <p class="travel-note-text" id="tr-note"></p>
-          </div>
-        </div>
-      </div>
+  <!-- ── STEP 5: DONE ── -->
+  <div class="section" id="step5">
+    <div class="confirm-box">
+      <div class="confirm-icon">✅</div>
+      <div class="confirm-title">Request Sent!</div>
+      <div class="confirm-sub">Your booking request has been received. I'll confirm your session within 24 hours at your email address.<br><br>In the meantime, follow the work on Instagram: <strong>@byadriano_</strong></div>
     </div>
+  </div>
 
-    <!-- ══ STEP 4: CONTACT ══ -->
-    <div class="config-step">
-      <div class="step-hd">
-        <span class="step-n">04</span>
-        <span class="step-title" data-en="Your info" data-fr="Vos coordonnées">Your info</span>
-      </div>
-      <div class="bf-grid2" style="margin-bottom:18px;">
-        <div class="bf-row">
-          <label for="bf-fname" data-en="First name" data-fr="Prénom">First name</label>
-          <input type="text" id="bf-fname" name="firstname" placeholder="First name" data-ph-en="First name" data-ph-fr="Prénom">
-        </div>
-        <div class="bf-row">
-          <label for="bf-lname" data-en="Last name" data-fr="Nom">Last name</label>
-          <input type="text" id="bf-lname" name="lastname" placeholder="Last name" data-ph-en="Last name" data-ph-fr="Nom">
-        </div>
-      </div>
-      <div class="bf-grid2" style="margin-bottom:18px;">
-        <div class="bf-row">
-          <label for="bf-email">Email</label>
-          <input type="email" id="bf-email" name="email" placeholder="your@email.com">
-        </div>
-        <div class="bf-row">
-          <label for="bf-phone">Phone</label>
-          <input type="tel" id="bf-phone" name="phone" placeholder="+1 (514) 000-0000">
-        </div>
-      </div>
-      <div class="bf-row" style="margin-bottom:0;">
-        <label for="bf-notes" data-en="Notes" data-fr="Notes">Notes</label>
-        <textarea id="bf-notes" name="notes" placeholder="Team name, specific shots you need, anything else…" data-ph-en="Team name, specific shots you need, anything else…" data-ph-fr="Nom de l'équipe, photos spécifiques, toute autre information…"></textarea>
-      </div>
+</div><!-- /.wrap -->
+
+<!-- ── LIVE PRICE BAR ── -->
+<div class="live-bar" id="live-bar">
+  <div class="live-bar-left">
+    <span class="live-bar-label">Your selection</span>
+    <div class="live-bar-detail" id="live-bar-detail">No package selected</div>
+  </div>
+  <div class="live-bar-right">
+    <span class="live-bar-price-label">Running total</span>
+    <div>
+      <span class="live-bar-price gold" id="live-bar-price">$0</span>
+      <span class="live-bar-currency">CAD</span>
     </div>
+  </div>
+</div>
 
-    <!-- ══ STEP 5: TERMS ══ -->
-    <div class="config-step">
-      <div class="step-hd">
-        <span class="step-n">05</span>
-        <span class="step-title" data-en="Terms &amp; policies" data-fr="Conditions &amp; politiques">Terms &amp; policies</span>
-        <span class="step-hint" data-en="All required" data-fr="Toutes obligatoires">All required</span>
-      </div>
-      <div id="terms-list">
-        <label class="term-item" id="t1">
-          <input type="checkbox" id="tc1">
-          <div class="term-box"><svg width="10" height="8" viewBox="0 0 10 8" fill="none" stroke="#0e0e0e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 3.5 6.5 9 1"/></svg></div>
-          <span class="term-text" data-en="<strong>Turnaround Time:</strong> I understand I will receive a private link to all edited images within 24 hours of the shoot." data-fr="<strong>Délai de livraison :</strong> Je comprends que je recevrai un lien privé vers toutes les images éditées dans les 24 heures suivant la séance."><strong>Turnaround Time:</strong> I understand I will receive a private link to all edited images within 24 hours of the shoot.</span>
-        </label>
-        <label class="term-item" id="t2">
-          <input type="checkbox" id="tc2">
-          <div class="term-box"><svg width="10" height="8" viewBox="0 0 10 8" fill="none" stroke="#0e0e0e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 3.5 6.5 9 1"/></svg></div>
-          <span class="term-text" data-en="<strong>Usage Rights:</strong> I agree images are for Personal Use Only. Commercial reselling or redistribution is prohibited." data-fr="<strong>Droits d'utilisation :</strong> Je conviens que les images sont à usage personnel uniquement. La revente ou redistribution commerciale est interdite."><strong>Usage Rights:</strong> I agree images are for Personal Use Only. Commercial reselling or redistribution is prohibited.</span>
-        </label>
-        <label class="term-item" id="t3">
-          <input type="checkbox" id="tc3">
-          <div class="term-box"><svg width="10" height="8" viewBox="0 0 10 8" fill="none" stroke="#0e0e0e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 3.5 6.5 9 1"/></svg></div>
-          <span class="term-text" data-en="<strong>Creator Rights:</strong> I grant the photographer permission to use captured media for business promotion and portfolio." data-fr="<strong>Droits du créateur :</strong> J'autorise le photographe à utiliser les médias capturés pour la promotion de son activité et son portfolio."><strong>Creator Rights:</strong> I grant the photographer permission to use captured media for business promotion and portfolio.</span>
-        </label>
-        <label class="term-item" id="t4">
-          <input type="checkbox" id="tc4">
-          <div class="term-box"><svg width="10" height="8" viewBox="0 0 10 8" fill="none" stroke="#0e0e0e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 3.5 6.5 9 1"/></svg></div>
-          <span class="term-text" data-en="<strong>Cancellation Policy:</strong> I understand that cancellations result in a fee of 25% of the total payment." data-fr="<strong>Politique d'annulation :</strong> Je comprends que les annulations entraînent des frais de 25% du paiement total."><strong>Cancellation Policy:</strong> I understand that cancellations result in a fee of 25% of the total payment.</span>
-        </label>
-      </div>
-      <div class="terms-warning" id="terms-warning" data-en="Please accept all 4 terms to continue." data-fr="Veuillez accepter les 4 conditions pour continuer.">Please accept all 4 terms to continue.</div>
-    </div>
-
-    <!-- ══ SUBMIT ══ -->
-    <div class="submit-section" id="submit-section">
-
-      <div class="book-success" id="book-success">
-        <div class="bs-check">
-          <svg width="26" height="22" viewBox="0 0 26 22" fill="none" stroke="#c8a96e" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 11 9 18 24 2"/></svg>
-        </div>
-        <h3 data-en="Booking request sent." data-fr="Demande de réservation envoyée.">Booking request sent.</h3>
-        <p data-en="I'll confirm within an hour with availability and next steps.<br>Check your inbox — a summary is on its way." data-fr="Je confirmerai dans l'heure avec les disponibilités et les prochaines étapes.<br>Vérifiez votre boîte mail — un résumé est en route.">I'll confirm within an hour with availability and next steps.<br>Check your inbox — a summary is on its way.</p>
-
-        <div class="bs-inbox-notice">
-          <div class="bs-inbox-icon">
-            <svg width="17" height="14" viewBox="0 0 24 20" fill="none" stroke="#c8a96e" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="2" y="4" width="20" height="16" rx="2"/>
-              <polyline points="2,4 12,13 22,4"/>
-            </svg>
-          </div>
-          <div class="bs-inbox-text">
-            <strong data-en="Check your inbox" data-fr="Vérifiez votre boîte mail">Check your inbox</strong>
-            <span data-en="A booking summary has been sent to:" data-fr="Un résumé de réservation a été envoyé à :">A booking summary has been sent to:</span>
-            <em class="bs-inbox-email" id="bs-inbox-email"></em>
-          </div>
-        </div>
-      </div>
-
-      <div id="order-summary-wrap">
-        <div class="order-summary-table" id="order-summary">
-          <div class="os-row">
-            <span class="osl" data-en="Package" data-fr="Forfait">Package</span>
-            <span class="osv" id="os-pkg">—</span>
-          </div>
-          <div id="os-addon-rows"></div>
-          <div class="os-row">
-            <span class="osl" id="os-travel-label" data-en="Travel (0 km × $0.75)" data-fr="Déplacement (0 km × 0,75 $)">Travel (0 km × $0.75)</span>
-            <span class="osv" id="os-travel">$0.00</span>
-          </div>
-          <div class="os-row os-tax-row">
-            <span class="osl" data-en="Subtotal" data-fr="Sous-total">Subtotal</span>
-            <span class="osv" id="os-subtotal">—</span>
-          </div>
-          <div class="os-row os-tax-row">
-            <span class="osl" data-en="GST (5%)" data-fr="TPS (5%)">GST (5%)</span>
-            <span class="osv" id="os-gst">—</span>
-          </div>
-          <div class="os-row os-tax-row" style="border-bottom: 1px solid rgba(255,255,255,0.08);">
-            <span class="osl" data-en="QST (9.975%)" data-fr="TVQ (9,975%)">QST (9.975%)</span>
-            <span class="osv" id="os-qst">—</span>
-          </div>
-          <div class="os-row total">
-            <span class="osl" data-en="Total (taxes incl.)" data-fr="Total (taxes incl.)">Total (taxes incl.)</span>
-            <span class="osv" id="os-total">—</span>
-          </div>
-        </div>
-        <div class="os-payment-notice">
-          <p data-en="<span>100% payment required upfront</span> to confirm your date. I'll send a payment link once I confirm availability." data-fr="<span>100% du paiement requis à l'avance</span> pour confirmer votre date. Je vous enverrai un lien de paiement une fois la disponibilité confirmée."><span>100% payment required upfront</span> to confirm your date. I'll send a payment link once I confirm availability.</p>
-        </div>
-        <p class="os-note" data-en="Prefer to talk directly? <a href='mailto:adrlezama@gmail.com'>adrlezama@gmail.com</a>" data-fr="Vous préférez discuter directement ? <a href='mailto:adrlezama@gmail.com'>adrlezama@gmail.com</a>">Prefer to talk directly? <a href="mailto:adrlezama@gmail.com">adrlezama@gmail.com</a></p>
-        <button class="book-btn" id="book-btn" data-en="Request Booking" data-fr="Envoyer la demande">Request Booking</button>
-      </div>
-
-    </div>
-
-  </div><!-- /config-right -->
-</div><!-- /config-layout -->
-
-<!-- ══ FOOTER ══ -->
 <footer>
   <div class="footer-brand">
     <span class="footer-name">Adriano Lezama</span>
@@ -1093,612 +561,314 @@
 </footer>
 
 <script>
-  // Mobile menu
+// ── DATA ──────────────────────────────────────────────────────────────────────
+const bookingData = {
+  individual: {
+    title: "Individual Packages",
+    sub: "For parents and athletes — photos delivered to your phone within 24 hours.",
+    theme: "gold-theme",
+    accent: "gold",
+    packages: [
+      { id:"p1", name:"Single Photo",     tag:"Option 01",               desc:"One perfect moment, high resolution.",                                            price:15,  unit:"CAD",            feats:["1 edited photo","Private gallery download","Print & share rights"] },
+      { id:"p2", name:"Basic Pack",       tag:"Option 02",               desc:"The 5 best photos of your child from the game.",                                  price:25,  unit:"CAD",            feats:["5 edited photos","High resolution","24h delivery","Personal use"] },
+      { id:"p3", name:"Full Game Pack",   tag:"Option 03 ⭐ Most Popular", desc:"10–15 photos covering the full match.",                                           price:40,  unit:"CAD",            feats:["10–15 edited photos","Action + team moments","24h delivery","Print & share rights"], best:true },
+      { id:"p4", name:"Season Pack",      tag:"Option 04",               desc:"All home games covered all season long.",                                          price:120, unit:"CAD / season",   feats:["All home matches","10–15 photos/game","Running gallery","Best value/game"] },
+      { id:"p5", name:"Athlete Session",  tag:"Personal Branding",       desc:"Portrait + action session to build your Instagram presence.",                     price:225, unit:"CAD / session",  feats:["25–40 edited photos","On-location session","24h delivery","Social media rights"] },
+      { id:"p6", name:"Complete Bundle",  tag:"Photos + Video 🎬",        desc:"Athlete session + a 60-second cinematic highlight reel.",                        price:300, unit:"CAD / session",  feats:["Everything in Athlete Session","60-sec highlight video","Instagram-ready cuts","24h delivery"], best:true },
+    ],
+    addons: [
+      { id:"a1", name:"Rush Delivery",    desc:"Delivered within 6 hours",                    price:50,  priceLabel:"+$50"      },
+      { id:"a2", name:"Extra Photos (+10)", desc:"20 additional edited photos",               price:30,  priceLabel:"+$30"      },
+      { id:"a3", name:"Printed 8×10",     desc:"Printed photo shipped to you via Printful",   price:30,  priceLabel:"+$30/print" },
+    ]
+  },
+  club: {
+    title: "Club Packages",
+    sub: "Professional game day coverage for clubs, associations, and leagues.",
+    theme: "blue-theme",
+    accent: "blue",
+    packages: [
+      { id:"c1", name:"Game Day Starter", tag:"Tier 01",               desc:"Everything your club needs to fuel social media after a game.",                    price:150, unit:"CAD / game",     feats:["1.5–2h sideline coverage","25–40 edited photos","Private Pixieset gallery","72h turnaround","Social media rights"] },
+      { id:"c2", name:"Season Coverage",  tag:"Tier 02 ⭐ Best Value",  desc:"Consistent visuals all season — content your comms team will use.",              price:275, unit:"CAD / game",     feats:["Full coverage 2–5h","50–60 edited photos","Individual player galleries","48h turnaround","Social crops 9:16 + 1:1","1 team portrait session/season"], best:true },
+      { id:"c3", name:"Club Partner",     tag:"Tier 03",               desc:"A dedicated photo partner for your entire organization.",                          price:400, unit:"CAD / game",     feats:["2 teams same day","80+ edited photos","Full roster headshots","24h turnaround guaranteed","Press & media kit photos","Full commercial rights"] },
+    ],
+    addons: [
+      { id:"b1", name:"Individual Player Pack", desc:"Full-res gallery per player",                                price:10,  priceLabel:"+$10/player"  },
+      { id:"b2", name:"Team Portrait Session",  desc:"60-min dedicated shoot, separate from game day",            price:200, priceLabel:"+$200/session" },
+      { id:"b3", name:"Rush Delivery",          desc:"Delivered within 6 hours of final whistle",                 price:50,  priceLabel:"+$50 flat"    },
+      { id:"b4", name:"End-of-Season Recap",    desc:"Curated gallery — best moments, every player featured",     price:150, priceLabel:"+$150 flat"   },
+      { id:"b5", name:"Player Headshots",       desc:"3–5 clean shots per player, social-ready",                  price:15,  priceLabel:"+$15/player"  },
+      { id:"b6", name:"Highlight Video",        desc:"60-sec cinematic match reel, color graded",                 price:100, priceLabel:"+$100 flat"   },
+    ]
+  }
+};
 
-  // Gallery auto-slideshow
-  const galleryImgs   = Array.from(document.querySelectorAll('.gallery-img'));
-  const galleryThumbs = Array.from(document.querySelectorAll('.gallery-thumb'));
-  let galleryCurrent  = 0;
-  let galleryTimer;
+// ── STATE ─────────────────────────────────────────────────────────────────────
+let who = null, selectedPkg = null, selectedAddons = new Set();
 
-  function goToSlide(idx) {
-    galleryImgs[galleryCurrent].classList.remove('active');
-    galleryThumbs[galleryCurrent].classList.remove('active');
-    galleryCurrent = idx;
-    galleryImgs[galleryCurrent].classList.add('active');
-    galleryThumbs[galleryCurrent].classList.add('active');
+// ── LIVE PRICE ────────────────────────────────────────────────────────────────
+function updateLivePrice() {
+  if (!who) return;
+  const d = bookingData[who];
+  const bar = document.getElementById('live-bar');
+  const barPrice = document.getElementById('live-bar-price');
+  const barDetail = document.getElementById('live-bar-detail');
+
+  if (!selectedPkg) {
+    bar.classList.remove('visible');
+    return;
   }
 
-  function startAutoSlide() {
-    clearInterval(galleryTimer);
-    galleryTimer = setInterval(() => {
-      goToSlide((galleryCurrent + 1) % galleryImgs.length);
-    }, 4000);
+  let total = selectedPkg.price;
+  const activeAddons = d.addons.filter(a => selectedAddons.has(a.id));
+  activeAddons.forEach(a => total += a.price);
+
+  // Build detail string
+  let parts = [selectedPkg.name + ' ($' + selectedPkg.price + ')'];
+  activeAddons.forEach(a => parts.push(a.name + ' (' + a.priceLabel + ')'));
+  barDetail.textContent = parts.join(' + ');
+
+  // Animate price
+  const prev = barPrice.textContent;
+  const next = '$' + total;
+  if (prev !== next) {
+    barPrice.textContent = next;
+    barPrice.classList.remove('pop');
+    void barPrice.offsetWidth; // reflow to restart animation
+    barPrice.classList.add('pop');
   }
 
-  // Manual thumb click — reset timer so it doesn't immediately override
-  galleryThumbs.forEach(thumb => {
-    thumb.addEventListener('click', () => {
-      goToSlide(parseInt(thumb.dataset.idx));
-      startAutoSlide();
-    });
+  // Color
+  barPrice.className = 'live-bar-price ' + (who === 'individual' ? 'gold' : 'blue') + ' pop';
+
+  // Show bar (slide in)
+  bar.classList.add('visible');
+}
+
+// ── WHO SELECTION ─────────────────────────────────────────────────────────────
+function selectWho(type) {
+  who = type;
+  selectedPkg = null;
+  selectedAddons = new Set();
+
+  document.querySelectorAll('.who-card').forEach(c => c.classList.remove('selected'));
+  document.querySelector('.who-card.' + type).classList.add('selected');
+  document.getElementById('check-individual').textContent = '';
+  document.getElementById('check-club').textContent = '';
+  document.getElementById('check-' + type).textContent = '✓';
+
+  const btn = document.getElementById('btn-who');
+  btn.disabled = false;
+  btn.className = 'btn ' + (type === 'individual' ? 'btn-gold' : 'btn-blue');
+}
+
+// ── RENDER PACKAGES ───────────────────────────────────────────────────────────
+function renderPackages() {
+  const d = bookingData[who];
+  document.getElementById('pkg-title').textContent = d.title;
+  document.getElementById('pkg-sub').textContent = d.sub;
+
+  // Packages
+  const pl = document.getElementById('packages-list');
+  pl.innerHTML = '';
+  d.packages.forEach(pkg => {
+    const div = document.createElement('div');
+    div.className = 'pkg ' + d.theme;
+    div.id = 'pkg-' + pkg.id;
+    div.onclick = () => selectPkg(pkg);
+    div.innerHTML =
+      (pkg.best ? `<div class="pkg-badge ${who==='individual'?'gold-bg':'blue-bg'}">Most Popular</div>` : '') +
+      `<div class="pkg-left">
+        <div class="pkg-tag">${pkg.tag}</div>
+        <div class="pkg-name">${pkg.name}</div>
+        <div class="pkg-desc">${pkg.desc}</div>
+        <div class="pkg-feats">${pkg.feats.map(f=>`<div class="feat-pill">✓ ${f}</div>`).join('')}</div>
+      </div>
+      <div class="pkg-right">
+        <div class="pkg-price">$${pkg.price}</div>
+        <div class="pkg-unit">${pkg.unit}</div>
+        <div class="pkg-radio"></div>
+      </div>`;
+    pl.appendChild(div);
   });
 
-  startAutoSlide();
-
-  // Click anywhere on date/time inputs to open picker
-  document.getElementById('bf-date').addEventListener('click', function() { this.showPicker(); });
-  document.getElementById('bf-time').addEventListener('click', function() { this.showPicker(); });
-
-  // Set min date (7 days)
-  const dateInput = document.getElementById('bf-date');
-  const minDate = new Date();
-  minDate.setDate(minDate.getDate() + 7);
-  dateInput.min = minDate.toISOString().split('T')[0];
-
-  // ── Bilingual helper ──
-  function t(en, fr) {
-    return (window.currentLang === 'fr') ? fr : en;
-  }
-
-  // ── Live price state ──
-  const GST_RATE = 0.05;
-  const QST_RATE = 0.09975;
-  const TRAVEL_RATE = 0.75; // $ per km
-
-  let selectedPkg    = null;
-  let addonTotal     = 0;
-  let addonItems     = [];
-  let calculatedKm   = 0;
-  let travelIsCustom = false;
-  let gamesCount     = 1;
-
-  const FREE_ZONE_KM = 5;
-
-  function getTravel() {
-    return { km: calculatedKm, cost: calculatedKm * TRAVEL_RATE };
-  }
-
-  function refreshPrice() {
-    const { km, cost: travel } = getTravel();
-    const breakdown    = document.getElementById('pb-breakdown');
-    const totalEl      = document.getElementById('pb-total');
-    const pbTotalLabel = document.querySelector('.pb-total-label');
-    const osAddonRows  = document.getElementById('os-addon-rows');
-    const osPkg        = document.getElementById('os-pkg');
-    const osTravelLabel = document.getElementById('os-travel-label');
-    const osTravel     = document.getElementById('os-travel');
-    const osSubtotal   = document.getElementById('os-subtotal');
-    const osGst        = document.getElementById('os-gst');
-    const osQst        = document.getElementById('os-qst');
-    const osTotal      = document.getElementById('os-total');
-
-    if (!selectedPkg) {
-      breakdown.innerHTML = t('— Select a package to begin', '— Choisissez un forfait pour commencer');
-      totalEl.className = 'pb-total custom';
-      totalEl.textContent = '—';
-      pbTotalLabel.textContent = t('Total (taxes incl.)', 'Total (taxes incl.)');
-      osPkg.textContent = '—';
-      osAddonRows.innerHTML = '';
-      osSubtotal.textContent = '—';
-      osGst.textContent = '—';
-      osQst.textContent = '—';
-      osTotal.textContent = '—';
-      document.getElementById('live-estimate').classList.remove('visible');
-      document.getElementById('gallery-price').classList.remove('visible');
-      return;
-    }
-
-    const freeGamesPreview = (selectedPkg && !selectedPkg.isCustom) ? Math.floor(gamesCount / 4) : 0;
-    osPkg.textContent = selectedPkg.name + (selectedPkg.isCustom
-      ? t(' (custom)', ' (personnalisé)')
-      : ' — $' + selectedPkg.price + (gamesCount > 1
-          ? (freeGamesPreview > 0
-              ? t(` × ${gamesCount} games (${freeGamesPreview} free)`, ` × ${gamesCount} matchs (${freeGamesPreview} gratuit${freeGamesPreview > 1 ? 's' : ''})`)
-              : t(' × ' + gamesCount + ' games', ' × ' + gamesCount + ' matchs'))
-          : ''));
-
-    if (selectedPkg.isCustom) {
-      osTravelLabel.textContent = t(`Travel (${km} km × $0.75)`, `Déplacement (${km} km × 0,75 $)`);
-      osTravel.textContent = '$' + travel.toFixed(2);
-      osAddonRows.innerHTML = addonItems.map(a =>
-        `<div class="os-row os-tax-row"><span class="osl">${a.name}</span><span class="osv">+$${a.price.toFixed(2)}</span></div>`
-      ).join('');
-      breakdown.innerHTML = `<span>${selectedPkg.name}</span> + ${t('travel', 'déplacement')}${addonTotal ? ' + ' + t('add-ons', 'suppléments') : ''}`;
-      totalEl.className = 'pb-total custom';
-      totalEl.textContent = t('Quote on request', 'Devis sur demande');
-      pbTotalLabel.textContent = t('Total (taxes incl.)', 'Total (taxes incl.)');
-      osSubtotal.textContent = '—';
-      osGst.textContent = '—';
-      osQst.textContent = '—';
-      osTotal.textContent = t('Custom — quote on confirmation', 'Personnalisé — devis à la confirmation');
-      // Live estimate panel — custom
-      document.getElementById('live-estimate').classList.add('visible');
-      document.getElementById('le-lines').innerHTML = `<div class="le-row"><span class="le-lbl">${selectedPkg.name}</span><span class="le-val">—</span></div>`;
-      const leTotalElC = document.getElementById('le-total');
-      leTotalElC.textContent = t('Custom quote', 'Devis personnalisé');
-      document.getElementById('le-tax-hint').textContent = '';
-      // Left gallery panel — custom
-      const gpBoxC = document.getElementById('gallery-price');
-      const gpTopC = document.getElementById('gp-top');
-      const gpTotalC = document.getElementById('gp-total');
-      gpBoxC.classList.add('visible');
-      let gpHtmlC = `<div class="gp-row"><span class="gp-lbl">${selectedPkg.name}</span><span class="gp-val">—</span></div>`;
-      addonItems.forEach(a => {
-        gpHtmlC += `<div class="gp-row"><span class="gp-lbl">${a.name}</span><span class="gp-val">+$${a.price.toFixed(0)}</span></div>`;
-      });
-      gpTopC.innerHTML = gpHtmlC;
-      gpTotalC.className = 'gp-total custom';
-      gpTotalC.textContent = t('Quote on request', 'Devis sur demande');
-    } else {
-      const multiplier   = gamesCount;
-      const base         = selectedPkg.price;
-      const freeGames    = Math.floor(gamesCount / 4);
-      const paidGames    = gamesCount - freeGames;
-      const packageCost  = base * paidGames;
-      const mgbItem      = addonItems.find(a => a.isMgb);
-      const mgbPrice     = mgbItem ? mgbItem.price : 0;
-      const nonMgbTotal  = addonTotal - mgbPrice;
-      const addonEff     = nonMgbTotal * multiplier + mgbPrice;
-      const travelMult   = mgbItem ? 3 : multiplier;
-      const travelEff    = travel * travelMult;
-      const subtotal     = packageCost + addonEff + travelEff;
-      const gst          = subtotal * GST_RATE;
-      const qst          = subtotal * QST_RATE;
-      const grand        = subtotal + gst + qst;
-
-      if (travelIsCustom) {
-        osTravelLabel.textContent = t('Travel — custom quote on confirmation', 'Déplacement — devis à la confirmation');
-        osTravel.textContent = '—';
-      } else if (mgbItem && km > 0) {
-        const saved = travel.toFixed(2);
-        osTravelLabel.textContent = t(
-          `Travel (${km.toFixed(1)} km × $0.75 × 3 games — 1 free, $${saved} saved)`,
-          `Déplacement (${km.toFixed(1)} km × 0,75 $ × 3 matchs — 1 gratuit, ${saved}$ économisés)`
-        );
-        osTravel.textContent = '$' + travelEff.toFixed(2);
-      } else if (travelMult > 1) {
-        osTravelLabel.textContent = t(
-          `Travel (${km.toFixed(1)} km × $0.75 × ${travelMult} matches)`,
-          `Déplacement (${km.toFixed(1)} km × 0,75 $ × ${travelMult} matchs)`
-        );
-        osTravel.textContent = '$' + travelEff.toFixed(2);
-      } else {
-        osTravelLabel.textContent = km > 0
-          ? t(`Travel (${km.toFixed(1)} km × $0.75)`, `Déplacement (${km.toFixed(1)} km × 0,75 $)`)
-          : t('Travel', 'Déplacement');
-        osTravel.textContent = '$' + travelEff.toFixed(2);
-      }
-
-      osAddonRows.innerHTML = addonItems.map(a => {
-        const effPrice = a.isMgb ? a.price : a.price * multiplier;
-        let label;
-        if (a.isMgb) {
-          label = t('Multi-Game Block (3 games, 1 free)', 'Bloc multi-matchs (3 matchs, 1 gratuit)');
-        } else if (a.perUnit) {
-          const gameTag = multiplier > 1 ? ` ×${multiplier} ${t('games', 'matchs')}` : '';
-          label = `${a.name} (${a.qty} ${a.perUnit}${a.qty > 1 ? 's' : ''}${gameTag})`;
-        } else {
-          label = multiplier > 1 ? `${a.name} ×${multiplier}` : a.name;
-        }
-        return `<div class="os-row os-tax-row"><span class="osl">${label}</span><span class="osv">+$${effPrice.toFixed(2)}</span></div>`;
-      }).join('');
-
-      const gamesLabel = gamesCount > 1
-        ? (freeGames > 0
-            ? t(` ×${gamesCount} games (${freeGames} free)`, ` ×${gamesCount} matchs (${freeGames} gratuit${freeGames > 1 ? 's' : ''})`)
-            : t(' ×' + gamesCount + ' games', ' ×' + gamesCount + ' matchs'))
-        : '';
-      let parts = [`<span>${selectedPkg.name} $${packageCost.toFixed(0)}${gamesLabel}</span>`];
-      if (addonEff) parts.push(`${t('add-ons', 'suppléments')} $${addonEff}`);
-      if (travelEff > 0) parts.push(`${t('travel', 'déplacement')} $${travelEff.toFixed(2)}`);
-      breakdown.innerHTML = parts.join(' · ');
-      totalEl.className = 'pb-total';
-      const newTotal = '$' + grand.toFixed(2);
-      if (totalEl.textContent !== newTotal) {
-        totalEl.classList.remove('pop');
-        void totalEl.offsetWidth;
-        totalEl.classList.add('pop');
-      }
-      totalEl.textContent = newTotal;
-      pbTotalLabel.textContent = t('Total (taxes incl.)', 'Total (taxes incl.)');
-
-      osSubtotal.textContent = '$' + subtotal.toFixed(2);
-      osGst.textContent = '$' + gst.toFixed(2);
-      osQst.textContent = '$' + qst.toFixed(2);
-      osTotal.textContent = '$' + grand.toFixed(2);
-
-      // ── Live estimate panel ──
-      const leBox = document.getElementById('live-estimate');
-      const leLines = document.getElementById('le-lines');
-      const leTotalEl = document.getElementById('le-total');
-      const leTaxHint = document.getElementById('le-tax-hint');
-      leBox.classList.add('visible');
-
-      let leHtml = `<div class="le-row"><span class="le-lbl">${selectedPkg.name}${gamesCount > 1 ? t(' × ' + gamesCount + ' games', ' × ' + gamesCount + ' matchs') : ''}</span><span class="le-val accent">$${packageCost.toFixed(0)}</span></div>`;
-      if (freeGames > 0) {
-        const savedAmt = base * freeGames;
-        leHtml += `<div class="le-row"><span class="le-lbl" style="color:var(--accent)">${t(`4-Game Deal — ${freeGames} game${freeGames > 1 ? 's' : ''} free`, `Offre 4 matchs — ${freeGames} match${freeGames > 1 ? 's' : ''} gratuit${freeGames > 1 ? 's' : ''}`)}</span><span class="le-val" style="color:var(--accent)">-$${savedAmt.toFixed(0)}</span></div>`;
-      }
-      addonItems.forEach(a => {
-        const effPrice = a.isMgb ? a.price : a.price * multiplier;
-        leHtml += `<div class="le-row"><span class="le-lbl">${a.name}</span><span class="le-val">+$${effPrice.toFixed(0)}</span></div>`;
-      });
-      if (travelEff > 0 && !travelIsCustom) {
-        leHtml += `<div class="le-row"><span class="le-lbl">${t('Travel', 'Déplacement')}</span><span class="le-val">+$${travelEff.toFixed(2)}</span></div>`;
-      }
-      leHtml += `<div class="le-sep"></div><div class="le-row"><span class="le-lbl">${t('Subtotal', 'Sous-total')}</span><span class="le-val">$${subtotal.toFixed(2)}</span></div><div class="le-row"><span class="le-lbl">${t('GST (5%) + QST (9.975%)', 'TPS (5%) + TVQ (9,975%)')}</span><span class="le-val">+$${(gst + qst).toFixed(2)}</span></div>`;
-      leLines.innerHTML = leHtml;
-
-      const newLTotal = '$' + grand.toFixed(2);
-      if (leTotalEl.textContent !== newLTotal) {
-        leTotalEl.classList.remove('pop');
-        void leTotalEl.offsetWidth;
-        leTotalEl.classList.add('pop');
-      }
-      leTotalEl.textContent = newLTotal;
-      leTaxHint.textContent = t('GST + QST included', 'TPS + TVQ incluses');
-
-      // ── Left gallery price overlay ──
-      const gpBox = document.getElementById('gallery-price');
-      const gpTop = document.getElementById('gp-top');
-      const gpTotal = document.getElementById('gp-total');
-      gpBox.classList.add('visible');
-
-      let gpHtml = `<div class="gp-row"><span class="gp-lbl">${selectedPkg.name}${gamesCount > 1 ? t(' × ' + gamesCount + ' games', ' × ' + gamesCount + ' matchs') : ''}</span><span class="gp-val">$${packageCost.toFixed(0)}</span></div>`;
-      if (freeGames > 0) {
-        const savedAmt = base * freeGames;
-        gpHtml += `<div class="gp-row"><span class="gp-lbl" style="color:var(--accent)">${t(`${freeGames} game${freeGames > 1 ? 's' : ''} free`, `${freeGames} match${freeGames > 1 ? 's' : ''} gratuit${freeGames > 1 ? 's' : ''}`)}</span><span class="gp-val" style="color:var(--accent)">-$${savedAmt.toFixed(0)}</span></div>`;
-      }
-      addonItems.forEach(a => {
-        const effPrice = a.isMgb ? a.price : a.price * multiplier;
-        gpHtml += `<div class="gp-row"><span class="gp-lbl">${a.name}</span><span class="gp-val">+$${effPrice.toFixed(0)}</span></div>`;
-      });
-      if (travelEff > 0 && !travelIsCustom) {
-        gpHtml += `<div class="gp-row"><span class="gp-lbl">${t('Travel', 'Déplacement')}</span><span class="gp-val">+$${travelEff.toFixed(2)}</span></div>`;
-      }
-      gpHtml += `<div class="gp-sep"></div><div class="gp-row"><span class="gp-lbl">${t('Subtotal', 'Sous-total')}</span><span class="gp-val">$${subtotal.toFixed(2)}</span></div><div class="gp-row"><span class="gp-lbl">GST + QST</span><span class="gp-val">+$${(gst + qst).toFixed(2)}</span></div>`;
-      gpTop.innerHTML = gpHtml;
-
-      const newGpTotal = '$' + grand.toFixed(2);
-      if (gpTotal.textContent !== newGpTotal) {
-        gpTotal.className = 'gp-total';
-        void gpTotal.offsetWidth;
-        gpTotal.className = 'gp-total pop';
-      }
-      gpTotal.textContent = newGpTotal;
-    }
-  }
-
-  function getMgbPrice() {
-    return selectedPkg && !selectedPkg.isCustom ? selectedPkg.price * 3 : 0;
-  }
-
-  function updateMgbLabel() {
-    const label = document.getElementById('mgb-price-label');
-    if (!selectedPkg || selectedPkg.isCustom) {
-      label.textContent = t('Buy 3 get 1 free', 'Achetez 3, obtenez 1 gratuit');
-    } else {
-      const total = getMgbPrice();
-      const free  = selectedPkg.price;
-      label.textContent = t(
-        '$' + total + ' — 1 game free ($' + free + ' saved)',
-        total + '$ — 1 match gratuit (' + free + '$ économisés)'
-      );
-    }
-  }
-
-  function updateGamesPreview() {
-    const el = document.getElementById('games-subtotal');
-    if (!el) return;
-    if (!selectedPkg || selectedPkg.isCustom || gamesCount <= 1) {
-      el.innerHTML = '';
-      return;
-    }
-    const freeG  = Math.floor(gamesCount / 4);
-    const paidG  = gamesCount - freeG;
-    const paid   = selectedPkg.price * paidG;
-    const saved  = selectedPkg.price * freeG;
-    if (freeG > 0) {
-      el.innerHTML = t(
-        `$${selectedPkg.price} × ${paidG} paid + <strong style="color:var(--accent)">${freeG} free</strong> = <strong>$${paid}</strong> <span style="font-size:0.62rem">before tax — save $${saved}</span>`,
-        `${selectedPkg.price}$ × ${paidG} payé + <strong style="color:var(--accent)">${freeG} gratuit</strong> = <strong>${paid}$</strong> <span style="font-size:0.62rem">avant taxes — économie de ${saved}$</span>`
-      );
-    } else {
-      const total = selectedPkg.price * gamesCount;
-      el.innerHTML = t(
-        `$${selectedPkg.price} × ${gamesCount} = <strong>$${total}</strong> <span style="font-size:0.62rem">before tax</span>`,
-        `${selectedPkg.price}$ × ${gamesCount} = <strong>${total}$</strong> <span style="font-size:0.62rem">avant taxes</span>`
-      );
-    }
-  }
-
-  function getItemQty(item) {
-    const qtyEl = item.querySelector('.qty-val');
-    return qtyEl ? Math.max(1, parseInt(qtyEl.textContent) || 1) : 1;
-  }
-
-  function rebuildAddons() {
-    addonTotal = 0;
-    addonItems = [];
-    document.querySelectorAll('.addon-item.selected').forEach(a => {
-      const isMgb    = a.dataset.name === 'Multi-Game Block';
-      const perUnit  = a.dataset.perUnit || null;
-      const qty      = perUnit ? getItemQty(a) : 1;
-      const basePrice = parseInt(a.dataset.price);
-      const p = isMgb ? getMgbPrice() : basePrice * qty;
-      addonTotal += p;
-      addonItems.push({ name: a.dataset.name, price: p, isMgb, perUnit, qty });
-    });
-  }
-
-  // Package selection
-  document.querySelectorAll('.pkg-card').forEach(card => {
-    card.addEventListener('click', () => {
-      document.querySelectorAll('.pkg-card').forEach(c => c.classList.remove('selected'));
-      card.classList.add('selected');
-      const price = card.dataset.price;
-      selectedPkg = {
-        name: card.dataset.name,
-        price: parseFloat(price) || 0,
-        isCustom: price === 'custom',
-        isSeason: card.dataset.slug === 'season'
-      };
-      gamesCount = 1;
-      document.getElementById('games-num').textContent = '1';
-      document.getElementById('games-row').classList.add('visible');
-      updateMgbLabel();
-      updateGamesPreview();
-      rebuildAddons();
-      refreshPrice();
-    });
+  // Addons
+  const al = document.getElementById('addons-list');
+  al.innerHTML = '';
+  d.addons.forEach(addon => {
+    const div = document.createElement('div');
+    div.className = 'addon-row ' + d.theme;
+    div.id = 'addon-' + addon.id;
+    div.onclick = () => toggleAddon(addon, div);
+    div.innerHTML =
+      `<div class="addon-info">
+        <div class="addon-name">${addon.name}</div>
+        <div class="addon-desc">${addon.desc}</div>
+      </div>
+      <div class="addon-right">
+        <div class="addon-price">${addon.priceLabel}</div>
+        <div class="addon-check"></div>
+      </div>`;
+    al.appendChild(div);
   });
 
-  // Games counter
-  document.getElementById('games-minus').addEventListener('click', function(e) {
-    e.preventDefault();
-    if (gamesCount > 1) {
-      gamesCount--;
-      document.getElementById('games-num').textContent = gamesCount;
-      updateGamesPreview();
-      rebuildAddons();
-      refreshPrice();
-    }
+  // Re-apply selections if user came back
+  if (selectedPkg) {
+    const el = document.getElementById('pkg-' + selectedPkg.id);
+    if (el) { el.classList.add('selected'); el.querySelector('.pkg-radio').textContent = '✓'; }
+  }
+  selectedAddons.forEach(id => {
+    const el = document.getElementById('addon-' + id);
+    if (el) { el.classList.add('selected'); el.querySelector('.addon-check').textContent = '✓'; }
   });
-  document.getElementById('games-plus').addEventListener('click', function(e) {
-    e.preventDefault();
-    if (gamesCount < 20) {
-      gamesCount++;
-      document.getElementById('games-num').textContent = gamesCount;
-      updateGamesPreview();
-      rebuildAddons();
-      refreshPrice();
-    }
+  updateLivePrice();
+}
+
+function selectPkg(pkg) {
+  selectedPkg = pkg;
+  document.querySelectorAll('.pkg').forEach(p => {
+    p.classList.remove('selected');
+    p.querySelector('.pkg-radio').textContent = '';
   });
+  const el = document.getElementById('pkg-' + pkg.id);
+  el.classList.add('selected');
+  el.querySelector('.pkg-radio').textContent = '✓';
 
-  // Add-on selection
-  document.querySelectorAll('.addon-item').forEach(item => {
-    const cb = item.querySelector('input[type=checkbox]');
-    cb.addEventListener('change', () => {
-      item.classList.toggle('selected', cb.checked);
-      // Reset qty to 1 when unchecked
-      if (!cb.checked) {
-        const qtyEl = item.querySelector('.qty-val');
-        if (qtyEl) qtyEl.textContent = '1';
-      }
-      rebuildAddons();
-      refreshPrice();
-    });
-  });
+  const btn = document.getElementById('btn-pkg');
+  btn.disabled = false;
+  btn.className = 'btn ' + (who === 'individual' ? 'btn-gold' : 'btn-blue');
 
-  // Qty +/− buttons (stop propagation so label click doesn't toggle checkbox)
-  document.querySelectorAll('.addon-item[data-per-unit]').forEach(item => {
-    const qtyVal  = item.querySelector('.qty-val');
-    const btnMinus = item.querySelector('.qty-minus');
-    const btnPlus  = item.querySelector('.qty-plus');
+  updateLivePrice();
+}
 
-    btnMinus.addEventListener('click', e => {
-      e.preventDefault(); e.stopPropagation();
-      const cur = parseInt(qtyVal.textContent) || 1;
-      if (cur > 1) { qtyVal.textContent = cur - 1; rebuildAddons(); refreshPrice(); }
-    });
+function toggleAddon(addon, el) {
+  if (selectedAddons.has(addon.id)) {
+    selectedAddons.delete(addon.id);
+    el.classList.remove('selected');
+    el.querySelector('.addon-check').textContent = '';
+  } else {
+    selectedAddons.add(addon.id);
+    el.classList.add('selected');
+    el.querySelector('.addon-check').textContent = '✓';
+  }
+  updateLivePrice();
+}
 
-    btnPlus.addEventListener('click', e => {
-      e.preventDefault(); e.stopPropagation();
-      const cur = parseInt(qtyVal.textContent) || 1;
-      qtyVal.textContent = cur + 1;
-      rebuildAddons();
-      refreshPrice();
-    });
-  });
+// ── SUMMARY ───────────────────────────────────────────────────────────────────
+function buildSummary() {
+  const d = bookingData[who];
+  const addons = d.addons.filter(a => selectedAddons.has(a.id));
+  const total = (selectedPkg ? selectedPkg.price : 0) + addons.reduce((s,a)=>s+a.price,0);
 
-  // Travel fee calculator — Nominatim geocoding + OSRM driving distance (no API key needed)
-  const BROSSARD_LAT = 45.4528, BROSSARD_LON = -73.4536;
+  document.getElementById('sum-who').textContent = who === 'individual' ? 'Individual (Parent / Player)' : 'Club / Association';
+  document.getElementById('sum-pkg').textContent = selectedPkg ? `${selectedPkg.name} — $${selectedPkg.price} CAD` : '—';
+  document.getElementById('sum-addons').textContent = addons.length ? addons.map(a=>a.name).join(', ') : 'None';
+  document.getElementById('sum-deposit').textContent = `$${Math.round(total * 0.5)} CAD`;
 
-  document.getElementById('travel-calc-btn').addEventListener('click', async function() {
-    const address = document.getElementById('bf-address').value.trim();
-    const errEl   = document.getElementById('travel-calc-error');
-    const resBox  = document.getElementById('travel-result-box');
-    errEl.style.display = 'none';
-    resBox.style.display = 'none';
+  const tp = document.getElementById('total-price-val');
+  tp.textContent = '$' + total;
+  tp.className = who === 'individual' ? 'gold' : 'blue';
 
-    if (!address) {
-      errEl.textContent = 'Please enter a venue address first.';
-      errEl.style.display = 'block';
-      return;
-    }
+  const cb = document.getElementById('confirm-btn');
+  cb.className = 'btn ' + (who === 'individual' ? 'btn-gold' : 'btn-blue');
+}
 
-    const btn  = this;
-    const lang = window.currentLang || 'en';
-    btn.textContent = '…';
-    btn.disabled = true;
+// ── NAVIGATION ────────────────────────────────────────────────────────────────
+function goTo(step) {
+  if (step === 2) renderPackages();
+  if (step === 4) buildSummary();
 
-    try {
-      // Step 1: Geocode the address with Nominatim
-      const query = address.toLowerCase().match(/\b(qc|québec|quebec|canada)\b/)
-        ? address : address + ', QC, Canada';
-      const geoRes  = await fetch(
-        'https://nominatim.openstreetmap.org/search?' +
-        new URLSearchParams({ q: query, format: 'json', limit: '1', countrycodes: 'ca' }),
-        { headers: { 'Accept-Language': 'en' } }
-      );
-      const geoData = await geoRes.json();
-      if (!geoData.length) throw new Error('not_found');
+  // Hide live bar when leaving step 2
+  const liveBar = document.getElementById('live-bar');
+  if (step !== 2) { liveBar.classList.remove('visible'); }
 
-      const destLat = parseFloat(geoData[0].lat);
-      const destLon = parseFloat(geoData[0].lon);
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById('step' + step).classList.add('active');
 
-      // Step 2: Driving distance via OSRM public routing API
-      const osrmRes  = await fetch(
-        `https://router.project-osrm.org/route/v1/driving/${BROSSARD_LON},${BROSSARD_LAT};${destLon},${destLat}?overview=false`
-      );
-      const osrmData = await osrmRes.json();
-      if (osrmData.code !== 'Ok' || !osrmData.routes?.length) throw new Error('route_not_found');
+  for (let i = 1; i <= 4; i++) {
+    const dot = document.getElementById('dot' + i);
+    const label = document.getElementById('dl' + i);
+    dot.classList.remove('active','done');
+    label.classList.remove('active','done');
+    if (i < step) { dot.classList.add('done'); dot.textContent = '✓'; label.classList.add('done'); }
+    else if (i === step) { dot.classList.add('active'); dot.textContent = i; label.classList.add('active'); }
+    else { dot.textContent = i; }
+  }
+  for (let i = 1; i <= 3; i++) {
+    const line = document.getElementById('line' + i);
+    if (line) line.className = 'step-line' + (i < step ? ' done' : '');
+  }
 
-      const distanceKm   = osrmData.routes[0].distance / 1000;
-      const distanceText = distanceKm < 1
-        ? Math.round(distanceKm * 1000) + ' m'
-        : distanceKm.toFixed(1) + ' km';
+  // Re-show live bar if returning to step 2
+  if (step === 2 && selectedPkg) updateLivePrice();
 
-      let status_, fee;
-      if (distanceKm <= FREE_ZONE_KM) {
-        status_ = 'free'; fee = 0;
-      } else {
-        status_ = 'paid'; fee = Math.round(distanceKm * TRAVEL_RATE);
-      }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 
-      calculatedKm   = status_ === 'paid' ? distanceKm : 0;
-      travelIsCustom = false;
+// ── SUBMIT ────────────────────────────────────────────────────────────────────
+async function submitBooking() {
+  const btn = document.getElementById('confirm-btn');
+  btn.textContent = 'Sending…';
+  btn.disabled = true;
 
-      document.getElementById('tr-distance').textContent = distanceText;
+  const d = bookingData[who];
+  const addons = d.addons.filter(a => selectedAddons.has(a.id));
+  const total = selectedPkg.price + addons.reduce((s,a) => s+a.price, 0);
 
-      const zoneEl  = document.getElementById('tr-zone');
-      const badgeEl = document.getElementById('tr-badge');
-      const feeEl   = document.getElementById('tr-fee');
-      const noteEl  = document.getElementById('tr-note');
-
-      if (status_ === 'free') {
-        zoneEl.textContent    = lang === 'fr' ? 'Zone locale' : 'Local zone';
-        badgeEl.textContent   = lang === 'fr' ? 'Gratuit' : 'No charge';
-        badgeEl.style.cssText = 'color:#4a7c59;background:#0d1f15;';
-        feeEl.textContent     = '$0';
-        feeEl.style.cssText   = 'font-size:1.35rem;font-family:GFS Didot,Didot,serif;color:#4a7c59;';
-        noteEl.textContent    = lang === 'fr'
-          ? "Vous êtes dans ma zone locale — aucun frais de déplacement."
-          : "You're in my local zone — no travel fee applies. Book with confidence.";
-      } else {
-        zoneEl.textContent    = lang === 'fr' ? 'Zone régionale' : 'Regional zone';
-        badgeEl.textContent   = lang === 'fr' ? 'Frais applicables' : 'Travel fee applies';
-        badgeEl.style.cssText = 'color:#b8940a;background:#1a1205;';
-        feeEl.textContent     = '$' + fee;
-        feeEl.style.cssText   = 'font-size:1.35rem;font-family:GFS Didot,Didot,serif;color:var(--accent);';
-        noteEl.textContent    = lang === 'fr'
-          ? `Frais de déplacement de ${fee}$ ajoutés à votre forfait — calculés à ${TRAVEL_RATE}$/km depuis Brossard.`
-          : `Travel fee of $${fee} added to your package — calculated at $${TRAVEL_RATE}/km from Brossard.`;
-      }
-
-      resBox.style.display = 'block';
-      refreshPrice();
-
-    } catch (e) {
-      errEl.textContent = e.message === 'not_found'
-        ? (lang === 'fr' ? 'Adresse introuvable. Essayez une adresse plus précise.' : 'Address not found. Please try a more specific address.')
-        : (lang === 'fr' ? 'Erreur de connexion. Réessayez.' : 'Connection error. Please try again.');
-      errEl.style.display = 'block';
-    } finally {
-      btn.textContent = lang === 'fr' ? 'Recalculer' : 'Recalculate';
-      btn.disabled = false;
-    }
-  });
-
-  // Term checkboxes
-  ['tc1','tc2','tc3','tc4'].forEach(id => {
-    document.getElementById(id).addEventListener('change', (e) => {
-      const item = e.target.closest('.term-item');
-      item.classList.toggle('checked', e.target.checked);
-    });
-  });
-
-  // Submit
-  document.getElementById('book-btn').addEventListener('click', async () => {
-    // Validate required
-    const pkg = document.querySelector('.pkg-card.selected');
-    if (!pkg) { alert(t('Please select a package.', 'Veuillez choisir un forfait.')); return; }
-    const terms = ['tc1','tc2','tc3','tc4'].every(id => document.getElementById(id).checked);
-    if (!terms) {
-      document.getElementById('terms-warning').classList.add('show');
-      document.getElementById('terms-warning').scrollIntoView({ behavior: 'smooth', block: 'center' });
-      return;
-    }
-    document.getElementById('terms-warning').classList.remove('show');
-
-    const btn = document.getElementById('book-btn');
-    btn.textContent = t('Sending…', 'Envoi…');
-    btn.disabled = true;
-
-    const { km, cost: travel } = getTravel();
-    const mgbSelected  = !!addonItems.find(a => a.isMgb);
-    const mgbPriceS    = mgbSelected ? addonItems.find(a => a.isMgb).price : 0;
-    const nonMgbS      = addonTotal - mgbPriceS;
-    const addonEffS    = nonMgbS * gamesCount + mgbPriceS;
-    const travelMult   = mgbSelected ? 3 : gamesCount;
-    const travelEff    = travel * travelMult;
-    const subtotal = selectedPkg.isCustom ? null : (selectedPkg.price * gamesCount + addonEffS + travelEff);
-    const gst      = subtotal ? (subtotal * GST_RATE) : null;
-    const qst      = subtotal ? (subtotal * QST_RATE) : null;
-    const grand    = subtotal ? (subtotal + gst + qst) : null;
-    const data = {
-      package:    document.querySelector('.pkg-card.selected').dataset.name,
-      games:      gamesCount,
-      addons:     addonItems.map(a => `${a.name} (+$${a.price})`).join(', ') || 'None',
-      km:         travelMult > 1 ? null : km,
-      travelFee:  travelEff.toFixed(2),
-      subtotal:   subtotal ? ('$' + subtotal.toFixed(2)) : 'Custom',
-      gst:        gst ? ('$' + gst.toFixed(2)) : '—',
-      qst:        qst ? ('$' + qst.toFixed(2)) : '—',
-      total:      grand ? ('$' + grand.toFixed(2)) : 'Custom — quote on confirmation',
-      sport:      document.getElementById('bf-sport').value,
-      date:       document.getElementById('bf-date').value,
-      time:       document.getElementById('bf-time').value,
-      address:    document.getElementById('bf-address').value,
-      firstname:  document.getElementById('bf-fname').value,
-      lastname:   document.getElementById('bf-lname').value,
-      email:      document.getElementById('bf-email').value,
-      phone:      document.getElementById('bf-phone').value,
-      notes:      document.getElementById('bf-notes').value,
-      lang:       window.currentLang || 'en',
-    };
-
-    try {
-      const res = await fetch('/api/book', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      });
-      if (res.ok) {
-        document.getElementById('order-summary-wrap').style.display = 'none';
-        document.getElementById('bs-inbox-email').textContent = document.getElementById('bf-email').value;
-        document.getElementById('book-success').style.display = 'block';
-      } else {
-        btn.textContent = t('Request Booking', 'Envoyer la demande'); btn.disabled = false;
-        alert(t('Something went wrong. Please email adrlezama@gmail.com directly.', 'Une erreur est survenue. Contactez adrlezama@gmail.com directement.'));
-      }
-    } catch {
-      btn.textContent = t('Request Booking', 'Envoyer la demande'); btn.disabled = false;
-      alert(t('Something went wrong. Please email adrlezama@gmail.com directly.', 'Une erreur est survenue. Contactez adrlezama@gmail.com directement.'));
-    }
-  });
-
-  // ── Language change hook — refresh all JS-driven text ──
-  window.onLangChange = function() {
-    refreshPrice();
-    updateMgbLabel();
-    updateGamesPreview();
+  const payload = {
+    package:   selectedPkg.name,
+    games:     1,
+    addons:    addons.length ? addons.map(a=>`${a.name} (+$${a.price})`).join(', ') : 'None',
+    km:        null,
+    travelFee: '0.00',
+    subtotal:  '$' + total.toFixed(2),
+    gst:       '—',
+    qst:       '—',
+    total:     '$' + total.toFixed(2) + ' CAD',
+    sport:     'Soccer',
+    date:      document.getElementById('pdate').value || 'TBD',
+    time:      '',
+    address:   document.getElementById('location').value || 'TBD',
+    firstname: document.getElementById('fname').value,
+    lastname:  document.getElementById('lname').value,
+    email:     document.getElementById('email').value,
+    phone:     document.getElementById('phone').value || 'N/A',
+    notes:     document.getElementById('notes').value || 'None',
+    lang:      'en',
+    clientType: who === 'individual' ? 'Individual (Parent/Player)' : 'Club/Association',
   };
+
+  try {
+    const res = await fetch('/api/book', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    if (res.ok) {
+      document.getElementById('live-bar').classList.remove('visible');
+      goTo(5);
+    } else {
+      throw new Error('Server error');
+    }
+  } catch(e) {
+    btn.textContent = 'Send Booking Request →';
+    btn.disabled = false;
+    alert('Something went wrong. Please email adriano@adrianolezamas.com directly.');
+  }
+}
 </script>
+
 <script src="lang.js"></script>
 <script>
-(function(){var nav=document.querySelector('.site-nav'),last=0;window.addEventListener('scroll',function(){var y=window.scrollY;nav.style.transform=y>last&&y>80?'translateY(-100%)':'translateY(0)';last=y;},{passive:true});})();
+// Nav hide on scroll
+(function(){
+  var nav=document.querySelector('.site-nav'),last=0;
+  window.addEventListener('scroll',function(){
+    var y=window.scrollY;
+    nav.style.transform=y>last&&y>80?'translateY(-100%)':'translateY(0)';
+    last=y;
+  },{passive:true});
+})();
 </script>
 </body>
 </html>
