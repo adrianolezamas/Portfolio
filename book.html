@@ -32,6 +32,12 @@ a{text-decoration:none;color:inherit;}
 .glow-gold{position:fixed;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(212,168,67,0.06) 0%,transparent 70%);top:-200px;right:-100px;pointer-events:none;z-index:0;}
 .glow-blue{position:fixed;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(59,130,246,0.05) 0%,transparent 70%);bottom:-100px;left:-100px;pointer-events:none;z-index:0;}
 
+/* ── BACKGROUND SLIDESHOW ── */
+#book-bg{position:fixed;inset:0;z-index:-1;}
+.book-slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity 1.8s ease-in-out;}
+.book-slide.active{opacity:1;}
+#book-bg-overlay{position:absolute;inset:0;background:rgba(6,9,15,0.82);}
+
 /* ── SITE NAV ── */
 .site-nav{position:fixed;top:0;left:0;right:0;z-index:200;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;height:var(--nav-h);transition:transform 0.35s cubic-bezier(0.4,0,0.2,1);}
 .site-nav-left{display:flex;align-items:center;gap:2.5rem;justify-content:center;}
@@ -306,6 +312,17 @@ input::placeholder,textarea::placeholder{color:var(--mid);}
   </style>
 </head>
 <body>
+
+<div id="book-bg">
+  <div class="book-slide active" style="background-image:url('photos/showcase/DSC00010.jpg')"></div>
+  <div class="book-slide" style="background-image:url('photos/showcase/5D7A0340.jpg')"></div>
+  <div class="book-slide" style="background-image:url('photos/showcase/5D7A0640.jpg')"></div>
+  <div class="book-slide" style="background-image:url('photos/showcase/5D7A0830.jpg')"></div>
+  <div class="book-slide" style="background-image:url('photos/showcase/5D7A3949.jpg')"></div>
+  <div class="book-slide" style="background-image:url('photos/showcase/5D7A7438.jpg')"></div>
+  <div class="book-slide" style="background-image:url('photos/showcase/5D7A9422.jpg')"></div>
+  <div id="book-bg-overlay"></div>
+</div>
 
 <div class="glow-gold"></div>
 <div class="glow-blue"></div>
@@ -937,6 +954,16 @@ function submitBooking(){
     nav.style.transform=y>last&&y>80?'translateY(-100%)':'translateY(0)';
     last=y;
   },{passive:true});
+})();
+</script>
+<script>
+(function(){
+  var slides=document.querySelectorAll('.book-slide'),i=0;
+  setInterval(function(){
+    slides[i].classList.remove('active');
+    i=(i+1)%slides.length;
+    slides[i].classList.add('active');
+  },5000);
 })();
 </script>
 </body>
