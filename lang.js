@@ -3,7 +3,7 @@
 
   function applyLang(lang) {
     const label = lang === 'en' ? 'FR' : 'EN';
-    document.querySelectorAll('.lang-btn').forEach(btn => { btn.textContent = label; });
+    document.querySelectorAll('.lang-btn, .nav-lang').forEach(btn => { btn.textContent = label; });
     document.querySelectorAll('[data-en]').forEach(el => { el.innerHTML = el.dataset[lang]; });
     document.querySelectorAll('[data-ph-en]').forEach(el => {
       el.placeholder = lang === 'en' ? el.dataset.phEn : el.dataset.phFr;

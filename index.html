@@ -701,17 +701,22 @@ document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
 document.getElementById('cf-form').addEventListener('submit',async(e)=>{
   e.preventDefault();
   const form=e.target,btn=form.querySelector('.cf-submit');
-  btn.textContent='Sending…';btn.disabled=true;
+  const isFr=window.currentLang==='fr';
+  btn.textContent=isFr?'Envoi…':'Sending…';btn.disabled=true;
   const data={
     firstname:form.firstname.value,lastname:form.lastname.value,
     phone:form.phone.value,email:form.email.value,
     subject:form.subject.value,message:form.message.value,
+    lang:window.currentLang||'en',
   };
+  const errMsg=isFr
+    ?'Une erreur s\'est produite. Écrivez-moi directement à adrlezama@gmail.com'
+    :'Something went wrong. Please email me directly at adrlezama@gmail.com';
   try{
     const res=await fetch('/api/send',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
     if(res.ok){form.style.display='none';document.getElementById('cf-success').style.display='block';}
-    else{btn.textContent='Send Message';btn.disabled=false;alert('Something went wrong. Please email me directly at adrlezama@gmail.com');}
-  }catch{btn.textContent='Send Message';btn.disabled=false;alert('Something went wrong. Please email me directly at adrlezama@gmail.com');}
+    else{btn.textContent=isFr?'Envoyer':'Send Message';btn.disabled=false;alert(errMsg);}
+  }catch{btn.textContent=isFr?'Envoyer':'Send Message';btn.disabled=false;alert(errMsg);}
 });
 
 </script>

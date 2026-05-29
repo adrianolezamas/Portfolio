@@ -314,13 +314,13 @@
 <nav class="site-nav">
   <div class="site-nav-left">
     <button class="lang-btn" onclick="toggleLang()">FR</button>
-    <a href="work.html">Gallery</a>
-    <a href="about.html">About</a>
+    <a href="work.html" data-en="Gallery" data-fr="Galerie">Gallery</a>
+    <a href="about.html" data-en="About" data-fr="À propos">About</a>
   </div>
   <a href="index.html" class="site-nav-center"><img src="AL.svg" alt="Adriano Lezama Photography"></a>
   <div class="site-nav-right">
-    <a href="contact.html">Contact</a>
-    <a href="book.html" class="book-link">Book</a>
+    <a href="contact.html" data-en="Contact" data-fr="Contact">Contact</a>
+    <a href="book.html" class="book-link" data-en="Book" data-fr="Réserver">Book</a>
   </div>
   <button class="site-nav-hamburger" id="site-menu-open" aria-label="Open menu">
     <svg width="22" height="16" viewBox="0 0 22 16" fill="none"><line x1="0" y1="1" x2="22" y2="1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="0" y1="8" x2="22" y2="8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="0" y1="15" x2="22" y2="15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
@@ -330,10 +330,10 @@
   <button id="site-menu-close" aria-label="Close menu">
     <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><line x1="2" y1="2" x2="18" y2="18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="18" y1="2" x2="2" y2="18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
   </button>
-  <a href="work.html">Gallery</a>
-  <a href="about.html">About</a>
-  <a href="contact.html">Contact</a>
-  <a href="book.html" class="book-link">Book</a>
+  <a href="work.html" data-en="Gallery" data-fr="Galerie">Gallery</a>
+  <a href="about.html" data-en="About" data-fr="À propos">About</a>
+  <a href="contact.html" data-en="Contact" data-fr="Contact">Contact</a>
+  <a href="book.html" class="book-link" data-en="Book" data-fr="Réserver">Book</a>
 </div>
 <script>
 (function(){
@@ -442,7 +442,8 @@
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const btn = form.querySelector('.form-submit');
-    btn.textContent = 'Sending…';
+    const isFr = window.currentLang === 'fr';
+    btn.textContent = isFr ? 'Envoi…' : 'Sending…';
     btn.disabled = true;
 
     const data = {
@@ -452,7 +453,12 @@
       email: form.email.value,
       subject: form.subject.value,
       message: form.message.value,
+      lang: window.currentLang || 'en',
     };
+
+    const errMsg = isFr
+      ? 'Une erreur s\'est produite. Écrivez-moi directement à adrlezama@gmail.com'
+      : 'Something went wrong. Please email me directly at adrlezama@gmail.com';
 
     try {
       const res = await fetch('/api/send', {
@@ -465,14 +471,14 @@
         form.style.display = 'none';
         successMsg.style.display = 'block';
       } else {
-        btn.textContent = 'Send Message';
+        btn.textContent = isFr ? 'Envoyer' : 'Send Message';
         btn.disabled = false;
-        alert('Something went wrong. Please email me directly at adrlezama@gmail.com');
+        alert(errMsg);
       }
     } catch {
-      btn.textContent = 'Send Message';
+      btn.textContent = isFr ? 'Envoyer' : 'Send Message';
       btn.disabled = false;
-      alert('Something went wrong. Please email me directly at adrlezama@gmail.com');
+      alert(errMsg);
     }
   });
 
@@ -499,7 +505,7 @@
   </div>
   <div class="footer-right">
     <a href="https://www.instagram.com/byadriano_/" target="_blank" rel="noopener" class="footer-ig">@byadriano_</a>
-    <span class="footer-copy">© 2026 · All rights reserved</span>
+    <span class="footer-copy" data-en="© 2026 · All rights reserved" data-fr="© 2026 · Tous droits réservés">© 2026 · All rights reserved</span>
   </div>
 </footer>
 <script>

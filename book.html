@@ -331,13 +331,13 @@ input::placeholder,textarea::placeholder{color:var(--mid);}
 <nav class="site-nav">
   <div class="site-nav-left">
     <button class="lang-btn" onclick="toggleLang()">FR</button>
-    <a href="work.html"><span data-en="Gallery" data-fr="Galerie">Gallery</span></a>
-    <a href="about.html"><span data-en="About" data-fr="À propos">About</span></a>
+    <a href="work.html" data-en="Gallery" data-fr="Galerie">Gallery</a>
+    <a href="about.html" data-en="About" data-fr="À propos">About</a>
   </div>
   <a href="index.html" class="site-nav-center"><img src="AL.svg" alt="Adriano Lezama Photography"></a>
   <div class="site-nav-right">
-    <a href="contact.html"><span data-en="Contact" data-fr="Contact">Contact</span></a>
-    <a href="book.html" class="book-link active"><span data-en="Book" data-fr="Réserver">Book</span></a>
+    <a href="contact.html" data-en="Contact" data-fr="Contact">Contact</a>
+    <a href="book.html" class="book-link active" data-en="Book" data-fr="Réserver">Book</a>
   </div>
   <button class="site-nav-hamburger" id="site-menu-open" aria-label="Open menu">
     <svg width="22" height="16" viewBox="0 0 22 16" fill="none"><line x1="0" y1="1" x2="22" y2="1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="0" y1="8" x2="22" y2="8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="0" y1="15" x2="22" y2="15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
@@ -347,10 +347,10 @@ input::placeholder,textarea::placeholder{color:var(--mid);}
   <button id="site-menu-close" aria-label="Close menu">
     <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><line x1="2" y1="2" x2="18" y2="18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="18" y1="2" x2="2" y2="18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
   </button>
-  <a href="work.html"><span data-en="Gallery" data-fr="Galerie">Gallery</span></a>
-  <a href="about.html"><span data-en="About" data-fr="À propos">About</span></a>
-  <a href="contact.html"><span data-en="Contact" data-fr="Contact">Contact</span></a>
-  <a href="book.html" class="book-link"><span data-en="Book" data-fr="Réserver">Book</span></a>
+  <a href="work.html" data-en="Gallery" data-fr="Galerie">Gallery</a>
+  <a href="about.html" data-en="About" data-fr="À propos">About</a>
+  <a href="contact.html" data-en="Contact" data-fr="Contact">Contact</a>
+  <a href="book.html" class="book-link" data-en="Book" data-fr="Réserver">Book</a>
 </div>
 <script>
 (function(){
@@ -401,52 +401,52 @@ input::placeholder,textarea::placeholder{color:var(--mid);}
 
   <header>
     <div class="logo-line">Adriano Photography · Montréal</div>
-    <h1>Book<span>a Session</span></h1>
-    <p class="header-note">25–40 edited photos · 24-hour delivery · Montréal & Rive-Sud</p>
+    <h1 data-en="Book<span>a Session</span>" data-fr="Réserver<span>une session</span>">Book<span>a Session</span></h1>
+    <p class="header-note" data-en="25–40 edited photos · 24-hour delivery · Montréal &amp; Rive-Sud" data-fr="25–40 photos retouchées · Livraison 24h · Montréal &amp; Rive-Sud">25–40 edited photos · 24-hour delivery · Montréal &amp; Rive-Sud</p>
   </header>
 
   <!-- STEPS -->
   <div class="steps">
-    <div class="step-dot"><div class="dot active" id="dot1">1</div><div class="dot-label active" id="dl1">Who</div></div>
+    <div class="step-dot"><div class="dot active" id="dot1">1</div><div class="dot-label active" id="dl1" data-en="Who" data-fr="Qui">Who</div></div>
     <div class="step-line" id="line1"></div>
-    <div class="step-dot"><div class="dot" id="dot2">2</div><div class="dot-label" id="dl2">Package</div></div>
+    <div class="step-dot"><div class="dot" id="dot2">2</div><div class="dot-label" id="dl2" data-en="Package" data-fr="Forfait">Package</div></div>
     <div class="step-line" id="line2"></div>
-    <div class="step-dot"><div class="dot" id="dot3">3</div><div class="dot-label" id="dl3">Details</div></div>
+    <div class="step-dot"><div class="dot" id="dot3">3</div><div class="dot-label" id="dl3" data-en="Details" data-fr="Détails">Details</div></div>
     <div class="step-line" id="line3"></div>
-    <div class="step-dot"><div class="dot" id="dot4">4</div><div class="dot-label" id="dl4">Confirm</div></div>
+    <div class="step-dot"><div class="dot" id="dot4">4</div><div class="dot-label" id="dl4" data-en="Confirm" data-fr="Confirmer">Confirm</div></div>
   </div>
 
   <!-- STEP 1 — WHO -->
   <div class="section active" id="step1">
-    <div class="section-title">Who are you booking for?</div>
-    <div class="section-sub">Select your profile — pricing and packages are tailored to each.</div>
+    <div class="section-title" data-en="Who are you booking for?" data-fr="Pour qui réservez-vous ?">Who are you booking for?</div>
+    <div class="section-sub" data-en="Select your profile — pricing and packages are tailored to each." data-fr="Sélectionnez votre profil — les prix et forfaits sont adaptés à chacun.">Select your profile — pricing and packages are tailored to each.</div>
     <div class="who-grid">
       <div class="who-card individual" onclick="selectWho('individual')">
         <div class="check-ring" id="check-individual"></div>
         <span class="who-icon">⚽</span>
-        <div class="who-title">Individual</div>
-        <div class="who-desc">A player or parent booking a personal branding session or athlete shoot.</div>
-        <div class="who-tag">Player · Athlete · Parent</div>
+        <div class="who-title" data-en="Individual" data-fr="Individuel">Individual</div>
+        <div class="who-desc" data-en="A player or parent booking a personal branding session or athlete shoot." data-fr="Un joueur ou parent qui réserve une session de branding personnel ou un shooting athlète.">A player or parent booking a personal branding session or athlete shoot.</div>
+        <div class="who-tag" data-en="Player · Athlete · Parent" data-fr="Joueur · Athlète · Parent">Player · Athlete · Parent</div>
       </div>
       <div class="who-card club" onclick="selectWho('club')">
         <div class="check-ring" id="check-club"></div>
         <span class="who-icon">🏟️</span>
-        <div class="who-title">Club / Team</div>
-        <div class="who-desc">Soccer club, association, or league looking for professional game day coverage.</div>
-        <div class="who-tag">Club · Association · League</div>
+        <div class="who-title" data-en="Club / Team" data-fr="Club / Équipe">Club / Team</div>
+        <div class="who-desc" data-en="Soccer club, association, or league looking for professional game day coverage." data-fr="Club de soccer, association ou ligue souhaitant une couverture professionnelle de match.">Soccer club, association, or league looking for professional game day coverage.</div>
+        <div class="who-tag" data-en="Club · Association · League" data-fr="Club · Association · Ligue">Club · Association · League</div>
       </div>
       <div class="who-card photo" onclick="selectWho('photo')">
         <div class="check-ring" id="check-photo"></div>
         <span class="who-icon">📸</span>
-        <div class="who-title">Buy My Photos</div>
-        <div class="who-desc">Saw your child's or your own photo on Instagram? Purchase a digital pack here.</div>
-        <div class="who-tag">Parent · Player · Fan</div>
+        <div class="who-title" data-en="Buy My Photos" data-fr="Acheter mes photos">Buy My Photos</div>
+        <div class="who-desc" data-en="Saw your child's or your own photo on Instagram? Purchase a digital pack here." data-fr="Vous avez vu la photo de votre enfant ou la vôtre sur Instagram ? Achetez un pack numérique ici.">Saw your child's or your own photo on Instagram? Purchase a digital pack here.</div>
+        <div class="who-tag" data-en="Parent · Player · Fan" data-fr="Parent · Joueur · Fan">Parent · Player · Fan</div>
       </div>
     </div>
     <div class="btn-row">
-      <button class="btn btn-gold" onclick="goTo(2)" id="btn-who" disabled>Continue →</button>
+      <button class="btn btn-gold" onclick="goTo(2)" id="btn-who" disabled data-en="Continue →" data-fr="Continuer →">Continue →</button>
     </div>
-    <p class="nav-note">Select one option to continue</p>
+    <p class="nav-note" data-en="Select one option to continue" data-fr="Sélectionnez une option pour continuer">Select one option to continue</p>
   </div>
 
   <!-- STEP 2 — PACKAGES -->
@@ -457,13 +457,13 @@ input::placeholder,textarea::placeholder{color:var(--mid);}
 
     <!-- EXTRAS (travel + players) -->
     <div class="extras-section" id="extras-section" style="display:none;">
-      <div class="extras-title">📍 Travel & Extra Players</div>
+      <div class="extras-title" data-en="📍 Travel &amp; Extra Players" data-fr="📍 Déplacement &amp; Joueurs supplémentaires">📍 Travel &amp; Extra Players</div>
       <!-- Address lookup -->
       <div class="extra-field" style="margin-bottom:14px;">
-        <div class="extra-label">Match Address</div>
+        <div class="extra-label" data-en="Match Address" data-fr="Adresse du match">Match Address</div>
         <div class="addr-row">
-          <input type="text" id="travel-address" placeholder="e.g. 4500 Rue de la Passerelle, Longueuil, QC" oninput="resetDistance()">
-          <button class="btn btn-ghost addr-calc-btn" id="calc-dist-btn" onclick="calcDistance()">Calculate →</button>
+          <input type="text" id="travel-address" placeholder="e.g. 4500 Rue de la Passerelle, Longueuil, QC" data-ph-en="e.g. 4500 Rue de la Passerelle, Longueuil, QC" data-ph-fr="ex. 4500 Rue de la Passerelle, Longueuil, QC" oninput="resetDistance()">
+          <button class="btn btn-ghost addr-calc-btn" id="calc-dist-btn" onclick="calcDistance()" data-en="Calculate →" data-fr="Calculer →">Calculate →</button>
         </div>
         <div class="travel-result" id="travel-result"></div>
         <input type="hidden" id="travel-km" value="0">
@@ -471,80 +471,80 @@ input::placeholder,textarea::placeholder{color:var(--mid);}
       <!-- Extra players (individual only) -->
       <div class="extras-grid">
         <div class="extra-field" id="extra-players-field" style="display:none;">
-          <div class="extra-label">Additional Players</div>
+          <div class="extra-label" data-en="Additional Players" data-fr="Joueurs supplémentaires">Additional Players</div>
           <input type="number" id="extra-players" min="0" placeholder="0" oninput="updateExtras()">
-          <div class="extra-note">+$25 per extra player</div>
+          <div class="extra-note" data-en="+$25 per extra player" data-fr="+25 $ par joueur supp.">+$25 per extra player</div>
         </div>
       </div>
       <div class="extra-total">
-        <div class="extra-total-label">Extras total</div>
+        <div class="extra-total-label" data-en="Extras total" data-fr="Total suppléments">Extras total</div>
         <div class="extra-total-val gold" id="extras-val">$0</div>
       </div>
     </div>
 
-    <div class="addons-title" id="addons-header">Optional Add-Ons</div>
+    <div class="addons-title" id="addons-header" data-en="Optional Add-Ons" data-fr="Options supplémentaires">Optional Add-Ons</div>
     <div class="addons-list" id="addons-list"></div>
 
     <div class="btn-row">
-      <button class="btn btn-ghost" onclick="goTo(1)">← Back</button>
-      <button class="btn btn-gold" id="btn-pkg" onclick="goTo(3)" disabled>Continue →</button>
+      <button class="btn btn-ghost" onclick="goTo(1)" data-en="← Back" data-fr="← Retour">← Back</button>
+      <button class="btn btn-gold" id="btn-pkg" onclick="goTo(3)" disabled data-en="Continue →" data-fr="Continuer →">Continue →</button>
     </div>
   </div>
 
   <!-- STEP 3 — DETAILS -->
   <div class="section" id="step3">
-    <div class="section-title">Your Details</div>
-    <div class="section-sub">Fill in your information — I'll confirm within 24 hours.</div>
+    <div class="section-title" data-en="Your Details" data-fr="Vos informations">Your Details</div>
+    <div class="section-sub" data-en="Fill in your information — I'll confirm within 24 hours." data-fr="Remplissez vos informations — je confirmerai dans les 24 heures.">Fill in your information — I'll confirm within 24 hours.</div>
     <div class="form-grid">
-      <div class="field"><label>First Name</label><input type="text" placeholder="Adriano" id="fname"></div>
-      <div class="field"><label>Last Name</label><input type="text" placeholder="Lezama" id="lname"></div>
+      <div class="field"><label data-en="First Name" data-fr="Prénom">First Name</label><input type="text" placeholder="Adriano" id="fname"></div>
+      <div class="field"><label data-en="Last Name" data-fr="Nom">Last Name</label><input type="text" placeholder="Lezama" id="lname"></div>
       <div class="field full"><label>Email</label><input type="email" placeholder="you@example.com" id="email"></div>
-      <div class="field"><label>Phone (optional)</label><input type="tel" placeholder="438-000-0000" id="phone"></div>
-      <div class="field"><label id="label-date">Preferred Date</label><input type="date" id="pdate"></div>
-      <div class="field"><label id="label-time">Start Time</label><input type="time" id="ptime"></div>
-      <div class="field full"><label id="label-location">Location / Club Name</label><input type="text" placeholder="ASB Brossard, Complexe Sportif CN..." id="location"></div>
-      <div class="field full"><label>Instagram Post / Notes</label><textarea placeholder="Link to the Instagram post where you saw the photo, player name, jersey number, or any other details..." id="notes"></textarea></div>
+      <div class="field"><label data-en="Phone (optional)" data-fr="Téléphone (optionnel)">Phone (optional)</label><input type="tel" placeholder="438-000-0000" id="phone"></div>
+      <div class="field"><label id="label-date" data-en="Preferred Date" data-fr="Date préférée">Preferred Date</label><input type="date" id="pdate"></div>
+      <div class="field"><label id="label-time" data-en="Start Time" data-fr="Heure de début">Start Time</label><input type="time" id="ptime"></div>
+      <div class="field full"><label id="label-location" data-en="Location / Club Name" data-fr="Lieu / Nom du club">Location / Club Name</label><input type="text" placeholder="ASB Brossard, Complexe Sportif CN..." data-ph-en="ASB Brossard, Complexe Sportif CN..." data-ph-fr="ASB Brossard, Complexe Sportif CN..." id="location"></div>
+      <div class="field full"><label data-en="Instagram Post / Notes" data-fr="Post Instagram / Notes">Instagram Post / Notes</label><textarea id="notes" data-ph-en="Link to the Instagram post where you saw the photo, player name, jersey number, or any other details…" data-ph-fr="Lien vers le post Instagram, nom du joueur, numéro de maillot ou tout autre détail…" placeholder="Link to the Instagram post where you saw the photo, player name, jersey number, or any other details…"></textarea></div>
     </div>
     <div class="btn-row">
-      <button class="btn btn-ghost" onclick="goTo(2)">← Back</button>
-      <button class="btn btn-gold" id="btn-details" onclick="goTo(4)">Review Booking →</button>
+      <button class="btn btn-ghost" onclick="goTo(2)" data-en="← Back" data-fr="← Retour">← Back</button>
+      <button class="btn btn-gold" id="btn-details" onclick="goTo(4)" data-en="Review Booking →" data-fr="Vérifier la réservation →">Review Booking →</button>
     </div>
   </div>
 
   <!-- STEP 4 — SUMMARY -->
   <div class="section" id="step4">
-    <div class="section-title">Review &amp; Confirm</div>
-    <div class="section-sub">Review your booking before sending the request.</div>
+    <div class="section-title" data-en="Review &amp; Confirm" data-fr="Vérifier &amp; Confirmer">Review &amp; Confirm</div>
+    <div class="section-sub" data-en="Review your booking before sending the request." data-fr="Vérifiez votre réservation avant d'envoyer la demande.">Review your booking before sending the request.</div>
     <div class="summary-box">
-      <div class="summary-header">Booking Summary</div>
-      <div class="summary-line"><span class="summary-label">Client type</span><span class="summary-val" id="sum-who">—</span></div>
-      <div class="summary-line"><span class="summary-label">Package</span><span class="summary-val" id="sum-pkg">—</span></div>
-      <div class="summary-line"><span class="summary-label">Add-ons</span><span class="summary-val" id="sum-addons">None</span></div>
-      <div class="summary-line" id="sum-travel-row" style="display:none;"><span class="summary-label">Travel fee</span><span class="summary-val" id="sum-travel">—</span></div>
-      <div class="summary-line" id="sum-players-row" style="display:none;"><span class="summary-label">Extra players</span><span class="summary-val" id="sum-players">—</span></div>
-      <div class="summary-line"><span class="summary-label">Delivery</span><span class="summary-val">24–72 hours</span></div>
-      <div class="summary-line"><span class="summary-label">Payment due (100% upfront)</span><span class="summary-val" id="sum-deposit">—</span></div>
+      <div class="summary-header" data-en="Booking Summary" data-fr="Résumé de la réservation">Booking Summary</div>
+      <div class="summary-line"><span class="summary-label" data-en="Client type" data-fr="Type de client">Client type</span><span class="summary-val" id="sum-who">—</span></div>
+      <div class="summary-line"><span class="summary-label" data-en="Package" data-fr="Forfait">Package</span><span class="summary-val" id="sum-pkg">—</span></div>
+      <div class="summary-line"><span class="summary-label" data-en="Add-ons" data-fr="Options">Add-ons</span><span class="summary-val" id="sum-addons">None</span></div>
+      <div class="summary-line" id="sum-travel-row" style="display:none;"><span class="summary-label" data-en="Travel fee" data-fr="Frais de déplacement">Travel fee</span><span class="summary-val" id="sum-travel">—</span></div>
+      <div class="summary-line" id="sum-players-row" style="display:none;"><span class="summary-label" data-en="Extra players" data-fr="Joueurs supp.">Extra players</span><span class="summary-val" id="sum-players">—</span></div>
+      <div class="summary-line"><span class="summary-label" data-en="Delivery" data-fr="Livraison">Delivery</span><span class="summary-val" data-en="24–72 hours" data-fr="24–72 heures">24–72 hours</span></div>
+      <div class="summary-line"><span class="summary-label" data-en="Payment due (100% upfront)" data-fr="Paiement requis (100 % à l'avance)">Payment due (100% upfront)</span><span class="summary-val" id="sum-deposit">—</span></div>
       <div class="summary-total">
         <div>
-          <div class="total-label">Total</div>
+          <div class="total-label" data-en="Total" data-fr="Total">Total</div>
           <div class="total-price"><span id="total-price-val">—</span> <span style="font-size:16px;color:var(--mid);font-family:Syne,sans-serif;font-weight:400;">CAD</span></div>
         </div>
-        <div style="text-align:right;font-size:12px;color:var(--mid);max-width:180px;line-height:1.6;">100% payment required upfront to confirm your booking.</div>
+        <div style="text-align:right;font-size:12px;color:var(--mid);max-width:180px;line-height:1.6;" data-en="100% payment required upfront to confirm your booking." data-fr="100 % du paiement requis à l'avance pour confirmer votre réservation.">100% payment required upfront to confirm your booking.</div>
       </div>
     </div>
     <div class="btn-row">
-      <button class="btn btn-ghost" onclick="goTo(3)">← Back</button>
-      <button class="btn btn-gold" id="confirm-btn" onclick="submitBooking()">Send Booking Request →</button>
+      <button class="btn btn-ghost" onclick="goTo(3)" data-en="← Back" data-fr="← Retour">← Back</button>
+      <button class="btn btn-gold" id="confirm-btn" onclick="submitBooking()" data-en="Send Booking Request →" data-fr="Envoyer la demande →">Send Booking Request →</button>
     </div>
-    <p class="nav-note">You'll receive a confirmation within 24 hours · adriano@adrianolezamas.com</p>
+    <p class="nav-note" data-en="You'll receive a confirmation within 24 hours · adriano@adrianolezamas.com" data-fr="Vous recevrez une confirmation dans les 24 heures · adriano@adrianolezamas.com">You'll receive a confirmation within 24 hours · adriano@adrianolezamas.com</p>
   </div>
 
   <!-- STEP 5 — DONE -->
   <div class="section" id="step5">
     <div class="confirm-box">
       <div class="confirm-icon">✅</div>
-      <div class="confirm-title">Request Sent!</div>
-      <div class="confirm-sub">Your booking request has been received. I'll confirm your session within 24 hours.<br><br>Follow the work on Instagram: <strong>@byadriano_</strong></div>
+      <div class="confirm-title" data-en="Request Sent!" data-fr="Demande envoyée !">Request Sent!</div>
+      <div class="confirm-sub" data-en="Your booking request has been received. I'll confirm your session within 24 hours.<br><br>Follow the work on Instagram: <strong>@byadriano_</strong>" data-fr="Votre demande de réservation a été reçue. Je confirmerai votre session dans les 24 heures.<br><br>Suivez le travail sur Instagram : <strong>@byadriano_</strong>">Your booking request has been received. I'll confirm your session within 24 hours.<br><br>Follow the work on Instagram: <strong>@byadriano_</strong></div>
     </div>
   </div>
 
@@ -553,11 +553,11 @@ input::placeholder,textarea::placeholder{color:var(--mid);}
 <!-- ── LIVE PRICE BAR ── -->
 <div class="live-bar" id="live-bar">
   <div class="live-bar-left">
-    <span class="live-bar-label">Your selection</span>
-    <div class="live-bar-detail" id="live-bar-detail">No package selected</div>
+    <span class="live-bar-label" data-en="Your selection" data-fr="Votre sélection">Your selection</span>
+    <div class="live-bar-detail" id="live-bar-detail" data-en="No package selected" data-fr="Aucun forfait sélectionné">No package selected</div>
   </div>
   <div class="live-bar-right">
-    <span class="live-bar-price-label">Total</span>
+    <span class="live-bar-price-label" data-en="Total" data-fr="Total">Total</span>
     <div>
       <span class="live-bar-price gold" id="live-bar-price">$0</span>
       <span class="live-bar-currency">CAD</span>
@@ -574,64 +574,72 @@ input::placeholder,textarea::placeholder{color:var(--mid);}
   <div class="footer-right">
     <a href="https://www.instagram.com/byadriano_/" target="_blank" rel="noopener" class="footer-ig">@byadriano_</a>
     <span class="footer-copy" data-en="© 2026 · All rights reserved" data-fr="© 2026 · Tous droits réservés">© 2026 · All rights reserved</span>
+
   </div>
 </footer>
 
 <script>
 const data = {
   individual: {
-    title:"Individual Session",
-    sub:"Personal branding shoot — one player, on location, 24h delivery.",
+    title:"Individual Session", titleFr:"Session individuelle",
+    sub:"Personal branding shoot — one player, on location, 24h delivery.", subFr:"Shooting personnel — un joueur, sur place, livraison 24h.",
     theme:"gold-theme", accent:"gold",
     showExtras:true, showPlayers:true,
     packages:[
-      { id:"i1", name:"Solo Session", tag:"1 Player", desc:"Portrait + action session for one player. $25 per additional player.", price:115, unit:"CAD / session", feats:["25–40 edited photos","On-location session","24h delivery","Social media rights","+$25 per extra player"] },
+      { id:"i1", name:"Solo Session", nameFr:"Session solo", tag:"1 Player", tagFr:"1 joueur", desc:"Portrait + action session for one player. $25 per additional player.", descFr:"Portrait + session action pour un joueur. +25 $ par joueur supplémentaire.", price:115, unit:"CAD / session", unitFr:"CAD / session", feats:["25–40 edited photos","On-location session","24h delivery","Social media rights","+$25 per extra player"], featsFr:["25–40 photos retouchées","Session sur place","Livraison 24h","Droits réseaux sociaux","+25 $ par joueur supp."] },
     ],
     addons:[
-      { id:"ia1", name:"Highlight Video", desc:"60-sec cinematic reel, Instagram-ready", price:100, priceLabel:"+$100" },
-      { id:"ia2", name:"Rush Delivery", desc:"Delivered within 6 hours", price:50, priceLabel:"+$50" },
-      { id:"ia3", name:"3 GIFs Action Plays", desc:"3 animated GIF clips of your best action moments", price:15, priceLabel:"+$15" },
+      { id:"ia1", name:"Highlight Video", nameFr:"Vidéo highlight", desc:"60-sec cinematic reel, Instagram-ready", descFr:"Reel cinématographique 60 sec, prêt pour Instagram", price:100, priceLabel:"+$100" },
+      { id:"ia2", name:"Rush Delivery", nameFr:"Livraison express", desc:"Delivered within 6 hours", descFr:"Livré en 6 heures", price:50, priceLabel:"+$50" },
+      { id:"ia3", name:"3 GIFs Action Plays", nameFr:"3 GIFs action", desc:"3 animated GIF clips of your best action moments", descFr:"3 clips GIF animés de vos meilleurs moments", price:15, priceLabel:"+$15" },
     ]
   },
   club: {
-    title:"Club Packages",
-    sub:"Professional game day coverage for clubs, associations, and leagues.",
+    title:"Club Packages", titleFr:"Forfaits club",
+    sub:"Professional game day coverage for clubs, associations, and leagues.", subFr:"Couverture professionnelle pour clubs, associations et ligues.",
     theme:"blue-theme", accent:"blue",
     showExtras:true, showPlayers:false,
     packages:[
-      { id:"c1", name:"Game Day Starter", tag:"Tier 01", desc:"Everything your club needs to fuel social media after a game.", price:150, unit:"CAD / game", feats:["1.5–2h sideline coverage","25–40 edited photos","Edited ready to publish","72h turnaround","Social media rights"] },
-      { id:"c2", name:"Season Coverage", tag:"Tier 02 ⭐ Best Value", desc:"Consistent visuals all season — content your comms team will use.", price:275, unit:"CAD / game", feats:["Full coverage 2–5h","50–60 edited photos","Individual player galleries","48h turnaround","Social crops 9:16 + 1:1","1 team portrait session/season"], best:true },
-      { id:"c3", name:"Club Partner", tag:"Tier 03", desc:"A dedicated photo partner for your entire organization.", price:400, unit:"CAD / game", feats:["2 teams same day","80+ edited photos","Full roster headshots","24h turnaround","Press & media kit photos","Full commercial rights"] },
+      { id:"c1", name:"Game Day Starter", nameFr:"Game Day Starter", tag:"Tier 01", tagFr:"Tier 01", desc:"Everything your club needs to fuel social media after a game.", descFr:"Tout ce qu'il faut pour alimenter les réseaux après un match.", price:150, unit:"CAD / game", unitFr:"CAD / match", feats:["1.5–2h sideline coverage","25–40 edited photos","Edited ready to publish","72h turnaround","Social media rights"], featsFr:["1,5–2h de couverture","25–40 photos retouchées","Prêt à publier","Délai 72h","Droits réseaux sociaux"] },
+      { id:"c2", name:"Season Coverage", nameFr:"Couverture saison", tag:"Tier 02 ⭐ Best Value", tagFr:"Tier 02 ⭐ Meilleur rapport", desc:"Consistent visuals all season — content your comms team will use.", descFr:"Visuels constants toute la saison — du contenu que votre équipe comms utilisera.", price:275, unit:"CAD / game", unitFr:"CAD / match", feats:["Full coverage 2–5h","50–60 edited photos","Individual player galleries","48h turnaround","Social crops 9:16 + 1:1","1 team portrait session/season"], featsFr:["Couverture complète 2–5h","50–60 photos retouchées","Galeries individuelles joueurs","Délai 48h","Recadrages 9:16 + 1:1","1 séance portrait équipe/saison"], best:true },
+      { id:"c3", name:"Club Partner", nameFr:"Partenaire Club", tag:"Tier 03", tagFr:"Tier 03", desc:"A dedicated photo partner for your entire organization.", descFr:"Un photographe dédié pour toute votre organisation.", price:400, unit:"CAD / game", unitFr:"CAD / match", feats:["2 teams same day","80+ edited photos","Full roster headshots","24h turnaround","Press & media kit photos","Full commercial rights"], featsFr:["2 équipes le même jour","80+ photos retouchées","Photos d'équipe complètes","Délai 24h","Photos presse & médias","Droits commerciaux complets"] },
     ],
     addons:[
-      { id:"b1", name:"Individual Player Pack", desc:"Full-res gallery per player", price:10, priceLabel:"+$10/player", hasQty:true },
-      { id:"b2", name:"Team Portrait Session", desc:"60-min dedicated shoot, separate from game day", price:200, priceLabel:"+$200/session" },
-      { id:"b3", name:"Rush Delivery", desc:"Within 6 hours of final whistle", price:50, priceLabel:"+$50 flat" },
-      { id:"b4", name:"End-of-Season Recap", desc:"Curated gallery — best moments, every player", price:150, priceLabel:"+$150 flat" },
-      { id:"b5", name:"Player Headshots", desc:"3–5 clean shots per player, social-ready", price:15, priceLabel:"+$15/player", hasQty:true },
-      { id:"b6", name:"Highlight Video", desc:"60-sec cinematic match reel, color graded", price:100, priceLabel:"+$100 flat" },
+      { id:"b1", name:"Individual Player Pack", nameFr:"Pack joueur individuel", desc:"Full-res gallery per player", descFr:"Galerie haute résolution par joueur", price:10, priceLabel:"+$10/player", hasQty:true },
+      { id:"b2", name:"Team Portrait Session", nameFr:"Séance portrait équipe", desc:"60-min dedicated shoot, separate from game day", descFr:"Shooting dédié 60 min, séparé du jour de match", price:200, priceLabel:"+$200/session" },
+      { id:"b3", name:"Rush Delivery", nameFr:"Livraison express", desc:"Within 6 hours of final whistle", descFr:"Dans les 6 heures suivant le coup de sifflet final", price:50, priceLabel:"+$50 flat" },
+      { id:"b4", name:"End-of-Season Recap", nameFr:"Récap fin de saison", desc:"Curated gallery — best moments, every player", descFr:"Galerie curatée — meilleurs moments, chaque joueur", price:150, priceLabel:"+$150 flat" },
+      { id:"b5", name:"Player Headshots", nameFr:"Photos de tête joueurs", desc:"3–5 clean shots per player, social-ready", descFr:"3–5 clichés nets par joueur, prêts pour les réseaux", price:15, priceLabel:"+$15/player", hasQty:true },
+      { id:"b6", name:"Highlight Video", nameFr:"Vidéo highlight", desc:"60-sec cinematic match reel, color graded", descFr:"Reel cinématographique 60 sec, étalonné", price:100, priceLabel:"+$100 flat" },
     ]
   },
   photo: {
-    title:"Buy Your Photos",
-    sub:"Saw your photo on Instagram? Choose a pack — delivered to your inbox in 24 hours.",
+    title:"Buy Your Photos", titleFr:"Acheter vos photos",
+    sub:"Saw your photo on Instagram? Choose a pack — delivered to your inbox in 24 hours.", subFr:"Vous avez vu votre photo sur Instagram ? Choisissez un forfait — livré dans les 24 heures.",
     theme:"purple-theme", accent:"purple",
     showExtras:false, showPlayers:false,
     packages:[
-      { id:"ph1", name:"Starter Pack", tag:"Option 01", desc:"5 of the best photos of you or your child from the game.", price:25, unit:"CAD", feats:["5 edited photos","High resolution download","Personal use rights","24h delivery","Print, frame & share freely"] },
-      { id:"ph2", name:"Pro Pack", tag:"Option 02 ⭐ Most Popular", desc:"15 photos covering different moments from the match.", price:50, unit:"CAD", feats:["15 edited photos","Full coverage of the game","High resolution","24h delivery","Personal use — print & share"], best:true },
-      { id:"ph3", name:"Full Gallery", tag:"Option 03 — Best Value", desc:"Every photo taken of you or your child — the complete set.", price:75, unit:"CAD", feats:["All photos of you / your child","Complete game coverage","Highest resolution","24h delivery","Personal use — print, frame & share"] },
+      { id:"ph1", name:"Starter Pack", nameFr:"Pack starter", tag:"Option 01", tagFr:"Option 01", desc:"5 of the best photos of you or your child from the game.", descFr:"5 des meilleures photos de vous ou de votre enfant.", price:25, unit:"CAD", unitFr:"CAD", feats:["5 edited photos","High resolution download","Personal use rights","24h delivery","Print, frame & share freely"], featsFr:["5 photos retouchées","Téléchargement haute résolution","Droits personnels","Livraison 24h","Imprimer, encadrer & partager librement"] },
+      { id:"ph2", name:"Pro Pack", nameFr:"Pack pro", tag:"Option 02 ⭐ Most Popular", tagFr:"Option 02 ⭐ Le plus populaire", desc:"15 photos covering different moments from the match.", descFr:"15 photos couvrant différents moments du match.", price:50, unit:"CAD", unitFr:"CAD", feats:["15 edited photos","Full coverage of the game","High resolution","24h delivery","Personal use — print & share"], featsFr:["15 photos retouchées","Couverture complète du match","Haute résolution","Livraison 24h","Usage personnel — imprimer & partager"], best:true },
+      { id:"ph3", name:"Full Gallery", nameFr:"Galerie complète", tag:"Option 03 — Best Value", tagFr:"Option 03 — Meilleur rapport", desc:"Every photo taken of you or your child — the complete set.", descFr:"Chaque photo prise de vous ou votre enfant — le set complet.", price:75, unit:"CAD", unitFr:"CAD", feats:["All photos of you / your child","Complete game coverage","Highest resolution","24h delivery","Personal use — print, frame & share"], featsFr:["Toutes vos photos","Couverture complète du match","Résolution maximale","Livraison 24h","Usage personnel — imprimer, encadrer & partager"] },
     ],
     addons:[
-      { id:"pa1", name:"Rush Delivery", desc:"Your gallery within 3 hours of payment", price:20, priceLabel:"+$20" },
-      { id:"pa2", name:"3 GIFs Action Plays", desc:"3 animated GIF clips of your best action moments", price:15, priceLabel:"+$15" },
-      { id:"pa3", name:"Season Pass", desc:"All future home game photos all season long", price:120, priceLabel:"+$120 / season" },
+      { id:"pa1", name:"Rush Delivery", nameFr:"Livraison express", desc:"Your gallery within 3 hours of payment", descFr:"Votre galerie dans les 3 heures suivant le paiement", price:20, priceLabel:"+$20" },
+      { id:"pa2", name:"3 GIFs Action Plays", nameFr:"3 GIFs action", desc:"3 animated GIF clips of your best action moments", descFr:"3 clips GIF animés de vos meilleurs moments", price:15, priceLabel:"+$15" },
+      { id:"pa3", name:"Season Pass", nameFr:"Passe saison", desc:"All future home game photos all season long", descFr:"Toutes vos photos pour tous les matchs à domicile de la saison", price:120, priceLabel:"+$120 / season" },
     ]
   }
 };
 
 let who=null, selectedPkg=null, selectedAddons=new Set(), addonQty=new Map();
 let travelKm=0, extraPlayers=0;
+
+// ── LANG HELPER ───────────────────────────────────────────────────
+function getT(obj, key) {
+  const fr = window.currentLang === 'fr';
+  if (fr && obj[key+'Fr'] !== undefined) return obj[key+'Fr'];
+  return obj[key];
+}
 
 // ── TAX HELPER ────────────────────────────────────────────────────
 function calcTax(subtotal) {
@@ -656,10 +664,13 @@ function updateLivePrice() {
   const barDetail = document.getElementById('live-bar-detail');
   const barTax = document.getElementById('live-bar-tax-line');
 
-  let parts = [selectedPkg.name+' ('+fmt(selectedPkg.price)+')'];
-  addons.forEach(a => parts.push(a.name+' ('+a.priceLabel+')'));
-  if (travelFee>0) parts.push('Travel ('+fmt(travelFee)+')');
-  if (playerFee>0) parts.push(players+' extra player'+(players>1?'s':'')+' ('+fmt(playerFee)+')');
+  const isFr = window.currentLang === 'fr';
+  let parts = [getT(selectedPkg,'name')+' ('+fmt(selectedPkg.price)+')'];
+  addons.forEach(a => parts.push(getT(a,'name')+' ('+a.priceLabel+')'));
+  if (travelFee>0) parts.push(isFr ? 'Déplacement ('+fmt(travelFee)+')' : 'Travel ('+fmt(travelFee)+')');
+  if (playerFee>0) parts.push(isFr
+    ? players+' joueur'+(players>1?'s':'')+' supp. ('+fmt(playerFee)+')'
+    : players+' extra player'+(players>1?'s':'')+' ('+fmt(playerFee)+')');
   barDetail.textContent = parts.join(' + ');
   barTax.textContent = '';
 
@@ -689,8 +700,8 @@ function selectWho(type){
 // ── RENDER PACKAGES ───────────────────────────────────────────────
 function renderPackages(){
   const d=data[who];
-  document.getElementById('pkg-title').textContent=d.title;
-  document.getElementById('pkg-sub').textContent=d.sub;
+  document.getElementById('pkg-title').textContent=getT(d,'title');
+  document.getElementById('pkg-sub').textContent=getT(d,'sub');
 
   const extSec=document.getElementById('extras-section');
   extSec.style.display=d.showExtras?'block':'none';
@@ -710,17 +721,18 @@ function renderPackages(){
     div.className='pkg '+d.theme;
     div.id='pkg-'+pkg.id;
     div.onclick=()=>selectPkg(pkg);
+    const badge = pkg.best ? (window.currentLang==='fr' ? 'Le plus populaire' : 'Most Popular') : '';
     div.innerHTML=
-      (pkg.best?`<div class="pkg-badge ${d.accent}-bg">Most Popular</div>`:'')+
+      (pkg.best?`<div class="pkg-badge ${d.accent}-bg">${badge}</div>`:'')+
       `<div class="pkg-left">
-        <div class="pkg-tag">${pkg.tag}</div>
-        <div class="pkg-name">${pkg.name}</div>
-        <div class="pkg-desc">${pkg.desc}</div>
-        <div class="pkg-feats">${pkg.feats.map(f=>`<div class="feat-pill">✓ ${f}</div>`).join('')}</div>
+        <div class="pkg-tag">${getT(pkg,'tag')}</div>
+        <div class="pkg-name">${getT(pkg,'name')}</div>
+        <div class="pkg-desc">${getT(pkg,'desc')}</div>
+        <div class="pkg-feats">${getT(pkg,'feats').map(f=>`<div class="feat-pill">✓ ${f}</div>`).join('')}</div>
       </div>
       <div class="pkg-right">
         <div class="pkg-price">$${pkg.price}</div>
-        <div class="pkg-unit">${pkg.unit}</div>
+        <div class="pkg-unit">${getT(pkg,'unit')}</div>
         <div class="pkg-radio"></div>
       </div>`;
     pl.appendChild(div);
@@ -745,7 +757,7 @@ function renderPackages(){
          </div>`
       : '';
     div.innerHTML=
-      `<div class="addon-info"><div class="addon-name">${addon.name}</div><div class="addon-desc">${addon.desc}</div>${qtyHtml}</div>
+      `<div class="addon-info"><div class="addon-name">${getT(addon,'name')}</div><div class="addon-desc">${getT(addon,'desc')}</div>${qtyHtml}</div>
        <div class="addon-right"><div class="addon-price" id="addon-price-${addon.id}">${addon.priceLabel}</div><div class="addon-check"></div></div>`;
     al.appendChild(div);
   });
@@ -814,28 +826,35 @@ async function calcDistance(){
   if(!addr) return;
   const btn=document.getElementById('calc-dist-btn');
   const result=document.getElementById('travel-result');
-  btn.textContent='Calculating…'; btn.disabled=true;
+  const isFr=window.currentLang==='fr';
+  btn.textContent=isFr?'Calcul…':'Calculating…'; btn.disabled=true;
   result.textContent=''; result.style.color='';
   try {
     const resp=await fetch('/api/distance?destination='+encodeURIComponent(addr));
     const json=await resp.json();
     if(!json.ok){
-      result.textContent='⚠ Address not found — try a more specific address';
+      result.textContent=isFr
+        ?'⚠ Adresse introuvable — essayez une adresse plus précise'
+        :'⚠ Address not found — try a more specific address';
       result.style.color='var(--red)';
       document.getElementById('travel-km').value='0';
     } else {
       const km=json.km;
       const fee=km>5?Math.round((km-5)*0.75):0;
-      result.textContent=km+' km from Brossard'+(fee>0?' · Travel fee: $'+fee+' CAD':' · No travel fee (within 5 km free radius)');
+      result.textContent=isFr
+        ?km+' km de Brossard'+(fee>0?' · Frais de dépl. : '+fee+' $ CAD':' · Aucun frais (rayon gratuit de 5 km)')
+        :km+' km from Brossard'+(fee>0?' · Travel fee: $'+fee+' CAD':' · No travel fee (within 5 km free radius)');
       result.style.color='var(--green)';
       document.getElementById('travel-km').value=km;
     }
     updateExtras();
   } catch(e){
-    result.textContent='⚠ Could not reach server — please try again';
+    result.textContent=isFr
+      ?'⚠ Impossible de joindre le serveur — veuillez réessayer'
+      :'⚠ Could not reach server — please try again';
     result.style.color='var(--red)';
   }
-  btn.textContent='Recalculate →'; btn.disabled=false;
+  btn.textContent=isFr?'Recalculer →':'Recalculate →'; btn.disabled=false;
 }
 
 function updateExtras(){
@@ -858,17 +877,26 @@ function buildSummary(){
   const travelFee=km>5?Math.round((km-5)*0.75):0;
   const playerFee=players*25;
   const subtotal=(selectedPkg?selectedPkg.price:0)+addons.reduce((s,a)=>s+a.price*(addonQty.get(a.id)||1),0)+travelFee+playerFee;
+  const isFr=window.currentLang==='fr';
 
-  const whoLabels={individual:'Individual — Player / Athlete',club:'Club / Association',photo:'Buying Photos from Instagram'};
+  const whoLabels=isFr
+    ?{individual:'Individuel — Joueur / Athlète',club:'Club / Association',photo:'Achat de photos Instagram'}
+    :{individual:'Individual — Player / Athlete',club:'Club / Association',photo:'Buying Photos from Instagram'};
   document.getElementById('sum-who').textContent=whoLabels[who];
-  document.getElementById('sum-pkg').textContent=selectedPkg?`${selectedPkg.name} — ${fmt(selectedPkg.price)} CAD`:'—';
-  document.getElementById('sum-addons').textContent=addons.length?addons.map(a=>addonQty.has(a.id)?`${a.name} ×${addonQty.get(a.id)}`:a.name).join(', '):'None';
+  document.getElementById('sum-pkg').textContent=selectedPkg?`${getT(selectedPkg,'name')} — ${fmt(selectedPkg.price)} CAD`:'—';
+  document.getElementById('sum-addons').textContent=addons.length
+    ?addons.map(a=>addonQty.has(a.id)?`${getT(a,'name')} ×${addonQty.get(a.id)}`:getT(a,'name')).join(', ')
+    :(isFr?'Aucune':'None');
 
   const tr=document.getElementById('sum-travel-row'),pr=document.getElementById('sum-players-row');
   if(travelFee>0){tr.style.display='flex';document.getElementById('sum-travel').textContent=`${fmt(travelFee)} CAD (${km} km)`;}
   else{tr.style.display='none';}
-  if(playerFee>0){pr.style.display='flex';document.getElementById('sum-players').textContent=`${fmt(playerFee)} CAD (${players} extra player${players>1?'s':''})`;}
-  else{pr.style.display='none';}
+  if(playerFee>0){
+    pr.style.display='flex';
+    document.getElementById('sum-players').textContent=isFr
+      ?`${fmt(playerFee)} CAD (${players} joueur${players>1?'s':''} supp.)`
+      :`${fmt(playerFee)} CAD (${players} extra player${players>1?'s':''})`;
+  } else{pr.style.display='none';}
 
   document.getElementById('sum-deposit').textContent=`${fmt(subtotal)} CAD`;
   const tp=document.getElementById('total-price-val');
@@ -883,9 +911,16 @@ function goTo(step){
   if(step===2) renderPackages();
   if(step===3){
     const isPhoto = who==='photo';
-    document.getElementById('label-date').textContent = isPhoto ? 'Match Date' : 'Preferred Date';
-    document.getElementById('label-time').textContent = isPhoto ? 'Match Time' : 'Start Time';
-    document.getElementById('label-location').textContent = isPhoto ? 'Club Name & Player Number' : 'Location / Club Name';
+    const isFr = window.currentLang === 'fr';
+    document.getElementById('label-date').textContent = isPhoto
+      ? (isFr ? 'Date du match' : 'Match Date')
+      : (isFr ? 'Date préférée' : 'Preferred Date');
+    document.getElementById('label-time').textContent = isPhoto
+      ? (isFr ? 'Heure du match' : 'Match Time')
+      : (isFr ? 'Heure de début' : 'Start Time');
+    document.getElementById('label-location').textContent = isPhoto
+      ? (isFr ? 'Club & Numéro du joueur' : 'Club Name & Player Number')
+      : (isFr ? 'Lieu / Nom du club' : 'Location / Club Name');
     document.getElementById('location').placeholder = isPhoto ? 'ASB Brossard · #10' : 'ASB Brossard, Complexe Sportif CN...';
   }
   if(step===4) buildSummary();
@@ -914,7 +949,8 @@ function goTo(step){
 // ── SUBMIT ────────────────────────────────────────────────────────
 function submitBooking(){
   const btn=document.getElementById('confirm-btn');
-  btn.textContent='Sending…'; btn.disabled=true;
+  const isFr=window.currentLang==='fr';
+  btn.textContent=isFr?'Envoi…':'Sending…'; btn.disabled=true;
   const d=data[who];
   const addons=d.addons.filter(a=>selectedAddons.has(a.id));
   const km=parseFloat(document.getElementById('travel-km').value)||0;
@@ -922,22 +958,49 @@ function submitBooking(){
   const travelFee=km>5?Math.round((km-5)*0.75):0;
   const playerFee=players*25;
   const subtotal=selectedPkg.price+addons.reduce((s,a)=>s+a.price*(addonQty.get(a.id)||1),0)+travelFee+playerFee;
-  const subject=encodeURIComponent(`Booking Request — ${selectedPkg.name}`);
-  const body=encodeURIComponent(
-    `Hello Adriano,\n\nBooking request:\n\n`+
-    `Type: ${who}\nPackage: ${selectedPkg.name} (${fmt(selectedPkg.price)} CAD)\n`+
-    `Add-ons: ${addons.length?addons.map(a=>addonQty.has(a.id)?`${a.name} ×${addonQty.get(a.id)}`:a.name).join(', '):'None'}\n`+
-    (travelFee>0?`Travel fee: ${fmt(travelFee)} (${km} km from Brossard)\nMatch address: ${document.getElementById('travel-address').value||'N/A'}\n`:'')+
-    (playerFee>0?`Extra players: ${players} × $25 = ${fmt(playerFee)}\n`:'')+
-    `Total: ${fmt(subtotal)} CAD (100% due upfront)\n\n`+
-    `Name: ${document.getElementById('fname').value} ${document.getElementById('lname').value}\n`+
-    `Email: ${document.getElementById('email').value}\n`+
-    `Phone: ${document.getElementById('phone').value||'N/A'}\n`+
-    `Date: ${document.getElementById('pdate').value||'TBD'}\n`+
-    `Time: ${document.getElementById('ptime').value||'TBD'}\n`+
-    `Location: ${document.getElementById('location').value||'TBD'}\n`+
-    `Notes: ${document.getElementById('notes').value||'None'}\n\nThank you!`
-  );
+
+  const addonList=addons.length
+    ?addons.map(a=>addonQty.has(a.id)?`${getT(a,'name')} ×${addonQty.get(a.id)}`:getT(a,'name')).join(', ')
+    :(isFr?'Aucune':'None');
+
+  let bodyText, subjectText;
+  if(isFr){
+    subjectText=`Demande de réservation — ${getT(selectedPkg,'name')}`;
+    bodyText=
+      `Bonjour Adriano,\n\nDemande de réservation :\n\n`+
+      `Type : ${who==='individual'?'Individuel':who==='club'?'Club':'Achat de photos'}\n`+
+      `Forfait : ${getT(selectedPkg,'name')} (${fmt(selectedPkg.price)} CAD)\n`+
+      `Options : ${addonList}\n`+
+      (travelFee>0?`Frais de dépl. : ${fmt(travelFee)} (${km} km de Brossard)\nAdresse : ${document.getElementById('travel-address').value||'N/A'}\n`:'')+
+      (playerFee>0?`Joueurs supp. : ${players} × 25 $ = ${fmt(playerFee)}\n`:'')+
+      `Total : ${fmt(subtotal)} CAD (100 % à l'avance)\n\n`+
+      `Nom : ${document.getElementById('fname').value} ${document.getElementById('lname').value}\n`+
+      `Email : ${document.getElementById('email').value}\n`+
+      `Tél. : ${document.getElementById('phone').value||'N/A'}\n`+
+      `Date : ${document.getElementById('pdate').value||'À confirmer'}\n`+
+      `Heure : ${document.getElementById('ptime').value||'À confirmer'}\n`+
+      `Lieu : ${document.getElementById('location').value||'À confirmer'}\n`+
+      `Notes : ${document.getElementById('notes').value||'Aucune'}\n\nMerci !`;
+  } else {
+    subjectText=`Booking Request — ${getT(selectedPkg,'name')}`;
+    bodyText=
+      `Hello Adriano,\n\nBooking request:\n\n`+
+      `Type: ${who}\nPackage: ${getT(selectedPkg,'name')} (${fmt(selectedPkg.price)} CAD)\n`+
+      `Add-ons: ${addonList}\n`+
+      (travelFee>0?`Travel fee: ${fmt(travelFee)} (${km} km from Brossard)\nMatch address: ${document.getElementById('travel-address').value||'N/A'}\n`:'')+
+      (playerFee>0?`Extra players: ${players} × $25 = ${fmt(playerFee)}\n`:'')+
+      `Total: ${fmt(subtotal)} CAD (100% due upfront)\n\n`+
+      `Name: ${document.getElementById('fname').value} ${document.getElementById('lname').value}\n`+
+      `Email: ${document.getElementById('email').value}\n`+
+      `Phone: ${document.getElementById('phone').value||'N/A'}\n`+
+      `Date: ${document.getElementById('pdate').value||'TBD'}\n`+
+      `Time: ${document.getElementById('ptime').value||'TBD'}\n`+
+      `Location: ${document.getElementById('location').value||'TBD'}\n`+
+      `Notes: ${document.getElementById('notes').value||'None'}\n\nThank you!`;
+  }
+
+  const subject=encodeURIComponent(subjectText);
+  const body=encodeURIComponent(bodyText);
   window.open(`mailto:adriano@adrianolezamas.com?subject=${subject}&body=${body}`);
   document.getElementById('live-bar').classList.remove('visible');
   document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
@@ -946,6 +1009,21 @@ function submitBooking(){
 </script>
 
 <script src="lang.js"></script>
+<script>
+// Re-render dynamic wizard content when language toggles
+window.onLangChange = function() {
+  if(who) {
+    if(document.getElementById('step2').classList.contains('active')) renderPackages();
+    if(document.getElementById('step3').classList.contains('active')) {
+      const isPhoto=who==='photo', isFr=window.currentLang==='fr';
+      document.getElementById('label-date').textContent=isPhoto?(isFr?'Date du match':'Match Date'):(isFr?'Date préférée':'Preferred Date');
+      document.getElementById('label-time').textContent=isPhoto?(isFr?'Heure du match':'Match Time'):(isFr?'Heure de début':'Start Time');
+      document.getElementById('label-location').textContent=isPhoto?(isFr?'Club & Numéro du joueur':'Club Name & Player Number'):(isFr?'Lieu / Nom du club':'Location / Club Name');
+    }
+    if(document.getElementById('step4').classList.contains('active')&&selectedPkg) buildSummary();
+  }
+};
+</script>
 <script>
 (function(){
   var nav=document.querySelector('.site-nav'),last=0;
