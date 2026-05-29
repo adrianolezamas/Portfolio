@@ -346,15 +346,45 @@ nav{
 
 /* ── RESPONSIVE ── */
 @media(max-width:900px){
-  nav{padding:22px 24px;}
+  /* Nav: lang toggle left · logo centered · ham right */
+  nav{padding:22px 24px;position:relative;}
   .nav-links{display:none;}
-  .nav-right{display:none;}
   .ham{display:flex;}
-  .hero-body{padding:0 24px;}
-  .hero-headline{font-size:clamp(52px,14vw,90px);}
-  .cta{font-size:12px;padding:14px 32px;}
-  .hero-foot{padding:0 24px 28px;gap:12px;flex-wrap:wrap;justify-content:center;}
+
+  /* Logo: absolute center, bigger */
+  .nav-logo{position:absolute;left:50%;transform:translateX(-50%);}
+  .nav-logo img{height:58px;}
+
+  /* Show lang toggle, hide nav CTA buttons */
+  .nav-right{display:flex;}
+  .nav-right .nav-cta{display:none;}
+
+  /* Hero body: stack headline + CTAs in lower portion */
+  .hero-body{padding:0 24px 44px;justify-content:flex-end;}
+
+  /* Hide eyebrow on mobile */
+  .hero-eyebrow{display:none;}
+
+  /* Headline: single line, smaller */
+  .hero-headline{
+    font-size:clamp(14px,4.5vw,22px);
+    line-height:1.3;
+    white-space:nowrap;
+    margin-bottom:28px;
+  }
+  .hero-headline br{display:none;}
+  .hero-headline em{display:inline;}
+
+  /* Bigger CTAs */
+  .cta{font-size:15px;padding:18px 44px;}
+
+  /* Hide scroll hint (text + yellow line) */
+  .scroll-hint{display:none;}
+
+  /* Meta blocks: pushed lower with more bottom padding */
+  .hero-foot{padding:0 24px 52px;gap:16px;flex-wrap:wrap;justify-content:center;}
   .meta-sep{display:none;}
+
   .trusted{margin:0 24px;gap:24px;flex-wrap:wrap;justify-content:center;}
   .mob-close{right:24px;}
 }
