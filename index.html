@@ -338,11 +338,10 @@ nav{
 }
 .trusted-logos{display:flex;align-items:center;gap:32px;}
 .trusted-logo{
-  height:24px;object-fit:contain;
-  filter:brightness(0) invert(1);
-  opacity:0.25;transition:opacity .3s;
+  height:28px;object-fit:contain;
+  opacity:0.82;transition:opacity .3s;
 }
-.trusted-logo:hover{opacity:0.6;}
+.trusted-logo:hover{opacity:1;}
 
 /* ── RESPONSIVE ── */
 @media(max-width:900px){
@@ -375,8 +374,9 @@ nav{
   .hero-headline br{display:none;}
   .hero-headline em{display:inline;}
 
-  /* Bigger CTAs */
-  .cta{font-size:15px;padding:18px 44px;}
+  /* CTAs side by side, bigger */
+  .cta-row{flex-wrap:nowrap;}
+  .cta{font-size:14px;padding:16px 28px;}
 
   /* Hide scroll hint (text + yellow line) */
   .scroll-hint{display:none;}
@@ -629,9 +629,9 @@ footer{
   <div class="hero-body">
     <div class="hero-eyebrow" data-en="Sports Photographer · Montréal & Rive-Sud" data-fr="Photographe sportif · Montréal & Rive-Sud">Sports Photographer · Montréal & Rive-Sud</div>
     <h1 class="hero-headline">
-      <span data-en="Where" data-fr="Là où">Where</span><br>
+      <span data-en="&ldquo;Where" data-fr="&ldquo;Là où">&ldquo;Where</span><br>
       <span data-en="Champions" data-fr="les champions">Champions</span><br>
-      <span data-en="Are" data-fr="sont"> Are </span><em data-en="Remembered." data-fr="immortalisés.">Remembered.</em>
+      <span data-en="Are" data-fr="sont"> Are </span><em data-en="Remembered.&rdquo;" data-fr="immortalisés.&rdquo;">Remembered.&rdquo;</em>
     </h1>
     <div class="cta-row">
       <a class="cta cta-gallery" href="work.html" data-en="View Gallery" data-fr="Voir la galerie">View Gallery</a>
@@ -641,21 +641,6 @@ footer{
 
   <!-- BOTTOM META -->
   <div class="hero-foot">
-    <div class="meta-block">
-      <span class="meta-label" data-en="Delivery" data-fr="Livraison">Delivery</span>
-      <span class="meta-val">24 hours</span>
-    </div>
-    <div class="meta-sep"></div>
-    <div class="meta-block">
-      <span class="meta-label" data-en="Format" data-fr="Format">Format</span>
-      <span class="meta-val">RAW · Edited</span>
-    </div>
-    <div class="meta-sep"></div>
-    <div class="meta-block">
-      <span class="meta-label" data-en="Service" data-fr="Service">Service</span>
-      <span class="meta-val">FR / EN</span>
-    </div>
-    <div class="meta-sep"></div>
     <div class="meta-block">
       <span class="meta-label" data-en="Zone" data-fr="Zone">Zone</span>
       <span class="meta-val">Montréal · Rive-Sud</span>
