@@ -763,7 +763,7 @@
     btn.disabled = true; btn.textContent = 'Signing in…';
     err.style.display = 'none';
 
-    const res = await fetch('/api/gallery-list', {
+    const res = await fetch('/api/gallery-admin?action=list', {
       headers: { Authorization: `Bearer ${pw}` },
     });
 
@@ -799,7 +799,7 @@
     document.getElementById('dash-empty').classList.add('hidden');
     document.getElementById('gallery-grid').innerHTML = '';
 
-    const res = await fetch('/api/gallery-list', { headers: apiHeaders() });
+    const res = await fetch('/api/gallery-admin?action=list', { headers: apiHeaders() });
     if (!res.ok) { showToast('Failed to load galleries'); return; }
 
     const { galleries: list } = await res.json();
@@ -863,7 +863,7 @@
     const btn = document.getElementById('btn-modal-create');
     btn.disabled = true; btn.textContent = 'Creating…';
 
-    const res = await fetch('/api/gallery-create', {
+    const res = await fetch('/api/gallery-admin?action=create', {
       method: 'POST',
       headers: apiHeaders(),
       body: JSON.stringify({
@@ -935,7 +935,7 @@
 
   async function togglePublish(status) {
     if (!currentGallery) return;
-    const res = await fetch('/api/gallery-publish', {
+    const res = await fetch('/api/gallery-admin?action=publish', {
       method: 'POST',
       headers: apiHeaders(),
       body: JSON.stringify({ slug: currentGallery.slug, status }),
@@ -962,7 +962,7 @@
     btn.textContent = 'Saving…'; btn.disabled = true;
 
     const name = document.getElementById('s-name').value.trim();
-    const res = await fetch('/api/gallery-settings', {
+    const res = await fetch('/api/gallery-admin?action=settings', {
       method: 'PATCH',
       headers: apiHeaders(),
       body: JSON.stringify({
@@ -995,7 +995,7 @@
     if (!currentGallery) return;
     if (!confirm(`Delete "${currentGallery.name}"? This cannot be undone.`)) return;
 
-    const res = await fetch(`/api/gallery-delete?slug=${currentGallery.slug}`, {
+    const res = await fetch(`/api/gallery-admin?action=gallery&slug=${currentGallery.slug}`, {
       method: 'DELETE',
       headers: apiHeaders(),
     });
@@ -1018,7 +1018,7 @@
     label.textContent = '';
 
     // Use admin list endpoint: fetch images for current gallery (draft ok)
-    const res = await fetch(`/api/gallery-admin-images?galleryId=${currentGallery.id}`, {
+    const res = await fetch(`/api/gallery-admin?action=images&galleryId=${currentGallery.id}`, {
       headers: apiHeaders(),
     });
 
@@ -1068,7 +1068,7 @@
 
   async function setCover(imageId, url) {
     if (!currentGallery) return;
-    await fetch('/api/gallery-settings', {
+    await fetch('/api/gallery-admin?action=settings', {
       method: 'PATCH',
       headers: apiHeaders(),
       body: JSON.stringify({ slug: currentGallery.slug, cover_url: url }),
@@ -1082,7 +1082,7 @@
 
   async function deleteImage(imageId) {
     if (!confirm('Delete this photo?')) return;
-    const res = await fetch(`/api/gallery-delete-image?imageId=${imageId}`, {
+    const res = await fetch(`/api/gallery-admin?action=image&imageId=${imageId}`, {
       method: 'DELETE',
       headers: apiHeaders(),
     });
@@ -1131,7 +1131,7 @@
 
       try {
         // Get Cloudinary signature
-        const sigRes = await fetch(`/api/gallery-sign-upload?galleryId=${currentGallery.id}`, {
+        const sigRes = await fetch(`/api/gallery-admin?action=sign&galleryId=${currentGallery.id}`, {
           headers: apiHeaders(),
         });
         if (!sigRes.ok) throw new Error('Failed to get upload signature');
@@ -1153,7 +1153,7 @@
         const result = await uploadRes.json();
 
         // Save metadata to Supabase
-        const saveRes = await fetch('/api/gallery-save-image', {
+        const saveRes = await fetch('/api/gallery-admin?action=save', {
           method: 'POST',
           headers: apiHeaders(),
           body: JSON.stringify({
@@ -1197,7 +1197,7 @@
 
   // ── Init ──────────────────────────────────────────────────────────────────
   if (adminPw) {
-    fetch('/api/gallery-list', { headers: { Authorization: `Bearer ${adminPw}` } })
+    fetch('/api/gallery-admin?action=list', { headers: { Authorization: `Bearer ${adminPw}` } })
       .then(r => r.ok ? loadDashboard() : showScreen('login'))
       .catch(() => showScreen('login'));
   } else {
