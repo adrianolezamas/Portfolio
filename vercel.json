@@ -1,15 +1,24 @@
 {
   "rewrites": [
-    { "source": "/api/send", "destination": "/api/send" },
-    { "source": "/api/book", "destination": "/api/book" },
-    { "source": "/api/distance", "destination": "/api/distance" },
-    { "source": "/api/respond",        "destination": "/api/respond"        },
-    { "source": "/api/stripe-session",    "destination": "/api/stripe-session"    },
-    { "source": "/api/payment-confirm",  "destination": "/api/payment-confirm"  },
-    { "source": "/api/gallery-download",  "destination": "/api/gallery-download"  },
-    { "source": "/api/get-payment",       "destination": "/api/get-payment"       },
-    { "source": "/api/gallery-request",  "destination": "/api/gallery-request"  },
-    { "source": "/api/gallery-photos",   "destination": "/api/gallery-photos"   }
+    { "source": "/api/send",                "destination": "/api/send"                },
+    { "source": "/api/book",                "destination": "/api/book"                },
+    { "source": "/api/distance",            "destination": "/api/distance"            },
+    { "source": "/api/respond",             "destination": "/api/respond"             },
+    { "source": "/api/stripe-session",      "destination": "/api/stripe-session"      },
+    { "source": "/api/payment-confirm",     "destination": "/api/payment-confirm"     },
+    { "source": "/api/get-payment",         "destination": "/api/get-payment"         },
+    { "source": "/api/gallery-download",    "destination": "/api/gallery-download"    },
+    { "source": "/api/gallery-request",     "destination": "/api/gallery-request"     },
+    { "source": "/api/gallery-photos",      "destination": "/api/gallery-photos"      },
+    { "source": "/api/gallery-create",      "destination": "/api/gallery-create"      },
+    { "source": "/api/gallery-list",        "destination": "/api/gallery-list"        },
+    { "source": "/api/gallery-sign-upload", "destination": "/api/gallery-sign-upload" },
+    { "source": "/api/gallery-save-image",  "destination": "/api/gallery-save-image"  },
+    { "source": "/api/gallery-delete-image","destination": "/api/gallery-delete-image"},
+    { "source": "/api/gallery-delete",      "destination": "/api/gallery-delete"      },
+    { "source": "/api/gallery-publish",     "destination": "/api/gallery-publish"     },
+    { "source": "/api/gallery-settings",    "destination": "/api/gallery-settings"    },
+    { "source": "/api/gallery-admin-images","destination": "/api/gallery-admin-images"},
+    { "source": "/g/:slug",                 "destination": "/client-gallery.html"     }
   ]
 }
-

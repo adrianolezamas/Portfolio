@@ -6,6 +6,7 @@
     "serve": "node serve.mjs"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.110.2",
     "resend": "^3.2.0",
     "stripe": "^22.0.1",
     "vercel": "^50.43.0"
